@@ -1,16 +1,79 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { BODY_CLASSES, 
         // BUTTON_TYPE_ONE, 
         // H_1
     } from '../constants';
 import { TrackPageViewIfEnabled } from '../util/cookiesHandling';
 
+// set up plotly with TypeScript: https://stackoverflow.com/a/70807520
+import Plotly from "plotly.js";
+import createPlotlyComponent from "react-plotly.js/factory";
+const Plot = createPlotlyComponent(Plotly);
+
 export default function HomePage(): ReactElement {
+
     TrackPageViewIfEnabled();
+
+    const [currentGene, setCurrentGene] = useState<string>("");
+    const [currentSegment, setCurrentSegment] = useState<string>("");
+    const [currentSubtype, setCurrentSubtype] = useState<string>("");
+    const [currentAllele, setCurrentAllele] = useState<string>("");
+
+    const [test, setTest] = useState<string>("nuthin'");
+
+    useEffect(() =>{
+        if (currentGene + currentSegment + currentSubtype + currentAllele) {
+            setTest(currentGene + currentSegment + currentSubtype + currentAllele);
+        }
+    }, [currentGene, currentSegment, currentSubtype, currentAllele]);
+
+    const data = [
+        {
+          x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          y: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          mode: "lines",
+        },
+      ];
+    const layout = { title: "Chart Title" };
 
     return (
         <div>
             <div className={BODY_CLASSES}>
+                <div className="grid grid-cols-3 place-items-center gap-2">
+                    <select className="select select-bordered w-full max-w-xs" 
+                            onChange={(e) => setCurrentGene(e.target.value)}
+                    >
+                        <option disabled selected>Select Gene</option>
+                        <option>IGH</option>
+                    </select>
+                    <select className="select select-bordered w-full max-w-xs"
+                            onChange={(e) => setCurrentSegment(e.target.value)}
+                    >
+                        <option disabled selected>Select Gene Segment</option>
+                        <option>V</option>
+                        <option>D</option>
+                        <option>J</option>
+                    </select>
+                    <select className="select select-bordered w-full max-w-xs"
+                            onChange={(e) => setCurrentSubtype(e.target.value)}
+                    >
+                        <option disabled selected>Select Gene Subtype</option>
+                        <option>1-2</option>
+                    </select>
+                    <select className="select select-bordered w-full max-w-xs"
+                            onChange={(e) => setCurrentAllele(e.target.value)}
+                    >
+                        <option disabled selected>Select Allele</option>
+                        <option>*02</option>
+                        <option>*04</option>
+                    </select>
+                </div>
+                <p>You selected {test}</p>
+
+                <div className="flex flex-row">
+                    <Plot data={data} layout={layout} />
+                    <Plot data={data} layout={layout} />
+                </div>
                 // DaisyUI item: Table with pinned-rows. Add hover effect and active row effect as displayed in the first two tables in DaisyUI. Table Header needs to be highlighted differently in all tables.
                 <div className="overflow-x-auto h-96">
                     <table className="table table-pin-rows">
