@@ -12,6 +12,7 @@
   "dependencies": {
     "@jonkoops/matomo-tracker-react": "^0.7.0",
     "axios": "^1.6.8",
+    "buffer": "^6.0.3",
     "daisyui": "^4.7.3",
     "js-cookie": "^3.0.5",
     "lato-font": "^3.0.0",
@@ -22,7 +23,8 @@
     "react-markdown": "^9.0.1",
     "react-plotly.js": "^2.6.0",
     "react-router-dom": "^6.22.3",
-    "remark-gfm": "^4.0.0"
+    "remark-gfm": "^4.0.0",
+    "stream-browserify": "^3.0.0"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",

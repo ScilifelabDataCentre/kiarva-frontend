@@ -5,7 +5,9 @@ import { BODY_CLASSES,
     } from '../constants';
 import { TrackPageViewIfEnabled } from '../util/cookiesHandling';
 
-// set up plotly with TypeScript: https://stackoverflow.com/a/70807520
+// set up plotly with TypeScript: 
+// https://stackoverflow.com/a/70807520 + 
+// https://community.plotly.com/t/how-to-initiate-and-build-a-plotly-js-project-using-vite/65701/4
 import Plotly from "plotly.js";
 import createPlotlyComponent from "react-plotly.js/factory";
 const Plot = createPlotlyComponent(Plotly);
