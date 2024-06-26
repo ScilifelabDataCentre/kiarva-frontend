@@ -51,3 +51,9 @@ export interface IDataSourcesDC {
     url: string;
     disease_type: string[]
 };
+
+export interface IGeneFrequencyData {
+    frequency: number;
+    n: number;
+    population: string;
+}
