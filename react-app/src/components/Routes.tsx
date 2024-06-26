@@ -1,10 +1,10 @@
 import { ReactElement } from 'react';
-import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from '../App';
 import HomePage from '../pages/HomePage';
 import AboutPage from '../pages/AboutPage';
-import DataSourcesPage from '../pages/DataSourcesPage';
 import PrivacyPage from '../pages/PrivacyPage';
+import ChangeLogPage from '../pages/ChangeLogPage';
 
 const router = createBrowserRouter([
     {
@@ -20,8 +20,8 @@ const router = createBrowserRouter([
                 element: <AboutPage />,
             },
             {
-                path: 'datasources',
-                element: <DataSourcesPage />,
+                path: 'changelog',
+                element: <ChangeLogPage />,
             },
             {
                 path: 'privacy',
