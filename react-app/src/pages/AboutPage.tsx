@@ -1,10 +1,9 @@
 import { ReactElement } from 'react';
+import ProfileComponent from '../components/ProfileComponent';
 import {
     BODY_CLASSES,
     H_1,
 } from '../constants';
-import { Link, NavLink, Outlet } from 'react-router-dom';
-import { ILink, } from '../interfaces/types';
 import { TrackPageViewIfEnabled } from '../util/cookiesHandling';
 
 export default function AboutPage(): ReactElement {
@@ -12,30 +11,54 @@ export default function AboutPage(): ReactElement {
 
     var pageTitle: string = "About Us";
     
-    var breadcrumbs: { [id: string] : ILink; } = {
-        'l1': { text: 'Home', classes: '', link: '/' },
-        'l2': { text: 'About', classes: '', link: '' },
-    };
-    
     return (
         <>
-            <div className={BODY_CLASSES}>
-                <div className="text-sm breadcrumbs">
-                <ul>
-                {Object.keys(breadcrumbs).map( key => (
-                    <li>{breadcrumbs[key].link ? <Link to={breadcrumbs[key].link}>{breadcrumbs[key].text}</Link> : <>{breadcrumbs[key].text}</>}</li>
-                ))}
-                </ul>
-                </div>
-                <div className={H_1}>{pageTitle}</div>
-                <div role="tablist" className="tabs tabs-lifted pb-4">
-                    <NavLink to='/about/product' role='tab' className={({ isActive }) => `tab ${ isActive ? 'tab-active text-info-content !bg-info' : 'bg-white shadow'}`}>Product</NavLink>
-                    <NavLink to='/about/faq' role='tab' className={({ isActive }) => `tab ${ isActive ? 'tab-active text-info-content !bg-info' : 'bg-white shadow'}`}>FAQ</NavLink>
-                    <NavLink to='/about/team' role='tab' className={({ isActive }) => `tab ${ isActive ? 'tab-active text-info-content !bg-info' : 'bg-white shadow'}`}>Team</NavLink>
-                    <NavLink to='/about/partners' role='tab' className={({ isActive }) => `tab ${ isActive ? 'tab-active text-info-content !bg-info' : 'bg-white shadow'}`}>Partners</NavLink>
-                </div>
-                <Outlet />
-            </div>
+ <div className={BODY_CLASSES}>
+    <div className={H_1}>{pageTitle}</div>
+    <p className='pb-8'>Our research focuses on the function of B lymphocytes and qualitative aspects of immunological memory. In several projects, we define anti-viral antibody responses at the clonal level by single-cell sorting memory B cells for sequence analysis of antibody V(D)J transcripts and for isolation and characterization of antigen-specific monoclonal antibodies. We also apply next generation sequencing to analyze expressed immune repertoires and to trace specific antibody lineages to understand their fate and levels of affinity maturation. Because V(D)J gene assignment is a critical first step of lineage tracing, and there is considerable genetic variation in germline V genes/alleles between subjects, we developed a computational tool that allows the generation of individualized germline V gene databases, IgDiscover. This is a major technical advance that will enable the use of individualized germline databases to become a standard element of high-quality immunological studies in both humans and experimental animals. By applying these methods, we obtain highly detailed information about polymorphisms in these genes, allowing us to investigate how the VDJ germline allele content influences the establishment of antigen-specific responses.</p>
+    <ProfileComponent
+        imageUrl="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+        linkUrl="https://ki.se/en/people/gunilla-karlsson-hedestam"
+        name="Gunilla Karlsson Hedestam"
+        title="Professor"
+        bgColor="bg-neutral"
+        />
+        <ProfileComponent
+        imageUrl="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+        linkUrl="https://ki.se/en/people/gunilla-karlsson-hedestam"
+        name="Gunilla Karlsson Hedestam"
+        title="Professor"
+        bgColor="bg-white"
+        />
+        <ProfileComponent
+        imageUrl="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+        linkUrl="https://ki.se/en/people/gunilla-karlsson-hedestam"
+        name="Gunilla Karlsson Hedestam"
+        title="Professor"
+        bgColor="bg-neutral"
+        />
+        <ProfileComponent
+        imageUrl="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+        linkUrl="https://ki.se/en/people/gunilla-karlsson-hedestam"
+        name="Gunilla Karlsson Hedestam"
+        title="Professor"
+        bgColor="bg-white"
+        />
+        <ProfileComponent
+        imageUrl="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+        linkUrl="https://ki.se/en/people/gunilla-karlsson-hedestam"
+        name="Gunilla Karlsson Hedestam"
+        title="Professor"
+        bgColor="bg-neutral"
+        />
+        <ProfileComponent
+        imageUrl="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+        linkUrl="https://ki.se/en/people/gunilla-karlsson-hedestam"
+        name="Gunilla Karlsson Hedestam"
+        title="Professor"
+        bgColor="bg-white"
+        />
+        </div>
         </>
     );
 }
