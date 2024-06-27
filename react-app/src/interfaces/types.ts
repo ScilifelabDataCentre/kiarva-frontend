@@ -51,3 +51,21 @@ export interface IDataSourcesDC {
     url: string;
     disease_type: string[]
 };
+
+export type ChangeLogComponentProps = {
+    title: string;
+    doi: string;
+    databaseUpdates: string | Array<string>;
+    designAndBugFixes: string | Array<string>;
+    frontEndLink: string;
+    backEndLink: string;
+    isCurrent: boolean;
+  };
+
+  export type ProfileComponentProps = {
+    imageUrl: string;
+    linkUrl: string;
+    name: string;
+    title: string;
+    bgColor: string;
+  };
