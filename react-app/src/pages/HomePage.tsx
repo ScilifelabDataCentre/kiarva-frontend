@@ -5,6 +5,7 @@ import { BODY_CLASSES,
     } from '../constants';
 import { TrackPageViewIfEnabled } from '../util/cookiesHandling';
 import FrequencyPlotComponent from '../components/FrequencyPlotComponent';
+import { IGeneFrequencyData } from '../interfaces/types';
 
 export default function HomePage(): ReactElement {
 
@@ -14,6 +15,14 @@ export default function HomePage(): ReactElement {
     const [currentSegment, setCurrentSegment] = useState<string>("");
     const [currentSubtype, setCurrentSubtype] = useState<string>("");
     const [currentAllele, setCurrentAllele] = useState<string>("");
+    const [geneAPIData, setGeneAPIData] = useState<IGeneFrequencyData[]>([
+        {
+            "frequency": 0,
+            "n": 0,
+            "population": "None"
+        },
+    ]);
+
 
     const [test, setTest] = useState<string>("nuthin'");
 
@@ -23,7 +32,7 @@ export default function HomePage(): ReactElement {
         }
     }, [currentGene, currentSegment, currentSubtype, currentAllele]);
 
-    const geneApiData = 
+    const geneAPIDataTest = 
     [
         {
             "frequency": 0.7133858267716535,
@@ -85,12 +94,17 @@ export default function HomePage(): ReactElement {
                         <option disabled selected>Select Allele</option>
                         <option>*02</option>
                         <option>*04</option>
+                        <option>*05</option>
+                        <option>*06</option>
+                        <option>*02_S4953</option>
+                        <option>*04_S3434</option>
+                        <option>*06_S5931</option>
                     </select>
                 </div>
                 <p>You selected {test}</p>
 
                 <div className="flex flex-row">
-                    <FrequencyPlotComponent plotName="Superpopulations" geneAPIData={geneApiData} barColors={superPopulationColors}/>
+                    <FrequencyPlotComponent plotName="Superpopulations" geneAPIData={geneAPIDataTest} barColors={superPopulationColors}/>
                 </div>
                 // DaisyUI item: Table with pinned-rows. Add hover effect and active row effect as displayed in the first two tables in DaisyUI. Table Header needs to be highlighted differently in all tables.
                 <div className="overflow-x-auto h-96">

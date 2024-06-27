@@ -7,7 +7,7 @@ import { IGeneFrequencyData } from '../interfaces/types';
 import { ReactElement } from "react";
 const Plot = createPlotlyComponent(Plotly);
 
-export default function DataSourcesComponent(prop: { plotName: String, geneAPIData: IGeneFrequencyData[], barColors: String[] }): ReactElement {
+export default function FrequencyPlotComponent(prop: { plotName: String, geneAPIData: IGeneFrequencyData[], barColors: String[] }): ReactElement {
     
 
     let genePopulations:  String[] = [];
