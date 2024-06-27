@@ -6,89 +6,89 @@ import { BODY_CLASSES,
 import { TrackPageViewIfEnabled } from '../util/cookiesHandling';
 import FrequencyPlotComponent from '../components/FrequencyPlotComponent';
 import { IGeneFrequencyData } from '../interfaces/types';
+import axios from 'axios';
 
 export default function HomePage(): ReactElement {
 
     TrackPageViewIfEnabled();
 
+    const superpopulations: string[] = [
+        "AFR",
+        "AMR",
+        "EAS",
+        "EUR",
+        "SAS"
+    ];
+
+    const superPopulationColors: String[] = ["#5C5A8C", "#3D8F86", "#D6ADA7", "#F9D99A", "#8FD6FF"];
+
+    const superpopFreqDataNoSelection: IGeneFrequencyData[] = []
+    for (let i = 0; i < superpopulations.length; i++) {
+        superpopFreqDataNoSelection.push({
+            "frequency": 0,
+            "n": 0,
+            "population": superpopulations[i]
+        });
+    }
+
     const [currentGene, setCurrentGene] = useState<string>("");
     const [currentSegment, setCurrentSegment] = useState<string>("");
     const [currentSubtype, setCurrentSubtype] = useState<string>("");
     const [currentAllele, setCurrentAllele] = useState<string>("");
-    const [geneAPIData, setGeneAPIData] = useState<IGeneFrequencyData[]>([
-        {
-            "frequency": 0,
-            "n": 0,
-            "population": "None"
-        },
-    ]);
+    const [superpopFreqAPIData, setSuperpopFreqAPIData] = useState<IGeneFrequencyData[]>(superpopFreqDataNoSelection);
+    // const [popFreqAPIData, setPopFreqAPIData] = useState<IGeneFrequencyData[]>([
+    //     {
+    //         "frequency": 0,
+    //         "n": 0,
+    //         "population": "None"
+    //     },
+    // ]);
+
+    const backendAPI = 'http://localhost:5000/data/frequencies/superpopulations/';
 
 
-    const [test, setTest] = useState<string>("nuthin'");
+    async function getGeneFreqData(allele: String){
+        let responseData: IGeneFrequencyData[] = [];
+        await axios.get(backendAPI + allele)
+            .then(response => {
+                responseData = response.data;
+                setSuperpopFreqAPIData(responseData)
+            })
+            .catch(response => console.log(response.error));
+    }
 
     useEffect(() =>{
-        if (currentGene + currentSegment + currentSubtype + currentAllele) {
-            setTest(currentGene + currentSegment + currentSubtype + currentAllele);
+        if (currentGene && currentSegment && currentSubtype && currentAllele) {
+            getGeneFreqData(currentGene + currentSegment + currentSubtype + currentAllele)
         }
     }, [currentGene, currentSegment, currentSubtype, currentAllele]);
 
-    const geneAPIDataTest = 
-    [
-        {
-            "frequency": 0.7133858267716535,
-            "n": 453,
-            "population": "AFR"
-        },
-        {
-            "frequency": 0.5679012345679012,
-            "n": 138,
-            "population": "AMR"
-        },
-        {
-            "frequency": 0.39611650485436894,
-            "n": 204,
-            "population": "EAS"
-        },
-        {
-            "frequency": 0.5592783505154639,
-            "n": 217,
-            "population": "EUR"
-        },
-        {
-            "frequency": 0.3812785388127854,
-            "n": 167,
-            "population": "SAS"
-        }
-    ];
-
-    let superPopulationColors: String[] = ["#5C5A8C", "#3D8F86", "#D6ADA7", "#F9D99A", "#8FD6FF"];
+    const dropDownMenuClasses: string = "select select-bordered w-full max-w-xs bg-neutral";
 
     return (
         <div>
             <div className={BODY_CLASSES}>
                 {}
                 <div className="grid grid-cols-3 place-items-center gap-2">
-                    <select className="select select-bordered w-full max-w-xs" 
+                    <select className={dropDownMenuClasses}
                             onChange={(e) => setCurrentGene(e.target.value)}
                     >
                         <option disabled selected>Select Gene</option>
                         <option>IGH</option>
                     </select>
-                    <select className="select select-bordered w-full max-w-xs"
+                    <select className={dropDownMenuClasses}
                             onChange={(e) => setCurrentSegment(e.target.value)}
                     >
                         <option disabled selected>Select Gene Segment</option>
                         <option>V</option>
-                        <option>D</option>
-                        <option>J</option>
                     </select>
-                    <select className="select select-bordered w-full max-w-xs"
+                    <select className={dropDownMenuClasses}
                             onChange={(e) => setCurrentSubtype(e.target.value)}
                     >
                         <option disabled selected>Select Gene Subtype</option>
                         <option>1-2</option>
                     </select>
-                    <select className="select select-bordered w-full max-w-xs"
+                    <select className={dropDownMenuClasses}
                             onChange={(e) => setCurrentAllele(e.target.value)}
                     >
                         <option disabled selected>Select Allele</option>
@@ -101,10 +101,8 @@ export default function HomePage(): ReactElement {
                         <option>*06_S5931</option>
                     </select>
                 </div>
-                <p>You selected {test}</p>
-
                 <div className="flex flex-row">
-                    <FrequencyPlotComponent plotName="Superpopulations" geneAPIData={geneAPIDataTest} barColors={superPopulationColors}/>
+                    <FrequencyPlotComponent plotName="Superpopulations" geneAPIData={superpopFreqAPIData} barColors={superPopulationColors}/>
                 </div>
                 // DaisyUI item: Table with pinned-rows. Add hover effect and active row effect as displayed in the first two tables in DaisyUI. Table Header needs to be highlighted differently in all tables.
                 <div className="overflow-x-auto h-96">
