@@ -4,14 +4,7 @@ import { BODY_CLASSES,
         // H_1
     } from '../constants';
 import { TrackPageViewIfEnabled } from '../util/cookiesHandling';
-
-// set up plotly with TypeScript: 
-// https://stackoverflow.com/a/70807520 + 
-// https://community.plotly.com/t/how-to-initiate-and-build-a-plotly-js-project-using-vite/65701/4
-import Plotly, { Datum, Layout } from "plotly.js";
-import createPlotlyComponent from "react-plotly.js/factory";
-import { IGeneFrequencyData } from '../interfaces/types';
-const Plot = createPlotlyComponent(Plotly);
+import FrequencyPlotComponent from '../components/FrequencyPlotComponent';
 
 export default function HomePage(): ReactElement {
 
@@ -29,10 +22,6 @@ export default function HomePage(): ReactElement {
             setTest(currentGene + currentSegment + currentSubtype + currentAllele);
         }
     }, [currentGene, currentSegment, currentSubtype, currentAllele]);
-
-    useEffect(() => {
-        Test()
-    }, [])
 
     const geneApiData = 
     [
@@ -63,75 +52,7 @@ export default function HomePage(): ReactElement {
         }
     ];
 
-    let superPopulationColors: any[] = ["#5C5A8C", "#3D8F86", "#D6ADA7", "#F9D99A", "#8FD6FF"];
-    let genePopulations:  String[] = [];
-    let geneFrequencies: Number[] = [];
-    let geneCounts: Number[] = [];
-    let JSONObj: IGeneFrequencyData;
-    for (JSONObj of geneApiData) {
-        genePopulations.push(JSONObj['population']);
-        geneFrequencies.push(JSONObj['frequency']);
-        geneCounts.push(JSONObj['n']);
-    }
-
-    let traces: Plotly.Data[] = [];
-
-    for (let i = 0; i < genePopulations.length; i++) {
-        traces.push(
-            {
-              x: [genePopulations[i]] as Datum[],
-              y: [geneFrequencies[i]] as Datum[],
-              type: 'bar',
-              name: genePopulations[i] as string,
-              marker:{
-                color: [superPopulationColors[i]]
-              },
-            },
-          );
-    }   
-        
-    const data: Plotly.Data[] = traces;
-
-    // const data: Plotly.Data[] = [
-    //     {
-    //       x: genePopulations as Datum[],
-    //       y: geneFrequencies as Datum[],
-    //       type: 'bar',
-    //       marker:{
-    //         color: ["#5C5A8C", "#3D8F86", "#D6ADA7", "#F9D99A", "#8FD6FF"]
-    //       },
-    //     },
-    //   ];
-    const layout: Partial<Layout> = { 
-        title: {
-            text: "Superpopulation", 
-            font: {
-                size: 25
-            },
-        },
-        xaxis: {title: '', showticklabels: false},
-        yaxis: {side: 'left', title: 'Frequency', titlefont: {size: 15}},
-        showlegend: true,
-        legend: {
-            orientation: 'h',
-            // traceorder:"reversed",
-            itemwidth: 66,
-            x: -0.038,
-        },
-        // margin: {l: 100, r: 40, b: 40, t: 30, pad: 1},
-        autosize: true,
-    };
-
-    // yaxis = list(side = 'left', title = 'Frequency', size = 10, titlefont = list(size = 15)), 
-    // xaxis = list(title = '', showticklabels=FALSE),
-    // legend = list(orientation = "h", traceorder = "reversed", title=list(text='<b> Superpopulation </b>')),
-    //               margin = list(l=100, r=40, b=40, t=30, pad=1)
-
-    function Test(){
-        console.log(genePopulations);
-        console.log(geneFrequencies);
-        console.log(geneCounts);
-    }
+    let superPopulationColors: String[] = ["#5C5A8C", "#3D8F86", "#D6ADA7", "#F9D99A", "#8FD6FF"];
 
     return (
         <div>
@@ -169,7 +90,7 @@ export default function HomePage(): ReactElement {
                 <p>You selected {test}</p>
 
                 <div className="flex flex-row">
-                    <Plot data={data} layout={layout} />
+                    <FrequencyPlotComponent plotName="Superpopulations" geneAPIData={geneApiData} barColors={superPopulationColors}/>
                 </div>
                 // DaisyUI item: Table with pinned-rows. Add hover effect and active row effect as displayed in the first two tables in DaisyUI. Table Header needs to be highlighted differently in all tables.
                 <div className="overflow-x-auto h-96">
