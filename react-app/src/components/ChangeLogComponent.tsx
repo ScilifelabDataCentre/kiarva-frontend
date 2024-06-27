@@ -1,15 +1,5 @@
 import React from "react";
-
-type ChangeLogComponentProps = {
-    title: string;
-    doi: string;
-    databaseUpdates: string | Array<string>;
-    designAndBugFixes: string | Array<string>;
-    frontEndLink: string;
-    backEndLink: string;
-    isCurrent: boolean;
-  };
-
+import { ChangeLogComponentProps } from "../interfaces/types";
 
   const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({ title, doi, databaseUpdates, designAndBugFixes, frontEndLink, backEndLink, isCurrent }) => {
     // Conditional variable assignments

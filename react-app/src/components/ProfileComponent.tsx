@@ -1,12 +1,5 @@
 import React from 'react';
-
-type ProfileComponentProps = {
-  imageUrl: string;
-  linkUrl: string;
-  name: string;
-  title: string;
-  bgColor: string;
-};
+import { ProfileComponentProps } from '../interfaces/types';
 
 const ProfileComponent: React.FC<ProfileComponentProps> = ({ imageUrl, linkUrl, name, title, bgColor }) => {
   return (
