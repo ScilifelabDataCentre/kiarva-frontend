@@ -40,6 +40,8 @@ export default function FrequencyPlotComponent(prop: { plotName: String, geneAPI
 
     const layout: Partial<Layout> = {
         xaxis: {title: '', showticklabels: false},
+        paper_bgcolor: '#f8fafc',
+        plot_bgcolor: '#f8fafc',
         yaxis: {side: 'left', title: 'Frequency', titlefont: {size: 15}},
         showlegend: true,
         legend: {
