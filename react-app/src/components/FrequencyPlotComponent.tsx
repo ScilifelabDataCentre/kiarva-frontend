@@ -7,53 +7,85 @@ import { IGeneFrequencyData } from '../interfaces/types';
 import { ReactElement } from "react";
 const Plot = createPlotlyComponent(Plotly);
 
-export default function FrequencyPlotComponent(prop: { plotName: String, geneAPIData: IGeneFrequencyData[], barColors: String[] }): ReactElement {
+export default function FrequencyPlotComponent(prop: { 
+    superpopulationAPIData: IGeneFrequencyData[], 
+    superpopulationColors: string[],
+    populationAPIData: IGeneFrequencyData[], 
+    populationColors: string[],
+    }): ReactElement {
     
+    function generateTraces(data: IGeneFrequencyData[], colors: string[]): Plotly.Data[] {
+        let regions: string[] = [];
+        let frequencies: Number[] = [];
+        let counts: Number[] = [];
+        let JSONObj: IGeneFrequencyData;
+        for (JSONObj of data) {
+            regions.push(JSONObj['population']);
+            frequencies.push(JSONObj['frequency']);
+            counts.push(JSONObj['n']);
+        }
+    
+        let traces: Plotly.Data[] = [];
+    
+        for (let i = 0; i < regions.length; i++) {
+            traces.push(
+                {
+                x: [regions[i]] as Datum[],
+                y: [frequencies[i]] as Datum[],
+                type: 'bar',
+                name: regions[i],
+                text: 'n = ' + counts[i].toString(),
+                marker:{
+                    color: [colors[i%colors.length] as any]
+                },
+                },
+            );
+        }
 
-    let genePopulations:  String[] = [];
-    let geneFrequencies: Number[] = [];
-    let geneCounts: Number[] = [];
-    let JSONObj: IGeneFrequencyData;
-    for (JSONObj of prop.geneAPIData) {
-        genePopulations.push(JSONObj['population']);
-        geneFrequencies.push(JSONObj['frequency']);
-        geneCounts.push(JSONObj['n']);
+        return traces;
     }
 
-    let traces: Plotly.Data[] = [];
+    let superpopulationTraces: Plotly.Data[] = generateTraces(prop.superpopulationAPIData, prop.superpopulationColors);
 
-    for (let i = 0; i < genePopulations.length; i++) {
-        traces.push(
-            {
-            x: [genePopulations[i]] as Datum[],
-            y: [geneFrequencies[i]] as Datum[],
-            type: 'bar',
-            name: genePopulations[i] as string,
-            marker:{
-                color: [prop.barColors[i%prop.barColors.length] as any]
-            },
-            },
-        );
-    }   
-        
-    const data: Plotly.Data[] = traces;
+    let populationTraces: Plotly.Data[] = generateTraces(prop.populationAPIData, prop.populationColors);
 
-    const layout: Partial<Layout> = {
+    const superpopulationsLayout: Partial<Layout> = {
         xaxis: {title: '', showticklabels: false},
         paper_bgcolor: '#f8fafc',
         plot_bgcolor: '#f8fafc',
-        yaxis: {side: 'left', title: 'Frequency', titlefont: {size: 15}},
+        yaxis: {side: 'left', title: 'Allele Frequency', titlefont: {size: 15}},
         showlegend: true,
         legend: {
-            title: {text: "<b>"+prop.plotName+"</b>",},
+            title: {text: "<b>Superpopulation</b>",},
             orientation: 'h',
         },
         margin: {l: 100, r: 40, b: 40, t: 30, pad: 1},
     };
+//     plot1 <- plot_ly(df_pops, 
+//         type = 'bar', 
+//         text = ~value,
+//         x = ~population, 
+//         y = ~frequency, 
+//         color = ~population, 
+//         colors = c("#3D8F86")) %>%
+// add_text(text=~n, textfont = t, textposition="top center",
+//    showlegend = F) %>%
+// layout(yaxis = list(side = 'left', title = 'Allele Frequency', size = 10, titlefont = list(size = 15)),
+//  xaxis = list(title = '<b>Population<b>'), showlegend = F,
+//  margin = list(l=100, r=40, b=40, t=30, pad=1))
+    const populationsLayout: Partial<Layout> = {
+        xaxis: {title: '<b>Population<b>'},
+        paper_bgcolor: '#f8fafc',
+        plot_bgcolor: '#f8fafc',
+        yaxis: {side: 'left', title: 'Allele Frequency', titlefont: {size: 15}},
+        showlegend: false,
+        margin: {l: 100, r: 40, b: 75, t: 30, pad: 1},
+    };
 
     return (
-        <>
-            <Plot data={data} layout={layout} />
-        </>
+        <div className="flex flex-row">
+            <Plot data={superpopulationTraces} layout={superpopulationsLayout} />
+            <Plot data={populationTraces} layout={populationsLayout} />
+        </div>
     );
 }

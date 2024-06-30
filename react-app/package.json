@@ -15,6 +15,7 @@
     "buffer": "^6.0.3",
     "daisyui": "^4.7.3",
     "js-cookie": "^3.0.5",
+    "js-file-download": "^0.4.12",
     "lato-font": "^3.0.0",
     "plotly.js": "^2.33.0",
     "react": "^18.2.0",
