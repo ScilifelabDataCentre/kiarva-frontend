@@ -5,6 +5,7 @@ import HomePage from '../pages/HomePage';
 import AboutPage from '../pages/AboutPage';
 import PrivacyPage from '../pages/PrivacyPage';
 import ChangeLogPage from '../pages/ChangeLogPage';
+import InformationPage from '../pages/InformationPage';
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: 'changelog',
                 element: <ChangeLogPage />,
+            },
+            {
+                path: 'information',
+                element: <InformationPage />,
             },
             {
                 path: 'privacy',
