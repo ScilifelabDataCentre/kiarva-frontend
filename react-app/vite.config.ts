@@ -9,4 +9,16 @@ export default defineConfig({
     "**/*.PNG"
   ],
   base: "./",
+  resolve: {
+    alias: {
+      stream: 'stream-browserify'
+    }
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      define: {
+        global: 'globalThis'
+      }
+    }
+  }
 });
