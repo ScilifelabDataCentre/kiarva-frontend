@@ -69,3 +69,11 @@ export type ChangeLogComponentProps = {
     title: string;
     bgColor: string;
   };
+
+  export type PublicationComponentProps = {
+    linkUrl: string;
+    title: string;
+    authors: string;
+    journal: string;
+    bgColor: string;
+  };
