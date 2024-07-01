@@ -52,8 +52,35 @@ export interface IDataSourcesDC {
     disease_type: string[]
 };
 
+
 export interface IGeneFrequencyData {
     frequency: number;
     n: number;
     population: string;
 }
+
+export type ChangeLogComponentProps = {
+    title: string;
+    doi: string;
+    databaseUpdates: string | Array<string>;
+    designAndBugFixes: string | Array<string>;
+    frontEndLink: string;
+    backEndLink: string;
+    isCurrent: boolean;
+  };
+
+  export type ProfileComponentProps = {
+    imageUrl: string;
+    linkUrl: string;
+    name: string;
+    title: string;
+    bgColor: string;
+  };
+
+  export type PublicationComponentProps = {
+    linkUrl: string;
+    title: string;
+    authors: string;
+    journal: string;
+    bgColor: string;
+  };
