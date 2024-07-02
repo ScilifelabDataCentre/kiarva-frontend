@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { BODY_CLASSES, BUTTON_TYPE_ONE, 
+import { BODY_CLASSES, 
         // BUTTON_TYPE_ONE, 
         // H_1
     } from '../constants';
@@ -72,7 +72,6 @@ export default function HomePage(): ReactElement {
         });
     }
 
-    const [currentGene, setCurrentGene] = useState<string>("");
     const [currentSegment, setCurrentSegment] = useState<string>("");
     const [currentSubtype, setCurrentSubtype] = useState<string>("");
     const [currentAllele, setCurrentAllele] = useState<string>("");
@@ -118,10 +117,10 @@ export default function HomePage(): ReactElement {
     }
 
     useEffect(() =>{
-        if (currentGene && currentSegment && currentSubtype && currentAllele) {
-            getGeneFreqData(currentGene + currentSegment + currentSubtype + currentAllele)
+        if (currentSegment && currentSubtype && currentAllele) {
+            getGeneFreqData(currentSegment + currentSubtype + currentAllele)
         }
-    }, [currentGene, currentSegment, currentSubtype, currentAllele]);
+    }, [currentSegment, currentSubtype, currentAllele]);
 
     // const dropDownMenuClasses: string = "select select-bordered w-full max-w-xs bg-neutral";
     const selectedRowClasses: string = "font-bold text-lg bg-neutral text-neutral-content";
