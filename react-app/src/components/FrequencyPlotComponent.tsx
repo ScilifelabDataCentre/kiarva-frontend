@@ -83,7 +83,7 @@ export default function FrequencyPlotComponent(prop: {
     };
 
     return (
-        <div className="flex flex-row">
+        <div className="flex flex-row -mx-24 items-center justify-center">
             <Plot data={superpopulationTraces} layout={superpopulationsLayout} />
             <Plot data={populationTraces} layout={populationsLayout} />
         </div>
