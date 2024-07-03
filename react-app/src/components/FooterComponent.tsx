@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { ILink } from '../interfaces/types';
 import { LINK_CLASSES } from '../constants';
-import footerBackground from '../assets/images/hedestamIndexImage.png';
+import footerBackground from '../assets/images/hedestamFooterImage.png';
 
 export default function FooterComponent(): ReactElement {
   
@@ -21,7 +21,7 @@ return (
         <p className='text-primary-content text-xl font-semibold'>Please visit the other pages of this database</p>
         <nav className="grid grid-flow-col gap-4">
           {Object.keys(links).map(key => (
-            <a key={key} href={links[key].link} target="_blank" rel="noopener noreferrer">
+            <a key={key} href={links[key].link} rel="noopener noreferrer">
               <div className="text-info-content text-base flex justify-center items-center w-44 h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-2xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90">
                 {links[key].text}
               </div>
