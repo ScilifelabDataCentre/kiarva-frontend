@@ -102,8 +102,8 @@ export default function HomePage(): ReactElement {
         .catch(response => console.log(response.error));
     }
 
-    async function downloadGeneFasta(fastaFileName: string) {
-        let fastaEndpoint = backendAPI + "fasta/" + fastaFileName;
+    async function downloadGeneFasta(geneSegment: string) {
+        let fastaEndpoint = backendAPI + "fasta/" + geneSegment;
         await axios.get(fastaEndpoint, {
             headers: {
               "Content-Type": 'attachment'
@@ -111,7 +111,7 @@ export default function HomePage(): ReactElement {
            })
             .then(response => {
                 let responseData: Blob = response.data;
-                fileDownload(responseData, fastaFileName);
+                fileDownload(responseData, geneSegment + '.fasta');
             })
             .catch(response => console.log(response.error));
     }
@@ -198,13 +198,13 @@ export default function HomePage(): ReactElement {
         <p className='text-primary-content text-xl font-semibold'>Downloadable Fasta Files</p>
         <div className="grid grid-flow-col gap-4">
               <div className="text-info-content text-base flex justify-center items-center w-44 h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
-              <button onClick={() => downloadGeneFasta('IGHV.fasta')}>IGHV</button>
+              <button onClick={() => downloadGeneFasta('IGHV')}>IGHV</button>
               </div>
               <div className="text-info-content text-base flex justify-center items-center w-44 h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
-              <button onClick={() => downloadGeneFasta('IGHJ.fasta')}>IGHJ</button>
+              <button onClick={() => downloadGeneFasta('IGHJ')}>IGHJ</button>
               </div>
               <div className="text-info-content text-base flex justify-center items-center w-44 h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
-              <button onClick={() => downloadGeneFasta('IGHD.fasta')}>IGHD</button>
+              <button onClick={() => downloadGeneFasta('IGHD')}>IGHD</button>
               </div>
         </div>
       </div>
