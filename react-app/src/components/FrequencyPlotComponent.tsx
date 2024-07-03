@@ -14,7 +14,7 @@ export default function FrequencyPlotComponent(prop: {
     populationColors: string[],
     }): ReactElement {
     
-    function generateTraces(data: IGeneFrequencyData[], colors: string[]): Plotly.Data[] {
+    function generateTraces(data: IGeneFrequencyData[], colors: string[], plotPosition: number): Plotly.Data[] {
         let regions: string[] = [];
         let frequencies: Number[] = [];
         let counts: Number[] = [];
@@ -26,14 +26,21 @@ export default function FrequencyPlotComponent(prop: {
         }
     
         let traces: Plotly.Data[] = [];
+
+        let showLegend = plotPosition === 1;
+        let legendGroupName = "";
     
         for (let i = 0; i < regions.length; i++) {
+            legendGroupName = plotPosition === 1 ? regions[i] : "AMR";
             traces.push(
                 {
                 x: [regions[i]] as Datum[],
                 y: [frequencies[i]] as Datum[],
+                xaxis: 'x'+plotPosition,
+                showlegend: showLegend,
                 type: 'bar',
-                name: regions[i],
+                legendgroup: "group" + i%5,
+                name: plotPosition === 1 ? regions[i] : "AMR",
                 text: 'n = ' + counts[i].toString(),
                 marker:{
                     color: [colors[i%colors.length] as any]
@@ -45,12 +52,17 @@ export default function FrequencyPlotComponent(prop: {
         return traces;
     }
 
-    let superpopulationTraces: Plotly.Data[] = generateTraces(prop.superpopulationAPIData, prop.superpopulationColors);
+    let superpopulationTraces: Plotly.Data[] = generateTraces(prop.superpopulationAPIData, prop.superpopulationColors, 1);
 
-    let populationTraces: Plotly.Data[] = generateTraces(prop.populationAPIData, prop.populationColors);
+    let populationTraces: Plotly.Data[] = generateTraces(prop.populationAPIData, prop.populationColors, 2);
 
-    const superpopulationsLayout: Partial<Layout> = {
+    let data = [...superpopulationTraces, ...populationTraces];
+
+    const layout: Partial<Layout> = {
+        height: 500,
+        width: 1250,
         xaxis: {title: '', showticklabels: false},
+        xaxis2: {title: '<b>Population<b>'},
         paper_bgcolor: '#f8fafc',
         plot_bgcolor: '#f8fafc',
         yaxis: {side: 'left', title: 'Allele Frequency', titlefont: {size: 15}},
@@ -60,32 +72,22 @@ export default function FrequencyPlotComponent(prop: {
             orientation: 'h',
         },
         margin: {l: 100, r: 40, b: 40, t: 30, pad: 1},
+        grid: {rows: 1, columns: 2},
     };
-//     plot1 <- plot_ly(df_pops, 
-//         type = 'bar', 
-//         text = ~value,
-//         x = ~population, 
-//         y = ~frequency, 
-//         color = ~population, 
-//         colors = c("#3D8F86")) %>%
-// add_text(text=~n, textfont = t, textposition="top center",
-//    showlegend = F) %>%
-// layout(yaxis = list(side = 'left', title = 'Allele Frequency', size = 10, titlefont = list(size = 15)),
-//  xaxis = list(title = '<b>Population<b>'), showlegend = F,
-//  margin = list(l=100, r=40, b=40, t=30, pad=1))
-    const populationsLayout: Partial<Layout> = {
-        xaxis: {title: '<b>Population<b>'},
-        paper_bgcolor: '#f8fafc',
-        plot_bgcolor: '#f8fafc',
-        yaxis: {side: 'left', title: 'Allele Frequency', titlefont: {size: 15}},
-        showlegend: false,
-        margin: {l: 100, r: 40, b: 75, t: 30, pad: 1},
-    };
+
+    // const populationsLayout: Partial<Layout> = {
+    //     xaxis: {title: '<b>Population<b>'},
+    //     paper_bgcolor: '#f8fafc',
+    //     plot_bgcolor: '#f8fafc',
+    //     yaxis: {side: 'left', title: 'Allele Frequency', titlefont: {size: 15}},
+    //     showlegend: false,
+    //     margin: {l: 100, r: 40, b: 75, t: 30, pad: 1},
+    // };
 
     return (
         <div className="flex flex-row -mx-24 items-center justify-center">
-            <Plot data={superpopulationTraces} layout={superpopulationsLayout} />
-            <Plot data={populationTraces} layout={populationsLayout} />
+            <Plot data={data} layout={layout} />
+            {/* <Plot data={populationTraces} layout={populationsLayout} /> */}
         </div>
     );
 }
