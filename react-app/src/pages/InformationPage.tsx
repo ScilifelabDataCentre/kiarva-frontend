@@ -34,6 +34,7 @@ export default function InformationPage(): ReactElement {
         <p className="pb-8 text-justify">
         The IgSNPer output serves several purposes. First, allelic sequences with zero scores indicate that the variation has been reported to be present in the human population at a certain frequency. Second, verified alleles with low IgSNPer counts (usually 1) reveal variations that are present at low frequency in the set of individuals in the reference set, for example alleles that may be specific to a population group that has not been utilized in the reference dataset. Finally, high IgSNPer counts are indicative of sequences that have an accumulation of variations that are absent in the reference set. Extreme caution should be taken with such alleles as a high IgSNPer score indicates technical issues such as those associated with truncated or incomplete alleles, or sequence errors present in such sequences.
         </p>
+        
         <div className="divider pt-4">Populations</div>
         <p className="pb-4 text-justify">
           Ut rhoncus ante in metus lobortis, eu euismod magna dignissim. Duis
