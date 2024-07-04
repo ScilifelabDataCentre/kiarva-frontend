@@ -18,8 +18,9 @@ export default function HeaderComponent() {
             <div className="navbar">
                 <div className="navbar-start">
                     <Link to="/">
-                      <div className="text-2xl font-bold">
-                        <p>KI Adaptive Immune Receptor Variant Atlas</p>
+                    <div className="text-2xl font-bold text-center">
+                    <span className="whitespace-nowrap">KI Adaptive Immune Receptor Variant Atlas</span>
+                    <p>KIARVA</p>
                       </div>
                     </Link>
                 </div>
