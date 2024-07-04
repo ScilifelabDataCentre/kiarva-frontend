@@ -18,8 +18,8 @@ export default function HeaderComponent() {
             <div className="navbar">
                 <div className="navbar-start">
                     <Link to="/">
-                      <div className="text-4xl font-bold">
-                        <p>BCR - TCR Gene Database</p>
+                      <div className="text-2xl font-bold">
+                        <p>KI Adaptive Immune Receptor Variant Atlas</p>
                       </div>
                     </Link>
                 </div>

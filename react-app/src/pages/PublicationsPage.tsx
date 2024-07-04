@@ -29,9 +29,8 @@ export default function PublicationsPage(): ReactElement {
           </svg>
           <div className="flex flex-col">
             <span>
-              This page shows scientific publications that referenced the BCR -
-              TCR gene database. Please inform the research group when you
-              referenced the BCR - TCR gene database and published your results.
+              This page shows scientific publications that referenced the KI Adaptive Immune Receptor Variant Atlas. Please inform the research group when you
+              referenced the KI Adaptive Immune Receptor Variant Atlas and published your results.
             </span>
           </div>
         </div>

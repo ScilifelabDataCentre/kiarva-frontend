@@ -25,7 +25,7 @@ export default function ChangeLogPage(): ReactElement {
             </svg>
             <div className='flex flex-col'>
             <label className="font-bold">How to use the Change Log</label>
-            <span>The Change Log displays all releases of the BCR - TCR gene database. Each versions card has a DOI and two buttons labelled ‘Frontend Repository’ and ‘Backend Repository’. Clicking one of the buttons in the current version card will open the corresponding GitHub repository. Clicking one of the buttons in the previous versions card will start a download of the source code of the selected version. Follow the instructions in the readme file to locally run the selected version.</span>
+            <span>The Change Log displays all releases of the KI Adaptive Immune Receptor Variant Atlas. Each versions card has a DOI and two buttons labelled ‘Frontend Repository’ and ‘Backend Repository’. Clicking one of the buttons in the current version card will open the corresponding GitHub repository. Clicking one of the buttons in the previous versions card will start a download of the source code of the selected version. Follow the instructions in the readme file to locally run the selected version.</span>
             </div>
             </div>
 
