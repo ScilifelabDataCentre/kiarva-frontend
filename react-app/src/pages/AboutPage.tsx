@@ -52,7 +52,7 @@ export default function AboutPage(): ReactElement {
         />
         <ProfileComponent
         imageUrl={gunillaKarlssonHedestam}
-        linkUrl="https://ki.se/en/people/gunilla-karlsson-hedestam"
+        linkUrl="https://ki.se/en/research/research-areas-centres-and-networks/research-groups/genetic-basis-for-b-and-t-cell-recognition-and-function-gunilla-karlsson-hedestam-group#tab-start"
         name="Gunilla Karlsson Hedestam"
         title="Professor/Group leader"
         bgColor="bg-neutral"
