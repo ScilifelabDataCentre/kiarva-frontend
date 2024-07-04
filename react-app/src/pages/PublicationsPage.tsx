@@ -37,10 +37,10 @@ export default function PublicationsPage(): ReactElement {
 
         <div className="pt-2 pb-4">
           <PublicationComponent
-            linkUrl="https://ki.se/en/people/gunilla-karlsson-hedestam"
-            title="Multivalent antigen display on nanoparticle immunogens increases B cell clonotype diversity and neutralization breadth to pneumoviruses."
-            authors="Ols S, Lenart K, Arcoverde Cerveira R, Miranda MC, Brunette N, Kochmann J, Corcoran M, Skotheim R, Philomin A, Cagigi A, Fiala B, Wrenn S, Marcandalli J, Hellgren F, Thompson EA, Lin A, Gegenfurtner F, Kumar A, Chen M, Phad GE, Graham BS, Perez L, Borst AJ, Karlsson Hedestam GB, Ruckwardt TJ, King NP, Loré K"
-            journal="Immunity 2023 Sep;():"
+            linkUrl=""
+            title="Ultra-high throughput IGH genotyping reveals individual and population level diversity and provides a comprehensive resource for future adaptive immune analysis"
+            authors="Martin Corcoran, Sanjana Narang*, Mateusz Kaduk*, Mark Chernyshev*, Christopher Sundling, Anna Färnert, and Gunilla B. Karlsson Hedestam"
+            journal="Pre-print August 2024"
             bgColor="bg-neutral"
           />
         </div>
