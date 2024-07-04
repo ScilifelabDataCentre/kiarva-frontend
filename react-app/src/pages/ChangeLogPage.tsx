@@ -33,7 +33,6 @@ export default function ChangeLogPage(): ReactElement {
             <div className='pt-2 pb-4'>
             <ChangeLogComponent 
                     title="Version 3.0"
-                    doi="https://doi.org/10.1080/10509585.2015.1092083"
                     databaseUpdates={[
                         "Change 1",
                         "Change 2. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim. Duis nec condimentum purus. Quisque urna enim, placerat non fermentum sed, pharetra sit amet quam. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim. Duis nec condimentum purus. Quisque urna enim, placerat non fermentum sed, pharetra sit amet quam. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim.",
@@ -53,7 +52,6 @@ export default function ChangeLogPage(): ReactElement {
             <div className='pt-2 pb-4'>
             <ChangeLogComponent
                     title="Version 2.1"
-                    doi="https://doi.org/10.1080/10509585.2015.1092083"
                     databaseUpdates="Let's see
                     what happens when we have a very long string
                     And new rows"
@@ -64,7 +62,6 @@ export default function ChangeLogPage(): ReactElement {
                 />
           <ChangeLogComponent 
                     title="Version 2.0"
-                    doi="https://doi.org/10.1080/10509585.2015.1092083"
                     databaseUpdates="Let's see
                     what happens when we have a very long string
                     And new rows"
@@ -77,7 +74,6 @@ export default function ChangeLogPage(): ReactElement {
             <div className='py-4'>
             <ChangeLogComponent
                     title="Version 1.1"
-                    doi="https://doi.org/10.1080/10509585.2015.1092083"
                     databaseUpdates="Let's see
                     what happens when we have a very long string
                     And new rows"
@@ -88,7 +84,6 @@ export default function ChangeLogPage(): ReactElement {
                 />
           <ChangeLogComponent 
                     title="Version 1.0"
-                    doi="https://doi.org/10.1080/10509585.2015.1092083"
                     databaseUpdates="Let's see
                     what happens when we have a very long string
                     And new rows"

@@ -61,7 +61,7 @@ export interface IGeneFrequencyData {
 
 export type ChangeLogComponentProps = {
     title: string;
-    doi: string;
+    // doi: string;
     databaseUpdates: string | Array<string>;
     designAndBugFixes: string | Array<string>;
     frontEndLink: string;
