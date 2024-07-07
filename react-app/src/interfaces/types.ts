@@ -59,6 +59,19 @@ export interface IGeneFrequencyData {
     population: string;
 }
 
+export interface IPopulationRegion {
+    superpopulation: string;
+    population: string;
+}
+
+export interface ISuperpopulationColors {
+    AFR: string;
+    AMR: string;
+    EAS: string;
+    EUR: string;
+    SAS: string;
+}
+
 export type ChangeLogComponentProps = {
     title: string;
     doi: string;

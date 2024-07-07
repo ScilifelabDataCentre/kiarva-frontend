@@ -5,7 +5,7 @@ import { BODY_CLASSES,
     } from '../constants';
 import { TrackPageViewIfEnabled } from '../util/cookiesHandling';
 import FrequencyPlotComponent from '../components/FrequencyPlotComponent';
-import { IGeneFrequencyData } from '../interfaces/types';
+import { IGeneFrequencyData, IPopulationRegion } from '../interfaces/types';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
 import indexBackground from '../assets/images/hedestamIndexImage.png';
@@ -16,13 +16,14 @@ export default function HomePage(): ReactElement {
 
     const superpopulations: string[] = [
         "AFR",
-        "AMR",
-        "EAS",
         "EUR",
-        "SAS"
+        "EAS",
+        "SAS",
+        "AMR",
     ];
-
-    const superPopulationColors: string[] = ["#5C5A8C", "#3D8F86", "#D6ADA7", "#F9D99A", "#8FD6FF"];
+    
+    // const superPopulationColors: string[] = ["#f25c5c", "#dab862", "#70c265", "#5480f0", "#999999"];
+    const superPopulationColorsDict = {"AFR": "#f25c5c", "AMR": "#dab862", "EAS": "#70c265", "EUR": "#5480f0", "SAS": "#999999"};
 
     const superpopFreqDataNoSelection: IGeneFrequencyData[] = [];
     for (let i = 0; i < superpopulations.length; i++) {
@@ -34,31 +35,31 @@ export default function HomePage(): ReactElement {
     }
 
     const populations: string[] = [
-        "ACB",
-        "ASW",
-        "BEB",
-        "CDX",
-        "CHB",
-        "CHS",
-        "CLM",
-        "ESN",
-        "FIN",
-        "GBR",
-        "GIH",
-        "GWD",
-        "IBS",
-        "ITU",
-        "JPT",
-        "KHV",
-        "LWK",
-        "MSL",
-        "MXL",
-        "PEL",
-        "PJL",
-        "PUR",
-        "STU",
-        "TSI",
-        "YRI"
+        'ACB',
+        'ASW',
+        'ESN',
+        'GWD',
+        'LWK',
+        'MSL',
+        'YRI',
+        'FIN',
+        'GBR',
+        'IBS',
+        'TSI',
+        'CDX',
+        'CHB',
+        'CHS',
+        'JPT',
+        'KHV',
+        'BEB',
+        'GIH',
+        'ITU',
+        'PJL',
+        'STU',
+        'CLM',
+        'MXL',
+        'PEL',
+        'PUR'
     ];
 
     const populationColors: string[] = ["#00008B"];
@@ -77,6 +78,7 @@ export default function HomePage(): ReactElement {
     const [currentAllele, setCurrentAllele] = useState<string>("");
     const [superpopFreqAPIData, setSuperpopFreqAPIData] = useState<IGeneFrequencyData[]>(superpopFreqDataNoSelection);
     const [popFreqAPIData, setPopFreqAPIData] = useState<IGeneFrequencyData[]>(popFreqDataNoSelection);
+    const [superpopulationRegions, setSuperpopulationRegions] = useState<IPopulationRegion[]>([{"superpopulation": "", "population": ""}]);
 
 
     const backendAPI = 'http://localhost:5000/';
@@ -89,7 +91,23 @@ export default function HomePage(): ReactElement {
         await axios.get(superpopulationsEndpoint)
             .then(response => {
                 responseData = response.data;
-                setSuperpopFreqAPIData(responseData)
+                let responseDataOrdered: IGeneFrequencyData[] = [];
+                let superpopulationRegion: string;
+                for (superpopulationRegion of superpopulations) {
+                    let responseObj: IGeneFrequencyData;
+                    for (responseObj of responseData) {
+                        console.log(responseObj['population']);
+                        console.log("VS")
+                        console.log(superpopulationRegion);
+                        if (responseObj.population === superpopulationRegion) {
+                            console.log("höhöj");
+                            responseDataOrdered.push(responseObj);
+                            break;
+                        }
+                    }
+                }
+                
+                setSuperpopFreqAPIData(responseDataOrdered)
             })
             .catch(response => console.log(response.error));
 
@@ -97,7 +115,27 @@ export default function HomePage(): ReactElement {
         await axios.get(populationsEndpoint)
         .then(response => {
             responseData = response.data;
-            setPopFreqAPIData(responseData)
+            let responseDataOrdered: IGeneFrequencyData[] = [];
+            let populationRegion: string;
+            for (populationRegion of populations) {
+                let responseObj: IGeneFrequencyData;
+                for (responseObj of responseData) {
+                    if (responseObj.population === populationRegion) {
+                        responseDataOrdered.push(responseObj);
+                        break;
+                    }
+                }
+            }
+            setPopFreqAPIData(responseDataOrdered)
+        })
+        .catch(response => console.log(response.error));
+
+        let regionResponseData: IPopulationRegion[] = []
+        let populationRegionEndpoint: string = backendAPI + "data/populationregions";
+        await axios.get(populationRegionEndpoint)
+        .then(response => {
+            regionResponseData = response.data;
+            setSuperpopulationRegions(regionResponseData)
         })
         .catch(response => console.log(response.error));
     }
@@ -217,9 +255,10 @@ export default function HomePage(): ReactElement {
 
                     <FrequencyPlotComponent 
                         superpopulationAPIData={superpopFreqAPIData} 
-                        superpopulationColors={superPopulationColors}
+                        superpopulationColors={superPopulationColorsDict}
                         populationAPIData={popFreqAPIData} 
                         populationColors={populationColors}
+                        superpopulationRegions={superpopulationRegions}
                         />
 
 {/*

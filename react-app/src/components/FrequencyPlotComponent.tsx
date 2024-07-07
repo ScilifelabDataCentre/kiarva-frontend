@@ -3,35 +3,44 @@
 // https://community.plotly.com/t/how-to-initiate-and-build-a-plotly-js-project-using-vite/65701/4
 import Plotly, { Datum, Layout } from "plotly.js";
 import createPlotlyComponent from "react-plotly.js/factory";
-import { IGeneFrequencyData } from '../interfaces/types';
+import { IGeneFrequencyData, IPopulationRegion, ISuperpopulationColors } from '../interfaces/types';
 import { ReactElement } from "react";
 const Plot = createPlotlyComponent(Plotly);
 
 export default function FrequencyPlotComponent(prop: { 
     superpopulationAPIData: IGeneFrequencyData[], 
-    superpopulationColors: string[],
+    superpopulationColors: ISuperpopulationColors,
     populationAPIData: IGeneFrequencyData[], 
     populationColors: string[],
+    superpopulationRegions: IPopulationRegion[]
     }): ReactElement {
     
-    function generateTraces(data: IGeneFrequencyData[], colors: string[], plotPosition: number): Plotly.Data[] {
+    function generateTraces(data: IGeneFrequencyData[], superpopulationsColor: ISuperpopulationColors, plotPosition: number, superpopulationRegions: IPopulationRegion[]): Plotly.Data[] {
         let regions: string[] = [];
         let frequencies: Number[] = [];
         let counts: Number[] = [];
+        let superpopulationRegion: string[] = [];
+        let colors: string[] = [];
         let JSONObj: IGeneFrequencyData;
         for (JSONObj of data) {
             regions.push(JSONObj['population']);
             frequencies.push(JSONObj['frequency']);
             counts.push(JSONObj['n']);
+            let regionObj: IPopulationRegion;
+            for (regionObj of superpopulationRegions) {
+                if (regionObj['population'] === JSONObj['population'] || regionObj['superpopulation'] === JSONObj['population']) {
+                    superpopulationRegion.push(regionObj['superpopulation']);
+                    colors.push(superpopulationsColor[regionObj['superpopulation'] as keyof typeof superpopulationsColor])
+                    break;
+                }
+            }
         }
     
         let traces: Plotly.Data[] = [];
 
         let showLegend = plotPosition === 1;
-        let legendGroupName = "";
     
         for (let i = 0; i < regions.length; i++) {
-            legendGroupName = plotPosition === 1 ? regions[i] : "AMR";
             traces.push(
                 {
                 x: [regions[i]] as Datum[],
@@ -39,8 +48,8 @@ export default function FrequencyPlotComponent(prop: {
                 xaxis: 'x'+plotPosition,
                 showlegend: showLegend,
                 type: 'bar',
-                legendgroup: "group" + i%5,
-                name: plotPosition === 1 ? regions[i] : "AMR",
+                legendgroup: superpopulationRegion[i],
+                name: superpopulationRegion[i],
                 text: 'n = ' + counts[i].toString(),
                 marker:{
                     color: [colors[i%colors.length] as any]
@@ -52,9 +61,9 @@ export default function FrequencyPlotComponent(prop: {
         return traces;
     }
 
-    let superpopulationTraces: Plotly.Data[] = generateTraces(prop.superpopulationAPIData, prop.superpopulationColors, 1);
+    let superpopulationTraces: Plotly.Data[] = generateTraces(prop.superpopulationAPIData, prop.superpopulationColors, 1, prop.superpopulationRegions);
 
-    let populationTraces: Plotly.Data[] = generateTraces(prop.populationAPIData, prop.populationColors, 2);
+    let populationTraces: Plotly.Data[] = generateTraces(prop.populationAPIData, prop.superpopulationColors, 2, prop.superpopulationRegions);
 
     let data = [...superpopulationTraces, ...populationTraces];
 
