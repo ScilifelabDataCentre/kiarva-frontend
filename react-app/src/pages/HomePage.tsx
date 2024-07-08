@@ -9,6 +9,7 @@ import { IGeneFrequencyData, IPopulationRegion } from '../interfaces/types';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
 import indexBackground from '../assets/images/hedestamIndexImage.png';
+import JSZip from 'jszip';
 
 export default function HomePage(): ReactElement {
 
@@ -154,6 +155,32 @@ export default function HomePage(): ReactElement {
             .catch(response => console.log(response.error));
     }
 
+    async function downloadGeneFastaZip() {
+        let geneSegments: string[] = ['IGHV', 'IGHD', 'IGHJ'];
+        let fastaBlobs: Blob[] = [];
+        let zip = new JSZip();
+        let geneSegment: string;
+        for (geneSegment of geneSegments) {
+            let fastaEndpoint = backendAPI + "fasta/" + geneSegment;
+            await axios.get(fastaEndpoint, {
+                headers: {
+                "Content-Type": 'attachment'
+                }
+            })
+                .then(response => {
+                    let responseData: Blob = response.data;
+                    zip.file(geneSegment + '.fasta', responseData);
+                })
+                .catch(response => console.log(response.error));
+        }
+        zip.generateAsync({type:"blob"}).then(function (blob) {
+            fileDownload(blob, "IGH-fastas.zip");                   
+        }, function (err) {
+            console.log(err)
+        })
+
+    }
+
     useEffect(() =>{
         if (currentSegment && currentSubtype && currentAllele) {
             getGeneFreqData(currentSegment + currentSubtype + currentAllele)
@@ -243,6 +270,9 @@ export default function HomePage(): ReactElement {
               </div>
               <div className="text-info-content text-base flex justify-center items-center w-44 h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
               <button onClick={() => downloadGeneFasta('IGHD')}>IGHD</button>
+              </div>
+              <div className="text-info-content text-base flex justify-center items-center w-44 h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+              <button onClick={() => downloadGeneFastaZip()}>ZIP</button>
               </div>
         </div>
       </div>
