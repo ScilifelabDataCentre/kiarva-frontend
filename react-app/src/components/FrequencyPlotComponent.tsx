@@ -3,37 +3,53 @@
 // https://community.plotly.com/t/how-to-initiate-and-build-a-plotly-js-project-using-vite/65701/4
 import Plotly, { Datum, Layout } from "plotly.js";
 import createPlotlyComponent from "react-plotly.js/factory";
-import { IGeneFrequencyData } from '../interfaces/types';
+import { IGeneFrequencyData, IPopulationRegion, ISuperpopulationColors } from '../interfaces/types';
 import { ReactElement } from "react";
 const Plot = createPlotlyComponent(Plotly);
 
 export default function FrequencyPlotComponent(prop: { 
     superpopulationAPIData: IGeneFrequencyData[], 
-    superpopulationColors: string[],
+    superpopulationColors: ISuperpopulationColors,
     populationAPIData: IGeneFrequencyData[], 
     populationColors: string[],
+    superpopulationRegions: IPopulationRegion[]
     }): ReactElement {
     
-    function generateTraces(data: IGeneFrequencyData[], colors: string[]): Plotly.Data[] {
+    function generateTraces(data: IGeneFrequencyData[], superpopulationsColor: ISuperpopulationColors, plotPosition: number, superpopulationRegions: IPopulationRegion[]): Plotly.Data[] {
         let regions: string[] = [];
         let frequencies: Number[] = [];
         let counts: Number[] = [];
+        let superpopulationRegion: string[] = [];
+        let colors: string[] = [];
         let JSONObj: IGeneFrequencyData;
         for (JSONObj of data) {
             regions.push(JSONObj['population']);
             frequencies.push(JSONObj['frequency']);
             counts.push(JSONObj['n']);
+            let regionObj: IPopulationRegion;
+            for (regionObj of superpopulationRegions) {
+                if (regionObj['population'] === JSONObj['population'] || regionObj['superpopulation'] === JSONObj['population']) {
+                    superpopulationRegion.push(regionObj['superpopulation']);
+                    colors.push(superpopulationsColor[regionObj['superpopulation'] as keyof typeof superpopulationsColor])
+                    break;
+                }
+            }
         }
     
         let traces: Plotly.Data[] = [];
+
+        let showLegend = plotPosition === 1;
     
         for (let i = 0; i < regions.length; i++) {
             traces.push(
                 {
                 x: [regions[i]] as Datum[],
                 y: [frequencies[i]] as Datum[],
+                xaxis: 'x'+plotPosition,
+                showlegend: showLegend,
                 type: 'bar',
-                name: regions[i],
+                legendgroup: superpopulationRegion[i],
+                name: superpopulationRegion[i],
                 text: 'n = ' + counts[i].toString(),
                 marker:{
                     color: [colors[i%colors.length] as any]
@@ -45,12 +61,17 @@ export default function FrequencyPlotComponent(prop: {
         return traces;
     }
 
-    let superpopulationTraces: Plotly.Data[] = generateTraces(prop.superpopulationAPIData, prop.superpopulationColors);
+    let superpopulationTraces: Plotly.Data[] = generateTraces(prop.superpopulationAPIData, prop.superpopulationColors, 1, prop.superpopulationRegions);
 
-    let populationTraces: Plotly.Data[] = generateTraces(prop.populationAPIData, prop.populationColors);
+    let populationTraces: Plotly.Data[] = generateTraces(prop.populationAPIData, prop.superpopulationColors, 2, prop.superpopulationRegions);
 
-    const superpopulationsLayout: Partial<Layout> = {
+    let data = [...superpopulationTraces, ...populationTraces];
+
+    const layout: Partial<Layout> = {
+        height: 500,
+        width: 1250,
         xaxis: {title: '', showticklabels: false},
+        xaxis2: {title: '<b>Population<b>'},
         paper_bgcolor: '#f8fafc',
         plot_bgcolor: '#f8fafc',
         yaxis: {side: 'left', title: 'Allele Frequency', titlefont: {size: 15}},
@@ -60,32 +81,22 @@ export default function FrequencyPlotComponent(prop: {
             orientation: 'h',
         },
         margin: {l: 100, r: 40, b: 40, t: 30, pad: 1},
+        grid: {rows: 1, columns: 2},
     };
-//     plot1 <- plot_ly(df_pops, 
-//         type = 'bar', 
-//         text = ~value,
-//         x = ~population, 
-//         y = ~frequency, 
-//         color = ~population, 
-//         colors = c("#3D8F86")) %>%
-// add_text(text=~n, textfont = t, textposition="top center",
-//    showlegend = F) %>%
-// layout(yaxis = list(side = 'left', title = 'Allele Frequency', size = 10, titlefont = list(size = 15)),
-//  xaxis = list(title = '<b>Population<b>'), showlegend = F,
-//  margin = list(l=100, r=40, b=40, t=30, pad=1))
-    const populationsLayout: Partial<Layout> = {
-        xaxis: {title: '<b>Population<b>'},
-        paper_bgcolor: '#f8fafc',
-        plot_bgcolor: '#f8fafc',
-        yaxis: {side: 'left', title: 'Allele Frequency', titlefont: {size: 15}},
-        showlegend: false,
-        margin: {l: 100, r: 40, b: 75, t: 30, pad: 1},
-    };
+
+    // const populationsLayout: Partial<Layout> = {
+    //     xaxis: {title: '<b>Population<b>'},
+    //     paper_bgcolor: '#f8fafc',
+    //     plot_bgcolor: '#f8fafc',
+    //     yaxis: {side: 'left', title: 'Allele Frequency', titlefont: {size: 15}},
+    //     showlegend: false,
+    //     margin: {l: 100, r: 40, b: 75, t: 30, pad: 1},
+    // };
 
     return (
         <div className="flex flex-row -mx-24 items-center justify-center">
-            <Plot data={superpopulationTraces} layout={superpopulationsLayout} />
-            <Plot data={populationTraces} layout={populationsLayout} />
+            <Plot data={data} layout={layout} />
+            {/* <Plot data={populationTraces} layout={populationsLayout} /> */}
         </div>
     );
 }
