@@ -97,3 +97,7 @@ export type ChangeLogComponentProps = {
     journal: string;
     bgColor: string;
   };
+
+  export type DownloadButtonComponentProps = {
+    geneArray: Array<string>;
+  }
