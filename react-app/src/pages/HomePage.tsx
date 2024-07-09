@@ -8,7 +8,6 @@ import FrequencyPlotComponent from '../components/FrequencyPlotComponent';
 import { IGeneFrequencyData, IPopulationRegion } from '../interfaces/types';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
-import indexBackground from '../assets/images/hedestamIndexImage.png';
 
 export default function HomePage(): ReactElement {
 
@@ -227,27 +226,6 @@ export default function HomePage(): ReactElement {
                     </tbody>
                         </table>
                     </div>
-
-                    <div className="relative bg-primary opacity-95 col-span-2 rounded-xl">
-    <img className="h-full w-full object-cover rounded-xl" src={indexBackground} alt="DNA String" />
-    <div className="absolute inset-0 bg-primary opacity-5"></div>
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="flex flex-col items-center justify-center space-y-4 z-10">
-        <p className='text-primary-content text-xl font-semibold'>Downloadable Fasta Files</p>
-        <div className="grid grid-flow-col gap-4">
-              <div className="text-info-content text-base flex justify-center items-center w-44 h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
-              <button onClick={() => downloadGeneFasta('IGHV')}>IGHV</button>
-              </div>
-              <div className="text-info-content text-base flex justify-center items-center w-44 h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
-              <button onClick={() => downloadGeneFasta('IGHJ')}>IGHJ</button>
-              </div>
-              <div className="text-info-content text-base flex justify-center items-center w-44 h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
-              <button onClick={() => downloadGeneFasta('IGHD')}>IGHD</button>
-              </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div className='flex items-center justify-center pt-8'><p className='text-neutral-content text-xl font-semibold'>Plots for {currentSegment} {currentSubtype} {currentAllele}</p></div>
