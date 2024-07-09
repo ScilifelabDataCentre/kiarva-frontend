@@ -25,7 +25,7 @@ export default function ChangeLogPage(): ReactElement {
             </svg>
             <div className='flex flex-col'>
             <label className="font-bold">How to use the Change Log</label>
-            <span>The Change Log displays all releases of the BCR - TCR gene database. Each versions card has a DOI and two buttons labelled ‘Frontend Repository’ and ‘Backend Repository’. Clicking one of the buttons in the current version card will open the corresponding GitHub repository. Clicking one of the buttons in the previous versions card will start a download of the source code of the selected version. Follow the instructions in the readme file to locally run the selected version.</span>
+            <span>The Change Log displays all releases of the KI Adaptive Immune Receptor Variant Atlas. Each versions card has a DOI and two buttons labelled ‘Frontend Repository’ and ‘Backend Repository’. Clicking one of the buttons in the current version card will open the corresponding GitHub repository. Clicking one of the buttons in the previous versions card will start a download of the source code of the selected version. Follow the instructions in the readme file to locally run the selected version.</span>
             </div>
             </div>
 
@@ -33,7 +33,6 @@ export default function ChangeLogPage(): ReactElement {
             <div className='pt-2 pb-4'>
             <ChangeLogComponent 
                     title="Version 3.0"
-                    doi="https://doi.org/10.1080/10509585.2015.1092083"
                     databaseUpdates={[
                         "Change 1",
                         "Change 2. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim. Duis nec condimentum purus. Quisque urna enim, placerat non fermentum sed, pharetra sit amet quam. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim. Duis nec condimentum purus. Quisque urna enim, placerat non fermentum sed, pharetra sit amet quam. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim.",
@@ -53,7 +52,6 @@ export default function ChangeLogPage(): ReactElement {
             <div className='pt-2 pb-4'>
             <ChangeLogComponent
                     title="Version 2.1"
-                    doi="https://doi.org/10.1080/10509585.2015.1092083"
                     databaseUpdates="Let's see
                     what happens when we have a very long string
                     And new rows"
@@ -64,7 +62,6 @@ export default function ChangeLogPage(): ReactElement {
                 />
           <ChangeLogComponent 
                     title="Version 2.0"
-                    doi="https://doi.org/10.1080/10509585.2015.1092083"
                     databaseUpdates="Let's see
                     what happens when we have a very long string
                     And new rows"
@@ -77,7 +74,6 @@ export default function ChangeLogPage(): ReactElement {
             <div className='py-4'>
             <ChangeLogComponent
                     title="Version 1.1"
-                    doi="https://doi.org/10.1080/10509585.2015.1092083"
                     databaseUpdates="Let's see
                     what happens when we have a very long string
                     And new rows"
@@ -88,7 +84,6 @@ export default function ChangeLogPage(): ReactElement {
                 />
           <ChangeLogComponent 
                     title="Version 1.0"
-                    doi="https://doi.org/10.1080/10509585.2015.1092083"
                     databaseUpdates="Let's see
                     what happens when we have a very long string
                     And new rows"
