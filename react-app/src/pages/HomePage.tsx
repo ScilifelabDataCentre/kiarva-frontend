@@ -8,6 +8,7 @@ import FrequencyPlotComponent from '../components/FrequencyPlotComponent';
 import { IGeneFrequencyData, IPopulationRegion } from '../interfaces/types';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
+import JSZip from 'jszip';
 
 export default function HomePage(): ReactElement {
 
@@ -151,6 +152,32 @@ export default function HomePage(): ReactElement {
                 fileDownload(responseData, geneSegment + '.fasta');
             })
             .catch(response => console.log(response.error));
+    }
+
+    async function downloadGeneFastaZip() {
+        let geneSegments: string[] = ['IGHV', 'IGHD', 'IGHJ'];
+        let fastaBlobs: Blob[] = [];
+        let zip = new JSZip();
+        let geneSegment: string;
+        for (geneSegment of geneSegments) {
+            let fastaEndpoint = backendAPI + "fasta/" + geneSegment;
+            await axios.get(fastaEndpoint, {
+                headers: {
+                "Content-Type": 'attachment'
+                }
+            })
+                .then(response => {
+                    let responseData: Blob = response.data;
+                    zip.file(geneSegment + '.fasta', responseData);
+                })
+                .catch(response => console.log(response.error));
+        }
+        zip.generateAsync({type:"blob"}).then(function (blob) {
+            fileDownload(blob, "IGH-fastas.zip");                   
+        }, function (err) {
+            console.log(err)
+        })
+
     }
 
     useEffect(() =>{
