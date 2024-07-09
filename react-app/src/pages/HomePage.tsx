@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { BODY_CLASSES, H_1, 
+import { BODY_CLASSES, 
         // BUTTON_TYPE_ONE, 
         // H_1
     } from '../constants';
@@ -9,26 +9,10 @@ import { IGeneFrequencyData, IPopulationRegion } from '../interfaces/types';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
 import indexBackground from '../assets/images/hedestamIndexImage.png';
-import DownloadButtonComponent from '../components/DownloadButtonComponent';
 
 export default function HomePage(): ReactElement {
 
     TrackPageViewIfEnabled();
-
-        const [activeTab, setActiveTab] = useState('nucleotide');
-              
-        //        const TabContent = () => {
-        //          switch (activeTab) {
-        //            case 'nucleotide':
-        //              return < />;
-        //            case 'aminoacid':
-        //              return < />;
-        //            case 'genotype':
-        //              return < />;
-        //            default:
-        //              return < />;
-        //          }
-        //        };
 
     const superpopulations: string[] = [
         "AFR",
@@ -183,7 +167,25 @@ export default function HomePage(): ReactElement {
     return (
         <div>
             <div className={BODY_CLASSES}>
-            <div className="alert">
+                <div className="grid grid-cols-4 grid-rows-2 gap-4 mt-8">
+                    
+                    <div className="overflow-x-auto max-h-56 col-span-2">
+                    <h1 className="text-neutral-content text-xl">Select Gene Segment</h1>
+                        <table className="table table-pin-rows">
+                        <thead>
+                            <tr>
+                            <th className='text-sm bg-secondary text-secondary-content'>IGH Segments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr className={currentSegment === 'IGHV' ? selectedRowClasses : notSelectedRowClasses} onClick={() => setCurrentSegment('IGHV')}><td>IGHV</td></tr>
+                            <tr className={currentSegment === 'IGHJ' ? selectedRowClasses : notSelectedRowClasses} onClick={() => setCurrentSegment('IGHJ')}><td>IGHJ</td></tr>
+                            <tr className={currentSegment === 'IGHD' ? selectedRowClasses : notSelectedRowClasses} onClick={() => setCurrentSegment('IGHD')}><td>IGHD</td></tr>
+                        </tbody>
+                        </table>
+                    </div>
+
+                    <div className="alert col-span-2">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -200,85 +202,6 @@ export default function HomePage(): ReactElement {
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tortor mauris, suscipit eu lacinia non, imperdiet blandit risus. Maecenas pellentesque, massa id sodales dictum, urna urna tincidunt eros, ac consequat urna lectus vel ligula. Suspendisse justo est, auctor et mi id, aliquet bibendum lacus. Quisque accumsan egestas felis, vel bibendum nunc fringilla nec. Integer accumsan sollicitudin porttitor. rna eros dapibus erat. Nam bibendum ac felis quis convallis. Praesent ne</span>
             </div>
             </div>
-
-            <div className={H_1}>Download Fasta Files</div>        
-            
-                  <div role="tablist" className="tabs tabs-lifted pb-4">
-                    <div
-                      role="tab"
-                      className={`tab ${activeTab === 'nucleotide' ? 'tab-active text-info-content !bg-info' : 'bg-white shadow'}`}
-                    //  onClick={() => setActiveTab('nucleotide')}
-                    >
-                      Expressed
-                    </div>
-                    <div
-                      role="tab"
-                      className={`tab ${activeTab === 'aminoacid' ? 'tab-active text-info-content !bg-info' : 'bg-white shadow'}`}
-                    //  onClick={() => setActiveTab('aminoacid')}
-                    >
-                      Genomic with flanking regions
-                    </div>
-                    <div
-                      role="tab"
-                      className={`tab ${activeTab === 'genotype' ? 'tab-active text-info-content !bg-info' : 'bg-white shadow'}`}
-                    //  onClick={() => setActiveTab('genotype')}
-                    >
-                      Grouped by Amino Acids
-                    </div>
-                  </div>
-                  {/* <TabContent /> */}
-
-<div className="relative bg-primary opacity-95 rounded-xl">
-  <img
-    className="h-full w-full object-cover rounded-xl"
-    src={indexBackground}
-    alt="DNA String"
-  />
-  <div className="absolute inset-0 bg-primary opacity-5"></div>
-  <div className="absolute inset-0 flex items-start content-center justify-around space-x-4 my-14">
-      <DownloadButtonComponent
-        geneArray={['IGH', 'IGHV', 'IGHD', 'IGHJ']}
-        />
-        <DownloadButtonComponent
-        geneArray={['TRG', 'TRGV', 'TRGJ', 'TRG Constants']}
-        />
-        <DownloadButtonComponent
-        geneArray={['IGL', 'IGL Constants']}
-        />
-        <DownloadButtonComponent
-        geneArray={['IGK', 'IGKL', 'IGKJ', 'IGK Constants']}
-        />
-        <DownloadButtonComponent
-        geneArray={['TRA', 'TRAV', 'TRAJ', 'TRA Constants']}
-        />
-        <DownloadButtonComponent
-        geneArray={['TRD', 'TRDV', 'TRDJ', 'TRDD', 'TRD Constants']}
-        />
-        <DownloadButtonComponent
-        geneArray={['TRB', 'TRBV', 'TRBJ', 'TRBD', 'TRB Constants']}
-        />
-    </div>
-  </div>
-</div>
-
-
-
-                <div className="grid grid-cols-4 grid-rows-2 gap-4 mt-8">
-                    <div className="overflow-x-auto max-h-56 col-span-2">
-                    <h1 className="text-neutral-content text-xl">Select Gene Segment</h1>
-                        <table className="table table-pin-rows">
-                        <thead>
-                            <tr>
-                            <th className='text-sm bg-secondary text-secondary-content'>IGH Segments</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className={currentSegment === 'IGHV' ? selectedRowClasses : notSelectedRowClasses} onClick={() => setCurrentSegment('IGHV')}><td>IGHV</td></tr>
-                            <tr className={currentSegment === 'IGHJ' ? selectedRowClasses : notSelectedRowClasses} onClick={() => setCurrentSegment('IGHJ')}><td>IGHJ</td></tr>
-                            <tr className={currentSegment === 'IGHD' ? selectedRowClasses : notSelectedRowClasses} onClick={() => setCurrentSegment('IGHD')}><td>IGHD</td></tr>
-                        </tbody>
-                        </table>
-                    </div>
 
                     <div className="overflow-x-auto max-h-56 col-span-1">
                     <h1 className="text-neutral-content text-xl">Select Subtype</h1>
@@ -304,6 +227,27 @@ export default function HomePage(): ReactElement {
                     </tbody>
                         </table>
                     </div>
+
+                    <div className="relative bg-primary opacity-95 col-span-2 rounded-xl">
+    <img className="h-full w-full object-cover rounded-xl" src={indexBackground} alt="DNA String" />
+    <div className="absolute inset-0 bg-primary opacity-5"></div>
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className="flex flex-col items-center justify-center space-y-4 z-10">
+        <p className='text-primary-content text-xl font-semibold'>Downloadable Fasta Files</p>
+        <div className="grid grid-flow-col gap-4">
+              <div className="text-info-content text-base flex justify-center items-center w-44 h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+              <button onClick={() => downloadGeneFasta('IGHV')}>IGHV</button>
+              </div>
+              <div className="text-info-content text-base flex justify-center items-center w-44 h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+              <button onClick={() => downloadGeneFasta('IGHJ')}>IGHJ</button>
+              </div>
+              <div className="text-info-content text-base flex justify-center items-center w-44 h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+              <button onClick={() => downloadGeneFasta('IGHD')}>IGHD</button>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div className='flex items-center justify-center pt-8'><p className='text-neutral-content text-xl font-semibold'>Plots for {currentSegment} {currentSubtype} {currentAllele}</p></div>
@@ -478,5 +422,6 @@ export default function HomePage(): ReactElement {
 
 
             </div>
+        </div>
     );
 }
