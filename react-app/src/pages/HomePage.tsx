@@ -193,6 +193,25 @@ export default function HomePage(): ReactElement {
     return (
         <div>
             <div className={BODY_CLASSES}>
+
+            <div className="alert">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="h-6 w-6 shrink-0 stroke-current">
+                <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div className='flex flex-col'>
+            <label className="font-bold">How to use the tool</label>
+            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tortor mauris, suscipit eu lacinia non, imperdiet blandit risus. Maecenas pellentesque, massa id sodales dictum, urna urna tincidunt eros, ac consequat urna lectus vel ligula. Suspendisse justo est, auctor et mi id, aliquet bibendum lacus. Quisque accumsan egestas felis, vel bibendum nunc fringilla nec. Integer accumsan sollicitudin porttitor. rna eros dapibus erat. Nam bibendum ac felis quis convallis. Praesent ne</span>
+            </div>
+            </div>
+
                 <div className="grid grid-cols-4 grid-rows-2 gap-4 mt-8">
                     
                     <div className="overflow-x-auto max-h-56 col-span-2">
@@ -210,24 +229,6 @@ export default function HomePage(): ReactElement {
                         </tbody>
                         </table>
                     </div>
-
-                    <div className="alert col-span-2">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="h-6 w-6 shrink-0 stroke-current">
-                <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <div className='flex flex-col'>
-            <label className="font-bold">How to use the tool</label>
-            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tortor mauris, suscipit eu lacinia non, imperdiet blandit risus. Maecenas pellentesque, massa id sodales dictum, urna urna tincidunt eros, ac consequat urna lectus vel ligula. Suspendisse justo est, auctor et mi id, aliquet bibendum lacus. Quisque accumsan egestas felis, vel bibendum nunc fringilla nec. Integer accumsan sollicitudin porttitor. rna eros dapibus erat. Nam bibendum ac felis quis convallis. Praesent ne</span>
-            </div>
-            </div>
 
                     <div className="overflow-x-auto max-h-56 col-span-1">
                     <h1 className="text-neutral-content text-xl">Select Subtype</h1>
