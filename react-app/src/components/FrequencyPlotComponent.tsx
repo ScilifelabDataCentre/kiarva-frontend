@@ -5,6 +5,7 @@ import Plotly, { Datum, Layout } from "plotly.js";
 import createPlotlyComponent from "react-plotly.js/factory";
 import { IGeneFrequencyData, IPopulationRegion, ISuperpopulationColors } from '../interfaces/types';
 import { ReactElement } from "react";
+import worldMap from '../assets/images/worldMap.png';
 const Plot = createPlotlyComponent(Plotly);
 
 export default function FrequencyPlotComponent(prop: { 
@@ -94,9 +95,21 @@ export default function FrequencyPlotComponent(prop: {
     // };
 
     return (
-        <div className="flex flex-row -mx-24 items-center justify-center">
-            <Plot data={data} layout={layout} />
+
+<div className="relative bg-base-100 -mx-24">
+  
+<div className="flex flex-row items-center justify-center">
+  <Plot data={data} layout={layout} />
             {/* <Plot data={populationTraces} layout={populationsLayout} /> */}
-        </div>
+    </div>
+
+    <img
+    className="absolute inset-0 h-full w-full object-cover opacity-15"
+    src={worldMap}
+    alt="World Map"
+  />
+
+  </div>
+  
     );
 }
