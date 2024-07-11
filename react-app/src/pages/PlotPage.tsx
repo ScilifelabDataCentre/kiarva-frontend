@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { BODY_CLASSES, 
         // BUTTON_TYPE_ONE, 
-        // H_1
+        H_1
     } from '../constants';
 import { TrackPageViewIfEnabled } from '../util/cookiesHandling';
 import FrequencyPlotComponent from '../components/FrequencyPlotComponent';
@@ -151,6 +151,7 @@ export default function PlotPage(): ReactElement {
     return (
         <div>
             <div className={BODY_CLASSES}>
+            <h1 className={H_1}>Plot Alleles</h1>
 
             <div className="alert">
             <svg
