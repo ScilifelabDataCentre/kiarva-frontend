@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 import { BODY_CLASSES, 
         // BUTTON_TYPE_ONE, 
         // H_1
+        H_2
     } from '../constants';
 import { TrackPageViewIfEnabled } from '../util/cookiesHandling';
 import { Link } from 'react-router-dom';
