@@ -1,8 +1,9 @@
-name: Build and push precision medicine portal container image
+name: Build and push kiarva-frontend container image
 on:
   push:
     tags:
       - 'v*.*.*'
+      - 'dev'
 jobs:
   build_push_container:
     runs-on: ubuntu-latest
@@ -29,7 +30,7 @@ jobs:
         id: metadata_action_id
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/ScilifelabDataCentre/precision-medicine-portal-frontend
+          images: ghcr.io/ScilifelabDataCentre/kiarva-frontend
           flavor: |
             latest=auto
           tags: |
@@ -39,8 +40,8 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
           labels: |
-            org.opencontainers.image.title=precision-medicine-portal-frontend
-            org.opencontainers.image.description=precision medicine web portal frontend
+            org.opencontainers.image.title=kiarva-frontend
+            org.opencontainers.image.description=kiarva frontend
             org.opencontainers.image.url=${{ github.event.repository.html_url }}
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
       - name: Build and push
