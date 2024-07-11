@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { BODY_CLASSES, H_1, H_2, 
+import { BODY_CLASSES, 
         // BUTTON_TYPE_ONE, 
         // H_1
     } from '../constants';
