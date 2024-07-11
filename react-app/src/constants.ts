@@ -7,3 +7,7 @@ export const BUTTON_TYPE_TWO: string = 'btn bg-gray-950 text-white hover:bg-gray
 export const BODY_CLASSES: string = "bg-base-100 space-y-8 py-4 px-36 pb-28 2xl:max-w-screen-2xl 2xl:mx-auto";
 
 export const LINK_CLASSES: string = 'link link-hover';
+
+export const backendAPI =   import.meta.env.VITE_BACKEND_API_URL ? 
+                            import.meta.env.VITE_BACKEND_API_URL : 
+                            'https://www.ki-adaptive-immune-receptor-variant-atlas.se/api/';
