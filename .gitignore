@@ -2,12 +2,14 @@
 .vscode/*
 
 # dependencies
-/pmp-frontend-app/node_modules
+/react-app/node_modules
 
 # misc
-/pmp-frontend-app/.DS_Store
+/react-app/.DS_Store
 
-/pmp-frontend-app/npm-debug.log*
-pmp-frontend-app/public/.DS_Store
+/react-app/npm-debug.log*
+react-app/public/.DS_Store
 
 react-app/node_modules
+
+.env
