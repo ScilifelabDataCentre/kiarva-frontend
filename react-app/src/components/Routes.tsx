@@ -7,6 +7,8 @@ import PrivacyPage from '../pages/PrivacyPage';
 import ChangeLogPage from '../pages/ChangeLogPage';
 import PublicationsPage from '../pages/PublicationsPage';
 import InformationPage from '../pages/InformationPage';
+import DownloadPage from '../pages/DownloadPage';
+import PlotPage from '../pages/PlotPage';
 
 const router = createBrowserRouter([
     {
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <HomePage />,
+            },
+            {
+                path: 'download',
+                element: <DownloadPage />,
+            },
+            {
+                path: 'plot',
+                element: <PlotPage />,
             },
             {
                 path: 'about',

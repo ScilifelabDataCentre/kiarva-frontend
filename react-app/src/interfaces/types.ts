@@ -16,8 +16,6 @@ export interface ISVG {
 
 export interface ICardConfig {
     cardClasses: string;
-    titleClasses: string;
-    subTitleClasses: string;
     textClasses: string;
     imgClasses: string;
     buttonClasses: string;
@@ -25,8 +23,6 @@ export interface ICardConfig {
 };
 
 export interface ICardContent {
-    title: string; 
-    subTitle: string;
     text: string; 
     buttonText: string;
     imageSrc: string;
@@ -95,5 +91,12 @@ export type ChangeLogComponentProps = {
     title: string;
     authors: string;
     journal: string;
+    bgColor: string;
+  };
+
+  export type NewsComponentProps = {
+    title: string;
+    date: string;
+    text: string;
     bgColor: string;
   };
