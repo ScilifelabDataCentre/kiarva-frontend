@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
-import { BODY_CLASSES, 
+import { BODY_CLASSES,
         // BUTTON_TYPE_ONE, 
-        // H_1
+        // H_1,
         H_2
     } from '../constants';
 import { TrackPageViewIfEnabled } from '../util/cookiesHandling';
@@ -15,7 +15,7 @@ export default function HomePage(): ReactElement {
     return (
         <div>
             <div className={BODY_CLASSES}>
-            <div className="alert my-10 py-8 bg-white border-white rounded-none">
+            <div className="alert my-5 py-8 bg-white border-white rounded-none">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -39,9 +39,9 @@ export default function HomePage(): ReactElement {
   className="hero min-h-96 bg-neutral">
   <div className="hero-content text-neutral-content text-center">
     <div className="max-w-md flex flex-col items-center">
-      <h1 className="mb-5 text-5xl font-bold text-nowrap">Download Fasta Files</h1>
+      <h1 className="mb-5 text-5xl font-bold text-nowrap">Download FASTA files</h1>
       <p className="mb-5">
-        Download Fasta Files here...
+        Download FASTA files here...
       </p>
       <Link to="/download">
       <button className="text-info-content text-base flex justify-center items-center w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">Go</button>
@@ -53,9 +53,9 @@ export default function HomePage(): ReactElement {
   className="hero min-h-96 bg-neutral">
   <div className="hero-content text-neutral-content text-center">
     <div className="max-w-md flex flex-col items-center">
-      <h1 className="mb-5 text-5xl font-bold">Plot Alleles</h1>
+      <h1 className="mb-5 text-5xl font-bold">Plot alleles</h1>
       <p className="mb-5">
-        Plot Alleles here...
+        Plot alleles here...
       </p>
       <Link to="/plot">
       <button className="text-info-content text-base flex justify-center items-center w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">Go</button>

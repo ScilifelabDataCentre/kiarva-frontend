@@ -5,15 +5,24 @@ import { LINK_CLASSES } from '../constants';
 export default function HeaderComponent() {
     
     let links: { [id: string] : ILink; } = {
-        'l1': { text: 'Download Fasta Files', classes: LINK_CLASSES, link: 'download' },
-        'l2': { text: 'Plot Alleles', classes: LINK_CLASSES, link: 'plot' },
+        'l1': { text: 'Download FASTA files', classes: LINK_CLASSES, link: 'download' },
+        'l2': { text: 'Plot alleles', classes: LINK_CLASSES, link: 'plot' },
         'l3': { text: 'Information', classes: LINK_CLASSES, link: 'information' },
-        'l4': { text: 'Change Log', classes: LINK_CLASSES, link: 'changelog' },
+        'l4': { text: 'Change log', classes: LINK_CLASSES, link: 'changelog' },
         'l5': { text: 'Publications', classes: LINK_CLASSES, link: 'publications' },
         'l6': { text: 'About', classes: LINK_CLASSES, link: 'about' },
     };
     
     return (
+      <>
+      <div className="min-h-screen bg-primary flex flex-col items-center justify-center">
+    <h1 className="text-5xl text-primary-content font-bold mb-8 animate-pulse">
+        Coming Soon
+    </h1>
+    <p className="text-primary-content text-lg mb-8">
+        We're working hard to bring you KIAVRA. Stay tuned! The launch is planned for August 2024.
+    </p>
+</div>
       <div className="bg-gradient-to-b from-primary to-secondary">
         <div className="text-primary-content px-36 pt-16 py-4 2xl:max-w-screen-2xl 2xl:mx-auto">
             <div className="navbar">
@@ -37,6 +46,7 @@ export default function HeaderComponent() {
             </div>
         </div>
       </div>
+      </>
     )
   }
   
