@@ -4,11 +4,11 @@ WORKDIR /app
 RUN chown -R node:node /app
 USER node
 # Cache and Install dependencies
-COPY ./pmp-frontend-app/package.json .
-COPY ./pmp-frontend-app/package-lock.json .
+COPY ./react-app/package.json .
+COPY ./react-app/package-lock.json .
 RUN npm ci
 # Copy app files
-COPY ./pmp-frontend-app/ .
+COPY ./react-app/ .
 RUN npm run build
 
 FROM nginxinc/nginx-unprivileged:stable-alpine

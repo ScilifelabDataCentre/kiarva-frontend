@@ -7,8 +7,8 @@ import { TrackPageViewIfEnabled } from '../util/cookiesHandling';
 import FrequencyPlotComponent from '../components/FrequencyPlotComponent';
 import { IGeneFrequencyData, IPopulationRegion } from '../interfaces/types';
 import axios from 'axios';
-import fileDownload from 'js-file-download';
-import JSZip from 'jszip';
+// import fileDownload from 'js-file-download';
+// import JSZip from 'jszip';
 
 export default function HomePage(): ReactElement {
 
@@ -80,8 +80,9 @@ export default function HomePage(): ReactElement {
     const [popFreqAPIData, setPopFreqAPIData] = useState<IGeneFrequencyData[]>(popFreqDataNoSelection);
     const [superpopulationRegions, setSuperpopulationRegions] = useState<IPopulationRegion[]>([{"superpopulation": "", "population": ""}]);
 
-
-    const backendAPI = 'http://localhost:5000/';
+    const backendAPI = import.meta.env.VITE_BACKEND_API_URL ? 
+        import.meta.env.VITE_BACKEND_API_URL : 
+        'https://www.ki-adaptive-immune-receptor-variant-atlas.se/api/';
 
 
     async function getGeneFreqData(allele: string){
@@ -96,11 +97,7 @@ export default function HomePage(): ReactElement {
                 for (superpopulationRegion of superpopulations) {
                     let responseObj: IGeneFrequencyData;
                     for (responseObj of responseData) {
-                        console.log(responseObj['population']);
-                        console.log("VS")
-                        console.log(superpopulationRegion);
                         if (responseObj.population === superpopulationRegion) {
-                            console.log("höhöj");
                             responseDataOrdered.push(responseObj);
                             break;
                         }
@@ -140,45 +137,43 @@ export default function HomePage(): ReactElement {
         .catch(response => console.log(response.error));
     }
 
-    async function downloadGeneFasta(geneSegment: string) {
-        let fastaEndpoint = backendAPI + "fasta/" + geneSegment;
-        await axios.get(fastaEndpoint, {
-            headers: {
-              "Content-Type": 'attachment'
-            }
-           })
-            .then(response => {
-                let responseData: Blob = response.data;
-                fileDownload(responseData, geneSegment + '.fasta');
-            })
-            .catch(response => console.log(response.error));
-    }
+    // async function downloadGeneFasta(geneSegment: string) {
+    //     let fastaEndpoint = backendAPI + "fasta/" + geneSegment;
+    //     await axios.get(fastaEndpoint, {
+    //         headers: {
+    //           "Content-Type": 'attachment'
+    //         }
+    //        })
+    //         .then(response => {
+    //             let responseData: Blob = response.data;
+    //             fileDownload(responseData, geneSegment + '.fasta');
+    //         })
+    //         .catch(response => console.log(response.error));
+    // }
 
-    async function downloadGeneFastaZip() {
-        let geneSegments: string[] = ['IGHV', 'IGHD', 'IGHJ'];
-        let fastaBlobs: Blob[] = [];
-        let zip = new JSZip();
-        let geneSegment: string;
-        for (geneSegment of geneSegments) {
-            let fastaEndpoint = backendAPI + "fasta/" + geneSegment;
-            await axios.get(fastaEndpoint, {
-                headers: {
-                "Content-Type": 'attachment'
-                }
-            })
-                .then(response => {
-                    let responseData: Blob = response.data;
-                    zip.file(geneSegment + '.fasta', responseData);
-                })
-                .catch(response => console.log(response.error));
-        }
-        zip.generateAsync({type:"blob"}).then(function (blob) {
-            fileDownload(blob, "IGH-fastas.zip");                   
-        }, function (err) {
-            console.log(err)
-        })
-
-    }
+    // async function downloadGeneFastaZip() {
+    //     let geneSegments: string[] = ['IGHV', 'IGHD', 'IGHJ'];
+    //     let zip = new JSZip();
+    //     let geneSegment: string;
+    //     for (geneSegment of geneSegments) {
+    //         let fastaEndpoint = backendAPI + "fasta/" + geneSegment;
+    //         await axios.get(fastaEndpoint, {
+    //             headers: {
+    //             "Content-Type": 'attachment'
+    //             }
+    //         })
+    //             .then(response => {
+    //                 let responseData: Blob = response.data;
+    //                 zip.file(geneSegment + '.fasta', responseData);
+    //             })
+    //             .catch(response => console.log(response.error));
+    //     }
+    //     zip.generateAsync({type:"blob"}).then(function (blob) {
+    //         fileDownload(blob, "IGH-fastas.zip");                   
+    //     }, function (err) {
+    //         console.log(err)
+    //     })
+    // }
 
     useEffect(() =>{
         if (currentSegment && currentSubtype && currentAllele) {
