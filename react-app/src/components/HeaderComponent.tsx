@@ -5,11 +5,12 @@ import { LINK_CLASSES } from '../constants';
 export default function HeaderComponent() {
     
     let links: { [id: string] : ILink; } = {
-        'l1': { text: 'Tool', classes: LINK_CLASSES, link: 'tool' },
-        'l2': { text: 'Information', classes: LINK_CLASSES, link: 'information' },
-        'l3': { text: 'Change Log', classes: LINK_CLASSES, link: 'changelog' },
-        'l4': { text: 'Publications', classes: LINK_CLASSES, link: 'publications' },
-        'l5': { text: 'About', classes: LINK_CLASSES, link: 'about' },
+        'l1': { text: 'Download Fasta Files', classes: LINK_CLASSES, link: 'download' },
+        'l2': { text: 'Plot Alleles', classes: LINK_CLASSES, link: 'plot' },
+        'l3': { text: 'Information', classes: LINK_CLASSES, link: 'information' },
+        'l4': { text: 'Change Log', classes: LINK_CLASSES, link: 'changelog' },
+        'l5': { text: 'Publications', classes: LINK_CLASSES, link: 'publications' },
+        'l6': { text: 'About', classes: LINK_CLASSES, link: 'about' },
     };
     
     return (
@@ -27,7 +28,7 @@ export default function HeaderComponent() {
                 <div className="navbar-center lg:flex">
                     <ul className="menu menu-horizontal text-lg">
                     {Object.keys(links).map( key => (
-                        <li key={key} className="ml-8">{<NavLink className={links[key].classes} to={links[key].link}>{links[key].text}</NavLink>}</li>
+                        <li key={key} className="ml-1 max-w-36">{<NavLink className={links[key].classes} to={links[key].link}>{links[key].text}</NavLink>}</li>
                     ))}
                     </ul>
                 </div>

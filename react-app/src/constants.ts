@@ -1,5 +1,6 @@
 // reused tailwind classes
 export const H_1: string = "text-left text-black text-[40px] font-semibold";
+export const H_2: string = "text-left text-black text-2xl font-semibold";
 
 export const BUTTON_TYPE_ONE: string = 'btn bg-fuchsia-950 text-white hover:bg-fuchsia-800 active:bg-fuchsia-900 focus:outline-none focus:ring focus:ring-fuchsia-300';
 export const BUTTON_TYPE_TWO: string = 'btn bg-gray-950 text-white hover:bg-gray-800 active:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-300';
