@@ -20,7 +20,7 @@ export default function HeaderComponent() {
         Coming Soon
     </h1>
     <p className="text-primary-content text-lg mb-8">
-        We're working hard to bring you KIAVRA. Stay tuned! The launch is planned for August 2024.
+        We're working hard to bring you KIARVA. Stay tuned! The launch is planned for August 2024.
     </p>
 </div>
       <div className="bg-gradient-to-b from-primary to-secondary">
