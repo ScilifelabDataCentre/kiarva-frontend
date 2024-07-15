@@ -7,6 +7,8 @@ import { BODY_CLASSES,
 import { TrackPageViewIfEnabled } from '../util/cookiesHandling';
 import { Link } from 'react-router-dom';
 import NewsComponent from '../components/NewsComponent';
+import downloadHeroBackground from '../assets/images/heroDownloadImage.jpg';
+import plotHeroBackground from '../assets/images/heroPlotImage.jpg';
 
 export default function HomePage(): ReactElement {
 
@@ -35,9 +37,12 @@ export default function HomePage(): ReactElement {
 
 
             <div className="grid grid-cols-2 place-items-center gap-6">
+
 <div
-  className="hero min-h-96 bg-neutral">
-  <div className="hero-content text-neutral-content text-center">
+  className="relative hero min-h-96 bg-neutral">
+                <img className="object-cover" src={downloadHeroBackground} alt="Download Hero Image" />
+                <div className="absolute inset-0 bg-gray-700 opacity-85"></div>
+  <div className="hero-content text-secondary-content text-center">
     <div className="max-w-md flex flex-col items-center">
       <h1 className="mb-5 text-3xl font-bold text-nowrap">Download FASTA files</h1>
       <p className="mb-5">
@@ -50,8 +55,10 @@ export default function HomePage(): ReactElement {
   </div>
 </div>
 <div
-  className="hero min-h-96 bg-neutral">
-  <div className="hero-content text-neutral-content text-center">
+  className="relative hero min-h-96 bg-neutral">
+                <img className="object-cover" src={plotHeroBackground} alt="Plot Image" />
+                <div className="absolute inset-0 bg-gray-700 opacity-85"></div>
+  <div className="hero-content text-secondary-content text-center">
     <div className="max-w-md flex flex-col items-center">
       <h1 className="mb-5 text-3xl font-bold">Plot alleles</h1>
       <p className="mb-5">

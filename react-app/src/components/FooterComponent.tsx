@@ -20,7 +20,7 @@ export default function FooterComponent(): ReactElement {
 
 return (
   <div className="relative bg-primary">
-    <img className="h-64 w-full object-cover" src={footerBackground} alt="Random image" />
+    <img className="h-64 w-full object-cover" src={footerBackground} alt="Footer Background Image" />
     <div className="absolute inset-0 bg-gray-700 opacity-85"></div>
     <footer className="absolute inset-0 footer footer-center p-10 px-36 2xl:max-w-screen-2xl 2xl:mx-auto">
       <div className="flex flex-col items-center justify-center space-y-4 z-10">
