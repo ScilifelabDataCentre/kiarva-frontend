@@ -39,7 +39,7 @@ export default function HomePage(): ReactElement {
   className="hero min-h-96 bg-neutral">
   <div className="hero-content text-neutral-content text-center">
     <div className="max-w-md flex flex-col items-center">
-      <h1 className="mb-5 text-5xl font-bold text-nowrap">Download FASTA files</h1>
+      <h1 className="mb-5 text-3xl font-bold text-nowrap">Download FASTA files</h1>
       <p className="mb-5">
         Download FASTA files here...
       </p>
@@ -53,7 +53,7 @@ export default function HomePage(): ReactElement {
   className="hero min-h-96 bg-neutral">
   <div className="hero-content text-neutral-content text-center">
     <div className="max-w-md flex flex-col items-center">
-      <h1 className="mb-5 text-5xl font-bold">Plot alleles</h1>
+      <h1 className="mb-5 text-3xl font-bold">Plot alleles</h1>
       <p className="mb-5">
         Plot alleles here...
       </p>
