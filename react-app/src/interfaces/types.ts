@@ -16,8 +16,6 @@ export interface ISVG {
 
 export interface ICardConfig {
     cardClasses: string;
-    titleClasses: string;
-    subTitleClasses: string;
     textClasses: string;
     imgClasses: string;
     buttonClasses: string;
@@ -25,8 +23,6 @@ export interface ICardConfig {
 };
 
 export interface ICardContent {
-    title: string; 
-    subTitle: string;
     text: string; 
     buttonText: string;
     imageSrc: string;
@@ -51,3 +47,56 @@ export interface IDataSourcesDC {
     url: string;
     disease_type: string[]
 };
+
+
+export interface IGeneFrequencyData {
+    frequency: number;
+    n: number;
+    population: string;
+}
+
+export interface IPopulationRegion {
+    superpopulation: string;
+    population: string;
+}
+
+export interface ISuperpopulationColors {
+    AFR: string;
+    AMR: string;
+    EAS: string;
+    EUR: string;
+    SAS: string;
+}
+
+export type ChangeLogComponentProps = {
+    title: string;
+    // doi: string;
+    databaseUpdates: string | Array<string>;
+    designAndBugFixes: string | Array<string>;
+    frontEndLink: string;
+    backEndLink: string;
+    isCurrent: boolean;
+  };
+
+  export type ProfileComponentProps = {
+    imageUrl: string;
+    linkUrl: string;
+    name: string;
+    title: string;
+    bgColor: string;
+  };
+
+  export type PublicationComponentProps = {
+    linkUrl: string;
+    title: string;
+    authors: string;
+    journal: string;
+    bgColor: string;
+  };
+
+  export type NewsComponentProps = {
+    title: string;
+    date: string;
+    text: string;
+    bgColor: string;
+  };

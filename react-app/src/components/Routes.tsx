@@ -1,17 +1,14 @@
 import { ReactElement } from 'react';
-import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from '../App';
 import HomePage from '../pages/HomePage';
 import AboutPage from '../pages/AboutPage';
-import ContactPage from '../pages/ContactPage';
-import DataSourcesPage from '../pages/DataSourcesPage';
-import EventsAndTrainingsPage from '../pages/EventsAndTrainingsPage';
-import SignInPage from '../pages/SignInPage';
 import PrivacyPage from '../pages/PrivacyPage';
-import AboutProductPage from '../pages/AboutProductPage';
-import AboutFAQPage from '../pages/AboutFAQPage';
-import AboutTeamPage from '../pages/AboutTeamPage';
-import AboutPartnersPage from '../pages/AboutPartnersPage';
+import ChangeLogPage from '../pages/ChangeLogPage';
+import PublicationsPage from '../pages/PublicationsPage';
+import InformationPage from '../pages/InformationPage';
+import DownloadPage from '../pages/DownloadPage';
+import PlotPage from '../pages/PlotPage';
 
 const router = createBrowserRouter([
     {
@@ -23,46 +20,28 @@ const router = createBrowserRouter([
                 element: <HomePage />,
             },
             {
+                path: 'download',
+                element: <DownloadPage />,
+            },
+            {
+                path: 'plot',
+                element: <PlotPage />,
+            },
+            {
                 path: 'about',
                 element: <AboutPage />,
-                children: [
-                    {
-                        index: true,
-                        loader: async () => redirect('product')
-                    },
-                    {
-                        path: 'product',
-                        element: <AboutProductPage />,
-                    },
-                    {
-                        path: 'faq',
-                        element: <AboutFAQPage />,
-                    },
-                    {
-                        path: 'team',
-                        element: <AboutTeamPage />,
-                    },
-                    {
-                        path: 'partners',
-                        element: <AboutPartnersPage />,
-                    },
-                ]
             },
             {
-                path: 'contact',
-                element: <ContactPage />,
+                path: 'changelog',
+                element: <ChangeLogPage />,
             },
             {
-                path: 'datasources',
-                element: <DataSourcesPage />,
+                path: 'publications',
+                element: <PublicationsPage />,
             },
             {
-                path: 'eventsandtrainings',
-                element: <EventsAndTrainingsPage />,
-            },
-            {
-                path: 'signin',
-                element: <SignInPage />,
+                path: 'information',
+                element: <InformationPage />,
             },
             {
                 path: 'privacy',
