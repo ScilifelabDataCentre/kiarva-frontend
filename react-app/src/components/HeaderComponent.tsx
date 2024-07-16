@@ -31,7 +31,7 @@ export default function HeaderComponent() {
                 <div className="font-bold text-center">
                   <p className="text-2xl">KIARVA</p>
                   <span className="whitespace-nowrap text-xl">
-                    KI Adaptive Immune Receptor Variant Atlas
+                    KI Adaptive Immune Receptor Gene Variant Atlas
                   </span>
                 </div>
               </Link>
