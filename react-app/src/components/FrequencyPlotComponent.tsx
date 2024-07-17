@@ -125,7 +125,7 @@ export default function FrequencyPlotComponent(prop: {
       </div>
 
       <img
-        className="absolute inset-0 h-full w-full object-cover opacity-15"
+        className="absolute inset-0 h-full w-full object-cover opacity-15 pointer-events-none"
         src={worldMap}
         alt="World Map"
       />
