@@ -263,7 +263,6 @@ export default function PlotPage(): ReactElement {
                 : ""
             }`}
           >
-            {" "}
             <DropdownComponent
               menuName="subtype"
               menuItemsArray={subtypeDropDownItemsArray}
@@ -280,7 +279,6 @@ export default function PlotPage(): ReactElement {
                 : ""
             }`}
           >
-            {" "}
             <DropdownComponent
               menuName="allele"
               menuItemsArray={alleleDropDownItemsArray}
