@@ -15,7 +15,7 @@ import DropdownComponent from "../components/DropdownComponent";
 export default function PlotPage(): ReactElement {
   // Track page views if cookies handling is enabled
   TrackPageViewIfEnabled();
-  
+
   // Define superpopulations and their corresponding colors
   const superpopulations: string[] = ["AFR", "EUR", "EAS", "SAS", "AMR"];
 
@@ -87,23 +87,26 @@ export default function PlotPage(): ReactElement {
     IPopulationRegion[]
   >([{ superpopulation: "", population: "" }]);
 
-// Function to fetch gene frequency data from the backend API
-  async function getGeneFreqData(allele: string){
-      let alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
-      let superpopulationsEndpoint: string = alleleFrequenciesEndpoint + "superpopulations/" + allele;
-      await axios.get(superpopulationsEndpoint)
-          .then(response => {
-              setSuperpopFreqAPIData(response.data)
-          })
-          .catch(response => console.log(response.error));
-
-      let populationsEndpoint: string = alleleFrequenciesEndpoint + "populations/" + allele;
-      await axios.get(populationsEndpoint)
-      .then(response => {
-          setPopFreqAPIData(response.data)
+  // Function to fetch gene frequency data from the backend API
+  async function getGeneFreqData(allele: string) {
+    let alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
+    let superpopulationsEndpoint: string =
+      alleleFrequenciesEndpoint + "superpopulations/" + allele;
+    await axios
+      .get(superpopulationsEndpoint)
+      .then((response) => {
+        setSuperpopFreqAPIData(response.data);
       })
-      .catch(response => console.log(response.error));
+      .catch((response) => console.log(response.error));
 
+    let populationsEndpoint: string =
+      alleleFrequenciesEndpoint + "populations/" + allele;
+    await axios
+      .get(populationsEndpoint)
+      .then((response) => {
+        setPopFreqAPIData(response.data);
+      })
+      .catch((response) => console.log(response.error));
   }
 
   // Initialize state for dropdown selections
@@ -122,15 +125,17 @@ export default function PlotPage(): ReactElement {
         currentPicks.alleleDropdown
     );
   }, [currentPicks.alleleDropdown]);
-  
+
   useEffect(() => {
-      let populationRegionEndpoint: string = backendAPI + "data/populationregions";
-      axios.get(populationRegionEndpoint)
-      .then(response => {
-          setSuperpopulationRegions(response.data)
+    let populationRegionEndpoint: string =
+      backendAPI + "data/populationregions";
+    axios
+      .get(populationRegionEndpoint)
+      .then((response) => {
+        setSuperpopulationRegions(response.data);
       })
-      .catch(response => console.log(response.error));
-  }, [])
+      .catch((response) => console.log(response.error));
+  }, []);
 
   // Function to update the current pick for dropdowns
   const handleSetCurrentPick = (dropdownName: string, value: string) => {
@@ -154,7 +159,7 @@ export default function PlotPage(): ReactElement {
   let geneDropDownItemsArray = ["IGHV", "IGHD", "IGKJ", "..."];
   let subtypeDropDownItemsArray = ["1-2", "3-4", "..."];
   let alleleDropDownItemsArray = ["*02", "*04", "*05", "*06", "..."];
-  let menuItemsArray = ["..."];
+  let geneSegmentItemsArray = ["IGH", "..."];
 
   // Render the component
   return (
@@ -193,7 +198,7 @@ export default function PlotPage(): ReactElement {
           <div className="basis-1/4">
             <DropdownComponent
               menuName="gene segment"
-              menuItemsArray={menuItemsArray}
+              menuItemsArray={geneSegmentItemsArray}
               currentPick={currentPicks.geneSegmentDropdown}
               setCurrentPick={(value) =>
                 handleSetCurrentPick("geneSegmentDropdown", value)
