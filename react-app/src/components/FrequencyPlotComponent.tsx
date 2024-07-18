@@ -16,7 +16,6 @@ export default function FrequencyPlotComponent(prop: {
   superpopulationAPIData: IGeneFrequencyData[];
   superpopulationColors: ISuperpopulationColors;
   populationAPIData: IGeneFrequencyData[];
-  populationColors: string[];
   superpopulationRegions: IPopulationRegion[];
 }): ReactElement {
   function generateTraces(
