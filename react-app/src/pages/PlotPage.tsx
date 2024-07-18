@@ -259,7 +259,6 @@ export default function PlotPage(): ReactElement {
           superpopulationAPIData={superpopFreqAPIData}
           superpopulationColors={superPopulationColorsDict}
           populationAPIData={popFreqAPIData}
-          populationColors={populationColors}
           superpopulationRegions={superpopulationRegions}
         />
       </div>
