@@ -15,14 +15,14 @@ export default function HeaderComponent() {
     
     return (
       <>
-      <div className="min-h-screen bg-primary flex flex-col items-center justify-center">
+      {/* <div className="min-h-screen bg-primary flex flex-col items-center justify-center">
     <h1 className="text-5xl text-primary-content font-bold mb-8 animate-pulse">
         Coming Soon
     </h1>
     <p className="text-primary-content text-lg mb-8">
         We're working hard to bring you KIAVRA. Stay tuned! The launch is planned for August 2024.
     </p>
-</div>
+</div> */}
       <div className="bg-gradient-to-b from-primary to-secondary">
         <div className="text-primary-content px-36 pt-16 py-4 2xl:max-w-screen-2xl 2xl:mx-auto">
             <div className="navbar">

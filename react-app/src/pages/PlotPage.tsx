@@ -80,59 +80,21 @@ export default function PlotPage(): ReactElement {
     const [superpopulationRegions, setSuperpopulationRegions] = useState<IPopulationRegion[]>([{"superpopulation": "", "population": ""}]);
 
     async function getGeneFreqData(allele: string){
-        let responseData: IGeneFrequencyData[] = [];
         let alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
         let superpopulationsEndpoint: string = alleleFrequenciesEndpoint + "superpopulations/" + allele;
         await axios.get(superpopulationsEndpoint)
             .then(response => {
-                responseData = response.data;
-                let responseDataOrdered: IGeneFrequencyData[] = [];
-                let superpopulationRegion: string;
-                for (superpopulationRegion of superpopulations) {
-                    let responseObj: IGeneFrequencyData;
-                    for (responseObj of responseData) {
-                        console.log(responseObj['population']);
-                        console.log("VS")
-                        console.log(superpopulationRegion);
-                        if (responseObj.population === superpopulationRegion) {
-                            console.log("höhöj");
-                            responseDataOrdered.push(responseObj);
-                            break;
-                        }
-                    }
-                }
-                
-                setSuperpopFreqAPIData(responseDataOrdered)
+                setSuperpopFreqAPIData(response.data)
             })
             .catch(response => console.log(response.error));
 
         let populationsEndpoint: string = alleleFrequenciesEndpoint + "populations/" + allele;
         await axios.get(populationsEndpoint)
         .then(response => {
-            responseData = response.data;
-            let responseDataOrdered: IGeneFrequencyData[] = [];
-            let populationRegion: string;
-            for (populationRegion of populations) {
-                let responseObj: IGeneFrequencyData;
-                for (responseObj of responseData) {
-                    if (responseObj.population === populationRegion) {
-                        responseDataOrdered.push(responseObj);
-                        break;
-                    }
-                }
-            }
-            setPopFreqAPIData(responseDataOrdered)
+            setPopFreqAPIData(response.data)
         })
         .catch(response => console.log(response.error));
 
-        let regionResponseData: IPopulationRegion[] = []
-        let populationRegionEndpoint: string = backendAPI + "data/populationregions";
-        await axios.get(populationRegionEndpoint)
-        .then(response => {
-            regionResponseData = response.data;
-            setSuperpopulationRegions(regionResponseData)
-        })
-        .catch(response => console.log(response.error));
     }
 
     useEffect(() =>{
@@ -141,6 +103,14 @@ export default function PlotPage(): ReactElement {
         }
     }, [currentSegment, currentSubtype, currentAllele]);
 
+    useEffect(() => {
+        let populationRegionEndpoint: string = backendAPI + "data/populationregions";
+        axios.get(populationRegionEndpoint)
+        .then(response => {
+            setSuperpopulationRegions(response.data)
+        })
+        .catch(response => console.log(response.error));
+    }, [currentSegment])
     // const dropDownMenuClasses: string = "select select-bordered w-full max-w-xs bg-neutral";
     const selectedRowClasses: string = "font-bold text-lg bg-neutral text-neutral-content";
     const notSelectedRowClasses: string = "odd:bg-base-100 even:bg-neutral even:bg-opacity-50 text-lg hover:opacity-100 hover:bg-neutral transform transition duration-300 ease-in-out";
