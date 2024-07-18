@@ -1,35 +1,28 @@
 import React from "react";
 import { DropdownComponentProps } from "../interfaces/types";
 
+// Define the DropdownComponent as a functional component that takes DropdownComponentProps as props
 const DropdownComponent: React.FC<DropdownComponentProps> = ({
   menuName,
   menuItemsArray,
   currentPick,
   setCurrentPick,
 }) => {
-  // Conditional variable assignments
-  // const bgColor = booleanVar ? "bg-accent opacity-60" : "bg-neutral opacity-60";
-
-  // Ensure databaseUpdates & designAndBugFixes is an array
-  // const updatesDatabaseUpdatesArray = Array.isArray(databaseUpdates) ? databaseUpdates : databaseUpdates.split('\n');
-  // const updatesDesignAndBugFixesArray = Array.isArray(designAndBugFixes) ? designAndBugFixes : designAndBugFixes.split('\n');
-
+  // Define classes for the selected dropdown item
   const selectedRowClasses: string = "text-secondary-content bg-info";
 
   return (
     <div className="group relative cursor-pointer">
-      {/*<div className={`${buttonColor} ${textColor} flex justify-center items-center w-44 h-10 font-medium opacity-60 rounded-2xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90`}>
-          Backend Repository
-        </div> */}
+      {/* Group wrapper for the dropdown component */}
+
+      {/* Dropdown button */}
       <div className="flex items-center justify-between bg-white px-4">
         <a className="my-2 py-2 text-lg font-medium text-neutral-content lg:mx-4">
+          {/* Display the current pick or prompt to pick an item if none is selected */}
           {currentPick === "" ? `Pick ${menuName}` : currentPick}
         </a>
         <span>
-          {/* We have two SVGs here to deal with the visibility behavior of the dropdown list. 
-            The standard one displays an arrow-down. If the dropdown menu is hovered, 
-            this one becomes hidden and another SVG becomes visible (by turning into an inline element). 
-            This SVG is an arrow-up. */}
+          {/* SVG icon for the dropdown button - arrow down */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -44,6 +37,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
               d="M19.5 8.25l-7.5 7.5-7.5-7.5"
             />
           </svg>
+          {/* SVG icon for the dropdown button - arrow up */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -61,7 +55,9 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
         </span>
       </div>
 
+      {/* Dropdown menu */}
       <div className="invisible opacity-0 absolute z-10 flex flex-col w-full bg-white py-2 px-4 shadow-xl transition-all duration-300 group-hover:visible group-hover:opacity-100">
+        {/* Map through the menu items array and create a clickable item for each */}
         {menuItemsArray.map((item, index) => (
           <a
             key={index}
@@ -69,6 +65,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
               ${currentPick === item ? selectedRowClasses : "text-secondary"} `}
             onClick={() => setCurrentPick(item)}
           >
+            {/* Display the menu item */}
             {item}
           </a>
         ))}
