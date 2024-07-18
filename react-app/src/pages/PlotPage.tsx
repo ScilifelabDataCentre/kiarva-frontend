@@ -15,7 +15,7 @@ import DropdownComponent from "../components/DropdownComponent";
 export default function PlotPage(): ReactElement {
   // Track page views if cookies handling is enabled
   TrackPageViewIfEnabled();
-
+  
   // Define superpopulations and their corresponding colors
   const superpopulations: string[] = ["AFR", "EUR", "EAS", "SAS", "AMR"];
 
@@ -66,8 +66,6 @@ export default function PlotPage(): ReactElement {
     "PUR",
   ];
 
-  const populationColors: string[] = ["#00008B"];
-
   // Initialize population frequency data with zero values
   const popFreqDataNoSelection: IGeneFrequencyData[] = [];
   for (let i = 0; i < populations.length; i++) {
@@ -89,70 +87,23 @@ export default function PlotPage(): ReactElement {
     IPopulationRegion[]
   >([{ superpopulation: "", population: "" }]);
 
-  // Function to fetch gene frequency data from the backend API
-  async function getGeneFreqData(allele: string) {
-    let responseData: IGeneFrequencyData[] = [];
-    let alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
+// Function to fetch gene frequency data from the backend API
+  async function getGeneFreqData(allele: string){
+      let alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
+      let superpopulationsEndpoint: string = alleleFrequenciesEndpoint + "superpopulations/" + allele;
+      await axios.get(superpopulationsEndpoint)
+          .then(response => {
+              setSuperpopFreqAPIData(response.data)
+          })
+          .catch(response => console.log(response.error));
 
-    // Fetch superpopulation frequency data
-    let superpopulationsEndpoint: string =
-      alleleFrequenciesEndpoint + "superpopulations/" + allele;
-    await axios
-      .get(superpopulationsEndpoint)
-      .then((response) => {
-        responseData = response.data;
-        let responseDataOrdered: IGeneFrequencyData[] = [];
-        let superpopulationRegion: string;
-
-        // Order the response data to match superpopulations
-        for (superpopulationRegion of superpopulations) {
-          let responseObj: IGeneFrequencyData;
-          for (responseObj of responseData) {
-            if (responseObj.population === superpopulationRegion) {
-              responseDataOrdered.push(responseObj);
-              break;
-            }
-          }
-        }
-        setSuperpopFreqAPIData(responseDataOrdered);
+      let populationsEndpoint: string = alleleFrequenciesEndpoint + "populations/" + allele;
+      await axios.get(populationsEndpoint)
+      .then(response => {
+          setPopFreqAPIData(response.data)
       })
-      .catch((response) => console.log(response.error));
+      .catch(response => console.log(response.error));
 
-    // Fetch population frequency data
-    let populationsEndpoint: string =
-      alleleFrequenciesEndpoint + "populations/" + allele;
-    await axios
-      .get(populationsEndpoint)
-      .then((response) => {
-        responseData = response.data;
-        let responseDataOrdered: IGeneFrequencyData[] = [];
-        let populationRegion: string;
-
-        // Order the response data to match populations
-        for (populationRegion of populations) {
-          let responseObj: IGeneFrequencyData;
-          for (responseObj of responseData) {
-            if (responseObj.population === populationRegion) {
-              responseDataOrdered.push(responseObj);
-              break;
-            }
-          }
-        }
-        setPopFreqAPIData(responseDataOrdered);
-      })
-      .catch((response) => console.log(response.error));
-
-    // Fetch superpopulation regions data
-    let regionResponseData: IPopulationRegion[] = [];
-    let populationRegionEndpoint: string =
-      backendAPI + "data/populationregions";
-    await axios
-      .get(populationRegionEndpoint)
-      .then((response) => {
-        regionResponseData = response.data;
-        setSuperpopulationRegions(regionResponseData);
-      })
-      .catch((response) => console.log(response.error));
   }
 
   // Initialize state for dropdown selections
@@ -171,6 +122,15 @@ export default function PlotPage(): ReactElement {
         currentPicks.alleleDropdown
     );
   }, [currentPicks.alleleDropdown]);
+  
+  useEffect(() => {
+      let populationRegionEndpoint: string = backendAPI + "data/populationregions";
+      axios.get(populationRegionEndpoint)
+      .then(response => {
+          setSuperpopulationRegions(response.data)
+      })
+      .catch(response => console.log(response.error));
+  }, [])
 
   // Function to update the current pick for dropdowns
   const handleSetCurrentPick = (dropdownName: string, value: string) => {

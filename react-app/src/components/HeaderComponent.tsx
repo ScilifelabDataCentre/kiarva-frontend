@@ -3,6 +3,7 @@ import { ILink } from "../interfaces/types";
 import { LINK_CLASSES } from "../constants";
 
 export default function HeaderComponent() {
+
   let links: { [id: string]: ILink } = {
     l1: { text: "Download", classes: LINK_CLASSES, link: "download" },
     l2: { text: "Plot alleles", classes: LINK_CLASSES, link: "plot" },
