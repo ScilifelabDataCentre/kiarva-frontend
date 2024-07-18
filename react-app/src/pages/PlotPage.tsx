@@ -9,13 +9,16 @@ import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 import FrequencyPlotComponent from "../components/FrequencyPlotComponent";
 import { IGeneFrequencyData, IPopulationRegion } from "../interfaces/types";
 import axios from "axios";
+import DropdownComponent from "../components/DropdownComponent";
 
+// Main function to render the PlotPage component
 export default function PlotPage(): ReactElement {
+  // Track page views if cookies handling is enabled
   TrackPageViewIfEnabled();
 
+  // Define superpopulations and their corresponding colors
   const superpopulations: string[] = ["AFR", "EUR", "EAS", "SAS", "AMR"];
 
-  // const superPopulationColors: string[] = ["#f25c5c", "#dab862", "#70c265", "#5480f0", "#999999"];
   const superPopulationColorsDict = {
     AFR: "#f25c5c",
     AMR: "#dab862",
@@ -24,6 +27,7 @@ export default function PlotPage(): ReactElement {
     SAS: "#999999",
   };
 
+  // Initialize superpopulation frequency data with zero values
   const superpopFreqDataNoSelection: IGeneFrequencyData[] = [];
   for (let i = 0; i < superpopulations.length; i++) {
     superpopFreqDataNoSelection.push({
@@ -33,6 +37,7 @@ export default function PlotPage(): ReactElement {
     });
   }
 
+  // Define populations and their corresponding color
   const populations: string[] = [
     "ACB",
     "ASW",
@@ -63,6 +68,7 @@ export default function PlotPage(): ReactElement {
 
   const populationColors: string[] = ["#00008B"];
 
+  // Initialize population frequency data with zero values
   const popFreqDataNoSelection: IGeneFrequencyData[] = [];
   for (let i = 0; i < populations.length; i++) {
     popFreqDataNoSelection.push({
@@ -72,9 +78,7 @@ export default function PlotPage(): ReactElement {
     });
   }
 
-  const [currentSegment, setCurrentSegment] = useState<string>("");
-  const [currentSubtype, setCurrentSubtype] = useState<string>("");
-  const [currentAllele, setCurrentAllele] = useState<string>("");
+  // State variables for selected dropdown values and fetched data
   const [superpopFreqAPIData, setSuperpopFreqAPIData] = useState<
     IGeneFrequencyData[]
   >(superpopFreqDataNoSelection);
@@ -85,9 +89,12 @@ export default function PlotPage(): ReactElement {
     IPopulationRegion[]
   >([{ superpopulation: "", population: "" }]);
 
+  // Function to fetch gene frequency data from the backend API
   async function getGeneFreqData(allele: string) {
     let responseData: IGeneFrequencyData[] = [];
     let alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
+
+    // Fetch superpopulation frequency data
     let superpopulationsEndpoint: string =
       alleleFrequenciesEndpoint + "superpopulations/" + allele;
     await axios
@@ -96,24 +103,22 @@ export default function PlotPage(): ReactElement {
         responseData = response.data;
         let responseDataOrdered: IGeneFrequencyData[] = [];
         let superpopulationRegion: string;
+
+        // Order the response data to match superpopulations
         for (superpopulationRegion of superpopulations) {
           let responseObj: IGeneFrequencyData;
           for (responseObj of responseData) {
-            console.log(responseObj["population"]);
-            console.log("VS");
-            console.log(superpopulationRegion);
             if (responseObj.population === superpopulationRegion) {
-              console.log("höhöj");
               responseDataOrdered.push(responseObj);
               break;
             }
           }
         }
-
         setSuperpopFreqAPIData(responseDataOrdered);
       })
       .catch((response) => console.log(response.error));
 
+    // Fetch population frequency data
     let populationsEndpoint: string =
       alleleFrequenciesEndpoint + "populations/" + allele;
     await axios
@@ -122,6 +127,8 @@ export default function PlotPage(): ReactElement {
         responseData = response.data;
         let responseDataOrdered: IGeneFrequencyData[] = [];
         let populationRegion: string;
+
+        // Order the response data to match populations
         for (populationRegion of populations) {
           let responseObj: IGeneFrequencyData;
           for (responseObj of responseData) {
@@ -135,6 +142,7 @@ export default function PlotPage(): ReactElement {
       })
       .catch((response) => console.log(response.error));
 
+    // Fetch superpopulation regions data
     let regionResponseData: IPopulationRegion[] = [];
     let populationRegionEndpoint: string =
       backendAPI + "data/populationregions";
@@ -147,22 +155,52 @@ export default function PlotPage(): ReactElement {
       .catch((response) => console.log(response.error));
   }
 
+  // Initialize state for dropdown selections
+  const [currentPicks, setCurrentPicks] = useState({
+    geneSegmentDropdown: "",
+    geneDropdown: "",
+    subtypeDropdown: "",
+    alleleDropdown: "",
+  });
+
+  // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
-    if (currentSegment && currentSubtype && currentAllele) {
-      getGeneFreqData(currentSegment + currentSubtype + currentAllele);
-    }
-  }, [currentSegment, currentSubtype, currentAllele]);
+    getGeneFreqData(
+      currentPicks.geneDropdown +
+        currentPicks.subtypeDropdown +
+        currentPicks.alleleDropdown
+    );
+  }, [currentPicks.alleleDropdown]);
 
-  // const dropDownMenuClasses: string = "select select-bordered w-full max-w-xs bg-neutral";
-  const selectedRowClasses: string =
-    "font-bold text-lg bg-neutral text-neutral-content";
-  const notSelectedRowClasses: string =
-    "odd:bg-base-100 even:bg-neutral even:bg-opacity-50 text-lg hover:opacity-100 hover:bg-neutral transform transition duration-300 ease-in-out";
+  // Function to update the current pick for dropdowns
+  const handleSetCurrentPick = (dropdownName: string, value: string) => {
+    setCurrentPicks((prev: typeof currentPicks) => ({
+      ...prev,
+      [dropdownName]: value,
+      ...(dropdownName === "subtypeDropdown" && { alleleDropdown: "" }), // Reset alleleDropdown if subtypeDropdown changes
+      ...(dropdownName === "geneDropdown" && {
+        alleleDropdown: "",
+        subtypeDropdown: "",
+      }), // Reset alleleDropdown and subtypeDropdown if geneDropdown changes
+      ...(dropdownName === "geneSegmentDropdown" && {
+        alleleDropdown: "",
+        subtypeDropdown: "",
+        geneDropdown: "",
+      }), // Reset alleleDropdown, subtypeDropdown, and geneDropdown if geneSegmentDropdown changes
+    }));
+  };
 
+  // Arrays for dropdown menu items
+  let geneDropDownItemsArray = ["IGHV", "IGHD", "IGKJ", "..."];
+  let subtypeDropDownItemsArray = ["1-2", "3-4", "..."];
+  let alleleDropDownItemsArray = ["*02", "*04", "*05", "*06", "..."];
+  let menuItemsArray = ["..."];
+
+  // Render the component
   return (
     <>
       <div className={BODY_CLASSES}>
-        <h1 className={H_1}>Plot Alleles</h1>
+        <h1 className={H_1}>Generate allele frequency plots</h1>
         <div className="alert">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +216,7 @@ export default function PlotPage(): ReactElement {
             ></path>
           </svg>
           <div className="flex flex-col">
-            <label className="font-bold">How to use the tool</label>
+            <label className="font-bold">Instructions</label>
             <span>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
               tortor mauris, suscipit eu lacinia non, imperdiet blandit risus.
@@ -191,162 +229,70 @@ export default function PlotPage(): ReactElement {
             </span>
           </div>
         </div>
-        <div className="grid grid-cols-4 grid-rows-2 gap-4 mt-8">
-          <div className="overflow-x-auto max-h-56 col-span-2">
-            <h1 className="text-neutral-content text-xl">
-              Select Gene Segment
-            </h1>
-            <table className="table table-pin-rows">
-              <thead>
-                <tr>
-                  <th className="text-sm bg-secondary text-secondary-content">
-                    IGH Segments
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  className={
-                    currentSegment === "IGHV"
-                      ? selectedRowClasses
-                      : notSelectedRowClasses
-                  }
-                  onClick={() => setCurrentSegment("IGHV")}
-                >
-                  <td>IGHV</td>
-                </tr>
-                <tr
-                  className={
-                    currentSegment === "IGHJ"
-                      ? selectedRowClasses
-                      : notSelectedRowClasses
-                  }
-                  onClick={() => setCurrentSegment("IGHJ")}
-                >
-                  <td>IGHJ</td>
-                </tr>
-                <tr
-                  className={
-                    currentSegment === "IGHD"
-                      ? selectedRowClasses
-                      : notSelectedRowClasses
-                  }
-                  onClick={() => setCurrentSegment("IGHD")}
-                >
-                  <td>IGHD</td>
-                </tr>
-              </tbody>
-            </table>
+        <div className="flex gap-4">
+          <div className="basis-1/4">
+            <DropdownComponent
+              menuName="gene segment"
+              menuItemsArray={menuItemsArray}
+              currentPick={currentPicks.geneSegmentDropdown}
+              setCurrentPick={(value) =>
+                handleSetCurrentPick("geneSegmentDropdown", value)
+              }
+            />
           </div>
-
-          <div className="overflow-x-auto max-h-56 col-span-1">
-            <h1 className="text-neutral-content text-xl">Select Subtype</h1>
-            <table className="table table-pin-rows">
-              <tbody>
-                <tr
-                  className={
-                    currentSubtype === "1-2"
-                      ? selectedRowClasses
-                      : notSelectedRowClasses
-                  }
-                  onClick={() => setCurrentSubtype("1-2")}
-                >
-                  <td>1-2</td>
-                </tr>
-                <tr
-                  className={
-                    currentSubtype === "3-4"
-                      ? selectedRowClasses
-                      : notSelectedRowClasses
-                  }
-                  onClick={() => setCurrentSubtype("3-4")}
-                >
-                  <td>3-4</td>
-                </tr>
-              </tbody>
-            </table>
+          <div
+            className={`basis-1/4 ${
+              currentPicks.geneSegmentDropdown === ""
+                ? "cursor-not-allowed pointer-events-none opacity-50"
+                : ""
+            }`}
+          >
+            <DropdownComponent
+              menuName="gene"
+              menuItemsArray={geneDropDownItemsArray}
+              currentPick={currentPicks.geneDropdown}
+              setCurrentPick={(value) =>
+                handleSetCurrentPick("geneDropdown", value)
+              }
+            />
           </div>
-          <div className="overflow-x-auto max-h-56 col-span-1">
-            <h1 className="text-neutral-content text-xl">Select Allele</h1>
-            <table className="table table-pin-rows">
-              <tbody>
-                <tr
-                  className={
-                    currentAllele === "*02"
-                      ? selectedRowClasses
-                      : notSelectedRowClasses
-                  }
-                  onClick={() => setCurrentAllele("*02")}
-                >
-                  <td>*02</td>
-                </tr>
-                <tr
-                  className={
-                    currentAllele === "*04"
-                      ? selectedRowClasses
-                      : notSelectedRowClasses
-                  }
-                  onClick={() => setCurrentAllele("*04")}
-                >
-                  <td>*04</td>
-                </tr>
-                <tr
-                  className={
-                    currentAllele === "*05"
-                      ? selectedRowClasses
-                      : notSelectedRowClasses
-                  }
-                  onClick={() => setCurrentAllele("*05")}
-                >
-                  <td>*05</td>
-                </tr>
-                <tr
-                  className={
-                    currentAllele === "*06"
-                      ? selectedRowClasses
-                      : notSelectedRowClasses
-                  }
-                  onClick={() => setCurrentAllele("*06")}
-                >
-                  <td>*06</td>
-                </tr>
-                <tr
-                  className={
-                    currentAllele === "*02_S4953"
-                      ? selectedRowClasses
-                      : notSelectedRowClasses
-                  }
-                  onClick={() => setCurrentAllele("*02_S4953")}
-                >
-                  <td>*02_S4953</td>
-                </tr>
-                <tr
-                  className={
-                    currentAllele === "*04_S3434"
-                      ? selectedRowClasses
-                      : notSelectedRowClasses
-                  }
-                  onClick={() => setCurrentAllele("*04_S3434")}
-                >
-                  <td>*04_S3434</td>
-                </tr>
-                <tr
-                  className={
-                    currentAllele === "*06_S5931"
-                      ? selectedRowClasses
-                      : notSelectedRowClasses
-                  }
-                  onClick={() => setCurrentAllele("*06_S5931")}
-                >
-                  <td>*06_S5931</td>
-                </tr>
-              </tbody>
-            </table>
+          <div
+            className={`basis-1/4 ${
+              currentPicks.geneDropdown === ""
+                ? "cursor-not-allowed pointer-events-none opacity-50"
+                : ""
+            }`}
+          >
+            <DropdownComponent
+              menuName="subtype"
+              menuItemsArray={subtypeDropDownItemsArray}
+              currentPick={currentPicks.subtypeDropdown}
+              setCurrentPick={(value) =>
+                handleSetCurrentPick("subtypeDropdown", value)
+              }
+            />
+          </div>
+          <div
+            className={`basis-1/4 ${
+              currentPicks.subtypeDropdown === ""
+                ? "cursor-not-allowed pointer-events-none opacity-50"
+                : ""
+            }`}
+          >
+            <DropdownComponent
+              menuName="allele"
+              menuItemsArray={alleleDropDownItemsArray}
+              currentPick={currentPicks.alleleDropdown}
+              setCurrentPick={(value) =>
+                handleSetCurrentPick("alleleDropdown", value)
+              }
+            />
           </div>
         </div>
         <div className="flex items-center justify-center pt-8">
           <p className="text-neutral-content text-xl font-semibold">
-            Plots for {currentSegment} {currentSubtype} {currentAllele}
+            Plots for {currentPicks.geneDropdown} {currentPicks.subtypeDropdown}{" "}
+            {currentPicks.alleleDropdown}
           </p>
         </div>
         <FrequencyPlotComponent
