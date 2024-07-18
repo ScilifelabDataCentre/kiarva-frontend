@@ -18,6 +18,7 @@ export default function PlotPage(): ReactElement {
 
   // Define superpopulations and their corresponding colors
   const superpopulations: string[] = ["AFR", "EUR", "EAS", "SAS", "AMR"];
+
   const superPopulationColorsDict = {
     AFR: "#f25c5c",
     AMR: "#dab862",
@@ -64,6 +65,7 @@ export default function PlotPage(): ReactElement {
     "PEL",
     "PUR",
   ];
+
   const populationColors: string[] = ["#00008B"];
 
   // Initialize population frequency data with zero values
@@ -227,7 +229,6 @@ export default function PlotPage(): ReactElement {
             </span>
           </div>
         </div>
-
         <div className="flex gap-4">
           <div className="basis-1/4">
             <DropdownComponent

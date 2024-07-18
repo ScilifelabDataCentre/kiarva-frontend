@@ -93,13 +93,6 @@ export type PublicationComponentProps = {
   bgColor: string;
 };
 
-export type NewsComponentProps = {
-  title: string;
-  date: string;
-  text: string;
-  bgColor: string;
-};
-
 export type DropdownComponentProps = {
   menuName: string;
   menuItemsArray: Array<string>;
