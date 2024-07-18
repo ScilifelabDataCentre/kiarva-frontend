@@ -91,54 +91,58 @@ export default function FrequencyPlotComponent(prop: {
   let data = [...superpopulationTraces, ...populationTraces];
 
   const layout: Partial<Layout> = {
-      height: 500,
-      width: 1250,
-      xaxis: {
-          showticklabels: false
-      },
-      // xaxis2: {
-      //     title: {
-      //         text: '<b>Population</b>', 
-      //         font: {
-      //             size: 18
-      //         }
+    height: 500,
+    width: 1250,
+    xaxis: {
+      showticklabels: false,
+    },
+    // xaxis2: {
+    //     title: {
+    //         text: '<b>Population</b>',
+    //         font: {
+    //             size: 18
+    //         }
+    //     },
+    // },
+    paper_bgcolor: "#f8fafc",
+    plot_bgcolor: "#f8fafc",
+    yaxis: { side: "left", title: "Allele Frequency", titlefont: { size: 16 } },
+    showlegend: true,
+    legend: {
+      // title: {
+      //     text: '<b>Superpopulation</b>',
+      //     font: {
+      //         size: 18
       //     },
       // },
-      paper_bgcolor: '#f8fafc',
-      plot_bgcolor: '#f8fafc',
-      yaxis: {side: 'left', title: 'Allele Frequency', titlefont: {size: 16}},
-      showlegend: true,
-      legend: {
-          // title: {
-          //     text: '<b>Superpopulation</b>', 
-          //     font: {
-          //         size: 18
-          //     },
-          // },
-          x: 0.08,
-          y: -0.11,
-          orientation: 'h',
-      },
-      margin: {l: 100, r: 40, b: 40, t: 30, pad: 1},
-      grid: {rows: 1, columns: 2},
+      x: 0.08,
+      y: -0.11,
+      orientation: "h",
+    },
+    margin: { l: 100, r: 40, b: 40, t: 30, pad: 1 },
+    grid: { rows: 1, columns: 2 },
   };
 
   return (
-      <div className="relative bg-base-100 -mx-24">
-          <div className="flex flex-row items-center justify-center relative">
-              <Plot data={data} layout={layout} />
-              <div className="absolute -bottom-6">
-                  <div className="flex flex-row text-neutral-content justify-between pl-8">
-                      <h1 className='text-2xl'><b>Superpopulation</b></h1>
-                      <h1 className='pl-[440px] text-2xl'><b>Population</b></h1>
-                  </div>
-              </div>
+    <div className="relative bg-base-100 -mx-24">
+      <div className="flex flex-row items-center justify-center relative">
+        <Plot data={data} layout={layout} />
+        <div className="absolute -bottom-6">
+          <div className="flex flex-row text-neutral-content justify-between pl-8">
+            <h1 className="text-2xl">
+              <b>Superpopulation</b>
+            </h1>
+            <h1 className="pl-[440px] text-2xl">
+              <b>Population</b>
+            </h1>
           </div>
-          <img
-              className="absolute inset-0 h-full w-full object-cover opacity-25"
-              src={worldMap}
-              alt="World Map"
-          />
+        </div>
       </div>
+      <img
+        className="absolute inset-0 h-full w-full object-cover opacity-25 pointer-events-none"
+        src={worldMap}
+        alt="World Map"
+      />
+    </div>
   );
 }
