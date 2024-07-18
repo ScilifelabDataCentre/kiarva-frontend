@@ -11,4 +11,4 @@ export const LINK_CLASSES: string = 'link link-hover';
 
 export const backendAPI =   import.meta.env.VITE_BACKEND_API_URL ? 
                             import.meta.env.VITE_BACKEND_API_URL : 
-                            'https://www.ki-adaptive-immune-receptor-variant-atlas.se/api/';
+                            'https://kiarva-dev.scilifelab-2-prod.sys.kth.se/api/';
