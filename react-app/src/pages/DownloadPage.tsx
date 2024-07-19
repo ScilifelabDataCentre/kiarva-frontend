@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { BODY_CLASSES } from "../constants";
+import { BODY_CLASSES, H_1 } from "../constants";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 // import axios from 'axios';
 // import fileDownload from 'js-file-download';
@@ -68,19 +68,52 @@ export default function DownloadPage(): ReactElement {
             ></path>
           </svg>
           <div className="flex flex-col">
-            <label className="font-bold">How to use the tool</label>
+            <label className="font-bold">How to download</label>
             <span>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              tortor mauris, suscipit eu lacinia non, imperdiet blandit risus.
-              Maecenas pellentesque, massa id sodales dictum, urna urna
-              tincidunt eros, ac consequat urna lectus vel ligula. Suspendisse
-              justo est, auctor et mi id, aliquet bibendum lacus. Quisque
-              accumsan egestas felis, vel bibendum nunc fringilla nec. Integer
-              accumsan sollicitudin porttitor. rna eros dapibus erat. Nam
-              bibendum ac felis quis convallis. Praesent ne
+              Start by choosing the type of fasta file you want. Then, select
+              the gene segment and/or individual genes you want to download by
+              ticking the appropriate boxes—ticking a gene segment will
+              automatically select all individual genes within that chain. After
+              making your selections, click the "Download" button. This will
+              generate and start a download of your chosen file(s). If you have
+              selected more than one file, a .zip file wil be generated.
             </span>
           </div>
         </div>
+        <div className={H_1}>Fasta type</div>
+        <div className="divider !my-0"></div>
+
+        <div className="w-full !my-0">
+          <div>
+            <label className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer">
+              <input type="radio" name="fastaRadio" className="radio" />
+              <span className="pl-2">Coding sequence</span>
+            </label>
+
+            <label className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer">
+              <input type="radio" name="fastaRadio" className="radio" />
+              <span className="pl-2">
+                Genomic sequence with flanking regions
+              </span>
+            </label>
+
+            <label className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer">
+              <input type="radio" name="fastaRadio" className="radio" />
+              <span className="pl-2">Grouped by amino acid</span>
+            </label>
+          </div>
+        </div>
+
+        <div className={H_1}>BCR</div>
+        <div className="divider !my-0"></div>
+
+        <div className="form-control">
+          <label className="label cursor-pointer">
+            <span className="label-text">Remember me</span>
+            <input type="checkbox" defaultChecked className="checkbox" />
+          </label>
+        </div>
+
         <div className="grid grid-cols-4 grid-rows-2 gap-4 mt-8">
           <div className="overflow-x-auto max-h-56 col-span-2">
             <h1 className="text-neutral-content text-xl">
