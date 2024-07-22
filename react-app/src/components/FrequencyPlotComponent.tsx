@@ -74,6 +74,7 @@ export default function FrequencyPlotComponent(prop: {
     return traces;
   }
 
+  let timeStart = Date.now();
   let superpopulationTraces: Plotly.Data[] = generateTraces(
     prop.superpopulationAPIData,
     prop.superpopulationColors,
@@ -122,6 +123,8 @@ export default function FrequencyPlotComponent(prop: {
     margin: { l: 100, r: 40, b: 40, t: 30, pad: 1 },
     grid: { rows: 1, columns: 2 },
   };
+  let timeEnd = Date.now()
+  console.log("Generating plots delta: " + (timeEnd - timeStart).toString() + " ms")
 
   return (
     <div className="relative bg-base-100 -mx-24">
