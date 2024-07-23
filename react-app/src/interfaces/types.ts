@@ -99,3 +99,13 @@ export type DropdownComponentProps = {
   currentPick: string;
   setCurrentPick: (currentPick: string) => void;
 };
+
+export type DownloadBoxComponentProps = {
+  geneSegment: string;
+  geneObjectArray: GeneObject[];
+};
+
+export interface GeneObject {
+  name: string;
+  isAvailable: boolean;
+}
