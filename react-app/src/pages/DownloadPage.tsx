@@ -102,8 +102,9 @@ export default function DownloadPage(): ReactElement {
             <span className="pl-2">Genomic sequence with flanking regions</span>
           </label>
 
+          {/* Once the fasta type is available, only delete the className part from cursor-not-allowed */}
           <label
-            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
+            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer cursor-not-allowed pointer-events-none opacity-50"
             onClick={() => setFastaTypeSelected("Grouped by amino acids")}
           >
             <input type="radio" name="fastaRadio" className="radio" />
