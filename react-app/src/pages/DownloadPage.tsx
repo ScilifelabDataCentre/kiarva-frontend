@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { BODY_CLASSES, H_1 } from "../constants";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 import DownloadBoxComponent from "../components/DownloadBoxComponent";
@@ -47,6 +47,9 @@ export default function DownloadPage(): ReactElement {
   //     })
   // }
 
+  const [fastaTypeSelected, setFastaTypeSelected] = useState("Coding sequence");
+  // use fastaTypeSelected in Download backend
+
   return (
     <div className={BODY_CLASSES}>
       <div className="alert">
@@ -81,17 +84,28 @@ export default function DownloadPage(): ReactElement {
 
       <div className="w-full !my-0">
         <div>
-          <label className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer">
+          <label
+            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
+            onClick={() => setFastaTypeSelected("Coding sequence")}
+          >
             <input type="radio" name="fastaRadio" className="radio" />
             <span className="pl-2">Coding sequence</span>
           </label>
 
-          <label className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer">
+          <label
+            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
+            onClick={() =>
+              setFastaTypeSelected("Genomic sequence with flanking regions")
+            }
+          >
             <input type="radio" name="fastaRadio" className="radio" />
             <span className="pl-2">Genomic sequence with flanking regions</span>
           </label>
 
-          <label className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer">
+          <label
+            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
+            onClick={() => setFastaTypeSelected("Grouped by amino acids")}
+          >
             <input type="radio" name="fastaRadio" className="radio" />
             <span className="pl-2">Grouped by amino acid</span>
           </label>
