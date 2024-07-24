@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 export default function FooterComponent(): ReactElement {
   let links: { [id: string]: ILink } = {
     l1: {
-      text: "Download Fasta files",
+      text: "Download FASTA files",
       classes: LINK_CLASSES,
       link: "/download",
     },

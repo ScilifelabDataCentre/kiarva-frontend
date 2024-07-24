@@ -47,10 +47,6 @@ export default function DownloadPage(): ReactElement {
   //     })
   // }
 
-  // const dropDownMenuClasses: string = "select select-bordered w-full max-w-xs bg-neutral";
-  // const selectedRowClasses: string = "font-bold text-lg bg-neutral text-neutral-content";
-  // const notSelectedRowClasses: string = "odd:bg-base-100 even:bg-neutral even:bg-opacity-50 text-lg hover:opacity-100 hover:bg-neutral transform transition duration-300 ease-in-out";
-
   return (
     <div className={BODY_CLASSES}>
       <div className="alert">
@@ -111,7 +107,7 @@ export default function DownloadPage(): ReactElement {
             { name: "IGHV", isAvailable: true },
             { name: "IGHD", isAvailable: true },
             { name: "IGHJ", isAvailable: true },
-            { name: "IGH constant", isAvailable: false },
+            { name: "IGH constant", isAvailable: true },
           ]}
         ></DownloadBoxComponent>
         <DownloadBoxComponent
