@@ -32,8 +32,6 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
     } else {
       setWholeGeneSegmentSelected(false);
     }
-    console.log(genesSelectedArray);
-    console.log(wholeGeneSegmentSelected);
   }, [genesSelectedArray]);
 
   return (
