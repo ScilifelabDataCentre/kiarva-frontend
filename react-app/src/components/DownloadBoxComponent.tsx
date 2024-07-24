@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { DownloadBoxComponentProps } from "../interfaces/types";
 
-// Define the DropdownComponent as a functional component that takes DownloadBoxComponentProps as props
+// Define the DownloadBoxComponent as a functional component that takes DownloadBoxComponentProps as props
 const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
   geneSegment,
   geneObjectArray,
 }) => {
+  // State to track if the whole gene segment is selected
   const [wholeGeneSegmentSelected, setWholeGeneSegmentSelected] =
     useState(false);
 
+  // State to track selected genes
   const [genesSelectedArray, setGenesSelectedArray] = useState<string[]>([]);
 
+  // Filter available genes from the geneObjectArray
   const availableGeneObjectArray = geneObjectArray.filter(
     (gene) => gene.isAvailable
   );
 
+  // Effect to update selected genes array when wholeGeneSegmentSelected changes
   useEffect(() => {
     if (wholeGeneSegmentSelected) {
       setGenesSelectedArray(availableGeneObjectArray.map((gene) => gene.name));
     }
   }, [wholeGeneSegmentSelected]);
 
+  // Effect to update wholeGeneSegmentSelected based on the length of genesSelectedArray
   useEffect(() => {
     if (genesSelectedArray.length === availableGeneObjectArray.length) {
       setWholeGeneSegmentSelected(true);
@@ -53,8 +58,7 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
         </label>
         <div className="divider !my-0 mx-8"></div>
 
-        {/* Map through the object items array and create a clickable item for each */}
-        {/* onClick={() => addToDownloadList(gene)} */}
+        {/* Map through the geneObjectArray and create a clickable item for each gene */}
         {geneObjectArray.map((gene, index) => (
           <label
             key={index}
@@ -82,10 +86,7 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
                 });
               }}
             />
-            <span className="label-text">
-              {/* Display the gene name */}
-              {gene.name}
-            </span>
+            <span className="label-text">{gene.name}</span>
           </label>
         ))}
       </div>
