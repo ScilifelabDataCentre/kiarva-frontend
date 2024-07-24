@@ -107,7 +107,7 @@ export default function DownloadPage(): ReactElement {
             { name: "IGHV", isAvailable: true },
             { name: "IGHD", isAvailable: true },
             { name: "IGHJ", isAvailable: true },
-            { name: "IGH constant", isAvailable: true },
+            { name: "IGH constant", isAvailable: false },
           ]}
         ></DownloadBoxComponent>
         <DownloadBoxComponent

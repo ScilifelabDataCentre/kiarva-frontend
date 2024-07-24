@@ -11,14 +11,18 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
 
   const [genesSelectedArray, setGenesSelectedArray] = useState<string[]>([]);
 
+  const availableGeneObjectArray = geneObjectArray.filter(
+    (gene) => gene.isAvailable
+  );
+
   useEffect(() => {
     if (wholeGeneSegmentSelected) {
-      setGenesSelectedArray(geneObjectArray.map((gene) => gene.name));
+      setGenesSelectedArray(availableGeneObjectArray.map((gene) => gene.name));
     }
   }, [wholeGeneSegmentSelected]);
 
   useEffect(() => {
-    if (genesSelectedArray.length === geneObjectArray.length) {
+    if (genesSelectedArray.length === availableGeneObjectArray.length) {
       setWholeGeneSegmentSelected(true);
     } else {
       setWholeGeneSegmentSelected(false);
