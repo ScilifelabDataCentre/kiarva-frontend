@@ -62,7 +62,7 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
         {geneObjectArray.map((gene, index) => (
           <label
             key={index}
-            className={`label justify-start gap-2 cursor-pointer rounded-md mx-4 px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral ${
+            className={`label justify-start gap-2 cursor-pointer rounded-md mx-4 px-2 py-2 my-2 transition-all duration-300 hover:bg-neutral ${
               gene.isAvailable
                 ? ""
                 : "cursor-not-allowed pointer-events-none opacity-50"
