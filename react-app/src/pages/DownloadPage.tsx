@@ -7,8 +7,10 @@ import DownloadBoxComponent from "../components/DownloadBoxComponent";
 // import JSZip from 'jszip';
 
 export default function DownloadPage(): ReactElement {
+  // Track the page view for analytics if enabled in the application settings
   TrackPageViewIfEnabled();
 
+  // Uncomment and use this function to download a single fasta file for a specific gene segment
   // async function downloadGeneFasta(geneSegment: string) {
   //     let fastaEndpoint = backendAPI + "fasta/" + geneSegment;
   //     await axios.get(fastaEndpoint, {
@@ -23,6 +25,7 @@ export default function DownloadPage(): ReactElement {
   //         .catch(response => console.log(response.error));
   // }
 
+  // Uncomment and use this function to download a zip file containing fasta files for multiple gene segments
   // async function downloadGeneFastaZip() {
   //     let geneSegments: string[] = ['IGHV', 'IGHD', 'IGHJ'];
   //     let zip = new JSZip();
@@ -47,14 +50,15 @@ export default function DownloadPage(): ReactElement {
   //     })
   // }
 
+  // State to keep track of the selected type of fasta file
   const [fastaTypeSelected, setFastaTypeSelected] = useState("Coding sequence");
-  // use fastaTypeSelected in Download backend
 
+  // States to keep track of the selected genes for each gene segment
   const [ighSelectionArray, setIghSelectionArray] = useState<string[]>([]);
   const [igkSelectionArray, setIgkSelectionArray] = useState<string[]>([]);
   const [iglSelectionArray, setIglSelectionArray] = useState<string[]>([]);
   const [traSelectionArray, setTraSelectionArray] = useState<string[]>([]);
-  // use SelectionArrays in Download backend, concatenate them as one big array when download button is pressed
+  // Combine the selection arrays and use them when the download button is pressed
 
   return (
     <div className={BODY_CLASSES}>
