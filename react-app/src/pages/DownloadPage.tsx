@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { BODY_CLASSES, H_1 } from "../constants";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 import DownloadBoxComponent from "../components/DownloadBoxComponent";
@@ -49,6 +49,12 @@ export default function DownloadPage(): ReactElement {
 
   const [fastaTypeSelected, setFastaTypeSelected] = useState("Coding sequence");
   // use fastaTypeSelected in Download backend
+
+  const [ighSelectionArray, setIghSelectionArray] = useState<string[]>([]);
+  const [igkSelectionArray, setIgkSelectionArray] = useState<string[]>([]);
+  const [iglSelectionArray, setIglSelectionArray] = useState<string[]>([]);
+  const [traSelectionArray, setTraSelectionArray] = useState<string[]>([]);
+  // use SelectionArrays in Download backend, concatenate them as one big array when download button is pressed
 
   return (
     <div className={BODY_CLASSES}>
@@ -124,6 +130,7 @@ export default function DownloadPage(): ReactElement {
             { name: "IGHJ", isAvailable: true },
             { name: "IGH constant", isAvailable: false },
           ]}
+          setPropsSelectionArray={setIghSelectionArray}
         ></DownloadBoxComponent>
         <DownloadBoxComponent
           geneSegment="IGK"
@@ -132,6 +139,7 @@ export default function DownloadPage(): ReactElement {
             { name: "IGKJ", isAvailable: true },
             { name: "IGK constant", isAvailable: false },
           ]}
+          setPropsSelectionArray={setIgkSelectionArray}
         ></DownloadBoxComponent>
         <DownloadBoxComponent
           geneSegment="IGL"
@@ -140,6 +148,7 @@ export default function DownloadPage(): ReactElement {
             { name: "IGLJ", isAvailable: true },
             { name: "IGL constant", isAvailable: false },
           ]}
+          setPropsSelectionArray={setIglSelectionArray}
         ></DownloadBoxComponent>
       </div>
 
@@ -153,6 +162,7 @@ export default function DownloadPage(): ReactElement {
             { name: "TRAJ", isAvailable: true },
             { name: "TR constant", isAvailable: false },
           ]}
+          setPropsSelectionArray={setTraSelectionArray}
         ></DownloadBoxComponent>
       </div>
 

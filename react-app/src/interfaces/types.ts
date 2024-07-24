@@ -103,6 +103,7 @@ export type DropdownComponentProps = {
 export type DownloadBoxComponentProps = {
   geneSegment: string;
   geneObjectArray: GeneObject[];
+  setPropsSelectionArray: (propsSelectionArray: string[]) => void;
 };
 
 export interface GeneObject {
