@@ -64,7 +64,7 @@ export default function FrequencyPlotComponent(prop: {
         type: "bar",
         legendgroup: superpopulationRegion[i],
         name: superpopulationRegion[i],
-        text: "n = " + counts[i].toString(),
+        text: "n = " + counts[i],
         marker: {
           color: [colors[i % colors.length] as any],
         },
@@ -74,7 +74,6 @@ export default function FrequencyPlotComponent(prop: {
     return traces;
   }
 
-  let timeStart = Date.now();
   let superpopulationTraces: Plotly.Data[] = generateTraces(
     prop.superpopulationAPIData,
     prop.superpopulationColors,
@@ -97,25 +96,11 @@ export default function FrequencyPlotComponent(prop: {
     xaxis: {
       showticklabels: false,
     },
-    // xaxis2: {
-    //     title: {
-    //         text: '<b>Population</b>',
-    //         font: {
-    //             size: 18
-    //         }
-    //     },
-    // },
     paper_bgcolor: "#f8fafc",
     plot_bgcolor: "#f8fafc",
     yaxis: { side: "left", title: "Allele Frequency", titlefont: { size: 16 } },
     showlegend: true,
     legend: {
-      // title: {
-      //     text: '<b>Superpopulation</b>',
-      //     font: {
-      //         size: 18
-      //     },
-      // },
       x: 0.08,
       y: -0.11,
       orientation: "h",
@@ -123,8 +108,6 @@ export default function FrequencyPlotComponent(prop: {
     margin: { l: 100, r: 40, b: 40, t: 30, pad: 1 },
     grid: { rows: 1, columns: 2 },
   };
-  let timeEnd = Date.now()
-  console.log("Generating plots delta: " + (timeEnd - timeStart).toString() + " ms")
 
   return (
     <div className="relative bg-base-100 -mx-24">
