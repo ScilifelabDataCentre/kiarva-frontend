@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { BODY_CLASSES, H_1 } from "../constants";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 import DownloadBoxComponent from "../components/DownloadBoxComponent";
@@ -51,7 +51,7 @@ export default function DownloadPage(): ReactElement {
   // }
 
   // State to keep track of the selected type of fasta file
-  const [fastaTypeSelected, setFastaTypeSelected] = useState("Coding sequence");
+  const [fastaTypeSelected, setFastaTypeSelected] = useState("coding");
 
   // States to keep track of the selected genes for each gene segment
   const [ighSelectionArray, setIghSelectionArray] = useState<string[]>([]);
@@ -96,16 +96,16 @@ export default function DownloadPage(): ReactElement {
         <div>
           <label
             className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
-            onClick={() => setFastaTypeSelected("Coding sequence")}
+            onClick={() => setFastaTypeSelected("coding")}
           >
-            <input type="radio" name="fastaRadio" className="radio" />
+            <input type="radio" name="fastaRadio" className="radio" defaultChecked/>
             <span className="pl-2">Coding sequence</span>
           </label>
 
           <label
             className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
             onClick={() =>
-              setFastaTypeSelected("Genomic sequence with flanking regions")
+              setFastaTypeSelected("genomic")
             }
           >
             <input type="radio" name="fastaRadio" className="radio" />
@@ -115,7 +115,7 @@ export default function DownloadPage(): ReactElement {
           {/* Once the fasta type is available, only delete the className part from cursor-not-allowed */}
           <label
             className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer cursor-not-allowed pointer-events-none opacity-50"
-            onClick={() => setFastaTypeSelected("Grouped by amino acids")}
+            onClick={() => setFastaTypeSelected("aminoacids")}
           >
             <input type="radio" name="fastaRadio" className="radio" />
             <span className="pl-2">Grouped by amino acid</span>
@@ -171,7 +171,14 @@ export default function DownloadPage(): ReactElement {
       </div>
 
       <div className="flex justify-center">
-        <a href="" rel="noopener noreferrer">
+        <button onClick={() => {
+          console.log(
+            fastaTypeSelected + '\n' +
+            ighSelectionArray + '\n' +
+            igkSelectionArray + '\n' +
+            iglSelectionArray + '\n' +
+            traSelectionArray + '\n'
+        );}}>
           <div className="bg-gradient-to-r from-[rgba(67,133,139)] to-primary text-primary-content text-lg tracking-wide flex gap-4 justify-center items-center w-96 h-14 font-extrabold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90">
             Download
             <svg
@@ -187,7 +194,7 @@ export default function DownloadPage(): ReactElement {
               </g>
             </svg>
           </div>
-        </a>
+        </button>
       </div>
     </div>
   );
