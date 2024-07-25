@@ -33,7 +33,23 @@ export default function HomePage(): ReactElement {
             </svg>
             <div className="">
               <label className={`font-bold ${H_2}`}>Welcome to KIARVA</label>
-              <p>3-5 lines summary description of the tool</p>
+              <p className="mt-4">
+                Variation between individuals and populations within the
+                immunoglobulin (IG) locus involves both structural and allelic
+                diversity. The Karolinska Institutet Adaptive Immune Receptor
+                Gene Variant Atlas (<b>KIARVA</b>) hosts germline-encoded IG
+                heavy chain (IGH) alleles identified in 2485 individuals from
+                the 1000 Genomes Project (1KGP) collection, in total 479 IGHV,
+                10 IGHJ and 40 IGHD alleles. <b>KIARVA</b> is open source and
+                provides downloadable FASTA files with all sequences, as well as
+                information about the frequency of each allele in 5
+                superpopulations and 25 subpopulations. In the near future,
+                KIARVA will be extended to also contain population-based
+                information about IG kappa and lambda genes, as well as T cell
+                receptor genes. When using this database, please cite Corcoran
+                et al. BioRxivXX, and when using the resource for commercial
+                purposes, contact the authors.
+              </p>
             </div>
           </div>
 
@@ -51,7 +67,7 @@ export default function HomePage(): ReactElement {
             </svg>
             <div className="">
               <label className={`font-bold ${H_2}`}>News</label>
-              <p className="italic">Date: </p>
+              <p className="italic pt-4">Date: </p>
               <p>Text here...</p>
             </div>
             <Link to="/changelog">
