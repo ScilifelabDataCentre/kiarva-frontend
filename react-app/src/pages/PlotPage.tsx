@@ -93,27 +93,21 @@ export default function PlotPage(): ReactElement {
     let superpopulationsEndpoint: string =
       alleleFrequenciesEndpoint + "superpopulations/" + allele;
 
-    let timeStart = Date.now();
     await axios
       .get(superpopulationsEndpoint)
       .then((response) => {
         setSuperpopFreqAPIData(response.data);
       })
       .catch((response) => console.log(response.error));
-    let timeEnd = Date.now();
-    console.log(superpopulationsEndpoint + ' delta: ' + (timeEnd-timeStart).toString() + " ms");
 
     let populationsEndpoint: string =
       alleleFrequenciesEndpoint + "populations/" + allele;
-    timeStart = Date.now();
     await axios
       .get(populationsEndpoint)
       .then((response) => {
         setPopFreqAPIData(response.data);
       })
       .catch((response) => console.log(response.error));
-    timeEnd = Date.now();
-    console.log(populationsEndpoint + ' delta: ' + (timeEnd-timeStart).toString() + " ms");
   }
 
   // Initialize state for dropdown selections
@@ -128,8 +122,8 @@ export default function PlotPage(): ReactElement {
   useEffect(() => {
     getGeneFreqData(
       currentPicks.geneDropdown +
-        currentPicks.subtypeDropdown +
-        currentPicks.alleleDropdown
+      currentPicks.subtypeDropdown +
+      currentPicks.alleleDropdown
     );
   }, [currentPicks.alleleDropdown]);
 

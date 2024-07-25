@@ -9,6 +9,8 @@ export const BODY_CLASSES: string = "bg-base-100 space-y-8 py-4 px-36 pb-28 2xl:
 
 export const LINK_CLASSES: string = 'link link-hover';
 
-export const backendAPI =   import.meta.env.VITE_BACKEND_API_URL ? 
-                            import.meta.env.VITE_BACKEND_API_URL : 
+export const backendAPI =   window.location.origin === 'http://localhost:5173' ? 
+                            (import.meta.env.VITE_BACKEND_API_URL ?
+                                import.meta.env.VITE_BACKEND_API_URL :
+                                'https://kiarva.scilifelab-2-dev.sys.kth.se/api/') : 
                             window.location.origin + '/api/';
