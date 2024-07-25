@@ -1,13 +1,16 @@
-import { ReactElement } from "react";
-import { BODY_CLASSES } from "../constants";
+import { ReactElement, useState } from "react";
+import { BODY_CLASSES, H_1 } from "../constants";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
+import DownloadBoxComponent from "../components/DownloadBoxComponent";
 // import axios from 'axios';
 // import fileDownload from 'js-file-download';
 // import JSZip from 'jszip';
 
 export default function DownloadPage(): ReactElement {
+  // Track the page view for analytics if enabled in the application settings
   TrackPageViewIfEnabled();
 
+  // Uncomment and use this function to download a single fasta file for a specific gene segment
   // async function downloadGeneFasta(geneSegment: string) {
   //     let fastaEndpoint = backendAPI + "fasta/" + geneSegment;
   //     await axios.get(fastaEndpoint, {
@@ -22,6 +25,7 @@ export default function DownloadPage(): ReactElement {
   //         .catch(response => console.log(response.error));
   // }
 
+  // Uncomment and use this function to download a zip file containing fasta files for multiple gene segments
   // async function downloadGeneFastaZip() {
   //     let geneSegments: string[] = ['IGHV', 'IGHD', 'IGHJ'];
   //     let zip = new JSZip();
@@ -46,110 +50,152 @@ export default function DownloadPage(): ReactElement {
   //     })
   // }
 
-  // const dropDownMenuClasses: string = "select select-bordered w-full max-w-xs bg-neutral";
-  // const selectedRowClasses: string = "font-bold text-lg bg-neutral text-neutral-content";
-  // const notSelectedRowClasses: string = "odd:bg-base-100 even:bg-neutral even:bg-opacity-50 text-lg hover:opacity-100 hover:bg-neutral transform transition duration-300 ease-in-out";
+  // State to keep track of the selected type of fasta file
+  const [fastaTypeSelected, setFastaTypeSelected] = useState("coding");
+
+  // States to keep track of the selected genes for each gene segment
+  const [ighSelectionArray, setIghSelectionArray] = useState<string[]>([]);
+  const [igkSelectionArray, setIgkSelectionArray] = useState<string[]>([]);
+  const [iglSelectionArray, setIglSelectionArray] = useState<string[]>([]);
+  const [traSelectionArray, setTraSelectionArray] = useState<string[]>([]);
+  // Combine the selection arrays and use them when the download button is pressed
 
   return (
-    <>
-      <div className={BODY_CLASSES}>
-        <div className="alert">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="h-6 w-6 shrink-0 stroke-current"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
-          <div className="flex flex-col">
-            <label className="font-bold">How to use the tool</label>
-            <span>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              tortor mauris, suscipit eu lacinia non, imperdiet blandit risus.
-              Maecenas pellentesque, massa id sodales dictum, urna urna
-              tincidunt eros, ac consequat urna lectus vel ligula. Suspendisse
-              justo est, auctor et mi id, aliquet bibendum lacus. Quisque
-              accumsan egestas felis, vel bibendum nunc fringilla nec. Integer
-              accumsan sollicitudin porttitor. rna eros dapibus erat. Nam
-              bibendum ac felis quis convallis. Praesent ne
-            </span>
-          </div>
-        </div>
-        <div className="grid grid-cols-4 grid-rows-2 gap-4 mt-8">
-          <div className="overflow-x-auto max-h-56 col-span-2">
-            <h1 className="text-neutral-content text-xl">
-              Select Gene Segment
-            </h1>
-            <table className="table table-pin-rows">
-              <thead>
-                <tr>
-                  <th className="text-sm bg-secondary text-secondary-content">
-                    IGH Segments
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>IGHV</td>
-                </tr>
-                <tr>
-                  <td>IGHJ</td>
-                </tr>
-                <tr>
-                  <td>IGHD</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="overflow-x-auto max-h-56 col-span-1">
-            <h1 className="text-neutral-content text-xl">Select Subtype</h1>
-            <table className="table table-pin-rows">
-              <tbody>
-                <tr>
-                  <td>1-2</td>
-                </tr>
-                <tr>
-                  <td>3-4</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="overflow-x-auto max-h-56 col-span-1">
-            <h1 className="text-neutral-content text-xl">Select Allele</h1>
-            <table className="table table-pin-rows">
-              <tbody>
-                <tr>
-                  <td>*02</td>
-                </tr>
-                <tr>
-                  <td>*04</td>
-                </tr>
-                <tr>
-                  <td>*05</td>
-                </tr>
-                <tr>
-                  <td>*06</td>
-                </tr>
-                <tr>
-                  <td>*02_S4953</td>
-                </tr>
-                <tr>
-                  <td>*04_S3434</td>
-                </tr>
-                <tr>
-                  <td>*06_S5931</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+    <div className={BODY_CLASSES}>
+      <div className="alert">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          className="h-6 w-6 shrink-0 stroke-current"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <div className="flex flex-col">
+          <label className="font-bold">How to download</label>
+          <span>
+            Start by choosing the type of fasta file you want. Then, select the
+            gene segment and/or individual genes you want to download by ticking
+            the appropriate boxes—ticking a gene segment will automatically
+            select all individual genes within that chain. After making your
+            selections, click the "Download" button. This will generate and
+            start a download of your chosen file(s). If you have selected more
+            than one file, a .zip file wil be generated.
+          </span>
         </div>
       </div>
-    </>
+      <div className={H_1}>Fasta type</div>
+      <div className="divider !my-0"></div>
+
+      <div className="w-full !my-0">
+        <div>
+          <label
+            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
+            onClick={() => setFastaTypeSelected("coding")}
+          >
+            <input type="radio" name="fastaRadio" className="radio" defaultChecked/>
+            <span className="pl-2">Coding sequence</span>
+          </label>
+
+          <label
+            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
+            onClick={() =>
+              setFastaTypeSelected("genomic")
+            }
+          >
+            <input type="radio" name="fastaRadio" className="radio" />
+            <span className="pl-2">Genomic sequence with flanking regions</span>
+          </label>
+
+          {/* Once the fasta type is available, only delete the className part from cursor-not-allowed */}
+          <label
+            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer cursor-not-allowed pointer-events-none opacity-50"
+            onClick={() => setFastaTypeSelected("aminoacids")}
+          >
+            <input type="radio" name="fastaRadio" className="radio" />
+            <span className="pl-2">Grouped by amino acid</span>
+          </label>
+        </div>
+      </div>
+
+      <div className={H_1}>BCR</div>
+      <div className="divider !my-0"></div>
+      <div className="flex justify-start gap-16">
+        <DownloadBoxComponent
+          geneSegment="IGH"
+          geneObjectArray={[
+            { name: "IGHV", isAvailable: true },
+            { name: "IGHD", isAvailable: true },
+            { name: "IGHJ", isAvailable: true },
+            { name: "IGH constant", isAvailable: false },
+          ]}
+          setPropsSelectionArray={setIghSelectionArray}
+        ></DownloadBoxComponent>
+        <DownloadBoxComponent
+          geneSegment="IGK"
+          geneObjectArray={[
+            { name: "IGKV", isAvailable: true },
+            { name: "IGKJ", isAvailable: true },
+            { name: "IGK constant", isAvailable: false },
+          ]}
+          setPropsSelectionArray={setIgkSelectionArray}
+        ></DownloadBoxComponent>
+        <DownloadBoxComponent
+          geneSegment="IGL"
+          geneObjectArray={[
+            { name: "IGLV", isAvailable: true },
+            { name: "IGLJ", isAvailable: true },
+            { name: "IGL constant", isAvailable: false },
+          ]}
+          setPropsSelectionArray={setIglSelectionArray}
+        ></DownloadBoxComponent>
+      </div>
+
+      <div className={H_1}>TCR</div>
+      <div className="divider !my-0"></div>
+      <div className="flex justify-start gap-16">
+        <DownloadBoxComponent
+          geneSegment="TRA"
+          geneObjectArray={[
+            { name: "TRAV", isAvailable: true },
+            { name: "TRAJ", isAvailable: true },
+            { name: "TR constant", isAvailable: false },
+          ]}
+          setPropsSelectionArray={setTraSelectionArray}
+        ></DownloadBoxComponent>
+      </div>
+
+      <div className="flex justify-center">
+        <button onClick={() => {
+          console.log(
+            fastaTypeSelected + '\n' +
+            ighSelectionArray + '\n' +
+            igkSelectionArray + '\n' +
+            iglSelectionArray + '\n' +
+            traSelectionArray + '\n'
+        );}}>
+          <div className="bg-gradient-to-r from-[rgba(67,133,139)] to-primary text-primary-content text-lg tracking-wide flex gap-4 justify-center items-center w-96 h-14 font-extrabold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90">
+            Download
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="white"
+              className="h-6 w-6 shrink-0 stroke-current"
+            >
+              <g data-name="11.download">
+                <path d="M12 24a12 12 0 1 1 12-12 12.013 12.013 0 0 1-12 12zm0-22a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2z" />
+                <path d="M12 14.414 7.293 9.707l1.414-1.414L12 11.586l3.293-3.293 1.414 1.414L12 14.414z" />
+                <path d="M11 5h2v8h-2zM17 19H7v-3h2v1h6v-1h2v3z" />
+              </g>
+            </svg>
+          </div>
+        </button>
+      </div>
+    </div>
   );
 }
