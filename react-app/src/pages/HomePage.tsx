@@ -17,7 +17,7 @@ export default function HomePage(): ReactElement {
     <div>
       <div className={BODY_CLASSES}>
         <div className="flex items-stretch place-items-center gap-6">
-          <div className="flex-grow basis-1/2 overflow-auto alert my-5 py-8 shadow-lg bg-white border-white rounded-none">
+          <div className="flex-grow basis-1/2 alert my-5 py-4 shadow-lg bg-white border-white rounded-none">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -33,7 +33,7 @@ export default function HomePage(): ReactElement {
             </svg>
             <div className="">
               <label className={`font-bold ${H_2}`}>Welcome to KIARVA</label>
-              <p className="mt-4">
+              <p className="mt-4 max-h-60 overflow-auto">
                 Variation between individuals and populations within the
                 immunoglobulin (IG) locus involves both structural and allelic
                 diversity. The Karolinska Institutet Adaptive Immune Receptor
@@ -53,7 +53,7 @@ export default function HomePage(): ReactElement {
             </div>
           </div>
 
-          <div className="flex-grow basis-1/2 overflow-auto alert shadow-lg my-5 py-8 bg-white border-white rounded-none">
+          <div className="flex-grow basis-1/2 alert shadow-lg my-5 py-2 bg-white border-white rounded-none">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
@@ -65,16 +65,30 @@ export default function HomePage(): ReactElement {
               />
               <path d="M13 7H9a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-4 8V9h4v6zM14 19h-4a1 1 0 0 0 0 2h4a1 1 0 0 0 0-2zM14 23H8a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2zM25 11h-7a1 1 0 0 0 0 2h7a1 1 0 0 0 0-2zM25 7h-7a1 1 0 0 0 0 2h7a1 1 0 0 0 0-2zM25 15h-7a1 1 0 0 0 0 2h7a1 1 0 0 0 0-2zM25 19h-7a1 1 0 0 0 0 2h7a1 1 0 0 0 0-2zM23 23h-5a1 1 0 0 0 0 2h5a1 1 0 0 0 0-2z" />
             </svg>
-            <div className="">
+            <div>
               <label className={`font-bold ${H_2}`}>News</label>
-              <p className="italic pt-4">Date: </p>
-              <p>Text here...</p>
+              <div className="mt-4 max-h-60 overflow-auto">
+                <p className="italic">Date: 2024-08-08</p>
+                <p className="">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+                  pellentesque sapien vitae felis laoreet, sit amet condimentum
+                  est ultricies. Etiam neque enim, bibendum et neque id, iaculis
+                  facilisis sem. Morbi turpis purus, lobortis in sodales et,
+                  tincidunt ut elit. Nam eu velit sagittis, fringilla justo vel,
+                  rhoncus nunc. Mauris sagittis tincidunt aliquet. Fusce eget
+                  nisi nec ex aliquet vulputate. Curabitur vel sapien rhoncus
+                  enim malesuada finibus congue ut risus. Maecenas rhoncus,
+                  massa at pellentesque fermentum, quam tortor eleifend sapien,
+                  sed viverra purus quam vel tortor. Sed lobortis lobortis dui
+                  quis rutrum. Sed luctus dignissim nibh.
+                </p>
+              </div>
+              <Link className="float-end pt-2" to="/changelog">
+                <button className="text-info-content text-base flex justify-center items-center h-10 px-2 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+                  See change log
+                </button>
+              </Link>
             </div>
-            <Link to="/changelog">
-              <button className="text-info-content text-base flex justify-center items-center h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
-                See change log
-              </button>
-            </Link>
           </div>
         </div>
 
