@@ -271,7 +271,28 @@ export default function PlotPage(): ReactElement {
           superpopulationRegions={superpopulationRegions}
         />
 
-        <div className="flex items-center justify-center pt-8">
+        <div className="flex items-center justify-between pt-8">
+          <p className="text-neutral-content text-xl font-semibold">
+            SNiPer SCORE: 1.0
+          </p>
+          <table className="table-auto border border-collapse border-secondary border-solid">
+            <thead>
+              <tr>
+                <th>Associated SNPs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>rs123</td>
+              </tr>
+              <tr>
+                <td>rs567</td>
+              </tr>
+              <tr>
+                <td>rs789</td>
+              </tr>
+            </tbody>
+          </table>
           <button
             className="bg-gradient-to-r from-neutral to-secondary text-base-content text-base flex gap-2 justify-center items-center w-64 h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
             onClick={() => setIsPopupOpen(true)}
