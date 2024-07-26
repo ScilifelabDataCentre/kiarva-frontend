@@ -10,6 +10,7 @@ import FrequencyPlotComponent from "../components/FrequencyPlotComponent";
 import { IGeneFrequencyData, IPopulationRegion } from "../interfaces/types";
 import axios from "axios";
 import DropdownComponent from "../components/DropdownComponent";
+import PopupComponent from "../components/PopupComponent";
 
 // Main function to render the PlotPage component
 export default function PlotPage(): ReactElement {
@@ -122,8 +123,8 @@ export default function PlotPage(): ReactElement {
   useEffect(() => {
     getGeneFreqData(
       currentPicks.geneDropdown +
-      currentPicks.subtypeDropdown +
-      currentPicks.alleleDropdown
+        currentPicks.subtypeDropdown +
+        currentPicks.alleleDropdown
     );
   }, [currentPicks.alleleDropdown]);
 
@@ -136,7 +137,7 @@ export default function PlotPage(): ReactElement {
         setSuperpopulationRegions(response.data);
       })
       .catch((response) => console.log(response.error));
-  }, [,currentPicks]);
+  }, [, currentPicks]);
 
   // Function to update the current pick for dropdowns
   const handleSetCurrentPick = (dropdownName: string, value: string) => {
@@ -161,6 +162,8 @@ export default function PlotPage(): ReactElement {
   let subtypeDropDownItemsArray = ["1-2", "3-4", "..."];
   let alleleDropDownItemsArray = ["*02", "*04", "*05", "*06", "..."];
   let geneSegmentItemsArray = ["IGH", "..."];
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   // Render the component
   return (
@@ -267,6 +270,15 @@ export default function PlotPage(): ReactElement {
           populationAPIData={popFreqAPIData}
           superpopulationRegions={superpopulationRegions}
         />
+
+        <div className="flex items-center justify-center pt-8">
+          <button className="btn" onClick={() => setIsPopupOpen(true)}>
+            open modal
+          </button>
+        </div>
+        {isPopupOpen && (
+          <PopupComponent onClose={() => setIsPopupOpen(false)} />
+        )}
       </div>
     </>
   );

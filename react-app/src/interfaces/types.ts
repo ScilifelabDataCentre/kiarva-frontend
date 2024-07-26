@@ -110,3 +110,7 @@ export interface GeneObject {
   name: string;
   isAvailable: boolean;
 }
+
+export type PopupComponentProps = {
+  onClose: () => void;
+};
