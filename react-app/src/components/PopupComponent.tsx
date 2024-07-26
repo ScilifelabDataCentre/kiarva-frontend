@@ -122,7 +122,7 @@ const PopupComponent: React.FC<PopupComponentProps> = ({ onClose }) => {
                 </div>
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                   <DialogTitle className="text-xl font-semibold leading-6 text-base-content">
-                    Legend
+                    Abbreviations
                   </DialogTitle>
                   <div className="mt-6">
                     <span className="font-semibold">Superpopulations</span>
