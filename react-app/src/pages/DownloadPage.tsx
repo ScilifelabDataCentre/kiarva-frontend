@@ -1,54 +1,14 @@
 import { ReactElement, useState } from "react";
-import { BODY_CLASSES, H_1 } from "../constants";
+import { backendAPI, BODY_CLASSES, H_1 } from "../constants";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 import DownloadBoxComponent from "../components/DownloadBoxComponent";
-// import axios from 'axios';
-// import fileDownload from 'js-file-download';
-// import JSZip from 'jszip';
+import axios from 'axios';
+import fileDownload from 'js-file-download';
+import JSZip from 'jszip';
 
 export default function DownloadPage(): ReactElement {
   // Track the page view for analytics if enabled in the application settings
   TrackPageViewIfEnabled();
-
-  // Uncomment and use this function to download a single fasta file for a specific gene segment
-  // async function downloadGeneFasta(geneSegment: string) {
-  //     let fastaEndpoint = backendAPI + "fasta/" + geneSegment;
-  //     await axios.get(fastaEndpoint, {
-  //         headers: {
-  //           "Content-Type": 'attachment'
-  //         }
-  //        })
-  //         .then(response => {
-  //             let responseData: Blob = response.data;
-  //             fileDownload(responseData, geneSegment + '.fasta');
-  //         })
-  //         .catch(response => console.log(response.error));
-  // }
-
-  // Uncomment and use this function to download a zip file containing fasta files for multiple gene segments
-  // async function downloadGeneFastaZip() {
-  //     let geneSegments: string[] = ['IGHV', 'IGHD', 'IGHJ'];
-  //     let zip = new JSZip();
-  //     let geneSegment: string;
-  //     for (geneSegment of geneSegments) {
-  //         let fastaEndpoint = backendAPI + "fasta/" + geneSegment;
-  //         await axios.get(fastaEndpoint, {
-  //             headers: {
-  //             "Content-Type": 'attachment'
-  //             }
-  //         })
-  //             .then(response => {
-  //                 let responseData: Blob = response.data;
-  //                 zip.file(geneSegment + '.fasta', responseData);
-  //             })
-  //             .catch(response => console.log(response.error));
-  //     }
-  //     zip.generateAsync({type:"blob"}).then(function (blob) {
-  //         fileDownload(blob, "IGH-fastas.zip");
-  //     }, function (err) {
-  //         console.log(err)
-  //     })
-  // }
 
   // State to keep track of the selected type of fasta file
   const [fastaTypeSelected, setFastaTypeSelected] = useState("coding");
@@ -58,6 +18,60 @@ export default function DownloadPage(): ReactElement {
   const [igkSelectionArray, setIgkSelectionArray] = useState<string[]>([]);
   const [iglSelectionArray, setIglSelectionArray] = useState<string[]>([]);
   const [traSelectionArray, setTraSelectionArray] = useState<string[]>([]);
+
+  async function downloadGeneFasta(geneSegment: string) {
+      let fastaType = fastaTypeSelected === 'coding' ? '' : fastaTypeSelected + '/';
+      let fastaEndpoint = backendAPI + "fasta/" + fastaType + geneSegment;
+      await axios.get(fastaEndpoint, {
+          headers: {
+            "Content-Type": 'attachment'
+          }
+         })
+          .then(response => {
+              let responseData: Blob = response.data;
+              fileDownload(responseData, geneSegment + '-' + fastaTypeSelected + '.fasta');
+          })
+          .catch(response => console.log(response.error));
+  }
+
+  async function downloadGeneFastaZip(geneSegments: string[]) {
+      let zip = new JSZip();
+      let geneSegment: string;
+      let fastaType = fastaTypeSelected === 'coding' ? '' : fastaTypeSelected + '/';
+      for (geneSegment of geneSegments) {
+          let fastaEndpoint = backendAPI + "fasta/" + fastaType + geneSegment;
+          await axios.get(fastaEndpoint, {
+              headers: {
+              "Content-Type": 'attachment'
+              }
+          })
+              .then(response => {
+                  let responseData: Blob = response.data;
+                  zip.file(geneSegment + '-' + fastaTypeSelected + '.fasta', responseData);
+              })
+              .catch(response => console.log(response.error));
+      }
+      zip.generateAsync({type:"blob"}).then(function (blob) {
+          fileDownload(blob, "kiarva-"+fastaTypeSelected+"-fastas.zip");
+      }, function (err) {
+          console.log(err)
+      })
+  }
+
+  function handleDownload() {
+    let selectionArr = ighSelectionArray.concat(
+      igkSelectionArray,
+      iglSelectionArray,
+      traSelectionArray);
+    
+    if (selectionArr.length === 1) {
+      downloadGeneFasta(selectionArr[0]);
+    }
+    else if (selectionArr.length > 1) {
+      downloadGeneFastaZip(selectionArr);
+    }
+  }
+
   // Combine the selection arrays and use them when the download button is pressed
 
   return (
@@ -171,14 +185,7 @@ export default function DownloadPage(): ReactElement {
       </div>
 
       <div className="flex justify-center">
-        <button onClick={() => {
-          console.log(
-            fastaTypeSelected + '\n' +
-            ighSelectionArray + '\n' +
-            igkSelectionArray + '\n' +
-            iglSelectionArray + '\n' +
-            traSelectionArray + '\n'
-        );}}>
+        <button onClick={handleDownload}>
           <div className="bg-gradient-to-r from-[rgba(67,133,139)] to-primary text-primary-content text-lg tracking-wide flex gap-4 justify-center items-center w-96 h-14 font-extrabold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90">
             Download
             <svg
