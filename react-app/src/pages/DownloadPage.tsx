@@ -19,9 +19,9 @@ export default function DownloadPage(): ReactElement {
   const [iglSelectionArray, setIglSelectionArray] = useState<string[]>([]);
   const [traSelectionArray, setTraSelectionArray] = useState<string[]>([]);
 
-  async function downloadGeneFasta(geneSegment: string) {
+  async function downloadGeneFasta(gene: string) {
       let fastaType = fastaTypeSelected === 'coding' ? '' : fastaTypeSelected + '/';
-      let fastaEndpoint = backendAPI + "fasta/" + fastaType + geneSegment;
+      let fastaEndpoint = backendAPI + "fasta/" + fastaType + gene;
       await axios.get(fastaEndpoint, {
           headers: {
             "Content-Type": 'attachment'
@@ -29,17 +29,17 @@ export default function DownloadPage(): ReactElement {
          })
           .then(response => {
               let responseData: Blob = response.data;
-              fileDownload(responseData, geneSegment + '-' + fastaTypeSelected + '.fasta');
+              fileDownload(responseData, gene + '-' + fastaTypeSelected + '.fasta');
           })
           .catch(response => console.log(response.error));
   }
 
-  async function downloadGeneFastaZip(geneSegments: string[]) {
+  async function downloadGeneFastaZip(genes: string[]) {
       let zip = new JSZip();
-      let geneSegment: string;
+      let gene: string;
       let fastaType = fastaTypeSelected === 'coding' ? '' : fastaTypeSelected + '/';
-      for (geneSegment of geneSegments) {
-          let fastaEndpoint = backendAPI + "fasta/" + fastaType + geneSegment;
+      for (gene of genes) {
+          let fastaEndpoint = backendAPI + "fasta/" + fastaType + gene;
           await axios.get(fastaEndpoint, {
               headers: {
               "Content-Type": 'attachment'
@@ -47,7 +47,7 @@ export default function DownloadPage(): ReactElement {
           })
               .then(response => {
                   let responseData: Blob = response.data;
-                  zip.file(geneSegment + '-' + fastaTypeSelected + '.fasta', responseData);
+                  zip.file(gene + '-' + fastaTypeSelected + '.fasta', responseData);
               })
               .catch(response => console.log(response.error));
       }
