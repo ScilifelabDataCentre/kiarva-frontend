@@ -13,7 +13,7 @@ export default function InformationPage(): ReactElement {
       <div className={BODY_CLASSES}>
         <div className={H_1}>{pageTitle}</div>
         <div className="divider pt-4">IgSNPer</div>
-        <p className="text-justify">
+        <p className="text-left lg:text-justify text-sm lg:text-base">
           Multiple research projects have accumulated data on the frequency of
           single nucleotide polymorphisms (SNPs) between individuals. These
           datasets provide an important resource to analyze individual and
@@ -26,7 +26,7 @@ export default function InformationPage(): ReactElement {
           defined genomic loci within the same assemblies, thereby confirming
           the individual SNP variant locations within verified IG gene variants.
         </p>
-        <p className="text-justify">
+        <p className="text-left lg:text-justify text-sm lg:text-base">
           The resultant program, termed IgSNPer, analyzes each nucleotide
           position within a complete variant allele, identifying whether
           specific nucleotide variations can be explained through the presence
@@ -37,7 +37,7 @@ export default function InformationPage(): ReactElement {
           (IGH) genes are located. This accumulated SNP reference set includes
           data from various population databases, including:
         </p>
-        <ol className="list-decimal list-inside">
+        <ol className="list-decimal list-inside text-sm lg:text-base">
           <li className="mb-1">
             dbGaP_PopFreq: Aggregated frequency data on over 1 million
             individuals.
@@ -70,7 +70,7 @@ export default function InformationPage(): ReactElement {
             1465 Korean individuals
           </li>
         </ol>
-        <p className="text-justify">
+        <p className="text-left lg:text-justify text-sm lg:text-base">
           The program examines each full-length allelic sequence, identifying
           both common SNP variants according to the amalgamated SNP database,
           and uncommon variations that are either present at low frequency
@@ -85,7 +85,7 @@ export default function InformationPage(): ReactElement {
           cutoff frequency within the set of individuals of the amalgamated SNP
           database.
         </p>
-        <p className="pb-8 text-justify">
+        <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
           The IgSNPer output serves several purposes. First, allelic sequences
           with zero scores indicate that the variation has been reported to be
           present in the human population at a certain frequency. Second,
@@ -102,7 +102,7 @@ export default function InformationPage(): ReactElement {
         </p>
 
         <div className="divider pt-4">Populations</div>
-        <p className="pb-4 text-justify">
+        <p className="pb-4 text-left lg:text-justify text-sm lg:text-base">
           Ut rhoncus ante in metus lobortis, eu euismod magna dignissim. Duis
           nec condimentum purus. Quisque urna enim, placerat non fermentum sed,
           pharetra sit amet quam. Ut rhoncus ante in metus lobortis, eu euismod
@@ -132,9 +132,9 @@ export default function InformationPage(): ReactElement {
           pharetra sit amet quam. Ut rhoncus ante in metus lobortis, eu euismod
           magna dignissim. Duis nec condimentum purus.{" "}
         </p>
-        <div className="pb-8 grid grid-cols-2 gap-4">
-          <img src={test2} alt="Test" className="colspan-1" />
-          <img src={test2} alt="Test" className="colspan-1" />
+        <div className="pb-8 grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <img src={test2} alt="Test" className="w-full h-auto" />
+          <img src={test2} alt="Test" className="w-full h-auto" />
         </div>
         <div className="divider pt-4">lgBLASTn</div>
         <div className="divider pt-4">IGH</div>
