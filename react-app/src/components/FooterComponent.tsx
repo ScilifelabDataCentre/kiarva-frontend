@@ -29,12 +29,12 @@ export default function FooterComponent(): ReactElement {
         alt="Footer Background Image"
       />
       <div className="absolute inset-0 bg-gray-700 opacity-85"></div>
-      <footer className="absolute inset-0 footer footer-center p-10 px-36 2xl:max-w-screen-2xl 2xl:mx-auto">
+      <footer className="absolute inset-0 footer footer-center p-10 px-4 lg:px-36 2xl:max-w-screen-2xl 2xl:mx-auto">
         <div className="flex flex-col items-center justify-center space-y-4 z-10">
           <p className="text-primary-content text-xl font-semibold">
             Please visit the other pages of KIARVA
           </p>
-          <nav className="grid grid-flow-col gap-4">
+          <nav className="grid grid-flow-row lg:grid-flow-col gap-2 lg:gap-4">
             {Object.keys(links)
               .filter((key) => links[key].link !== currentPath) // Filter out the current page link
               .map((key) => (

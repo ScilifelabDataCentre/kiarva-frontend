@@ -24,33 +24,9 @@ export default function HeaderComponent() {
         </p>
       </div>
       <div className="bg-gradient-to-b from-primary to-secondary">
-        <div className="px-4 py-4 lg:px-36 lg:pt-16 2xl:max-w-screen-2xl 2xl:mx-auto">
+        <div className="py-4 lg:px-36 lg:pt-16 2xl:max-w-screen-2xl 2xl:mx-auto">
           <div className="navbar text-primary-content">
-            <div className="navbar-start">
-              <Link to="/">
-                <div className="font-bold text-center">
-                  <p className="text-2xl">KIARVA</p>
-                  <span className="lg:whitespace-nowrap text-xl">
-                    KI Adaptive Immune Receptor Gene Variant Atlas
-                  </span>
-                </div>
-              </Link>
-            </div>
-            <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal text-lg">
-                {Object.keys(links).map((key) => (
-                  <li key={key} className="ml-1.5 max-w-36">
-                    <NavLink
-                      className={links[key].classes}
-                      to={links[key].link}
-                    >
-                      {links[key].text}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="navbar-end lg:hidden">
+            <div className="navbar-start lg:hidden">
               <div className="dropdown">
                 <label tabIndex={0} className="btn btn-ghost lg:hidden">
                   <svg
@@ -64,7 +40,7 @@ export default function HeaderComponent() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      d="M4 6h16M4 12h16m-7 6h7"
+                      d="M4 6h16M4 12h16M4 18h7"
                     />
                   </svg>
                 </label>
@@ -84,6 +60,30 @@ export default function HeaderComponent() {
                   ))}
                 </ul>
               </div>
+            </div>
+            <div className="navbar-end lg:navbar-start">
+              <Link to="/">
+                <div className="font-bold text-center">
+                  <p className="text-2xl">KIARVA</p>
+                  <span className="lg:whitespace-nowrap text-xl">
+                    KI Adaptive Immune Receptor Gene Variant Atlas
+                  </span>
+                </div>
+              </Link>
+            </div>
+            <div className="hidden lg:navbar-center">
+              <ul className="menu menu-horizontal text-lg">
+                {Object.keys(links).map((key) => (
+                  <li key={key} className="ml-1.5 max-w-36">
+                    <NavLink
+                      className={links[key].classes}
+                      to={links[key].link}
+                    >
+                      {links[key].text}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
