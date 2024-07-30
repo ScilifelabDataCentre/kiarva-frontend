@@ -26,9 +26,9 @@ export default function HeaderComponent() {
       <div className="bg-gradient-to-b from-primary to-secondary">
         <div className="py-4 lg:px-36 lg:pt-16 2xl:max-w-screen-2xl 2xl:mx-auto">
           <div className="navbar text-primary-content">
-            <div className="navbar-start lg:hidden">
+            <div className="navbar-start 2xl:hidden">
               <div className="dropdown">
-                <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                <label tabIndex={0} className="btn btn-ghost">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -61,7 +61,7 @@ export default function HeaderComponent() {
                 </ul>
               </div>
             </div>
-            <div className="navbar-end lg:navbar-start">
+            <div className="navbar-end 2xl:navbar-start">
               <Link to="/">
                 <div className="font-bold text-center">
                   <p className="text-2xl">KIARVA</p>
@@ -71,7 +71,7 @@ export default function HeaderComponent() {
                 </div>
               </Link>
             </div>
-            <div className="hidden lg:navbar-center">
+            <div className="hidden 2xl:flex 2xl:navbar-center">
               <ul className="menu menu-horizontal text-lg">
                 {Object.keys(links).map((key) => (
                   <li key={key} className="ml-1.5 max-w-36">
