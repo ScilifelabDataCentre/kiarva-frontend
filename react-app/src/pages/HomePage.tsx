@@ -16,8 +16,8 @@ export default function HomePage(): ReactElement {
   return (
     <div>
       <div className={BODY_CLASSES}>
-        <div className="flex items-stretch place-items-center gap-6">
-          <div className="flex-grow basis-1/2 alert my-5 py-4 shadow-lg bg-white border-white rounded-none">
+        <div className="flex flex-col lg:flex-row items-stretch place-items-center gap-6 mb-6">
+          <div className="flex-grow lg:basis-1/2 alert lg:my-5 shadow-lg bg-white border-white rounded-none">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -31,9 +31,9 @@ export default function HomePage(): ReactElement {
                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               ></path>
             </svg>
-            <div className="">
+            <div>
               <label className={`font-bold ${H_2}`}>Welcome to KIARVA</label>
-              <p className="mt-4 max-h-60 overflow-auto">
+              <p className="mt-4 max-h-60 overflow-auto text-sm lg:text-base">
                 Variation between individuals and populations within the
                 immunoglobulin (IG) locus involves both structural and allelic
                 diversity. The Karolinska Institutet Adaptive Immune Receptor
@@ -53,7 +53,7 @@ export default function HomePage(): ReactElement {
             </div>
           </div>
 
-          <div className="flex-grow basis-1/2 alert shadow-lg my-5 py-2 bg-white border-white rounded-none">
+          <div className="flex-grow lg:basis-1/2 alert lg:my-5 shadow-lg bg-white border-white rounded-none">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
@@ -67,9 +67,9 @@ export default function HomePage(): ReactElement {
             </svg>
             <div>
               <label className={`font-bold ${H_2}`}>News</label>
-              <div className="mt-4 max-h-60 overflow-auto">
+              <div className="mt-4 max-h-60 overflow-auto text-sm lg:text-base">
                 <p className="italic">Date: 2024-08-08</p>
-                <p className="">
+                <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
                   pellentesque sapien vitae felis laoreet, sit amet condimentum
                   est ultricies. Etiam neque enim, bibendum et neque id, iaculis
@@ -92,22 +92,24 @@ export default function HomePage(): ReactElement {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 place-items-center gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center gap-6">
           <div className="relative hero min-h-96 bg-neutral">
             <img
-              className="object-cover"
+              className="object-cover w-full h-full"
               src={downloadHeroBackground}
               alt="Download Hero Image"
             />
             <div className="absolute inset-0 bg-gray-700 opacity-85"></div>
             <div className="hero-content text-secondary-content text-center">
               <div className="max-w-md flex flex-col items-center">
-                <h1 className="mb-5 text-3xl font-bold text-nowrap">
+                <h1 className="mb-5 text-2xl lg:text-3xl font-bold text-nowrap">
                   Download FASTA files
                 </h1>
-                <p className="mb-5">Download FASTA files here...</p>
+                <p className="mb-5 text-sm lg:text-base">
+                  Download FASTA files here...
+                </p>
                 <Link to="/download">
-                  <button className="text-info-content text-base flex justify-center items-center w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+                  <button className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
                     Go
                   </button>
                 </Link>
@@ -116,17 +118,21 @@ export default function HomePage(): ReactElement {
           </div>
           <div className="relative hero min-h-96 bg-neutral">
             <img
-              className="object-cover"
+              className="object-cover w-full h-full"
               src={plotHeroBackground}
               alt="Plot Image"
             />
             <div className="absolute inset-0 bg-gray-700 opacity-85"></div>
             <div className="hero-content text-secondary-content text-center">
               <div className="max-w-md flex flex-col items-center">
-                <h1 className="mb-5 text-3xl font-bold">Plot alleles</h1>
-                <p className="mb-5">Plot alleles here...</p>
+                <h1 className="mb-5 text-2xl lg:text-3xl font-bold">
+                  Plot alleles
+                </h1>
+                <p className="mb-5 text-sm lg:text-base">
+                  Plot alleles here...
+                </p>
                 <Link to="/plot">
-                  <button className="text-info-content text-base flex justify-center items-center w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+                  <button className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
                     Go
                   </button>
                 </Link>
