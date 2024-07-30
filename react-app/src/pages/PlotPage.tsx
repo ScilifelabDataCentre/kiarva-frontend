@@ -87,12 +87,28 @@ export default function PlotPage(): ReactElement {
     IPopulationRegion[]
   >([{ superpopulation: "", population: "" }]);
 
+  // Initialize state for dropdown selections
+  const [currentPicks, setCurrentPicks] = useState({
+    geneSegmentDropdown: "",
+    geneDropdown: "",
+    subtypeDropdown: "",
+    alleleDropdown: "",
+  });
+
+  // Arrays for dropdown menu items
+  let geneSegmentItemsArray = ["IGH", "..."];
+  let geneDropDownItemsArray = ["IGHV", "IGHD", "IGHJ", "..."];
+  const [subtypeDropDownItemsArray, setSubtypeDropDownItemsArray] = useState<string[]>(["..."]);
+  const [alleleDropDownItemsArray, setAlleleDropDownItemsArray] = useState<string[]>(["..."]);
+  const geneSelectionEndpoint: string = backendAPI + "data/plotoptions/"
+
   // Function to fetch gene frequency data from the backend API
   async function getGeneFreqData(allele: string) {
     let alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
     let superpopulationsEndpoint: string =
       alleleFrequenciesEndpoint + "superpopulations/" + allele;
 
+    console.log(superpopulationsEndpoint);
     await axios
       .get(superpopulationsEndpoint)
       .then((response) => {
@@ -110,14 +126,6 @@ export default function PlotPage(): ReactElement {
       .catch((response) => console.log(response.error));
   }
 
-  // Initialize state for dropdown selections
-  const [currentPicks, setCurrentPicks] = useState({
-    geneSegmentDropdown: "",
-    geneDropdown: "",
-    subtypeDropdown: "",
-    alleleDropdown: "",
-  });
-
   // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
     getGeneFreqData(
@@ -127,6 +135,10 @@ export default function PlotPage(): ReactElement {
     );
   }, [currentPicks.alleleDropdown]);
 
+  // fetch region data (which subpopulation belongs to which superpopulation)
+  // either on page load or when currentPicks is changed
+  // (should be on page load, but seemed a bit slow or unresponsive sometimes
+  // so added currentPicks for safety)
   useEffect(() => {
     let populationRegionEndpoint: string =
       backendAPI + "data/populationregions";
@@ -156,11 +168,46 @@ export default function PlotPage(): ReactElement {
     }));
   };
 
-  // Arrays for dropdown menu items
-  let geneDropDownItemsArray = ["IGHV", "IGHD", "IGKJ", "..."];
-  let subtypeDropDownItemsArray = ["1-2", "3-4", "..."];
-  let alleleDropDownItemsArray = ["*02", "*04", "*05", "*06", "..."];
-  let geneSegmentItemsArray = ["IGH", "..."];
+    // fetch next selection options after gene is selected
+    useEffect(() => {
+      if (!currentPicks.subtypeDropdown) {
+        setAlleleDropDownItemsArray(["..."]);
+        let currentSelection = currentPicks.geneDropdown;
+        axios
+          .get(geneSelectionEndpoint + currentSelection)
+          .then((response) => {
+            let responseData = response.data;
+            responseData.push("...");
+            setSubtypeDropDownItemsArray(responseData);
+          })
+          .catch((response) => console.log(response.error));
+      } else {
+        let currentSelection = currentPicks.geneDropdown + currentPicks.subtypeDropdown + '*';
+        setAlleleDropDownItemsArray([])
+        axios
+          .get(geneSelectionEndpoint + currentSelection)
+          .then((response) => {
+            let responseData = response.data;
+            responseData.push("...");
+            setAlleleDropDownItemsArray(responseData);
+          })
+          .catch((response) => console.log(response.error));
+      }
+    }, [currentPicks]);
+
+    // fetch next selection options after gene is selected
+    useEffect(() => {
+      let currentSelection = currentPicks.geneDropdown + currentPicks.geneSegmentDropdown;
+      setAlleleDropDownItemsArray([])
+      axios
+        .get(geneSelectionEndpoint + currentSelection)
+        .then((response) => {
+          let responseData = response.data;
+          responseData.push("...");
+          setAlleleDropDownItemsArray(responseData);
+        })
+        .catch((response) => console.log(response.error));
+    }, [currentPicks.geneSegmentDropdown]);
 
   // Render the component
   return (
