@@ -17,7 +17,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
 
       {/* Dropdown button */}
       <div className="flex items-center justify-between bg-white px-4">
-        <a className="my-2 py-2 text-lg font-medium text-neutral-content lg:mx-4">
+        <a className="my-2 py-2 text-base lg:text-lg font-medium text-neutral-content lg:mx-4">
           {/* Display the current pick or prompt to pick an item if none is selected */}
           {currentPick === "" ? `Pick ${menuName}` : currentPick}
         </a>
@@ -61,7 +61,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
         {menuItemsArray.map((item, index) => (
           <a
             key={index}
-            className={`block py-3 font-semibold  transition-all duration-300 hover:text-secondary-content hover:bg-info md:px-2 
+            className={`block py-3 font-semibold transition-all duration-300 hover:text-secondary-content hover:bg-info px-2 
               ${currentPick === item ? selectedRowClasses : "text-secondary"} `}
             onClick={() => setCurrentPick(item)}
           >

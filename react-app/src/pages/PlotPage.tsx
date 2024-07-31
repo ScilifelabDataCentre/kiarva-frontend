@@ -99,9 +99,13 @@ export default function PlotPage(): ReactElement {
   // Arrays for dropdown menu items
   let geneSegmentItemsArray = ["IGH", "..."];
   let geneDropDownItemsArray = ["IGHV", "IGHD", "IGHJ", "..."];
-  const [subtypeDropDownItemsArray, setSubtypeDropDownItemsArray] = useState<string[]>(["..."]);
-  const [alleleDropDownItemsArray, setAlleleDropDownItemsArray] = useState<string[]>(["..."]);
-  const geneSelectionEndpoint: string = backendAPI + "data/plotoptions/"
+  const [subtypeDropDownItemsArray, setSubtypeDropDownItemsArray] = useState<
+    string[]
+  >(["..."]);
+  const [alleleDropDownItemsArray, setAlleleDropDownItemsArray] = useState<
+    string[]
+  >(["..."]);
+  const geneSelectionEndpoint: string = backendAPI + "data/plotoptions/";
 
   // Function to fetch gene frequency data from the backend API
   async function getGeneFreqData(allele: string) {
@@ -169,32 +173,33 @@ export default function PlotPage(): ReactElement {
     }));
   };
 
-    // fetch next selection options after gene is selected
-    useEffect(() => {
-      if (!currentPicks.subtypeDropdown) {
-        setAlleleDropDownItemsArray(["..."]);
-        let currentSelection = currentPicks.geneDropdown;
-        axios
-          .get(geneSelectionEndpoint + currentSelection)
-          .then((response) => {
-            let responseData = response.data;
-            responseData.push("...");
-            setSubtypeDropDownItemsArray(responseData);
-          })
-          .catch((response) => console.log(response.error));
-      } else {
-        let currentSelection = currentPicks.geneDropdown + currentPicks.subtypeDropdown + '*';
-        setAlleleDropDownItemsArray([])
-        axios
-          .get(geneSelectionEndpoint + currentSelection)
-          .then((response) => {
-            let responseData = response.data;
-            responseData.push("...");
-            setAlleleDropDownItemsArray(responseData);
-          })
-          .catch((response) => console.log(response.error));
-      }
-    }, [currentPicks.geneDropdown, currentPicks.subtypeDropdown]);
+  // fetch next selection options after gene is selected
+  useEffect(() => {
+    if (!currentPicks.subtypeDropdown) {
+      setAlleleDropDownItemsArray(["..."]);
+      let currentSelection = currentPicks.geneDropdown;
+      axios
+        .get(geneSelectionEndpoint + currentSelection)
+        .then((response) => {
+          let responseData = response.data;
+          responseData.push("...");
+          setSubtypeDropDownItemsArray(responseData);
+        })
+        .catch((response) => console.log(response.error));
+    } else {
+      let currentSelection =
+        currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
+      setAlleleDropDownItemsArray([]);
+      axios
+        .get(geneSelectionEndpoint + currentSelection)
+        .then((response) => {
+          let responseData = response.data;
+          responseData.push("...");
+          setAlleleDropDownItemsArray(responseData);
+        })
+        .catch((response) => console.log(response.error));
+    }
+  }, [currentPicks.geneDropdown, currentPicks.subtypeDropdown]);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -217,22 +222,19 @@ export default function PlotPage(): ReactElement {
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             ></path>
           </svg>
-          <div className="flex flex-col">
-            <label className="font-bold">Instructions</label>
-            <span>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              tortor mauris, suscipit eu lacinia non, imperdiet blandit risus.
-              Maecenas pellentesque, massa id sodales dictum, urna urna
-              tincidunt eros, ac consequat urna lectus vel ligula. Suspendisse
-              justo est, auctor et mi id, aliquet bibendum lacus. Quisque
-              accumsan egestas felis, vel bibendum nunc fringilla nec. Integer
-              accumsan sollicitudin porttitor. rna eros dapibus erat. Nam
-              bibendum ac felis quis convallis. Praesent ne
-            </span>
-          </div>
+          <span className="text-sm lg:text-base">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+            tortor mauris, suscipit eu lacinia non, imperdiet blandit risus.
+            Maecenas pellentesque, massa id sodales dictum, urna urna tincidunt
+            eros, ac consequat urna lectus vel ligula. Suspendisse justo est,
+            auctor et mi id, aliquet bibendum lacus. Quisque accumsan egestas
+            felis, vel bibendum nunc fringilla nec. Integer accumsan
+            sollicitudin porttitor. rna eros dapibus erat. Nam bibendum ac felis
+            quis convallis. Praesent ne
+          </span>
         </div>
-        <div className="flex gap-4">
-          <div className="basis-1/4">
+        <div className="flex flex-col lg:flex-row gap-4">
+          <div className="w-full lg:w-1/4">
             <DropdownComponent
               menuName="gene segment"
               menuItemsArray={geneSegmentItemsArray}
@@ -243,7 +245,7 @@ export default function PlotPage(): ReactElement {
             />
           </div>
           <div
-            className={`basis-1/4 ${
+            className={`w-full lg:w-1/4 ${
               currentPicks.geneSegmentDropdown === ""
                 ? "cursor-not-allowed pointer-events-none opacity-50"
                 : ""
@@ -259,7 +261,7 @@ export default function PlotPage(): ReactElement {
             />
           </div>
           <div
-            className={`basis-1/4 ${
+            className={`w-full lg:w-1/4 ${
               currentPicks.geneDropdown === ""
                 ? "cursor-not-allowed pointer-events-none opacity-50"
                 : ""
@@ -275,7 +277,7 @@ export default function PlotPage(): ReactElement {
             />
           </div>
           <div
-            className={`basis-1/4 ${
+            className={`w-full lg:w-1/4 ${
               currentPicks.subtypeDropdown === ""
                 ? "cursor-not-allowed pointer-events-none opacity-50"
                 : ""
@@ -303,39 +305,37 @@ export default function PlotPage(): ReactElement {
           populationAPIData={popFreqAPIData}
           superpopulationRegions={superpopulationRegions}
         />
-
-        <div className="flex items-start justify-between pt-8">
-          <p className="text-neutral-content text-lg font-semibold basis-1/4">
+        <div className="flex flex-col lg:flex-row items-start justify-between pt-8 gap-4">
+          <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/4">
             SNiPer SCORE: 1.0
           </p>
-
-          <div className="overflow-x-auto basis-1/4">
+          <div className="overflow-x-auto lg:w-1/4">
             <div className="p-1.5 min-w-full inline-block align-middle">
               <div className="border rounded-lg overflow-hidden">
-                <table className="min-w-full divide-y divide-neutral">
+                <table className="min-w-full divide-y divide-neutral text-base-content">
                   <thead className="bg-neutral">
                     <tr>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-start text-lg font-semibold text-base-content"
+                        className="px-6 py-3 text-start text-lg lg:text-xl font-semibold"
                       >
                         Associated SNPs
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-neutral">
+                  <tbody className="divide-y divide-neutral text-base lg:text-lg">
                     <tr>
-                      <td className="px-6 py-4 whitespace-nowrap font-medium text-base-content">
+                      <td className="px-6 py-4 whitespace-nowrap font-medium">
                         rs123
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-6 py-4 whitespace-nowrap font-medium text-base-content">
+                      <td className="px-6 py-4 whitespace-nowrap font-medium">
                         rs456
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-6 py-4 whitespace-nowrap font-medium text-base-content">
+                      <td className="px-6 py-4 whitespace-nowrap font-medium">
                         rs789
                       </td>
                     </tr>
@@ -344,11 +344,9 @@ export default function PlotPage(): ReactElement {
               </div>
             </div>
           </div>
-
-          <div className="basis-1/4"></div>
-
+          <div className="lg:w-1/4"></div>
           <button
-            className="bg-gradient-to-r from-neutral to-secondary text-base-content text-base flex gap-2 justify-center items-center basis-1/4 h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
+            className="bg-gradient-to-r from-neutral to-secondary text-base-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:order-4 lg:px-0 lg:w-1/4 h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
             onClick={() => setIsPopupOpen(true)}
           >
             <svg
