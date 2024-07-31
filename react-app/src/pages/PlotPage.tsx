@@ -193,21 +193,7 @@ export default function PlotPage(): ReactElement {
           })
           .catch((response) => console.log(response.error));
       }
-    }, [currentPicks]);
-
-    // fetch next selection options after gene is selected
-    useEffect(() => {
-      let currentSelection = currentPicks.geneDropdown + currentPicks.geneSegmentDropdown;
-      setAlleleDropDownItemsArray([])
-      axios
-        .get(geneSelectionEndpoint + currentSelection)
-        .then((response) => {
-          let responseData = response.data;
-          responseData.push("...");
-          setAlleleDropDownItemsArray(responseData);
-        })
-        .catch((response) => console.log(response.error));
-    }, [currentPicks.geneSegmentDropdown]);
+    }, [currentPicks.geneDropdown, currentPicks.subtypeDropdown]);
 
   // Render the component
   return (
