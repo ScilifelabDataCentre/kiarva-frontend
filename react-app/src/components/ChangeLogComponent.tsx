@@ -28,18 +28,17 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
   return (
     <div className="block">
       <div
-        className={`flex flex-col shadow border-2 ${borderColor} border-opacity-60 col-span-2`}
+        className={`flex flex-col lg:shadow border-2 ${borderColor} border-opacity-60 col-span-2`}
       >
         <div
-          className={`flex flex-row ${bgColor} p-3 items-center justify-between`}
+          className={`flex flex-col lg:flex-row ${bgColor} p-3 items-center justify-between`}
         >
-          <div className="justify-self-start">
-            <p className="text-neutral-content/80 font-semibold text-xl">
+          <div className="justify-self-start mb-2 lg:mb-0">
+            <p className="text-neutral-content/80 font-semibold text-lg lg:text-xl">
               {title}
             </p>
           </div>
-          {/* <p className="text-neutral-content/60 font-extralight text-l italic -ml-32">{doi}</p> */}
-          <div className="flex justify-self-end gap-x-2.5">
+          <div className="flex flex-row justify-self-end gap-2 lg:gap-x-2.5">
             <a
               className="flex"
               href={frontEndLink}
@@ -47,7 +46,7 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
               rel="noopener noreferrer"
             >
               <div
-                className={`${buttonColor} ${textColor} flex justify-center items-center w-44 h-10 font-medium opacity-60 rounded-2xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90`}
+                className={`${buttonColor} ${textColor} flex justify-center items-center w-full px-1 lg:px-0 lg:w-44 h-10 font-medium opacity-60 rounded-2xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90`}
               >
                 Frontend Repository
               </div>
@@ -59,27 +58,27 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
               rel="noopener noreferrer"
             >
               <div
-                className={`${buttonColor} ${textColor} flex justify-center items-center w-44 h-10 font-medium opacity-60 rounded-2xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90`}
+                className={`${buttonColor} ${textColor} flex justify-center items-center w-full px-1 lg:px-0 lg:w-44 h-10 font-medium opacity-60 rounded-2xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90`}
               >
                 Backend Repository
               </div>
             </a>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div
-            className={`border-r-2 ${borderColor} border-opacity-60 flex flex-col p-3`}
+            className={`lg:border-r-2 ${borderColor} border-opacity-60 flex flex-col p-3`}
           >
-            <label className="font-bold text-l">Database Updates</label>
-            <ul>
+            <label className="font-bold text-base">Database Updates</label>
+            <ul className="text-sm lg:text-base">
               {updatesDatabaseUpdatesArray.map((update, index) => (
                 <li key={index}>• {update}</li>
               ))}
             </ul>
           </div>
           <div className="flex flex-col p-3">
-            <label className="font-bold text-l">Design & Bug Fixes</label>
-            <ul>
+            <label className="font-bold text-base">Design & Bug Fixes</label>
+            <ul className="text-sm lg:text-base">
               {updatesDesignAndBugFixesArray.map((update, index) => (
                 <li key={index}>• {update}</li>
               ))}

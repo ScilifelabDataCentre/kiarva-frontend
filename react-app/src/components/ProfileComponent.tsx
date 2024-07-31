@@ -16,19 +16,19 @@ const ProfileComponent: React.FC<ProfileComponentProps> = ({
       className="!mt-0 block"
     >
       <div
-        className={`h-56 flex items-center transition-all duration-500 hover:bg-base-100 hover:shadow-lg ${bgColor}`}
+        className={`flex flex-row items-center p-4 transition-all duration-500 hover:bg-base-100 hover:shadow-lg ${bgColor}`}
       >
-        <div className=" flex items-center pl-6">
+        <div className="flex items-center lg:p-2 lg:w-1/3">
           <div className="avatar pr-4">
-            <div className="w-36 rounded-full">
+            <div className="w-24 lg:w-36 rounded-full">
               <img src={imageUrl} alt={name} />
             </div>
           </div>
-          <div>
-            <h1 className="text-5xl font-normal text-neutral-content">
+          <div className="text-left lg:w-2/3">
+            <h1 className="text-2xl text-ellipsis lg:text-5xl lg:text-nowrap font-normal text-neutral-content">
               {name}
             </h1>
-            <p className="text-xl italic pt-2 pl-1 text-neutral-content">
+            <p className="text-lg lg:text-xl lg:text-nowrap italic pt-2 text-neutral-content">
               {title}
             </p>
           </div>
