@@ -17,8 +17,8 @@ export default function AboutPage(): ReactElement {
     <>
       <div className={BODY_CLASSES}>
         <div className={H_1}>{pageTitle}</div>
-        <div className="divider pt-4">TBD</div>
-        <p className="pb-8 text-justify">
+        <div className="divider pt-4 ">TBD</div>
+        <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
           To create KIARVA, we applied a high throughput genomic technique
           designed for adaptive immune receptor germline gene sequencing,
           ImmuneDiscover (Corcoran et al. BioRXiv), to 2481 cases from the 1000
@@ -47,14 +47,14 @@ export default function AboutPage(): ReactElement {
           to constant exon variants from each of the receptor subtypes.
         </p>
         <div className="divider pt-4">Funding</div>
-        <p className="pb-8 text-justify">
+        <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
           Funding for this project was generously provided by a Distinguished
           Professor grant from the Swedish Research Council (2017-00968) and a
           European Research Council (ERC) Advanced Grant - ImmuneDiversity
           (788016) to GBKH.
         </p>
         <div className="divider pt-4">Contact</div>
-        <p className="text-justify">
+        <p className="text-left lg:text-justify text-sm lg:text-base">
           For technical questions related to the website, please contact:
           <br />
           <strong>Data Science Node in Precision Medicine & Diagnostics</strong>
@@ -67,7 +67,7 @@ export default function AboutPage(): ReactElement {
           </a>
           <br />
         </p>
-        <p className="pb-8 text-justify">
+        <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
           For questions related to the scientific content, please contact:
           <br />
           <strong>Martin Corcoran</strong>—
@@ -113,7 +113,7 @@ export default function AboutPage(): ReactElement {
             imageUrl={markChernyshev}
             linkUrl="https://ki.se/en/people/mark-chernyshev"
             name="Mark Chernyshev"
-            title="PhD student/Bioinformatician"
+            title="PhD student / Bioinformatician"
             bgColor="bg-white"
           />
           <ProfileComponent
