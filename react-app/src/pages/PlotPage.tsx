@@ -10,6 +10,7 @@ import FrequencyPlotComponent from "../components/FrequencyPlotComponent";
 import { IGeneFrequencyData, IPopulationRegion } from "../interfaces/types";
 import axios from "axios";
 import DropdownComponent from "../components/DropdownComponent";
+import PopupComponent from "../components/PopupComponent";
 
 // Main function to render the PlotPage component
 export default function PlotPage(): ReactElement {
@@ -130,8 +131,8 @@ export default function PlotPage(): ReactElement {
   useEffect(() => {
     getGeneFreqData(
       currentPicks.geneDropdown +
-      currentPicks.subtypeDropdown +
-      currentPicks.alleleDropdown
+        currentPicks.subtypeDropdown +
+        currentPicks.alleleDropdown
     );
   }, [currentPicks.alleleDropdown]);
 
@@ -148,7 +149,7 @@ export default function PlotPage(): ReactElement {
         setSuperpopulationRegions(response.data);
       })
       .catch((response) => console.log(response.error));
-  }, [,currentPicks]);
+  }, [, currentPicks]);
 
   // Function to update the current pick for dropdowns
   const handleSetCurrentPick = (dropdownName: string, value: string) => {
@@ -194,6 +195,8 @@ export default function PlotPage(): ReactElement {
           .catch((response) => console.log(response.error));
       }
     }, [currentPicks.geneDropdown, currentPicks.subtypeDropdown]);
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   // Render the component
   return (
@@ -300,6 +303,74 @@ export default function PlotPage(): ReactElement {
           populationAPIData={popFreqAPIData}
           superpopulationRegions={superpopulationRegions}
         />
+
+        <div className="flex items-start justify-between pt-8">
+          <p className="text-neutral-content text-lg font-semibold basis-1/4">
+            SNiPer SCORE: 1.0
+          </p>
+
+          <div className="overflow-x-auto basis-1/4">
+            <div className="p-1.5 min-w-full inline-block align-middle">
+              <div className="border rounded-lg overflow-hidden">
+                <table className="min-w-full divide-y divide-neutral">
+                  <thead className="bg-neutral">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-start text-lg font-semibold text-base-content"
+                      >
+                        Associated SNPs
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-neutral">
+                    <tr>
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-base-content">
+                        rs123
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-base-content">
+                        rs456
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-base-content">
+                        rs789
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div className="basis-1/4"></div>
+
+          <button
+            className="bg-gradient-to-r from-neutral to-secondary text-base-content text-base flex gap-2 justify-center items-center basis-1/4 h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
+            onClick={() => setIsPopupOpen(true)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+              />
+            </svg>
+            Population abbreviations
+          </button>
+        </div>
+        {isPopupOpen && (
+          <PopupComponent onClose={() => setIsPopupOpen(false)} />
+        )}
       </div>
     </>
   );

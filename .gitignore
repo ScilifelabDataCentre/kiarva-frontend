@@ -3,6 +3,8 @@
 
 # dependencies
 /react-app/node_modules
+node_modules
+/node_modules
 
 # misc
 /react-app/.DS_Store
