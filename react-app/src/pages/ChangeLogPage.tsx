@@ -9,9 +9,9 @@ export default function ChangeLogPage(): ReactElement {
   var pageTitle: string = "Change log";
 
   return (
-    <div className={BODY_CLASSES + " py-16"}>
+    <div className={BODY_CLASSES}>
       <div className={H_1}>{pageTitle}</div>
-      <div className="alert my-10 py-8">
+      <div className="alert">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -25,19 +25,16 @@ export default function ChangeLogPage(): ReactElement {
             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           ></path>
         </svg>
-        <div className="flex flex-col">
-          <label className="font-bold">How to use the change log</label>
-          <span>
-            The change log displays all releases of the KI Adaptive Immune
-            Receptor Gene Variant Atlas. Each versions card has a DOI and two
-            buttons labelled ‘Frontend Repository’ and ‘Backend Repository’.
-            Clicking one of the buttons in the current version card will open
-            the corresponding GitHub repository. Clicking one of the buttons in
-            the previous versions card will start a download of the source code
-            of the selected version. Follow the instructions in the readme file
-            to locally run the selected version.
-          </span>
-        </div>
+        <span className="text-sm lg:text-base">
+          The change log displays all releases of the KI Adaptive Immune
+          Receptor Gene Variant Atlas. Each versions card has a DOI and two
+          buttons labelled ‘Frontend Repository’ and ‘Backend Repository’.
+          Clicking one of the buttons in the current version card will open the
+          corresponding GitHub repository. Clicking one of the buttons in the
+          previous versions card will start a download of the source code of the
+          selected version. Follow the instructions in the readme file to
+          locally run the selected version.
+        </span>
       </div>
 
       <div className="divider pt-4">Current version</div>

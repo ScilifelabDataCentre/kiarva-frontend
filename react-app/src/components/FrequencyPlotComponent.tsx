@@ -8,7 +8,7 @@ import {
   IPopulationRegion,
   ISuperpopulationColors,
 } from "../interfaces/types";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import worldMap from "../assets/images/worldMap.png";
 const Plot = createPlotlyComponent(Plotly);
 
@@ -64,7 +64,7 @@ export default function FrequencyPlotComponent(prop: {
         type: "bar",
         legendgroup: superpopulationRegion[i],
         name: superpopulationRegion[i],
-        text: "n = " + counts[i].toString(),
+        text: "n = " + counts[i],
         marker: {
           color: [colors[i % colors.length] as any],
         },
@@ -90,31 +90,28 @@ export default function FrequencyPlotComponent(prop: {
 
   let data = [...superpopulationTraces, ...populationTraces];
 
+  const [isLargeScreen, setIsLargeScreen] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth >= 1280);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Initial check
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const layout: Partial<Layout> = {
     height: 500,
     width: 1250,
     xaxis: {
       showticklabels: false,
     },
-    // xaxis2: {
-    //     title: {
-    //         text: '<b>Population</b>',
-    //         font: {
-    //             size: 18
-    //         }
-    //     },
-    // },
     paper_bgcolor: "#f8fafc",
     plot_bgcolor: "#f8fafc",
     yaxis: { side: "left", title: "Allele Frequency", titlefont: { size: 16 } },
     showlegend: true,
     legend: {
-      // title: {
-      //     text: '<b>Superpopulation</b>',
-      //     font: {
-      //         size: 18
-      //     },
-      // },
       x: 0.08,
       y: -0.11,
       orientation: "h",
@@ -123,26 +120,51 @@ export default function FrequencyPlotComponent(prop: {
     grid: { rows: 1, columns: 2 },
   };
 
-  return (
-    <div className="relative bg-base-100 -mx-24">
-      <div className="flex flex-row items-center justify-center relative">
-        <Plot data={data} layout={layout} />
-        <div className="absolute -bottom-6">
-          <div className="flex flex-row text-neutral-content justify-between pl-8">
-            <h1 className="text-2xl">
-              <b>Superpopulation</b>
-            </h1>
-            <h1 className="pl-[440px] text-2xl">
-              <b>Population</b>
-            </h1>
+  if (isLargeScreen) {
+    return (
+      <div className="relative bg-base-100 lg:-mx-24 overflow-x-auto">
+        <div className="flex flex-row items-center justify-center relative">
+          <Plot data={data} layout={layout} />
+          <div className="absolute -bottom-6">
+            <div className="flex flex-row text-neutral-content justify-between pl-8">
+              <h1 className="text-lg lg:text-xl">
+                <b>Superpopulation</b>
+              </h1>
+              <h1 className="pl-[440px] text-lg lg:text-xl">
+                <b>Population</b>
+              </h1>
+            </div>
           </div>
         </div>
+        <img
+          className="absolute inset-0 h-full w-full object-cover opacity-25 pointer-events-none"
+          src={worldMap}
+          alt="World Map"
+        />
       </div>
-      <img
-        className="absolute inset-0 h-full w-full object-cover opacity-25 pointer-events-none"
-        src={worldMap}
-        alt="World Map"
-      />
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div role="alert" className="alert alert-error bg-info text-info-content">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 shrink-0 stroke-current"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+          />
+        </svg>
+        <span>
+          Error: Plots can only be displayed on a 13-inch screen and bigger.
+          Please resize your browser window to view the plots or use a laptop or
+          desktop computer.
+        </span>
+      </div>
+    );
+  }
 }

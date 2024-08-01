@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 export default function FooterComponent(): ReactElement {
   let links: { [id: string]: ILink } = {
     l1: {
-      text: "Download Fasta files",
+      text: "Download FASTA files",
       classes: LINK_CLASSES,
       link: "/download",
     },
@@ -29,17 +29,17 @@ export default function FooterComponent(): ReactElement {
         alt="Footer Background Image"
       />
       <div className="absolute inset-0 bg-gray-700 opacity-85"></div>
-      <footer className="absolute inset-0 footer footer-center p-10 px-36 2xl:max-w-screen-2xl 2xl:mx-auto">
+      <footer className="absolute inset-0 footer footer-center p-4 lg:p-10 px-4 lg:px-36 2xl:max-w-screen-2xl 2xl:mx-auto">
         <div className="flex flex-col items-center justify-center space-y-4 z-10">
-          <p className="text-primary-content text-xl font-semibold">
+          <p className="text-primary-content text-base lg:text-lg font-semibold">
             Please visit the other pages of KIARVA
           </p>
-          <nav className="grid grid-flow-col gap-4">
+          <nav className="grid grid-flow-row grid-cols-2 lg:grid-flow-col gap-2 lg:gap-4">
             {Object.keys(links)
               .filter((key) => links[key].link !== currentPath) // Filter out the current page link
               .map((key) => (
                 <a key={key} href={links[key].link} rel="noopener noreferrer">
-                  <div className="text-info-content text-base flex justify-center items-center h-10 px-8 py-2 bg-info font-medium opacity-80 rounded-2xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800 hover:opacity-90">
+                  <div className="text-info-content text-sm lg:text-base flex justify-center items-center h-8 lg:h-10 p-2 lg:px-4 bg-info font-medium opacity-80 rounded-2xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800 hover:opacity-90">
                     {links[key].text}
                   </div>
                 </a>

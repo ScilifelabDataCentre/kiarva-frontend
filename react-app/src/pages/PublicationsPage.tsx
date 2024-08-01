@@ -13,7 +13,7 @@ export default function PublicationsPage(): ReactElement {
       <div className={BODY_CLASSES}>
         <div className={H_1}>{pageTitle}</div>
 
-        <div className="alert my-10 py-8">
+        <div className="alert">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -27,14 +27,12 @@ export default function PublicationsPage(): ReactElement {
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             ></path>
           </svg>
-          <div className="flex flex-col">
-            <span>
-              This page shows scientific publications that referenced the KI
-              Adaptive Immune Receptor Gene Variant Atlas. Please inform the
-              research group when you referenced the KI Adaptive Immune Receptor
-              Gene Variant Atlas and published your results.
-            </span>
-          </div>
+          <span className="text-sm lg:text-base">
+            This page shows scientific publications that referenced the KI
+            Adaptive Immune Receptor Gene Variant Atlas. Please inform the
+            research group when you referenced the KI Adaptive Immune Receptor
+            Gene Variant Atlas and published your results.
+          </span>
         </div>
 
         <div className="pt-2 pb-4">

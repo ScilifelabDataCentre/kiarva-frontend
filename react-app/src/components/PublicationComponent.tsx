@@ -16,14 +16,18 @@ const PublicationComponent: React.FC<PublicationComponentProps> = ({
       className="block"
     >
       <div
-        className={`min-h-56 flex items-center transition-all duration-500 hover:bg-base-100 hover:shadow-lg ${bgColor}`}
+        className={`flex flex-row p-4 transition-all duration-500 hover:bg-base-100 hover:shadow-lg ${bgColor}`}
       >
-        <div className=" flex flex-col items-start p-6 text-pretty space-y-0.5">
-          <h1 className="text-xl font-semibold underline underline-offset-auto text-neutral-content">
+        <div className="flex flex-col items-start text-pretty space-y-2">
+          <h1 className="text-lg lg:text-xl font-semibold underline underline-offset-auto text-neutral-content">
             {title}
           </h1>
-          <p className="text-xl pt-2 text-neutral-content">{authors}</p>
-          <p className="text-xl italic pt-1 text-neutral-content">{journal}</p>
+          <p className="text-base lg:text-lg pt-2 text-neutral-content">
+            {authors}
+          </p>
+          <p className="text-base lg:text-lg pt-1 text-neutral-content">
+            {journal}
+          </p>
         </div>
       </div>
     </a>

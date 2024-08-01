@@ -99,3 +99,18 @@ export type DropdownComponentProps = {
   currentPick: string;
   setCurrentPick: (currentPick: string) => void;
 };
+
+export type DownloadBoxComponentProps = {
+  geneSegment: string;
+  geneObjectArray: GeneObject[];
+  setPropsSelectionArray: (propsSelectionArray: string[]) => void;
+};
+
+export interface GeneObject {
+  name: string;
+  isAvailable: boolean;
+}
+
+export type PopupComponentProps = {
+  onClose: () => void;
+};
