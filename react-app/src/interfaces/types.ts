@@ -114,3 +114,8 @@ export interface GeneObject {
 export type PopupComponentProps = {
   onClose: () => void;
 };
+
+export type IgSNPerData = {
+  igSNPer_score: number;
+  igSNPer_SNPs: string[];
+}

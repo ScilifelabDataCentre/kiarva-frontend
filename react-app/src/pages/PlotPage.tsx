@@ -7,7 +7,7 @@ import {
 } from "../constants";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 import FrequencyPlotComponent from "../components/FrequencyPlotComponent";
-import { IGeneFrequencyData, IPopulationRegion } from "../interfaces/types";
+import { IGeneFrequencyData, IgSNPerData, IPopulationRegion } from "../interfaces/types";
 import axios from "axios";
 import DropdownComponent from "../components/DropdownComponent";
 import PopupComponent from "../components/PopupComponent";
@@ -96,6 +96,9 @@ export default function PlotPage(): ReactElement {
     alleleDropdown: "",
   });
 
+  const [igSNPerScore, SetIgSNPerScore] = useState<string>("")
+  const [igSNPerSNPs, SetIgSNPerSNPs] = useState<string[]>([])
+
   // Arrays for dropdown menu items
   let geneSegmentItemsArray = ["IGH", "..."];
   let geneDropDownItemsArray = ["IGHV", "IGHD", "IGHJ", "..."];
@@ -131,6 +134,28 @@ export default function PlotPage(): ReactElement {
       .catch((response) => console.log(response.error));
   }
 
+  async function getGeneIgSNPerData(allele: string) {
+    let alleleIgSNPerDataEndpoint: string = backendAPI + "data/igsnperdata/" + allele;
+    console.log(alleleIgSNPerDataEndpoint);
+    await axios
+      .get(alleleIgSNPerDataEndpoint)
+      .then((response) => {
+        let responseData: IgSNPerData = response.data;
+        if (responseData.igSNPer_score || responseData.igSNPer_score === 0) {
+          let scoreString = responseData.igSNPer_score.toString();
+          if (scoreString.length === 1) {
+            SetIgSNPerScore(scoreString + ".0");
+          } else {
+            SetIgSNPerScore(scoreString);
+          }
+        }
+        else {
+          SetIgSNPerScore("Missing");
+        }
+        SetIgSNPerSNPs(responseData.igSNPer_SNPs);
+      })
+      .catch((response) => console.log(response.error));
+  }
   // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
     getGeneFreqData(
@@ -138,7 +163,19 @@ export default function PlotPage(): ReactElement {
         currentPicks.subtypeDropdown +
         currentPicks.alleleDropdown
     );
+    getGeneIgSNPerData(
+      currentPicks.geneDropdown +
+        currentPicks.subtypeDropdown +
+        currentPicks.alleleDropdown
+    );
   }, [currentPicks.alleleDropdown]);
+
+  useEffect(() => {
+    if (!currentPicks.alleleDropdown) {
+      SetIgSNPerScore("");
+      SetIgSNPerSNPs([]);
+    }
+  }, [currentPicks.geneSegmentDropdown, currentPicks.geneDropdown, currentPicks.subtypeDropdown])
 
   // fetch region data (which subpopulation belongs to which superpopulation)
   // either on page load or when currentPicks is changed
@@ -307,7 +344,7 @@ export default function PlotPage(): ReactElement {
         />
         <div className="flex flex-col lg:flex-row items-start justify-between pt-8 gap-4">
           <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/4">
-            SNiPer SCORE: 1.0
+            SNiPer SCORE: {igSNPerScore}
           </p>
           <div className="overflow-x-auto lg:w-1/4">
             <div className="p-1.5 min-w-full inline-block align-middle">
@@ -324,21 +361,14 @@ export default function PlotPage(): ReactElement {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-neutral text-base lg:text-lg">
-                    <tr>
-                      <td className="px-6 py-4 whitespace-nowrap font-medium">
-                        rs123
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 whitespace-nowrap font-medium">
-                        rs456
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 whitespace-nowrap font-medium">
-                        rs789
-                      </td>
-                    </tr>
+                    {igSNPerSNPs.map(value => {
+                      return (
+                      <tr key={value}>
+                        <td className="px-6 py-4 whitespace-nowrap font-medium">
+                          {value}
+                        </td>
+                      </tr>)
+                    })}
                   </tbody>
                 </table>
               </div>
