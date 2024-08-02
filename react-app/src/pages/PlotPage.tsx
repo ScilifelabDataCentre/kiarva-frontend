@@ -96,8 +96,8 @@ export default function PlotPage(): ReactElement {
     alleleDropdown: "",
   });
 
-  const [igSNPerScore, SetIgSNPerScore] = useState<string>("")
-  const [igSNPerSNPs, SetIgSNPerSNPs] = useState<string[]>([])
+  const [igSNPerScore, setIgSNPerScore] = useState<string>("")
+  const [igSNPerSNPs, setIgSNPerSNPs] = useState<string[]>([])
 
   // Arrays for dropdown menu items
   let geneSegmentItemsArray = ["IGH", "..."];
@@ -144,15 +144,15 @@ export default function PlotPage(): ReactElement {
         if (responseData.igSNPer_score || responseData.igSNPer_score === 0) {
           let scoreString = responseData.igSNPer_score.toString();
           if (scoreString.length === 1) {
-            SetIgSNPerScore(scoreString + ".0");
+            setIgSNPerScore(scoreString + ".0");
           } else {
-            SetIgSNPerScore(scoreString);
+            setIgSNPerScore(scoreString);
           }
         }
         else {
-          SetIgSNPerScore("Missing");
+          setIgSNPerScore("Missing");
         }
-        SetIgSNPerSNPs(responseData.igSNPer_SNPs);
+        setIgSNPerSNPs(responseData.igSNPer_SNPs);
       })
       .catch((response) => console.log(response.error));
   }
@@ -172,8 +172,8 @@ export default function PlotPage(): ReactElement {
 
   useEffect(() => {
     if (!currentPicks.alleleDropdown) {
-      SetIgSNPerScore("");
-      SetIgSNPerSNPs([]);
+      setIgSNPerScore("");
+      setIgSNPerSNPs([]);
     }
   }, [currentPicks.geneSegmentDropdown, currentPicks.geneDropdown, currentPicks.subtypeDropdown])
 
