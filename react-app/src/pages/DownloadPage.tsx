@@ -18,6 +18,9 @@ export default function DownloadPage(): ReactElement {
   const [igkSelectionArray, setIgkSelectionArray] = useState<string[]>([]);
   const [iglSelectionArray, setIglSelectionArray] = useState<string[]>([]);
   const [traSelectionArray, setTraSelectionArray] = useState<string[]>([]);
+  const [trbSelectionArray, setTrbSelectionArray] = useState<string[]>([]);
+  const [trgSelectionArray, setTrgSelectionArray] = useState<string[]>([]);
+  const [trdSelectionArray, setTrdSelectionArray] = useState<string[]>([]);
 
   async function downloadGeneFasta(gene: string) {
     let fastaType =
@@ -69,7 +72,10 @@ export default function DownloadPage(): ReactElement {
     let selectionArr = ighSelectionArray.concat(
       igkSelectionArray,
       iglSelectionArray,
-      traSelectionArray
+      traSelectionArray,
+      trbSelectionArray,
+      trgSelectionArray,
+      trdSelectionArray
     );
 
     if (selectionArr.length === 1) {
@@ -161,7 +167,7 @@ export default function DownloadPage(): ReactElement {
           geneSegment="IGK"
           geneObjectArray={[
             { name: "IGKV", isAvailable: true },
-            { name: "IGKJ", isAvailable: true },
+            { name: "IGKJ", isAvailable: false },
             { name: "IGK constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setIgkSelectionArray}
@@ -170,7 +176,7 @@ export default function DownloadPage(): ReactElement {
           geneSegment="IGL"
           geneObjectArray={[
             { name: "IGLV", isAvailable: true },
-            { name: "IGLJ", isAvailable: true },
+            { name: "IGLJ", isAvailable: false },
             { name: "IGL constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setIglSelectionArray}
@@ -184,10 +190,39 @@ export default function DownloadPage(): ReactElement {
           geneSegment="TRA"
           geneObjectArray={[
             { name: "TRAV", isAvailable: true },
-            { name: "TRAJ", isAvailable: true },
-            { name: "TR constant", isAvailable: false },
+            { name: "TRAJ", isAvailable: false },
+            { name: "TRA constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setTraSelectionArray}
+        ></DownloadBoxComponent>
+        <DownloadBoxComponent
+          geneSegment="TRB"
+          geneObjectArray={[
+            { name: "TRBV", isAvailable: true },
+            { name: "TRBD", isAvailable: false },
+            { name: "TRBJ", isAvailable: false },
+            { name: "TRB constant", isAvailable: false },
+          ]}
+          setPropsSelectionArray={setTrbSelectionArray}
+        ></DownloadBoxComponent>
+        <DownloadBoxComponent
+          geneSegment="TRG"
+          geneObjectArray={[
+            { name: "TRGV", isAvailable: true },
+            { name: "TRGJ", isAvailable: false },
+            { name: "TRG constant", isAvailable: false },
+          ]}
+          setPropsSelectionArray={setTrgSelectionArray}
+        ></DownloadBoxComponent>
+        <DownloadBoxComponent
+          geneSegment="TRD"
+          geneObjectArray={[
+            { name: "TRDV", isAvailable: true },
+            { name: "TRDD", isAvailable: false },
+            { name: "TRDJ", isAvailable: false },
+            { name: "TRD constant", isAvailable: false },
+          ]}
+          setPropsSelectionArray={setTrdSelectionArray}
         ></DownloadBoxComponent>
       </div>
 
