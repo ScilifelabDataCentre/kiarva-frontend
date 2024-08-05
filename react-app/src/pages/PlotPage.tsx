@@ -351,10 +351,10 @@ export default function PlotPage(): ReactElement {
           superpopulationRegions={superpopulationRegions}
         />
         <div className="flex flex-col lg:flex-row items-start justify-between pt-8 gap-4">
-          <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/4">
+          <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/8">
             SNiPer SCORE: {igSNPerScore}
           </p>
-          <div className="overflow-x-auto lg:w-1/4">
+          <div className="overflow-x-auto lg:w-2/4">
             <div className="p-1.5 min-w-full inline-block align-middle">
               <div className="border rounded-lg overflow-hidden">
                 <table className="min-w-full divide-y divide-neutral text-base-content">
@@ -383,7 +383,7 @@ export default function PlotPage(): ReactElement {
               </div>
             </div>
           </div>
-          <div className="lg:w-1/4"></div>
+          <div className="lg:w-1/8"></div>
           <button
             className="bg-gradient-to-r from-[rgba(4,92,100,0.7)] to-primary text-primary-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:order-4 lg:px-0 lg:w-1/4 h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
             onClick={() => setIsPopupOpen(true)}
