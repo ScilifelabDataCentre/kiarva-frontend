@@ -5,7 +5,7 @@ import { LINK_CLASSES } from "../constants";
 export default function HeaderComponent() {
   let links: { [id: string]: ILink } = {
     l1: { text: "Download", classes: LINK_CLASSES, link: "download" },
-    l2: { text: "Plot alleles", classes: LINK_CLASSES, link: "plot" },
+    l2: { text: "Population frequencies", classes: LINK_CLASSES, link: "plot" },
     l3: { text: "Information", classes: LINK_CLASSES, link: "information" },
     l4: { text: "Change log", classes: LINK_CLASSES, link: "changelog" },
     l5: { text: "Publications", classes: LINK_CLASSES, link: "publications" },
@@ -72,9 +72,9 @@ export default function HeaderComponent() {
               </Link>
             </div>
             <div className="hidden 13inch:flex 13inch:navbar-center">
-              <ul className="menu menu-horizontal text-lg">
+              <ul className="menu menu-horizontal text-base">
                 {Object.keys(links).map((key) => (
-                  <li key={key} className="ml-1.5 max-w-36">
+                  <li key={key} className="">
                     <NavLink
                       className={links[key].classes}
                       to={links[key].link}
