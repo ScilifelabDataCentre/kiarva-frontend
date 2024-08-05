@@ -6,7 +6,7 @@ import AboutPage from "../pages/AboutPage";
 import PrivacyPage from "../pages/PrivacyPage";
 import ChangeLogPage from "../pages/ChangeLogPage";
 import PublicationsPage from "../pages/PublicationsPage";
-import InformationPage from "../pages/InformationPage";
+import MethodologyPage from "../pages/MethodologyPage";
 import DownloadPage from "../pages/DownloadPage";
 import PlotPage from "../pages/PlotPage";
 
@@ -40,8 +40,8 @@ const router = createBrowserRouter([
         element: <PublicationsPage />,
       },
       {
-        path: "information",
-        element: <InformationPage />,
+        path: "methodology",
+        element: <MethodologyPage />,
       },
       {
         path: "privacy",

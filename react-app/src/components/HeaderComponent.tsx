@@ -6,7 +6,7 @@ export default function HeaderComponent() {
   let links: { [id: string]: ILink } = {
     l1: { text: "Download", classes: LINK_CLASSES, link: "download" },
     l2: { text: "Population frequencies", classes: LINK_CLASSES, link: "plot" },
-    l3: { text: "Information", classes: LINK_CLASSES, link: "information" },
+    l3: { text: "Methodology", classes: LINK_CLASSES, link: "methodology" },
     l4: { text: "Change log", classes: LINK_CLASSES, link: "changelog" },
     l5: { text: "Publications", classes: LINK_CLASSES, link: "publications" },
     l6: { text: "About", classes: LINK_CLASSES, link: "about" },
