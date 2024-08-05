@@ -385,7 +385,7 @@ export default function PlotPage(): ReactElement {
           </div>
           <div className="lg:w-1/4"></div>
           <button
-            className="bg-gradient-to-r from-neutral to-secondary text-base-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:order-4 lg:px-0 lg:w-1/4 h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
+            className="bg-gradient-to-r from-[rgba(4,92,100,0.6)] to-primary text-primary-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:order-4 lg:px-0 lg:w-1/4 h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
             onClick={() => setIsPopupOpen(true)}
           >
             <svg
