@@ -128,7 +128,7 @@ export default function DownloadPage(): ReactElement {
               className="radio"
               defaultChecked
             />
-            <span className="pl-2">Coding sequence</span>
+            <span className="pl-2">Genomic coding sequence</span>
           </label>
 
           <label
@@ -136,7 +136,9 @@ export default function DownloadPage(): ReactElement {
             onClick={() => setFastaTypeSelected("genomic")}
           >
             <input type="radio" name="fastaRadio" className="radio" />
-            <span className="pl-2">Genomic sequence with flanking regions</span>
+            <span className="pl-2">
+              Genomic coding sequence with flanking regions
+            </span>
           </label>
 
           {/* Once the fasta type is available, only delete the className part from cursor-not-allowed */}
@@ -145,7 +147,7 @@ export default function DownloadPage(): ReactElement {
             onClick={() => setFastaTypeSelected("aminoacids")}
           >
             <input type="radio" name="fastaRadio" className="radio" />
-            <span className="pl-2">Grouped by amino acid</span>
+            <span className="pl-2">Translated V gene sequences</span>
           </label>
         </div>
       </div>
