@@ -7,7 +7,11 @@ import {
 } from "../constants";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 import FrequencyPlotComponent from "../components/FrequencyPlotComponent";
-import { IGeneFrequencyData, IgSNPerData, IPopulationRegion } from "../interfaces/types";
+import {
+  IGeneFrequencyData,
+  IgSNPerData,
+  IPopulationRegion,
+} from "../interfaces/types";
 import axios from "axios";
 import DropdownComponent from "../components/DropdownComponent";
 import PopupComponent from "../components/PopupComponent";
@@ -96,12 +100,12 @@ export default function PlotPage(): ReactElement {
     alleleDropdown: "",
   });
 
-  const [igSNPerScore, setIgSNPerScore] = useState<string>("")
-  const [igSNPerSNPs, setIgSNPerSNPs] = useState<string[]>([])
+  const [igSNPerScore, setIgSNPerScore] = useState<string>("");
+  const [igSNPerSNPs, setIgSNPerSNPs] = useState<string[]>([]);
 
   // Arrays for dropdown menu items
-  let geneSegmentItemsArray = ["IGH", "..."];
-  let geneDropDownItemsArray = ["IGHV", "IGHD", "IGHJ", "..."];
+  let geneSegmentItemsArray = ["IGH"];
+  let geneDropDownItemsArray = ["IGHV"];
   const [subtypeDropDownItemsArray, setSubtypeDropDownItemsArray] = useState<
     string[]
   >(["..."]);
@@ -135,7 +139,8 @@ export default function PlotPage(): ReactElement {
   }
 
   async function getGeneIgSNPerData(allele: string) {
-    let alleleIgSNPerDataEndpoint: string = backendAPI + "data/igsnperdata/" + allele;
+    let alleleIgSNPerDataEndpoint: string =
+      backendAPI + "data/igsnperdata/" + allele;
     console.log(alleleIgSNPerDataEndpoint);
     await axios
       .get(alleleIgSNPerDataEndpoint)
@@ -148,8 +153,7 @@ export default function PlotPage(): ReactElement {
           } else {
             setIgSNPerScore(scoreString);
           }
-        }
-        else {
+        } else {
           setIgSNPerScore("Missing");
         }
         setIgSNPerSNPs(responseData.igSNPer_SNPs);
@@ -175,7 +179,11 @@ export default function PlotPage(): ReactElement {
       setIgSNPerScore("");
       setIgSNPerSNPs([]);
     }
-  }, [currentPicks.geneSegmentDropdown, currentPicks.geneDropdown, currentPicks.subtypeDropdown])
+  }, [
+    currentPicks.geneSegmentDropdown,
+    currentPicks.geneDropdown,
+    currentPicks.subtypeDropdown,
+  ]);
 
   // fetch region data (which subpopulation belongs to which superpopulation)
   // either on page load or when currentPicks is changed
@@ -244,7 +252,7 @@ export default function PlotPage(): ReactElement {
   return (
     <>
       <div className={BODY_CLASSES}>
-        <h1 className={H_1}>Generate allele frequency plots</h1>
+        <h1 className={H_1}>Generate population frequency plots</h1>
         <div className="alert">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -273,7 +281,7 @@ export default function PlotPage(): ReactElement {
         <div className="flex flex-col lg:flex-row gap-4">
           <div className="w-full lg:w-1/4">
             <DropdownComponent
-              menuName="gene segment"
+              menuName="Loci"
               menuItemsArray={geneSegmentItemsArray}
               currentPick={currentPicks.geneSegmentDropdown}
               setCurrentPick={(value) =>
@@ -289,7 +297,7 @@ export default function PlotPage(): ReactElement {
             }`}
           >
             <DropdownComponent
-              menuName="gene"
+              menuName="Gene type"
               menuItemsArray={geneDropDownItemsArray}
               currentPick={currentPicks.geneDropdown}
               setCurrentPick={(value) =>
@@ -305,7 +313,7 @@ export default function PlotPage(): ReactElement {
             }`}
           >
             <DropdownComponent
-              menuName="subtype"
+              menuName="Gene"
               menuItemsArray={subtypeDropDownItemsArray}
               currentPick={currentPicks.subtypeDropdown}
               setCurrentPick={(value) =>
@@ -321,7 +329,7 @@ export default function PlotPage(): ReactElement {
             }`}
           >
             <DropdownComponent
-              menuName="allele"
+              menuName="Allele"
               menuItemsArray={alleleDropDownItemsArray}
               currentPick={currentPicks.alleleDropdown}
               setCurrentPick={(value) =>
@@ -361,13 +369,14 @@ export default function PlotPage(): ReactElement {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-neutral text-base lg:text-lg">
-                    {igSNPerSNPs.map(value => {
+                    {igSNPerSNPs.map((value) => {
                       return (
-                      <tr key={value}>
-                        <td className="px-6 py-4 whitespace-nowrap font-medium">
-                          {value}
-                        </td>
-                      </tr>)
+                        <tr key={value}>
+                          <td className="px-6 py-4 whitespace-nowrap font-medium">
+                            {value}
+                          </td>
+                        </tr>
+                      );
                     })}
                   </tbody>
                 </table>

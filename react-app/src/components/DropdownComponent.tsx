@@ -19,7 +19,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
       <div className="flex items-center justify-between bg-white px-4">
         <a className="my-2 py-2 text-base lg:text-lg font-medium text-neutral-content lg:mx-4">
           {/* Display the current pick or prompt to pick an item if none is selected */}
-          {currentPick === "" ? `Pick ${menuName}` : currentPick}
+          {currentPick === "" ? `${menuName}` : currentPick}
         </a>
         <span>
           {/* SVG icon for the dropdown button - arrow down */}
