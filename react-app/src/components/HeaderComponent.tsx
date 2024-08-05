@@ -74,7 +74,7 @@ export default function HeaderComponent() {
             <div className="hidden 13inch:flex 13inch:navbar-center">
               <ul className="menu menu-horizontal text-base">
                 {Object.keys(links).map((key) => (
-                  <li key={key} className="">
+                  <li key={key}>
                     <NavLink
                       className={links[key].classes}
                       to={links[key].link}
