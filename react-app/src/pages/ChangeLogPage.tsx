@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
-import { BODY_CLASSES, H_1 } from "../constants";
+import { BODY_CLASSES, H_1, currentVersion } from "../constants";
 import ChangeLogComponent from "../components/ChangeLogComponent";
 
 export default function ChangeLogPage(): ReactElement {
@@ -26,81 +26,71 @@ export default function ChangeLogPage(): ReactElement {
           ></path>
         </svg>
         <span className="text-sm lg:text-base">
-          The change log displays all releases of the KI Adaptive Immune
-          Receptor Gene Variant Atlas. Each versions card has a DOI and two
-          buttons labelled ‘Frontend Repository’ and ‘Backend Repository’.
-          Clicking one of the buttons in the current version card will open the
-          corresponding GitHub repository. Clicking one of the buttons in the
-          previous versions card will start a download of the source code of the
-          selected version. Follow the instructions in the readme file to
-          locally run the selected version.
+          The change log provides a comprehensive overview of all releases of
+          the KI Adaptive Immune Receptor Gene Variant Atlas. Each version's
+          card features two buttons: 'Frontend Repository' and 'Backend
+          Repository'. Clicking a button on the current version card will direct
+          you to the respective GitHub repository. For previous versions,
+          clicking a button will take you to the relevant GitHub pull request.
+          In the near future, we will include instructions in the README file on
+          how to run the selected version locally.
         </span>
       </div>
 
       <div className="divider pt-4">Current version</div>
       <div className="pt-2 pb-4">
         <ChangeLogComponent
-          title="Version 3.0"
-          databaseUpdates={[
-            "Change 1",
-            "Change 2. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim. Duis nec condimentum purus. Quisque urna enim, placerat non fermentum sed, pharetra sit amet quam. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim. Duis nec condimentum purus. Quisque urna enim, placerat non fermentum sed, pharetra sit amet quam. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim.",
-            "Change 3",
-          ]}
-          designAndBugFixes={[
-            "Change 1",
-            "Change 2. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim. Duis nec condimentum purus. Quisque urna enim, placerat non fermentum sed, pharetra sit amet quam. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim. Duis nec condimentum purus. Quisque urna enim, placerat non fermentum sed, pharetra sit amet quam. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim.",
-            "Change 3",
-          ]}
+          title={`Version ${currentVersion}`}
+          databaseUpdates={["Initial release with IGHV data only"]}
+          designAndBugFixes={["Initial release"]}
           isCurrent={true}
-          frontEndLink="https://github.com/ScilifelabDataCentre/immunediscover-service-frontend"
-          backEndLink="https://github.com/ScilifelabDataCentre/immunediscover-service-backend"
+          frontEndLink="https://github.com/ScilifelabDataCentre/kiarva-frontend"
+          backEndLink="https://github.com/ScilifelabDataCentre/kiarva-backend"
         />
       </div>
+      {/*}
       <div className="divider pt-4">Previous versions</div>
       <div className="pt-2 pb-4">
         <ChangeLogComponent
-          title="Version 2.1"
-          databaseUpdates="Let's see
-                    what happens when we have a very long string
-                    And new rows"
-          designAndBugFixes="New test here"
+          title="Version 0.1.0"
+          databaseUpdates={[
+            "Initial release with IGHV data only",
+          ]}
+          designAndBugFixes={[
+            "Initial release",
+          ]}
           isCurrent={false}
           frontEndLink="https://github.com/ScilifelabDataCentre/immunediscover-service-frontend"
           backEndLink="https://github.com/ScilifelabDataCentre/immunediscover-service-backend"
         />
         <ChangeLogComponent
-          title="Version 2.0"
-          databaseUpdates="Let's see
-                    what happens when we have a very long string
-                    And new rows"
-          designAndBugFixes="New test here"
+          title="Version 0.0.0"
+          databaseUpdates={[
+            "TBD",
+          ]}
+          designAndBugFixes={[
+            "TBD",
+          ]}
           isCurrent={false}
-          frontEndLink="https://github.com/ScilifelabDataCentre/immunediscover-service-frontend"
-          backEndLink="https://github.com/ScilifelabDataCentre/immunediscover-service-backend"
+          frontEndLink="https://github.com/ScilifelabDataCentre/kiarva-frontend"
+          backEndLink="https://github.com/ScilifelabDataCentre/kiarva-backend"
         />
       </div>
       <div className="py-4">
         <ChangeLogComponent
-          title="Version 1.1"
-          databaseUpdates="Let's see
-                    what happens when we have a very long string
-                    And new rows"
-          designAndBugFixes="New test here"
+          title="Version 0.0.0"
+          databaseUpdates={[
+            "TBD",
+          ]}
+          designAndBugFixes={[
+            "TBD",
+          ]}
           isCurrent={false}
-          frontEndLink="https://github.com/ScilifelabDataCentre/immunediscover-service-frontend"
-          backEndLink="https://github.com/ScilifelabDataCentre/immunediscover-service-backend"
-        />
-        <ChangeLogComponent
-          title="Version 1.0"
-          databaseUpdates="Let's see
-                    what happens when we have a very long string
-                    And new rows"
-          designAndBugFixes="New test here"
-          isCurrent={false}
-          frontEndLink="https://github.com/ScilifelabDataCentre/immunediscover-service-frontend"
-          backEndLink="https://github.com/ScilifelabDataCentre/immunediscover-service-backend"
+          frontEndLink="https://github.com/ScilifelabDataCentre/kiarva-frontend"
+          backEndLink="https://github.com/ScilifelabDataCentre/kiarva-backend"
         />
       </div>
+      */}
     </div>
   );
 }

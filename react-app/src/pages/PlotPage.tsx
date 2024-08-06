@@ -7,7 +7,11 @@ import {
 } from "../constants";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 import FrequencyPlotComponent from "../components/FrequencyPlotComponent";
-import { IGeneFrequencyData, IgSNPerData, IPopulationRegion } from "../interfaces/types";
+import {
+  IGeneFrequencyData,
+  IgSNPerData,
+  IPopulationRegion,
+} from "../interfaces/types";
 import axios from "axios";
 import DropdownComponent from "../components/DropdownComponent";
 import PopupComponent from "../components/PopupComponent";
@@ -96,12 +100,12 @@ export default function PlotPage(): ReactElement {
     alleleDropdown: "",
   });
 
-  const [igSNPerScore, setIgSNPerScore] = useState<string>("")
-  const [igSNPerSNPs, setIgSNPerSNPs] = useState<string[]>([])
+  const [igSNPerScore, setIgSNPerScore] = useState<string>("");
+  const [igSNPerSNPs, setIgSNPerSNPs] = useState<string[]>([]);
 
   // Arrays for dropdown menu items
-  let geneSegmentItemsArray = ["IGH", "..."];
-  let geneDropDownItemsArray = ["IGHV", "IGHD", "IGHJ", "..."];
+  let geneSegmentItemsArray = ["IGH"];
+  let geneDropDownItemsArray = ["IGHV"];
   const [subtypeDropDownItemsArray, setSubtypeDropDownItemsArray] = useState<
     string[]
   >(["..."]);
@@ -135,7 +139,8 @@ export default function PlotPage(): ReactElement {
   }
 
   async function getGeneIgSNPerData(allele: string) {
-    let alleleIgSNPerDataEndpoint: string = backendAPI + "data/igsnperdata/" + allele;
+    let alleleIgSNPerDataEndpoint: string =
+      backendAPI + "data/igsnperdata/" + allele;
     console.log(alleleIgSNPerDataEndpoint);
     await axios
       .get(alleleIgSNPerDataEndpoint)
@@ -148,8 +153,7 @@ export default function PlotPage(): ReactElement {
           } else {
             setIgSNPerScore(scoreString);
           }
-        }
-        else {
+        } else {
           setIgSNPerScore("Missing");
         }
         setIgSNPerSNPs(responseData.igSNPer_SNPs);
@@ -175,7 +179,11 @@ export default function PlotPage(): ReactElement {
       setIgSNPerScore("");
       setIgSNPerSNPs([]);
     }
-  }, [currentPicks.geneSegmentDropdown, currentPicks.geneDropdown, currentPicks.subtypeDropdown])
+  }, [
+    currentPicks.geneSegmentDropdown,
+    currentPicks.geneDropdown,
+    currentPicks.subtypeDropdown,
+  ]);
 
   // fetch region data (which subpopulation belongs to which superpopulation)
   // either on page load or when currentPicks is changed
@@ -219,7 +227,7 @@ export default function PlotPage(): ReactElement {
         .get(geneSelectionEndpoint + currentSelection)
         .then((response) => {
           let responseData = response.data;
-          responseData.push("...");
+          //  responseData.push("...");
           setSubtypeDropDownItemsArray(responseData);
         })
         .catch((response) => console.log(response.error));
@@ -231,7 +239,7 @@ export default function PlotPage(): ReactElement {
         .get(geneSelectionEndpoint + currentSelection)
         .then((response) => {
           let responseData = response.data;
-          responseData.push("...");
+          // responseData.push("...");
           setAlleleDropDownItemsArray(responseData);
         })
         .catch((response) => console.log(response.error));
@@ -244,7 +252,7 @@ export default function PlotPage(): ReactElement {
   return (
     <>
       <div className={BODY_CLASSES}>
-        <h1 className={H_1}>Generate allele frequency plots</h1>
+        <h1 className={H_1}>Generate population frequency plots</h1>
         <div className="alert">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -260,20 +268,16 @@ export default function PlotPage(): ReactElement {
             ></path>
           </svg>
           <span className="text-sm lg:text-base">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            tortor mauris, suscipit eu lacinia non, imperdiet blandit risus.
-            Maecenas pellentesque, massa id sodales dictum, urna urna tincidunt
-            eros, ac consequat urna lectus vel ligula. Suspendisse justo est,
-            auctor et mi id, aliquet bibendum lacus. Quisque accumsan egestas
-            felis, vel bibendum nunc fringilla nec. Integer accumsan
-            sollicitudin porttitor. rna eros dapibus erat. Nam bibendum ac felis
-            quis convallis. Praesent ne
+            This page allows users to generate population frequency plots for
+            the KI Adaptive Immune Receptor Gene Variant Atlas. You can select
+            from various dropdowns to filter by gene segment, gene type, gene,
+            and allele. The page features associated SNPs and SNiPer scores.
           </span>
         </div>
         <div className="flex flex-col lg:flex-row gap-4">
           <div className="w-full lg:w-1/4">
             <DropdownComponent
-              menuName="gene segment"
+              menuName="Loci"
               menuItemsArray={geneSegmentItemsArray}
               currentPick={currentPicks.geneSegmentDropdown}
               setCurrentPick={(value) =>
@@ -289,7 +293,7 @@ export default function PlotPage(): ReactElement {
             }`}
           >
             <DropdownComponent
-              menuName="gene"
+              menuName="Gene type"
               menuItemsArray={geneDropDownItemsArray}
               currentPick={currentPicks.geneDropdown}
               setCurrentPick={(value) =>
@@ -305,7 +309,7 @@ export default function PlotPage(): ReactElement {
             }`}
           >
             <DropdownComponent
-              menuName="subtype"
+              menuName="Gene"
               menuItemsArray={subtypeDropDownItemsArray}
               currentPick={currentPicks.subtypeDropdown}
               setCurrentPick={(value) =>
@@ -321,7 +325,7 @@ export default function PlotPage(): ReactElement {
             }`}
           >
             <DropdownComponent
-              menuName="allele"
+              menuName="Allele"
               menuItemsArray={alleleDropDownItemsArray}
               currentPick={currentPicks.alleleDropdown}
               setCurrentPick={(value) =>
@@ -343,10 +347,10 @@ export default function PlotPage(): ReactElement {
           superpopulationRegions={superpopulationRegions}
         />
         <div className="flex flex-col lg:flex-row items-start justify-between pt-8 gap-4">
-          <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/4">
+          <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/8">
             SNiPer SCORE: {igSNPerScore}
           </p>
-          <div className="overflow-x-auto lg:w-1/4">
+          <div className="overflow-x-auto lg:w-2/4">
             <div className="p-1.5 min-w-full inline-block align-middle">
               <div className="border rounded-lg overflow-hidden">
                 <table className="min-w-full divide-y divide-neutral text-base-content">
@@ -361,22 +365,23 @@ export default function PlotPage(): ReactElement {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-neutral text-base lg:text-lg">
-                    {igSNPerSNPs.map(value => {
+                    {igSNPerSNPs.map((value) => {
                       return (
-                      <tr key={value}>
-                        <td className="px-6 py-4 whitespace-nowrap font-medium">
-                          {value}
-                        </td>
-                      </tr>)
+                        <tr key={value}>
+                          <td className="px-6 py-4 whitespace-nowrap font-medium">
+                            {value}
+                          </td>
+                        </tr>
+                      );
                     })}
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-          <div className="lg:w-1/4"></div>
+          <div className="lg:w-1/8"></div>
           <button
-            className="bg-gradient-to-r from-neutral to-secondary text-base-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:order-4 lg:px-0 lg:w-1/4 h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
+            className="bg-gradient-to-r from-[rgba(4,92,100,0.7)] to-primary text-primary-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:order-4 lg:px-0 lg:w-1/4 h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
             onClick={() => setIsPopupOpen(true)}
           >
             <svg

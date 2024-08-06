@@ -1,5 +1,10 @@
 import { ReactElement, useState } from "react";
-import { backendAPI, BODY_CLASSES, H_1 } from "../constants";
+import {
+  backendAPI,
+  BODY_CLASSES,
+  H_1,
+  currentVersionFormatted,
+} from "../constants";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 import DownloadBoxComponent from "../components/DownloadBoxComponent";
 import axios from "axios";
@@ -34,7 +39,15 @@ export default function DownloadPage(): ReactElement {
       })
       .then((response) => {
         let responseData: Blob = response.data;
-        fileDownload(responseData, gene + "-" + fastaTypeSelected + ".fasta");
+        fileDownload(
+          responseData,
+          gene +
+            "-" +
+            fastaTypeSelected +
+            "-v" +
+            currentVersionFormatted +
+            ".fasta"
+        );
       })
       .catch((response) => console.log(response.error));
   }
@@ -54,13 +67,28 @@ export default function DownloadPage(): ReactElement {
         })
         .then((response) => {
           let responseData: Blob = response.data;
-          zip.file(gene + "-" + fastaTypeSelected + ".fasta", responseData);
+          zip.file(
+            gene +
+              "-" +
+              fastaTypeSelected +
+              "-v" +
+              currentVersionFormatted +
+              ".fasta",
+            responseData
+          );
         })
         .catch((response) => console.log(response.error));
     }
     zip.generateAsync({ type: "blob" }).then(
       function (blob) {
-        fileDownload(blob, "kiarva-" + fastaTypeSelected + "-fastas.zip");
+        fileDownload(
+          blob,
+          "kiarva-" +
+            fastaTypeSelected +
+            "-v" +
+            currentVersionFormatted +
+            "-fastas.zip"
+        );
       },
       function (err) {
         console.log(err);
@@ -89,6 +117,7 @@ export default function DownloadPage(): ReactElement {
 
   return (
     <div className={BODY_CLASSES}>
+      <h1 className={H_1}>Download FASTA files</h1>
       <div className="alert">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +157,7 @@ export default function DownloadPage(): ReactElement {
               className="radio"
               defaultChecked
             />
-            <span className="pl-2">Coding sequence</span>
+            <span className="pl-2">Genomic coding sequence</span>
           </label>
 
           <label
@@ -136,7 +165,9 @@ export default function DownloadPage(): ReactElement {
             onClick={() => setFastaTypeSelected("genomic")}
           >
             <input type="radio" name="fastaRadio" className="radio" />
-            <span className="pl-2">Genomic sequence with flanking regions</span>
+            <span className="pl-2">
+              Genomic coding sequence with flanking regions
+            </span>
           </label>
 
           {/* Once the fasta type is available, only delete the className part from cursor-not-allowed */}
@@ -145,7 +176,7 @@ export default function DownloadPage(): ReactElement {
             onClick={() => setFastaTypeSelected("aminoacids")}
           >
             <input type="radio" name="fastaRadio" className="radio" />
-            <span className="pl-2">Grouped by amino acid</span>
+            <span className="pl-2">Translated V gene sequences</span>
           </label>
         </div>
       </div>

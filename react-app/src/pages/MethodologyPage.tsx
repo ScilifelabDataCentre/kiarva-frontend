@@ -3,10 +3,10 @@ import { BODY_CLASSES, H_1 } from "../constants";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 import test2 from "../assets/images/test2.png";
 
-export default function InformationPage(): ReactElement {
+export default function MethodologyPage(): ReactElement {
   TrackPageViewIfEnabled();
 
-  var pageTitle: string = "Information";
+  var pageTitle: string = "Methodology";
 
   return (
     <>
