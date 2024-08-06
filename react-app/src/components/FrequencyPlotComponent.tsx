@@ -122,15 +122,15 @@ export default function FrequencyPlotComponent(prop: {
 
   if (isLargeScreen) {
     return (
-      <div className="relative bg-base-100 lg:-mx-24 overflow-x-auto">
+      <div className="relative bg-base-100 -mx-24 overflow-hidden">
         <div className="flex flex-row items-center justify-center relative">
           <Plot data={data} layout={layout} />
           <div className="absolute -bottom-6">
             <div className="flex flex-row text-neutral-content justify-between pl-8">
-              <h1 className="text-lg lg:text-xl">
+              <h1 className="text-xl">
                 <b>Superpopulation</b>
               </h1>
-              <h1 className="pl-[440px] text-lg lg:text-xl">
+              <h1 className="pl-[440px] text-xl">
                 <b>Population</b>
               </h1>
             </div>

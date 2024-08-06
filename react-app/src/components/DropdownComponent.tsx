@@ -19,7 +19,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
       <div className="flex items-center justify-between bg-white px-4">
         <a className="my-2 py-2 text-base lg:text-lg font-medium text-neutral-content lg:mx-4">
           {/* Display the current pick or prompt to pick an item if none is selected */}
-          {currentPick === "" ? `Pick ${menuName}` : currentPick}
+          {currentPick === "" ? `${menuName}` : currentPick}
         </a>
         <span>
           {/* SVG icon for the dropdown button - arrow down */}
@@ -56,7 +56,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
       </div>
 
       {/* Dropdown menu */}
-      <div className="invisible opacity-0 absolute z-10 flex flex-col w-full bg-white py-2 px-4 shadow-xl transition-all duration-300 group-hover:visible group-hover:opacity-100">
+      <div className="invisible overflow-y-auto max-h-80 lg:max-h-[500px] opacity-0 absolute z-10 flex flex-col w-full bg-white py-2 px-4 shadow-xl transition-all duration-300 group-hover:visible group-hover:opacity-100">
         {/* Map through the menu items array and create a clickable item for each */}
         {menuItemsArray.map((item, index) => (
           <a

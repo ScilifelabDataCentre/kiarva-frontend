@@ -33,7 +33,7 @@ export default function HomePage(): ReactElement {
             </svg>
             <div>
               <label className={`font-bold ${H_2}`}>Welcome to KIARVA</label>
-              <p className="mt-4 max-h-60 overflow-auto text-sm lg:text-base">
+              <p className="mt-4 pr-2 max-h-60 overflow-auto text-sm lg:text-base">
                 Variation between individuals and populations within the
                 immunoglobulin (IG) locus involves both structural and allelic
                 diversity. The Karolinska Institutet Adaptive Immune Receptor
@@ -67,7 +67,7 @@ export default function HomePage(): ReactElement {
             </svg>
             <div>
               <label className={`font-bold ${H_2}`}>News</label>
-              <div className="mt-4 max-h-60 overflow-auto text-sm lg:text-base">
+              <div className="mt-4 pr-2 max-h-60 overflow-auto text-sm lg:text-base">
                 <p className="italic">Date: 2024-08-08</p>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
@@ -84,7 +84,10 @@ export default function HomePage(): ReactElement {
                 </p>
               </div>
               <Link className="float-end pt-2" to="/changelog">
-                <button className="text-info-content text-base flex justify-center items-center h-10 px-2 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+                <button
+                  className="text-info-content text-base flex justify-center items-center h-10 px-2 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800"
+                  onClick={() => window.scrollTo(0, 0)}
+                >
                   See change log
                 </button>
               </Link>
@@ -109,7 +112,10 @@ export default function HomePage(): ReactElement {
                   Download FASTA files here...
                 </p>
                 <Link to="/download">
-                  <button className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+                  <button
+                    className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
                     Go
                   </button>
                 </Link>
@@ -126,13 +132,14 @@ export default function HomePage(): ReactElement {
             <div className="hero-content text-secondary-content text-center">
               <div className="max-w-md flex flex-col items-center">
                 <h1 className="mb-5 text-2xl lg:text-3xl font-bold">
-                  Plot alleles
+                  Population frequencies
                 </h1>
-                <p className="mb-5 text-sm lg:text-base">
-                  Plot alleles here...
-                </p>
+                <p className="mb-5 text-sm lg:text-base">TBD</p>
                 <Link to="/plot">
-                  <button className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+                  <button
+                    className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
                     Go
                   </button>
                 </Link>

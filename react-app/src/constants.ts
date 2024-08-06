@@ -20,3 +20,8 @@ export const backendAPI =
       ? import.meta.env.VITE_BACKEND_API_URL
       : "https://kiarva.scilifelab-2-dev.sys.kth.se/api/"
     : window.location.origin + "/api/";
+
+export const currentVersion: string = "0.1.0";
+export const currentVersionFormatted: string = `${
+  currentVersion.split(".")[0]
+}_${currentVersion.split(".")[1]}`;
