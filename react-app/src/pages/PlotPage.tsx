@@ -348,7 +348,7 @@ export default function PlotPage(): ReactElement {
         />
         <div className="flex flex-col lg:flex-row items-start justify-between pt-8 gap-4">
           <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/8">
-            SNiPer SCORE: {igSNPerScore}
+            IgSNPer SCORE: {igSNPerScore}
           </p>
           <div className="overflow-x-auto lg:w-2/4">
             <div className="p-1.5 min-w-full inline-block align-middle">
