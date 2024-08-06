@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
-import { BODY_CLASSES, H_1 } from "../constants";
+import { BODY_CLASSES, H_1, currentVersion } from "../constants";
 import ChangeLogComponent from "../components/ChangeLogComponent";
 
 export default function ChangeLogPage(): ReactElement {
@@ -40,7 +40,7 @@ export default function ChangeLogPage(): ReactElement {
       <div className="divider pt-4">Current version</div>
       <div className="pt-2 pb-4">
         <ChangeLogComponent
-          title="Version 3.0"
+          title={`Version ${currentVersion}`}
           databaseUpdates={[
             "Change 1",
             "Change 2. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim. Duis nec condimentum purus. Quisque urna enim, placerat non fermentum sed, pharetra sit amet quam. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim. Duis nec condimentum purus. Quisque urna enim, placerat non fermentum sed, pharetra sit amet quam. Ut rhoncus ante in metus lobortis, eu euismod magna dignissim.",

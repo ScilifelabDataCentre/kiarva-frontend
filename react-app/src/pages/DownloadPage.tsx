@@ -1,5 +1,10 @@
 import { ReactElement, useState } from "react";
-import { backendAPI, BODY_CLASSES, H_1 } from "../constants";
+import {
+  backendAPI,
+  BODY_CLASSES,
+  H_1,
+  currentVersionFormatted,
+} from "../constants";
 import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 import DownloadBoxComponent from "../components/DownloadBoxComponent";
 import axios from "axios";
@@ -34,7 +39,15 @@ export default function DownloadPage(): ReactElement {
       })
       .then((response) => {
         let responseData: Blob = response.data;
-        fileDownload(responseData, gene + "-" + fastaTypeSelected + ".fasta");
+        fileDownload(
+          responseData,
+          gene +
+            "-" +
+            fastaTypeSelected +
+            "-v" +
+            currentVersionFormatted +
+            ".fasta"
+        );
       })
       .catch((response) => console.log(response.error));
   }
@@ -54,13 +67,28 @@ export default function DownloadPage(): ReactElement {
         })
         .then((response) => {
           let responseData: Blob = response.data;
-          zip.file(gene + "-" + fastaTypeSelected + ".fasta", responseData);
+          zip.file(
+            gene +
+              "-" +
+              fastaTypeSelected +
+              "-v" +
+              currentVersionFormatted +
+              ".fasta",
+            responseData
+          );
         })
         .catch((response) => console.log(response.error));
     }
     zip.generateAsync({ type: "blob" }).then(
       function (blob) {
-        fileDownload(blob, "kiarva-" + fastaTypeSelected + "-fastas.zip");
+        fileDownload(
+          blob,
+          "kiarva-" +
+            fastaTypeSelected +
+            "-v" +
+            currentVersionFormatted +
+            "-fastas.zip"
+        );
       },
       function (err) {
         console.log(err);
