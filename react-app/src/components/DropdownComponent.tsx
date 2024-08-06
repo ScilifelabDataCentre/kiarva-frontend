@@ -56,7 +56,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
       </div>
 
       {/* Dropdown menu */}
-      <div className="invisible overflow-y-auto max-h-[500px] opacity-0 absolute z-10 flex flex-col w-full bg-white py-2 px-4 shadow-xl transition-all duration-300 group-hover:visible group-hover:opacity-100">
+      <div className="invisible overflow-y-auto max-h-80 lg:max-h-[500px] opacity-0 absolute z-10 flex flex-col w-full bg-white py-2 px-4 shadow-xl transition-all duration-300 group-hover:visible group-hover:opacity-100">
         {/* Map through the menu items array and create a clickable item for each */}
         {menuItemsArray.map((item, index) => (
           <a
