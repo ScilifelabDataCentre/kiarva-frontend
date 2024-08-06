@@ -33,7 +33,7 @@ export default function HomePage(): ReactElement {
             </svg>
             <div>
               <label className={`font-bold ${H_2}`}>Welcome to KIARVA</label>
-              <p className="mt-4 max-h-60 overflow-auto text-sm lg:text-base">
+              <p className="mt-4 pr-2 max-h-60 overflow-auto text-sm lg:text-base">
                 Variation between individuals and populations within the
                 immunoglobulin (IG) locus involves both structural and allelic
                 diversity. The Karolinska Institutet Adaptive Immune Receptor
@@ -67,7 +67,7 @@ export default function HomePage(): ReactElement {
             </svg>
             <div>
               <label className={`font-bold ${H_2}`}>News</label>
-              <div className="mt-4 max-h-60 overflow-auto text-sm lg:text-base">
+              <div className="mt-4 pr-2 max-h-60 overflow-auto text-sm lg:text-base">
                 <p className="italic">Date: 2024-08-08</p>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
