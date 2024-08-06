@@ -84,7 +84,10 @@ export default function HomePage(): ReactElement {
                 </p>
               </div>
               <Link className="float-end pt-2" to="/changelog">
-                <button className="text-info-content text-base flex justify-center items-center h-10 px-2 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+                <button
+                  className="text-info-content text-base flex justify-center items-center h-10 px-2 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800"
+                  onClick={() => window.scrollTo(0, 0)}
+                >
                   See change log
                 </button>
               </Link>
@@ -109,7 +112,10 @@ export default function HomePage(): ReactElement {
                   Download FASTA files here...
                 </p>
                 <Link to="/download">
-                  <button className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+                  <button
+                    className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
                     Go
                   </button>
                 </Link>
@@ -130,7 +136,10 @@ export default function HomePage(): ReactElement {
                 </h1>
                 <p className="mb-5 text-sm lg:text-base">TBD</p>
                 <Link to="/plot">
-                  <button className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800">
+                  <button
+                    className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
                     Go
                   </button>
                 </Link>

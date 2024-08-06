@@ -120,7 +120,7 @@ export default function AboutPage(): ReactElement {
             imageUrl={gunillaKarlssonHedestam}
             linkUrl="https://ki.se/en/research/research-areas-centres-and-networks/research-groups/genetic-basis-for-b-and-t-cell-recognition-and-function-gunilla-karlsson-hedestam-group#tab-start"
             name="Gunilla Karlsson Hedestam"
-            title="Professor/Group leader"
+            title="Professor / Group leader"
             bgColor="bg-neutral"
           />
         </div>
