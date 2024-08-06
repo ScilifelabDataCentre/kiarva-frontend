@@ -54,7 +54,7 @@ export default function FooterComponent(): ReactElement {
           </nav>
         </div>
         <nav className="justify-self-end">
-          <Link to="/privacy" rel="noopener noreferrer">
+          <Link to="/privacy" rel="noopener noreferrer" reloadDocument>
             <p
               className={`text-info-content text-opacity-80 text-sm ${LINK_CLASSES}`}
             >
