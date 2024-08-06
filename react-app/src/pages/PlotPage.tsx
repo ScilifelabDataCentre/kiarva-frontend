@@ -227,7 +227,7 @@ export default function PlotPage(): ReactElement {
         .get(geneSelectionEndpoint + currentSelection)
         .then((response) => {
           let responseData = response.data;
-          responseData.push("...");
+          //  responseData.push("...");
           setSubtypeDropDownItemsArray(responseData);
         })
         .catch((response) => console.log(response.error));
@@ -239,7 +239,7 @@ export default function PlotPage(): ReactElement {
         .get(geneSelectionEndpoint + currentSelection)
         .then((response) => {
           let responseData = response.data;
-          responseData.push("...");
+          // responseData.push("...");
           setAlleleDropDownItemsArray(responseData);
         })
         .catch((response) => console.log(response.error));
