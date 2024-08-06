@@ -6,12 +6,10 @@ import { TrackPageViewIfEnabled } from "../util/cookiesHandling";
 export default function PublicationsPage(): ReactElement {
   TrackPageViewIfEnabled();
 
-  var pageTitle: string = "Publications";
-
   return (
     <>
       <div className={BODY_CLASSES}>
-        <div className={H_1}>{pageTitle}</div>
+        <div className={H_1}>Publications</div>
 
         <div className="alert">
           <svg
@@ -28,10 +26,10 @@ export default function PublicationsPage(): ReactElement {
             ></path>
           </svg>
           <span className="text-sm lg:text-base">
-            This page shows scientific publications that referenced the KI
-            Adaptive Immune Receptor Gene Variant Atlas. Please inform the
-            research group when you referenced the KI Adaptive Immune Receptor
-            Gene Variant Atlas and published your results.
+            This page displays scientific publications that have cited the KI
+            Adaptive Immune Receptor Gene Variant Atlas. If you reference the
+            Atlas in your research and publish your findings, please notify the
+            Hedestam research group.
           </span>
         </div>
 

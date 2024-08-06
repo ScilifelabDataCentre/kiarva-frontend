@@ -33,7 +33,7 @@ export default function FooterComponent(): ReactElement {
         alt="Footer Background Image"
       />
       <div className="absolute inset-0 bg-gray-700 opacity-85"></div>
-      <footer className="absolute inset-0 footer footer-center p-4 lg:p-10 px-4 lg:px-36 2xl:max-w-screen-2xl 2xl:mx-auto">
+      <footer className="absolute inset-0 footer footer-center pt-4 lg:pt-10 px-4 lg:px-36 2xl:max-w-screen-2xl 2xl:mx-auto">
         <div className="flex flex-col items-center justify-center space-y-4 z-10">
           <p className="text-primary-content text-base lg:text-lg font-semibold">
             Please visit the other pages of KIARVA
@@ -53,6 +53,15 @@ export default function FooterComponent(): ReactElement {
               ))}
           </nav>
         </div>
+        <nav className="justify-self-end">
+          <Link to="/privacy" rel="noopener noreferrer">
+            <p
+              className={`text-info-content text-opacity-80 text-sm ${LINK_CLASSES}`}
+            >
+              Privacy Policy
+            </p>
+          </Link>
+        </nav>
       </footer>
     </div>
   );

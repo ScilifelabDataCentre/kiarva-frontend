@@ -268,14 +268,10 @@ export default function PlotPage(): ReactElement {
             ></path>
           </svg>
           <span className="text-sm lg:text-base">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            tortor mauris, suscipit eu lacinia non, imperdiet blandit risus.
-            Maecenas pellentesque, massa id sodales dictum, urna urna tincidunt
-            eros, ac consequat urna lectus vel ligula. Suspendisse justo est,
-            auctor et mi id, aliquet bibendum lacus. Quisque accumsan egestas
-            felis, vel bibendum nunc fringilla nec. Integer accumsan
-            sollicitudin porttitor. rna eros dapibus erat. Nam bibendum ac felis
-            quis convallis. Praesent ne
+            This page allows users to generate population frequency plots for
+            the KI Adaptive Immune Receptor Gene Variant Atlas. You can select
+            from various dropdowns to filter by gene segment, gene type, gene,
+            and allele. The page features associated SNPs and SNiPer scores.
           </span>
         </div>
         <div className="flex flex-col lg:flex-row gap-4">
