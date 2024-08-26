@@ -6,9 +6,11 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { PopupComponentProps } from "../interfaces/types";
+import { AbbreviationPopupComponentProps } from "../interfaces/types";
 
-const PopupComponent: React.FC<PopupComponentProps> = ({ onClose }) => {
+const AbbreviationPopupComponent: React.FC<AbbreviationPopupComponentProps> = ({
+  onClose,
+}) => {
   // This component is only used a single time.
   const [open, setOpen] = useState(true);
 
@@ -172,4 +174,4 @@ const PopupComponent: React.FC<PopupComponentProps> = ({ onClose }) => {
   );
 };
 
-export default PopupComponent;
+export default AbbreviationPopupComponent;
