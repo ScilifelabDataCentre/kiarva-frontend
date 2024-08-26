@@ -258,7 +258,7 @@ export default function PlotPage(): ReactElement {
 
         <button
           className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
-          onClick={() => setIsPopupOpen(true)}
+          onClick={() => setIsDisclaimerPopupOpen(true)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
