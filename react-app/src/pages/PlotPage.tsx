@@ -107,6 +107,10 @@ export default function PlotPage(): ReactElement {
   // Arrays for dropdown menu items
   let geneSegmentItemsArray = ["IGH"];
   let geneDropDownItemsArray = ["IGHV"];
+  let subtypeDropDownItemsArray = ["1-2"];
+  let alleleDropDownItemsArray = ["*02_S4953", "*04", "*06"];
+
+  /* Only commented out for current initial release. Uncomment once the data is released.
   const [subtypeDropDownItemsArray, setSubtypeDropDownItemsArray] = useState<
     string[]
   >(["..."]);
@@ -114,6 +118,7 @@ export default function PlotPage(): ReactElement {
     string[]
   >(["..."]);
   const geneSelectionEndpoint: string = backendAPI + "data/plotoptions/";
+  */
 
   // Function to fetch gene frequency data from the backend API
   async function getGeneFreqData(allele: string) {
@@ -219,6 +224,7 @@ export default function PlotPage(): ReactElement {
     }));
   };
 
+  /* Only commented out for current initial release. Uncomment once the data is released.
   // fetch next selection options after gene is selected
   useEffect(() => {
     if (!currentPicks.subtypeDropdown) {
@@ -246,6 +252,7 @@ export default function PlotPage(): ReactElement {
         .catch((response) => console.log(response.error));
     }
   }, [currentPicks.geneDropdown, currentPicks.subtypeDropdown]);
+  */
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isDisclaimerPopupOpen, setIsDisclaimerPopupOpen] = useState(true);
