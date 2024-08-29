@@ -14,7 +14,8 @@ import {
 } from "../interfaces/types";
 import axios from "axios";
 import DropdownComponent from "../components/DropdownComponent";
-import PopupComponent from "../components/PopupComponent";
+import AbbreviationPopupComponent from "../components/AbbreviationPopupComponent";
+import DisclaimerPopupComponent from "../components/DisclaimerPopupComponent";
 
 // Main function to render the PlotPage component
 export default function PlotPage(): ReactElement {
@@ -254,12 +255,42 @@ export default function PlotPage(): ReactElement {
   */
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isDisclaimerPopupOpen, setIsDisclaimerPopupOpen] = useState(true);
 
   // Render the component
   return (
     <>
       <div className={BODY_CLASSES}>
         <h1 className={H_1}>Generate population frequency plots</h1>
+
+        <button
+          className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
+          onClick={() => setIsDisclaimerPopupOpen(true)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 shrink-0 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            />
+          </svg>
+          Disclaimer
+        </button>
+        {isDisclaimerPopupOpen && (
+          <DisclaimerPopupComponent
+            onClose={() => setIsDisclaimerPopupOpen(false)}
+            explanation="This page is fully developed and allows you to explore its
+                      design and functionality. However, the underlying data has
+                      not been officially published yet. Therefore, we can currently only showcase three plots for demonstration purposes."
+          />
+        )}
+
         <div className="alert">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -409,7 +440,7 @@ export default function PlotPage(): ReactElement {
           </button>
         </div>
         {isPopupOpen && (
-          <PopupComponent onClose={() => setIsPopupOpen(false)} />
+          <AbbreviationPopupComponent onClose={() => setIsPopupOpen(false)} />
         )}
       </div>
     </>

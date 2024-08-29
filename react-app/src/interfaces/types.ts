@@ -111,11 +111,16 @@ export interface GeneObject {
   isAvailable: boolean;
 }
 
-export type PopupComponentProps = {
+export type AbbreviationPopupComponentProps = {
   onClose: () => void;
+};
+
+export type DisclaimerPopupComponentProps = {
+  onClose: () => void;
+  explanation: string;
 };
 
 export type IgSNPerData = {
   igSNPer_score: number;
   igSNPer_SNPs: string[];
-}
+};
