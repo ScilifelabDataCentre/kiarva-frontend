@@ -27,11 +27,11 @@ export default function FrequencyPlotComponent(prop: {
     plotPosition: number,
     superpopulationRegions: IPopulationRegion[]
   ): Plotly.Data[] {
-    let regions: string[] = [];
-    let frequencies: Number[] = [];
-    let counts: Number[] = [];
-    let superpopulationRegion: string[] = [];
-    let colors: string[] = [];
+    const regions: string[] = [];
+    const frequencies: number[] = [];
+    const counts: number[] = [];
+    const superpopulationRegion: string[] = [];
+    const colors: string[] = [];
     let JSONObj: IGeneFrequencyData;
     for (JSONObj of data) {
       regions.push(JSONObj["population"]);
@@ -54,9 +54,9 @@ export default function FrequencyPlotComponent(prop: {
       }
     }
 
-    let traces: Plotly.Data[] = [];
+    const traces: Plotly.Data[] = [];
 
-    let showLegend = plotPosition === 1;
+    const showLegend = plotPosition === 1;
 
     for (let i = 0; i < regions.length; i++) {
       traces.push({
@@ -69,7 +69,7 @@ export default function FrequencyPlotComponent(prop: {
         name: superpopulationRegion[i],
         text: "n = " + counts[i],
         marker: {
-          color: [colors[i % colors.length] as any],
+          color: [colors[i % colors.length] as string],
         },
       });
     }
@@ -77,21 +77,21 @@ export default function FrequencyPlotComponent(prop: {
     return traces;
   }
 
-  let superpopulationTraces: Plotly.Data[] = generateTraces(
+  const superpopulationTraces: Plotly.Data[] = generateTraces(
     prop.superpopulationAPIData,
     prop.superpopulationColors,
     1,
     prop.superpopulationRegions
   );
 
-  let populationTraces: Plotly.Data[] = generateTraces(
+  const populationTraces: Plotly.Data[] = generateTraces(
     prop.populationAPIData,
     prop.superpopulationColors,
     2,
     prop.superpopulationRegions
   );
 
-  let data = [...superpopulationTraces, ...populationTraces];
+  const data = [...superpopulationTraces, ...populationTraces];
 
   const [isLargeScreen, setIsLargeScreen] = useState(true);
 

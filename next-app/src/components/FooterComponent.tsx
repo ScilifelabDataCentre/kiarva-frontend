@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 const footerBackground = "images/hedestamFooterImage.png";
 
 export default function FooterComponent(): ReactElement {
-  let links: { [id: string]: ILink } = {
+  const links: { [id: string]: ILink } = {
     l1: {
       text: "Download FASTA files",
       classes: LINK_CLASSES,

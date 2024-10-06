@@ -9,7 +9,7 @@ const test2 = "images/test2.png";
 export default function MethodologyPage(): ReactElement {
   TrackPageViewIfEnabled();
 
-  var pageTitle: string = "Methodology";
+  const pageTitle: string = "Methodology";
 
   return (
     <>

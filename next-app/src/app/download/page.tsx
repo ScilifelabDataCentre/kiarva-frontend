@@ -31,9 +31,9 @@ export default function DownloadPage(): ReactElement {
   const [trdSelectionArray, setTrdSelectionArray] = useState<string[]>([]);
 
   async function downloadGeneFasta(gene: string) {
-    let fastaType =
+    const fastaType =
       fastaTypeSelected === "coding" ? "" : fastaTypeSelected + "/";
-    let fastaEndpoint = backendAPI + "fasta/" + fastaType + gene;
+    const fastaEndpoint = backendAPI + "fasta/" + fastaType + gene;
     await axios
       .get(fastaEndpoint, {
         headers: {
@@ -41,7 +41,7 @@ export default function DownloadPage(): ReactElement {
         },
       })
       .then((response) => {
-        let responseData: Blob = response.data;
+        const responseData: Blob = response.data;
         fileDownload(
           responseData,
           gene +
@@ -56,12 +56,12 @@ export default function DownloadPage(): ReactElement {
   }
 
   async function downloadGeneFastaZip(genes: string[]) {
-    let zip = new JSZip();
+    const zip = new JSZip();
     let gene: string;
-    let fastaType =
+    const fastaType =
       fastaTypeSelected === "coding" ? "" : fastaTypeSelected + "/";
     for (gene of genes) {
-      let fastaEndpoint = backendAPI + "fasta/" + fastaType + gene;
+      const fastaEndpoint = backendAPI + "fasta/" + fastaType + gene;
       await axios
         .get(fastaEndpoint, {
           headers: {
@@ -69,7 +69,7 @@ export default function DownloadPage(): ReactElement {
           },
         })
         .then((response) => {
-          let responseData: Blob = response.data;
+          const responseData: Blob = response.data;
           zip.file(
             gene +
               "-" +
@@ -100,7 +100,7 @@ export default function DownloadPage(): ReactElement {
   }
 
   function handleDownload() {
-    let selectionArr = ighSelectionArray.concat(
+    const selectionArr = ighSelectionArray.concat(
       igkSelectionArray,
       iglSelectionArray,
       traSelectionArray,
@@ -173,7 +173,7 @@ export default function DownloadPage(): ReactElement {
           gene segment and/or individual genes you want to download by ticking
           the appropriate boxes—ticking a gene segment will automatically select
           all individual genes within that chain. After making your selections,
-          click the "Download" button. This will generate and start a download
+          click the &quot;Download&quot; button. This will generate and start a download
           of your chosen file(s). If you have selected more than one file, a
           .zip file wil be generated.
         </span>

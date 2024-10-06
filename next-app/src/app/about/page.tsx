@@ -14,7 +14,7 @@ const gunillaKarlssonHedestam = "/images/gunillaKarlssonHedestam.png";
 export default function AboutPage(): ReactElement {
   TrackPageViewIfEnabled();
 
-  var pageTitle: string = "About Us";
+  const pageTitle: string = "About Us";
 
   return (
     <>

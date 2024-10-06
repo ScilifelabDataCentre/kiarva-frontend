@@ -8,7 +8,7 @@ import ChangeLogComponent from "@/components/ChangeLogComponent";
 export default function ChangeLogPage(): ReactElement {
   TrackPageViewIfEnabled();
 
-  var pageTitle: string = "Change log";
+  const pageTitle: string = "Change log";
 
   return (
     <div className={BODY_CLASSES}>
@@ -29,9 +29,9 @@ export default function ChangeLogPage(): ReactElement {
         </svg>
         <span className="text-sm lg:text-base">
           The change log provides a comprehensive overview of all releases of
-          the KI Adaptive Immune Receptor Gene Variant Atlas. Each version's
-          card features two buttons: 'Frontend Repository' and 'Backend
-          Repository'. Clicking a button on the current version card will direct
+          the KI Adaptive Immune Receptor Gene Variant Atlas. Each version&apos;s
+          card features two buttons: &apos;Frontend Repository&apos; and &apos;Backend
+          Repository&apos;. Clicking a button on the current version card will direct
           you to the respective GitHub repository. For previous versions,
           clicking a button will take you to the relevant GitHub pull request.
           In the near future, we will include instructions in the README file on

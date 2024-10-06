@@ -5,7 +5,7 @@ import { ILink } from "@/interfaces/types";
 import { LINK_CLASSES } from "@/constants";
 
 export default function HeaderComponent() {
-  let links: { [id: string]: ILink } = {
+  const links: { [id: string]: ILink } = {
     l1: { text: "Download", classes: LINK_CLASSES, link: "/download" },
     l2: { text: "Population frequencies", classes: LINK_CLASSES, link: "/plot" },
     l3: { text: "Methodology", classes: LINK_CLASSES, link: "/methodology" },
@@ -21,7 +21,7 @@ export default function HeaderComponent() {
           Coming Soon
         </h1>
         <p className="text-primary-content text-lg mb-8">
-          We're working hard to bring you KIARVA. Stay tuned! The launch is
+          We&apos;re working hard to bring you KIARVA. Stay tuned! The launch is
           planned for August 2024.
         </p>
       </div>
