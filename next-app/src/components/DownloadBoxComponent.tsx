@@ -26,7 +26,7 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
     if (wholeGeneSegmentSelected) {
       setGenesSelectedArray(availableGeneObjectArray.map((gene) => gene.name));
     }
-  }, [wholeGeneSegmentSelected, availableGeneObjectArray]);
+  }, [wholeGeneSegmentSelected]);
 
   // Effect to update wholeGeneSegmentSelected based on the length of genesSelectedArray
   useEffect(() => {
@@ -36,7 +36,7 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
     } else {
       setWholeGeneSegmentSelected(false);
     }
-  }, [genesSelectedArray, availableGeneObjectArray, setPropsSelectionArray]);
+  }, [genesSelectedArray]);
 
   return (
     <>

@@ -230,7 +230,7 @@ export default function DownloadPage(): ReactElement {
           ]}
           setPropsSelectionArray={setIghSelectionArray}
         ></DownloadBoxComponent>
-        <DownloadBoxComponent
+        {/* <DownloadBoxComponent
           geneSegment="IGK"
           geneObjectArray={[
             { name: "IGKV", isAvailable: true },
@@ -238,8 +238,8 @@ export default function DownloadPage(): ReactElement {
             { name: "IGK constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setIgkSelectionArray}
-        ></DownloadBoxComponent>
-        <DownloadBoxComponent
+        ></DownloadBoxComponent> */}
+        {/* <DownloadBoxComponent
           geneSegment="IGL"
           geneObjectArray={[
             { name: "IGLV", isAvailable: true },
@@ -247,13 +247,13 @@ export default function DownloadPage(): ReactElement {
             { name: "IGL constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setIglSelectionArray}
-        ></DownloadBoxComponent>
+        ></DownloadBoxComponent> */}
       </div>
 
-      <div className={H_1}>TCR</div>
+      {/* <div className={H_1}>TCR</div>
       <div className="divider !my-0"></div>
-      <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16">
-        <DownloadBoxComponent
+      <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16"> */}
+        {/* <DownloadBoxComponent
           geneSegment="TRA"
           geneObjectArray={[
             { name: "TRAV", isAvailable: true },
@@ -261,8 +261,8 @@ export default function DownloadPage(): ReactElement {
             { name: "TRA constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setTraSelectionArray}
-        ></DownloadBoxComponent>
-        <DownloadBoxComponent
+        ></DownloadBoxComponent> */}
+        {/* <DownloadBoxComponent
           geneSegment="TRB"
           geneObjectArray={[
             { name: "TRBV", isAvailable: true },
@@ -271,8 +271,8 @@ export default function DownloadPage(): ReactElement {
             { name: "TRB constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setTrbSelectionArray}
-        ></DownloadBoxComponent>
-        <DownloadBoxComponent
+        ></DownloadBoxComponent> */}
+        {/* <DownloadBoxComponent
           geneSegment="TRG"
           geneObjectArray={[
             { name: "TRGV", isAvailable: true },
@@ -280,8 +280,8 @@ export default function DownloadPage(): ReactElement {
             { name: "TRG constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setTrgSelectionArray}
-        ></DownloadBoxComponent>
-        <DownloadBoxComponent
+        ></DownloadBoxComponent> */}
+        {/* <DownloadBoxComponent
           geneSegment="TRD"
           geneObjectArray={[
             { name: "TRDV", isAvailable: true },
@@ -290,8 +290,8 @@ export default function DownloadPage(): ReactElement {
             { name: "TRD constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setTrdSelectionArray}
-        ></DownloadBoxComponent>
-      </div>
+        ></DownloadBoxComponent> */}
+      {/* </div> */}
 
       <div className="flex justify-center py-8 lg:py-0">
         {/* Delete the button disabled and className when officially launching */}
