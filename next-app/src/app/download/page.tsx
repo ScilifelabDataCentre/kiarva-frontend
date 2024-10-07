@@ -23,12 +23,12 @@ export default function DownloadPage(): ReactElement {
 
   // States to keep track of the selected genes for each gene segment
   const [ighSelectionArray, setIghSelectionArray] = useState<string[]>([]);
-  const [igkSelectionArray, setIgkSelectionArray] = useState<string[]>([]);
-  const [iglSelectionArray, setIglSelectionArray] = useState<string[]>([]);
-  const [traSelectionArray, setTraSelectionArray] = useState<string[]>([]);
-  const [trbSelectionArray, setTrbSelectionArray] = useState<string[]>([]);
-  const [trgSelectionArray, setTrgSelectionArray] = useState<string[]>([]);
-  const [trdSelectionArray, setTrdSelectionArray] = useState<string[]>([]);
+  // const [igkSelectionArray, setIgkSelectionArray] = useState<string[]>([]);
+  // const [iglSelectionArray, setIglSelectionArray] = useState<string[]>([]);
+  // const [traSelectionArray, setTraSelectionArray] = useState<string[]>([]);
+  // const [trbSelectionArray, setTrbSelectionArray] = useState<string[]>([]);
+  // const [trgSelectionArray, setTrgSelectionArray] = useState<string[]>([]);
+  // const [trdSelectionArray, setTrdSelectionArray] = useState<string[]>([]);
 
   async function downloadGeneFasta(gene: string) {
     const fastaType =
@@ -100,14 +100,15 @@ export default function DownloadPage(): ReactElement {
   }
 
   function handleDownload() {
-    const selectionArr = ighSelectionArray.concat(
-      igkSelectionArray,
-      iglSelectionArray,
-      traSelectionArray,
-      trbSelectionArray,
-      trgSelectionArray,
-      trdSelectionArray
-    );
+    const selectionArr = ighSelectionArray;
+    // const selectionArr = ighSelectionArray.concat(
+    //   igkSelectionArray,
+    //   iglSelectionArray,
+    //   traSelectionArray,
+    //   trbSelectionArray,
+    //   trgSelectionArray,
+    //   trdSelectionArray
+    // );
 
     if (selectionArr.length === 1) {
       downloadGeneFasta(selectionArr[0]);

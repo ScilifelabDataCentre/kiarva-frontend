@@ -27,6 +27,9 @@ export default {
           "error": "#ff5724", // Red, Error color
           "error-content": "#ffffff", // White, text color on error
         },
+        screens: {
+          '13inch': '1440px',  // Customize this value based on the resolution you target
+        },
       },
     },
     plugins: [
