@@ -1,8 +1,9 @@
 'use client';
 
 import { ChangeEvent, ReactElement, useState } from 'react';
-import { backendAPI, BODY_CLASSES } from '@/constants'
+import { backendAPI, BODY_CLASSES } from '@/constants';
 import axios from 'axios';
+import { setCookie, hasCookie } from 'cookies-next';
 
 export default function PasswordPage(): ReactElement {
     const [inputField, setInputField] = useState("");
@@ -15,7 +16,6 @@ export default function PasswordPage(): ReactElement {
     }
 
     async function handleSubmit(): Promise<void> {
-        console.log("wot");
         const config = {
             headers: {
                 'X-api-key': inputField,
@@ -27,15 +27,16 @@ export default function PasswordPage(): ReactElement {
             .then((response) => {
                 console.log(response);
                 setCorrectPassword("Password correct, unlocking full functionality.");
+                setCookie('password', inputField, { maxAge: 365 });
             })
             .catch((response) => {
                 setCorrectPassword("Password incorrect, try again or continue with restricted version.");
             });
-        // console.log("The password is:" + inputField);
     }
 
     return (
         <div className={BODY_CLASSES}>
+            {!hasCookie('password') ?
             <div className="flex flex-col">
                 <input 
                     type="password"
@@ -49,6 +50,9 @@ export default function PasswordPage(): ReactElement {
                 <button onClick={handleSubmit} className="btn btn-wide bg-fuchsia-950 text-white hover:bg-fuchsia-800 active:bg-fuchsia-900 focus:outline-none focus:ring focus:ring-fuchsia-300">Submit</button>
                 <p>{correctPassword}</p>
             </div>
+            :
+            <p>Password saved.</p>
+            }
         </div>
     );
 }

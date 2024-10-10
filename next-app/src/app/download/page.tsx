@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import {
   backendAPI,
   BODY_CLASSES,
@@ -13,6 +13,7 @@ import axios from "axios";
 import fileDownload from "js-file-download";
 import JSZip from "jszip";
 import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent";
+import { getCookie, hasCookie } from "cookies-next";
 
 export default function DownloadPage(): ReactElement {
   // Track the page view for analytics if enabled in the application settings
@@ -30,16 +31,19 @@ export default function DownloadPage(): ReactElement {
   // const [trgSelectionArray, setTrgSelectionArray] = useState<string[]>([]);
   // const [trdSelectionArray, setTrdSelectionArray] = useState<string[]>([]);
 
-  async function downloadGeneFasta(gene: string) {
+  const [axiosConfig, setAxiosConfig] = useState({
+    headers: {
+      "X-api-key": "",
+      "Content-Type": "attachment",
+    }
+  })
+
+  async function downloadGeneFasta(gene: string) {  
     const fastaType =
       fastaTypeSelected === "coding" ? "" : fastaTypeSelected + "/";
     const fastaEndpoint = backendAPI + "fasta/" + fastaType + gene;
     await axios
-      .get(fastaEndpoint, {
-        headers: {
-          "Content-Type": "attachment",
-        },
-      })
+      .get(fastaEndpoint, axiosConfig)
       .then((response) => {
         const responseData: Blob = response.data;
         fileDownload(
@@ -63,11 +67,7 @@ export default function DownloadPage(): ReactElement {
     for (gene of genes) {
       const fastaEndpoint = backendAPI + "fasta/" + fastaType + gene;
       await axios
-        .get(fastaEndpoint, {
-          headers: {
-            "Content-Type": "attachment",
-          },
-        })
+        .get(fastaEndpoint, axiosConfig)
         .then((response) => {
           const responseData: Blob = response.data;
           zip.file(
@@ -120,6 +120,17 @@ export default function DownloadPage(): ReactElement {
   // Combine the selection arrays and use them when the download button is pressed
 
   const [isPopupOpen, setIsPopupOpen] = useState(true);
+
+  useEffect(() => {
+    if (hasCookie('password')) {
+      setAxiosConfig({
+        headers: {
+            'X-api-key': getCookie('password') as string,
+            "Content-Type": "attachment",
+        }
+      })
+    }
+  }, [])
 
   return (
     <div className={BODY_CLASSES}>
@@ -298,8 +309,8 @@ export default function DownloadPage(): ReactElement {
         {/* Delete the button disabled and className when officially launching */}
         <button
           onClick={handleDownload}
-          disabled
-          className="opacity-50 cursor-not-allowed"
+          disabled={!hasCookie('password')}
+          className={"opacity-50" + (!hasCookie('password') && "cursor-not-allowed")}
         >
           <div className="bg-gradient-to-r from-[rgba(67,133,139)] to-primary text-primary-content text-lg tracking-wide flex gap-4 justify-center items-center w-64 lg:w-96 h-14 font-extrabold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90">
             Download
