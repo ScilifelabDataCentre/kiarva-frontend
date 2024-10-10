@@ -3,7 +3,7 @@
 import { ChangeEvent, ReactElement, useState } from 'react';
 import { backendAPI, BODY_CLASSES } from '@/constants';
 import axios from 'axios';
-import { setCookie, hasCookie } from 'cookies-next';
+import { setCookie, hasCookie, deleteCookie } from 'cookies-next';
 
 export default function PasswordPage(): ReactElement {
     const [inputField, setInputField] = useState("");
@@ -34,6 +34,10 @@ export default function PasswordPage(): ReactElement {
             });
     }
 
+    function handleReset(): void {
+        deleteCookie('password');
+    }
+
     return (
         <div className={BODY_CLASSES}>
             {!hasCookie('password') ?
@@ -51,7 +55,10 @@ export default function PasswordPage(): ReactElement {
                 <p>{correctPassword}</p>
             </div>
             :
-            <p>Password saved.</p>
+            <div className="flex flex-col">
+                <p>Password saved.</p>
+                <button onClick={handleReset} className="btn btn-wide bg-fuchsia-950 text-white hover:bg-fuchsia-800 active:bg-fuchsia-900 focus:outline-none focus:ring focus:ring-fuchsia-300">Reset password</button>
+            </div>
             }
         </div>
     );
