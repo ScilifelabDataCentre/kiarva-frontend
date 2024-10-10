@@ -2,6 +2,7 @@
 
 import { ReactElement, useEffect, useState } from "react";
 import {
+  backendAPI,
   // backendAPI,
   BODY_CLASSES,
   // BUTTON_TYPE_ONE,
@@ -11,18 +12,25 @@ import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import FrequencyPlotComponent from "@/components/FrequencyPlotComponent";
 import {
   IGeneFrequencyData,
-  // IgSNPerData,
+  IgSNPerData,
   IPopulationRegion,
 } from "@/interfaces/types";
-// import axios from "axios";
+import axios from "axios";
 import DropdownComponent from "@/components/DropdownComponent";
 import AbbreviationPopupComponent from "@/components/AbbreviationPopupComponent";
 import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent";
+import { getCookie, hasCookie } from "cookies-next";
 
 // Main function to render the PlotPage component
 export default function PlotPage(): ReactElement {
   // Track page views if cookies handling is enabled
   TrackPageViewIfEnabled();
+
+  const [axiosConfig, setAxiosConfig] = useState({
+    headers: {
+      "X-api-key": "",
+    }
+  })
 
   // Define superpopulations and their corresponding colors
   const superpopulations: string[] = ["AFR", "EUR", "EAS", "SAS", "AMR"];
@@ -106,16 +114,15 @@ export default function PlotPage(): ReactElement {
   const [igSNPerScore, setIgSNPerScore] = useState<string>("");
   const [igSNPerSNPs, setIgSNPerSNPs] = useState<string[]>([]);
 
+
   // ------------------------
   // temporary data, used until backend with live data is allowed to be published
   // Arrays for dropdown menu items
   const geneSegmentItemsArray = ["IGH"];
   const geneDropDownItemsArray = ["IGHV"];
-  const subtypeDropDownItemsArray = ["1-2"];
-  const alleleDropDownItemsArray = ["*02_S4953", "*04", "*06"];
 
 
-  /* Only commented out for current initial release. Uncomment once the data is released.
+  
   const [subtypeDropDownItemsArray, setSubtypeDropDownItemsArray] = useState<
     string[]
   >(["..."]);
@@ -123,55 +130,50 @@ export default function PlotPage(): ReactElement {
     string[]
   >(["..."]);
   const geneSelectionEndpoint: string = backendAPI + "data/plotoptions/";
-  */
 
-  // Function to fetch gene frequency data from the backend API
-  // -- disabled until Hedestam group publishes paper --
-  // async function getGeneFreqData(allele: string) {
-  //   let alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
-  //   let superpopulationsEndpoint: string =
-  //     alleleFrequenciesEndpoint + "superpopulations/" + allele;
+  async function getGeneFreqData(allele: string) {
+    let alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
+    let superpopulationsEndpoint: string =
+      alleleFrequenciesEndpoint + "superpopulations/" + allele;
 
-  //   console.log(superpopulationsEndpoint);
-  //   await axios
-  //     .get(superpopulationsEndpoint)
-  //     .then((response) => {
-  //       setSuperpopFreqAPIData(response.data);
-  //     })
-  //     .catch((response) => console.log(response.error));
+    await axios
+      .get(superpopulationsEndpoint, axiosConfig)
+      .then((response) => {
+        setSuperpopFreqAPIData(response.data);
+      })
+      .catch((response) => console.log(response.error));
 
-  //   let populationsEndpoint: string =
-  //     alleleFrequenciesEndpoint + "populations/" + allele;
-  //   await axios
-  //     .get(populationsEndpoint)
-  //     .then((response) => {
-  //       setPopFreqAPIData(response.data);
-  //     })
-  //     .catch((response) => console.log(response.error));
-  // }
+    let populationsEndpoint: string =
+      alleleFrequenciesEndpoint + "populations/" + allele;
+    await axios
+      .get(populationsEndpoint, axiosConfig)
+      .then((response) => {
+        setPopFreqAPIData(response.data);
+      })
+      .catch((response) => console.log(response.error));
+  }
 
-  // async function getGeneIgSNPerData(allele: string) {
-  //   let alleleIgSNPerDataEndpoint: string =
-  //     backendAPI + "data/igsnperdata/" + allele;
-  //   console.log(alleleIgSNPerDataEndpoint);
-  //   await axios
-  //     .get(alleleIgSNPerDataEndpoint)
-  //     .then((response) => {
-  //       let responseData: IgSNPerData = response.data;
-  //       if (responseData.igSNPer_score || responseData.igSNPer_score === 0) {
-  //         let scoreString = responseData.igSNPer_score.toString();
-  //         if (scoreString.length === 1) {
-  //           setIgSNPerScore(scoreString + ".0");
-  //         } else {
-  //           setIgSNPerScore(scoreString);
-  //         }
-  //       } else {
-  //         setIgSNPerScore("Missing");
-  //       }
-  //       setIgSNPerSNPs(responseData.igSNPer_SNPs);
-  //     })
-  //     .catch((response) => console.log(response.error));
-  // }
+  async function getGeneIgSNPerData(allele: string) {
+    let alleleIgSNPerDataEndpoint: string =
+      backendAPI + "data/igsnperdata/" + allele;
+    await axios
+      .get(alleleIgSNPerDataEndpoint, axiosConfig)
+      .then((response) => {
+        let responseData: IgSNPerData = response.data;
+        if (responseData.igSNPer_score || responseData.igSNPer_score === 0) {
+          let scoreString = responseData.igSNPer_score.toString();
+          if (scoreString.length === 1) {
+            setIgSNPerScore(scoreString + ".0");
+          } else {
+            setIgSNPerScore(scoreString);
+          }
+        } else {
+          setIgSNPerScore("Missing");
+        }
+        setIgSNPerSNPs(responseData.igSNPer_SNPs);
+      })
+      .catch((response) => console.log(response.error));
+  }
 
   // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
@@ -666,7 +668,7 @@ export default function PlotPage(): ReactElement {
         ],
       }
     }
-    if (currentPicks.alleleDropdown) {
+    if (currentPicks.alleleDropdown && !hasCookie('password')) {
       const fullAlleleStr = 
         currentPicks.geneDropdown +
         currentPicks.subtypeDropdown +
@@ -676,17 +678,18 @@ export default function PlotPage(): ReactElement {
       setPopFreqAPIData(tmpAlleleData[strToKey].population);
       setIgSNPerScore(tmpAlleleData[strToKey].SNPscore);
       setIgSNPerSNPs(tmpAlleleData[strToKey].SNPsnips);
+    } else {
+      getGeneFreqData(
+        currentPicks.geneDropdown +
+          currentPicks.subtypeDropdown +
+          currentPicks.alleleDropdown
+      );
+      getGeneIgSNPerData(
+        currentPicks.geneDropdown +
+          currentPicks.subtypeDropdown +
+          currentPicks.alleleDropdown
+      );
     }
-    // getGeneFreqData(
-    //   currentPicks.geneDropdown +
-    //     currentPicks.subtypeDropdown +
-    //     currentPicks.alleleDropdown
-    // );
-    // getGeneIgSNPerData(
-    //   currentPicks.geneDropdown +
-    //     currentPicks.subtypeDropdown +
-    //     currentPicks.alleleDropdown
-    // );
   }, [
     currentPicks.geneDropdown, 
     currentPicks.alleleDropdown,
@@ -710,16 +713,6 @@ export default function PlotPage(): ReactElement {
   // (should be on page load, but seemed a bit slow or unresponsive sometimes
   // so added currentPicks for safety)
   useEffect(() => {
-    // ----------------------
-    // API call disabled until Hedestam group publishes paper
-    // let populationRegionEndpoint: string =
-    //   backendAPI + "data/populationregions";
-    // axios
-    //   .get(populationRegionEndpoint)
-    //   .then((response) => {
-    //     setSuperpopulationRegions(response.data);
-    //   })
-    //   .catch((response) => console.log(response.error));
     const populationRegionsData = [
       {
         "population": "ACB",
@@ -823,7 +816,7 @@ export default function PlotPage(): ReactElement {
       }
     ]
     setSuperpopulationRegions(populationRegionsData);
-  }, [, currentPicks]);
+  }, []);
 
   // Function to update the current pick for dropdowns
   const handleSetCurrentPick = (dropdownName: string, value: string) => {
@@ -843,38 +836,56 @@ export default function PlotPage(): ReactElement {
     }));
   };
 
-  /* Only commented out for current initial release. Uncomment once the data is released.
-  // fetch next selection options after gene is selected
   useEffect(() => {
-    if (!currentPicks.subtypeDropdown) {
-      setAlleleDropDownItemsArray(["..."]);
-      let currentSelection = currentPicks.geneDropdown;
-      axios
-        .get(geneSelectionEndpoint + currentSelection)
-        .then((response) => {
-          let responseData = response.data;
-          //  responseData.push("...");
-          setSubtypeDropDownItemsArray(responseData);
-        })
-        .catch((response) => console.log(response.error));
-    } else {
-      let currentSelection =
-        currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
-      setAlleleDropDownItemsArray([]);
-      axios
-        .get(geneSelectionEndpoint + currentSelection)
-        .then((response) => {
-          let responseData = response.data;
-          // responseData.push("...");
-          setAlleleDropDownItemsArray(responseData);
-        })
-        .catch((response) => console.log(response.error));
+    if (!hasCookie('password')) {
+      setSubtypeDropDownItemsArray(['1-2']);
+      setAlleleDropDownItemsArray([
+        '*02_S4953',
+        '*04',
+        '*06'
+      ])
+    }
+    else {
+      if (!currentPicks.subtypeDropdown) {
+        setAlleleDropDownItemsArray(["..."]);
+        let currentSelection = currentPicks.geneDropdown;
+        axios
+          .get(geneSelectionEndpoint + currentSelection, axiosConfig)
+          .then((response) => {
+            let responseData = response.data;
+            //  responseData.push("...");
+            setSubtypeDropDownItemsArray(responseData);
+          })
+          .catch((response) => console.log(response.error));
+      } else {
+        let currentSelection =
+          currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
+        setAlleleDropDownItemsArray([]);
+        axios
+          .get(geneSelectionEndpoint + currentSelection, axiosConfig)
+          .then((response) => {
+            let responseData = response.data;
+            // responseData.push("...");
+            setAlleleDropDownItemsArray(responseData);
+          })
+          .catch((response) => console.log(response.error));
+      }
     }
   }, [currentPicks.geneDropdown, currentPicks.subtypeDropdown]);
-  */
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isDisclaimerPopupOpen, setIsDisclaimerPopupOpen] = useState(true);
+
+  // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
+  useEffect(() => {
+    if (hasCookie('password')) {
+      setAxiosConfig({
+        headers: {
+            'X-api-key': getCookie('password') as string,
+        }
+      })
+    }
+  }, [])
 
   // Render the component
   return (
@@ -901,7 +912,7 @@ export default function PlotPage(): ReactElement {
           </svg>
           Disclaimer
         </button>
-        {isDisclaimerPopupOpen && (
+        {!hasCookie('password') && isDisclaimerPopupOpen && (
           <DisclaimerPopupComponent
             onClose={() => setIsDisclaimerPopupOpen(false)}
             explanation="This page is fully developed and allows you to explore its

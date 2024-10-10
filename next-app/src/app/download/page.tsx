@@ -155,7 +155,7 @@ export default function DownloadPage(): ReactElement {
         </svg>
         Disclaimer
       </button>
-      {isPopupOpen && (
+      {!hasCookie('password') && isPopupOpen && (
         <DisclaimerPopupComponent
           onClose={() => setIsPopupOpen(false)}
           explanation="This page is fully developed and allows you to explore its
@@ -310,7 +310,7 @@ export default function DownloadPage(): ReactElement {
         <button
           onClick={handleDownload}
           disabled={!hasCookie('password')}
-          className={"opacity-50" + (!hasCookie('password') && "cursor-not-allowed")}
+          className={"opacity-50" + (!hasCookie('password') && " cursor-not-allowed")}
         >
           <div className="bg-gradient-to-r from-[rgba(67,133,139)] to-primary text-primary-content text-lg tracking-wide flex gap-4 justify-center items-center w-64 lg:w-96 h-14 font-extrabold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90">
             Download
