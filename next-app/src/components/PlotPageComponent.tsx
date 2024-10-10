@@ -132,8 +132,8 @@ export default function PlotPage(): ReactElement {
   const geneSelectionEndpoint: string = backendAPI + "data/plotoptions/";
 
   async function getGeneFreqData(allele: string) {
-    let alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
-    let superpopulationsEndpoint: string =
+    const alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
+    const superpopulationsEndpoint: string =
       alleleFrequenciesEndpoint + "superpopulations/" + allele;
 
     await axios
@@ -143,7 +143,7 @@ export default function PlotPage(): ReactElement {
       })
       .catch((response) => console.log(response.error));
 
-    let populationsEndpoint: string =
+    const populationsEndpoint: string =
       alleleFrequenciesEndpoint + "populations/" + allele;
     await axios
       .get(populationsEndpoint, axiosConfig)
@@ -154,14 +154,14 @@ export default function PlotPage(): ReactElement {
   }
 
   async function getGeneIgSNPerData(allele: string) {
-    let alleleIgSNPerDataEndpoint: string =
+    const alleleIgSNPerDataEndpoint: string =
       backendAPI + "data/igsnperdata/" + allele;
     await axios
       .get(alleleIgSNPerDataEndpoint, axiosConfig)
       .then((response) => {
-        let responseData: IgSNPerData = response.data;
+        const responseData: IgSNPerData = response.data;
         if (responseData.igSNPer_score || responseData.igSNPer_score === 0) {
-          let scoreString = responseData.igSNPer_score.toString();
+          const scoreString = responseData.igSNPer_score.toString();
           if (scoreString.length === 1) {
             setIgSNPerScore(scoreString + ".0");
           } else {
@@ -848,23 +848,23 @@ export default function PlotPage(): ReactElement {
     else {
       if (!currentPicks.subtypeDropdown) {
         setAlleleDropDownItemsArray(["..."]);
-        let currentSelection = currentPicks.geneDropdown;
+        const currentSelection = currentPicks.geneDropdown;
         axios
           .get(geneSelectionEndpoint + currentSelection, axiosConfig)
           .then((response) => {
-            let responseData = response.data;
+            const responseData = response.data;
             //  responseData.push("...");
             setSubtypeDropDownItemsArray(responseData);
           })
           .catch((response) => console.log(response.error));
       } else {
-        let currentSelection =
+        const currentSelection =
           currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
         setAlleleDropDownItemsArray([]);
         axios
           .get(geneSelectionEndpoint + currentSelection, axiosConfig)
           .then((response) => {
-            let responseData = response.data;
+            const responseData = response.data;
             // responseData.push("...");
             setAlleleDropDownItemsArray(responseData);
           })

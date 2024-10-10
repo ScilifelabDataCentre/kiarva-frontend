@@ -29,7 +29,7 @@ export default function PasswordPage(): ReactElement {
                 setCorrectPassword("Password correct, unlocking full functionality.");
                 setCookie('password', inputField, { maxAge: 365 });
             })
-            .catch((response) => {
+            .catch(() => {
                 setCorrectPassword("Password incorrect, try again or continue with restricted version.");
             });
     }
