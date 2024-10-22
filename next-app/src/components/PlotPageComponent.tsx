@@ -133,6 +133,9 @@ export default function PlotPage(): ReactElement {
 
   async function getGeneFreqData(allele: string) {
     const alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
+    // allele names sometimes contain slashes, which breaks the functionality of the API as it interprets it as a path
+    // replace with '&slash&' and replace again with '/' in the api
+    allele = allele.replace('/', '&slash&');
     const superpopulationsEndpoint: string =
       alleleFrequenciesEndpoint + "superpopulations/" + allele;
 
