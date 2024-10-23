@@ -27,7 +27,7 @@ export default function PasswordPage(): ReactElement {
             .then((response) => {
                 console.log(response);
                 setCorrectPassword("Password correct, unlocking full functionality.");
-                setCookie('password', inputField, { maxAge: 365 });
+                setCookie('password', inputField, { maxAge: 365 * 24 * 60 * 60 });
             })
             .catch(() => {
                 setCorrectPassword("Password incorrect, try again or continue with restricted version.");
