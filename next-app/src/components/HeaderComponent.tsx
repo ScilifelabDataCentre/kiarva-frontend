@@ -16,13 +16,12 @@ export default function HeaderComponent() {
 
   return (
     <>
-      <div className="min-h-screen bg-primary flex flex-col items-center justify-center">
+      <div className="pt-16 bg-primary flex flex-col items-center justify-center">
         <h1 className="text-5xl text-primary-content font-bold mb-8 animate-pulse">
           Coming Soon
         </h1>
         <p className="text-primary-content text-lg mb-8">
-          We&apos;re working hard to bring you KIARVA. Stay tuned! The launch is
-          planned for August 2024.
+          Preview version available below. Full version to be released at a later date, once KIARVA data has been officially published.
         </p>
       </div>
       <div className="bg-gradient-to-b from-primary to-secondary">

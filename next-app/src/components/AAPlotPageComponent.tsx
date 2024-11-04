@@ -557,8 +557,8 @@ export default function PlotPage(): ReactElement {
   return (
     <>
       <div className={BODY_CLASSES}>
-        <h1 className={H_1}>Generate population amino acid frequency plots</h1>
-
+        <h1 className={H_1}>Generate population frequency plots for translated alleles</h1>
+        {!hasCookie('password') &&
         <button
           className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
           onClick={() => setIsDisclaimerPopupOpen(true)}
@@ -577,7 +577,7 @@ export default function PlotPage(): ReactElement {
             />
           </svg>
           Disclaimer
-        </button>
+        </button>}
         {!hasCookie('password') && isDisclaimerPopupOpen && (
           <DisclaimerPopupComponent
             onClose={() => setIsDisclaimerPopupOpen(false)}
