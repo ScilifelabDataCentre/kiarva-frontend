@@ -1,4 +1,3 @@
-import { BODY_CLASSES } from "@/constants";
 import "../globals.css";
 import SelectionTabComponent from "@/components/SelectionTabComponent";
 
