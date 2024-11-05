@@ -13,7 +13,7 @@ import {
 import { ReactElement, useEffect, useState } from "react";
 const Plot = createPlotlyComponent(Plotly);
 
-const worldMap = "images/worldMap.png";
+const worldMap = "../images/worldMap.png";
 
 export default function FrequencyPlotComponent(prop: {
   superpopulationAPIData: IGeneFrequencyData[];

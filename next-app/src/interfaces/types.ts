@@ -124,3 +124,11 @@ export type IgSNPerData = {
   igSNPer_score: number;
   igSNPer_SNPs: string[];
 };
+
+export type AlleleListAA = {
+  aa_allele_list: string[];
+}
+
+export type IPaths = {
+    [key: string]: string;
+}
