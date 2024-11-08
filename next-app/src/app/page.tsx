@@ -110,7 +110,9 @@ export default function HomePage(): ReactElement {
                 <h1 className="mb-5 text-2xl lg:text-3xl font-bold text-nowrap">
                   Download FASTA files
                 </h1>
-                <p className="mb-5 text-sm lg:text-base">TBD</p>
+                <p className="mb-5 text-sm lg:text-base">
+                  Click on the button to see the light version
+                </p>
                 <Link href="/download">
                   <button
                     className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800"
@@ -134,7 +136,9 @@ export default function HomePage(): ReactElement {
                 <h1 className="mb-5 text-2xl lg:text-3xl font-bold">
                   Population frequencies
                 </h1>
-                <p className="mb-5 text-sm lg:text-base">TBD</p>
+                <p className="mb-5 text-sm lg:text-base">
+                  Click on the button to see the light version
+                </p>
                 <Link href="/plot">
                   <button
                     className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800"
