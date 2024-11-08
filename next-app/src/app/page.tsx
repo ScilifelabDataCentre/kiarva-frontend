@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { ReactElement } from "react";
 import {
@@ -71,19 +71,18 @@ export default function HomePage(): ReactElement {
             <div>
               <label className={`font-bold ${H_2}`}>News</label>
               <div className="mt-4 pr-2 max-h-60 overflow-auto text-sm lg:text-base">
-                <p className="italic">Date: 2024-08-08</p>
+                <p className="italic">Date: 2024-11-13</p>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                  pellentesque sapien vitae felis laoreet, sit amet condimentum
-                  est ultricies. Etiam neque enim, bibendum et neque id, iaculis
-                  facilisis sem. Morbi turpis purus, lobortis in sodales et,
-                  tincidunt ut elit. Nam eu velit sagittis, fringilla justo vel,
-                  rhoncus nunc. Mauris sagittis tincidunt aliquet. Fusce eget
-                  nisi nec ex aliquet vulputate. Curabitur vel sapien rhoncus
-                  enim malesuada finibus congue ut risus. Maecenas rhoncus,
-                  massa at pellentesque fermentum, quam tortor eleifend sapien,
-                  sed viverra purus quam vel tortor. Sed lobortis lobortis dui
-                  quis rutrum. Sed luctus dignissim nibh.
+                  We are excited to introduce the <b>light version</b> of our
+                  new research tool, designed to provide an early glimpse into
+                  the DSN&apos;s first dashboard. This preliminary release
+                  includes a few example plots to showcase the tool&apos;s
+                  analytical capabilities, while the full functionality is being
+                  finalized. In this light version, users can explore data
+                  visualizations but won&apos;t have access to download FASTA
+                  files at this stage. The complete tool, including all data and
+                  download options, will be available once the research team has
+                  published their findings.
                 </p>
               </div>
               <Link className="float-end pt-2" href="/changelog">
