@@ -130,5 +130,11 @@ export type AlleleListAA = {
 }
 
 export type IPaths = {
-    [key: string]: string;
+  [key: string]: string;
+}
+
+export type IAlleleDropDownConfig = {
+  geneSegmentItemsArray: string[];
+  geneDropDownItemsArray: string[];
+  geneSelectionEndpoint: string;
 }
