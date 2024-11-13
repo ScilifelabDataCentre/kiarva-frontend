@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   function setIsDisclaimerPopupOpen(arg0: boolean): void {
-    throw new Error("Function not implemented.");
+    console.log("Disclaimer popup button not implemented.")
   }
 
   return (
@@ -68,7 +68,7 @@ export default function RootLayout({
             and allele. The page features associated SNPs and SNiPer scores.
           </span>
         </div>
-      <SelectionTabComponent paths={{"Genomic": "genomic", "Translated": "translated"}} /> 
+      <SelectionTabComponent paths={{"Genomic": "genomic", "Translated": "translated", "MSA": "msa"}} /> 
       {children}
     </div>
   );

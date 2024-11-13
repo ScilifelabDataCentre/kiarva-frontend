@@ -3,10 +3,6 @@
 import { ReactElement, useEffect, useState } from "react";
 import {
   backendAPI,
-  // backendAPI,
-  BODY_CLASSES,
-  // BUTTON_TYPE_ONE,
-  H_1,
 } from "@/constants";
 import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import FrequencyPlotComponent from "@/components/FrequencyPlotComponent";
@@ -18,7 +14,6 @@ import {
 } from "@/interfaces/types";
 import axios from "axios";
 import AbbreviationPopupComponent from "@/components/AbbreviationPopupComponent";
-import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent";
 import { getCookie, hasCookie } from "cookies-next";
 import AlelleSelectionComponent from "./AlleleSelectionComponent";
 import { populationSubsets, sampleAlleleDataGenomicPlot, subPopulations, superPopulationColorsDict, superPopulations } from "@/content/localPlotData";

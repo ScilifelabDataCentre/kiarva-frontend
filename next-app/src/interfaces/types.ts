@@ -138,3 +138,8 @@ export type IAlleleDropDownConfig = {
   geneDropDownItemsArray: string[];
   geneSelectionEndpoint: string;
 }
+
+export type IMSAData = {
+  aa_sequence: string;
+  fasta: string;
+}

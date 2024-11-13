@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic'
 import { ReactElement } from 'react';
 
-const AAPlotPageComponent = dynamic(() => import('@/components/AAPlotPageComponent'), {
+const MSAPlotPageComponent = dynamic(() => import('@/components/MSAPlotPageComponent'), {
   ssr: false
 })
 
@@ -11,7 +11,7 @@ const AAPlotPageComponent = dynamic(() => import('@/components/AAPlotPageCompone
 export default function AminoAcidPlotPage(): ReactElement {
   return (
     <>
-      <AAPlotPageComponent/>
+      <MSAPlotPageComponent/>
     </>
   );
 }

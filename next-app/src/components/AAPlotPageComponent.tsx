@@ -3,10 +3,6 @@
 import { ReactElement, useEffect, useState } from "react";
 import {
   backendAPI,
-  // backendAPI,
-  BODY_CLASSES,
-  // BUTTON_TYPE_ONE,
-  H_1,
 } from "@/constants";
 import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import FrequencyPlotComponent from "@/components/FrequencyPlotComponent";
@@ -18,13 +14,12 @@ import {
 } from "@/interfaces/types";
 import axios from "axios";
 import AbbreviationPopupComponent from "@/components/AbbreviationPopupComponent";
-import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent";
 import { getCookie, hasCookie } from "cookies-next";
 import AlelleSelectionComponent from "./AlleleSelectionComponent";
 import { populationSubsets, sampleAlleleDataAminoAcidPlot, subPopulations, superPopulationColorsDict, superPopulations } from "@/content/localPlotData";
 
 // Main function to render the PlotPage component
-export default function PlotPage(): ReactElement {
+export default function AminoAcidPlotPage(): ReactElement {
   // Track page views if cookies handling is enabled
   TrackPageViewIfEnabled();
 
@@ -150,7 +145,6 @@ export default function PlotPage(): ReactElement {
   }, []);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isDisclaimerPopupOpen, setIsDisclaimerPopupOpen] = useState(true);
 
   // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
   useEffect(() => {
