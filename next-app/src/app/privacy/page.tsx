@@ -21,11 +21,14 @@ export default function PrivacyPage(): ReactElement {
   const [ optInText, setOptInText ] = useState(optInOrOutTextActive(!trackingDisabled()))
 
   const handleOptOut = () => {
-      trackingDisabled() ? 
-          deleteCookie('trackingDisabled') :
-          setCookie('trackingDisabled', 'true', { maxAge: 365 })
-      setOptInText(optInOrOutTextActive(!trackingDisabled()))
-  };
+    if (trackingDisabled()) {
+      deleteCookie("trackingDisabled")
+    }
+    else {
+      setCookie("trackingDisabled", "true", { maxAge: 60*60*24*365 });
+    }
+    setOptInText(optInOrOutTextActive(!trackingDisabled()));
+  }
   
   return (
     <>
