@@ -12,7 +12,7 @@ import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import FrequencyPlotComponent from "@/components/FrequencyPlotComponent";
 import {
   IGeneFrequencyData,
-  IgSNPerData,
+  AlleleListAA,
   IPopulationRegion,
 } from "@/interfaces/types";
 import axios from "axios";
@@ -111,8 +111,7 @@ export default function PlotPage(): ReactElement {
     alleleDropdown: "",
   });
 
-  const [igSNPerScore, setIgSNPerScore] = useState<string>("");
-  const [igSNPerSNPs, setIgSNPerSNPs] = useState<string[]>([]);
+  const [alleleListAA, setAlleleListAA] = useState<string[]>([]);
 
 
   // ------------------------
@@ -129,10 +128,10 @@ export default function PlotPage(): ReactElement {
   const [alleleDropDownItemsArray, setAlleleDropDownItemsArray] = useState<
     string[]
   >(["..."]);
-  const geneSelectionEndpoint: string = backendAPI + "data/plotoptions/";
+  const geneSelectionEndpoint: string = backendAPI + "data/aminoacidplotoptions/";
 
   async function getGeneFreqData(allele: string) {
-    const alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
+    const alleleFrequenciesEndpoint: string = backendAPI + "data/aminoacidfrequencies/";
     // allele names sometimes contain slashes, which breaks the functionality of the API as it interprets it as a path
     // replace with '&slash&' and replace again with '/' in the api
     allele = allele.replace('/', '&slash&');
@@ -156,24 +155,16 @@ export default function PlotPage(): ReactElement {
       .catch((response) => console.log(response.error));
   }
 
-  async function getGeneIgSNPerData(allele: string) {
-    const alleleIgSNPerDataEndpoint: string =
-      backendAPI + "data/igsnperdata/" + allele;
+  async function getAlleleListAA(allele: string) {
+    const alleleListAADataEndpoint: string =
+      backendAPI + "data/aminoacidlist/" + allele;
     await axios
-      .get(alleleIgSNPerDataEndpoint, axiosConfig)
+      .get(alleleListAADataEndpoint, axiosConfig)
       .then((response) => {
-        const responseData: IgSNPerData = response.data;
-        if (responseData.igSNPer_score || responseData.igSNPer_score === 0) {
-          const scoreString = responseData.igSNPer_score.toString();
-          if (scoreString.length === 1) {
-            setIgSNPerScore(scoreString + ".0");
-          } else {
-            setIgSNPerScore(scoreString);
-          }
-        } else {
-          setIgSNPerScore("Missing");
+        const responseData: AlleleListAA = response.data;
+        if (responseData.aa_allele_list) {
+            setAlleleListAA(responseData.aa_allele_list);
         }
-        setIgSNPerSNPs(responseData.igSNPer_SNPs);
       })
       .catch((response) => console.log(response.error));
   }
@@ -181,495 +172,171 @@ export default function PlotPage(): ReactElement {
   // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
     const tmpAlleleData = {
-      'IGHV1-2*02_S4953': 
+      'IGHV1-18*01_AA': 
       {
         'superpopulation':
         [
-          {
-            "frequency": 0.031073446327683617,
-            "n": 22,
-            "population": "AFR"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "EUR"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "EAS"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "SAS"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "AMR"
-          }
+            {
+                "frequency": 0.8319209039548022,
+                "n": 589,
+                "population": "AFR"
+            },
+            {
+                "frequency": 0.9396135265700483,
+                "n": 389,
+                "population": "EUR"
+            },
+            {
+                "frequency": 0.9481481481481482,
+                "n": 512,
+                "population": "EAS"
+            },
+            {
+                "frequency": 0.7685185185185185,
+                "n": 415,
+                "population": "SAS"
+            },
+            {
+                "frequency": 0.8821428571428571,
+                "n": 247,
+                "population": "AMR"
+            }
         ],
         'population':
         [
-          {
-            "frequency": 0.0379746835443038,
-            "n": 3,
-            "population": "ACB"
-          },
-          {
-            "frequency": 0.03225806451612903,
-            "n": 2,
-            "population": "ASW"
-          },
-          {
-            "frequency": 0.035398230088495575,
-            "n": 4,
-            "population": "ESN"
-          },
-          {
-            "frequency": 0.008403361344537815,
-            "n": 1,
-            "population": "GWD"
-          },
-          {
-            "frequency": 0.01680672268907563,
-            "n": 2,
-            "population": "LWK"
-          },
-          {
-            "frequency": 0.02040816326530612,
-            "n": 2,
-            "population": "MSL"
-          },
-          {
-            "frequency": 0.06779661016949153,
-            "n": 8,
-            "population": "YRI"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "FIN"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "GBR"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "IBS"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "TSI"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "CDX"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "CHB"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "CHS"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "JPT"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "KHV"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "BEB"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "GIH"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "ITU"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "PJL"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "STU"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "CLM"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "MXL"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "PEL"
-          },
-          {
-            "frequency": 0.0,
-            "n": 0,
-            "population": "PUR"
-          }
+            {
+                "frequency": 0.5822784810126582,
+                "n": 46,
+                "population": "ACB"
+            },
+            {
+                "frequency": 0.8064516129032258,
+                "n": 50,
+                "population": "ASW"
+            },
+            {
+                "frequency": 0.9292035398230089,
+                "n": 105,
+                "population": "ESN"
+            },
+            {
+                "frequency": 0.8739495798319328,
+                "n": 104,
+                "population": "GWD"
+            },
+            {
+                "frequency": 0.8487394957983193,
+                "n": 101,
+                "population": "LWK"
+            },
+            {
+                "frequency": 0.7244897959183674,
+                "n": 71,
+                "population": "MSL"
+            },
+            {
+                "frequency": 0.9491525423728814,
+                "n": 112,
+                "population": "YRI"
+            },
+            {
+                "frequency": 1.0,
+                "n": 100,
+                "population": "FIN"
+            },
+            {
+                "frequency": 0.9801980198019802,
+                "n": 99,
+                "population": "GBR"
+            },
+            {
+                "frequency": 0.8080808080808081,
+                "n": 80,
+                "population": "IBS"
+            },
+            {
+                "frequency": 0.9649122807017544,
+                "n": 110,
+                "population": "TSI"
+            },
+            {
+                "frequency": 0.984,
+                "n": 123,
+                "population": "CDX"
+            },
+            {
+                "frequency": 0.8454545454545455,
+                "n": 93,
+                "population": "CHB"
+            },
+            {
+                "frequency": 0.94,
+                "n": 94,
+                "population": "CHS"
+            },
+            {
+                "frequency": 0.9809523809523809,
+                "n": 103,
+                "population": "JPT"
+            },
+            {
+                "frequency": 0.99,
+                "n": 99,
+                "population": "KHV"
+            },
+            {
+                "frequency": 0.9805825242718447,
+                "n": 101,
+                "population": "BEB"
+            },
+            {
+                "frequency": 0.9908256880733946,
+                "n": 108,
+                "population": "GIH"
+            },
+            {
+                "frequency": 0.9464285714285714,
+                "n": 106,
+                "population": "ITU"
+            },
+            {
+                "frequency": 0.49074074074074076,
+                "n": 53,
+                "population": "PJL"
+            },
+            {
+                "frequency": 0.4351851851851852,
+                "n": 47,
+                "population": "STU"
+            },
+            {
+                "frequency": 1.0,
+                "n": 70,
+                "population": "CLM"
+            },
+            {
+                "frequency": 0.8285714285714286,
+                "n": 58,
+                "population": "MXL"
+            },
+            {
+                "frequency": 0.9857142857142858,
+                "n": 69,
+                "population": "PEL"
+            },
+            {
+                "frequency": 0.7142857142857143,
+                "n": 50,
+                "population": "PUR"
+            }
         ],
-        'SNPscore': "0.0",
-        'SNPsnips': [
-          "rs373342578(T:261,106452929)"
+        'alleleListAA': [
+            "IGHV1-18*01",
+            "IGHV1-18*01_S0898",
+            "IGHV1-18*01_S1946",
+            "IGHV1-18*04"
         ],
       },
-      'IGHV1-2*04':
-      {
-        'superpopulation':
-        [
-          {
-            "frequency": 0.211864406779661,
-            "n": 150,
-            "population": "AFR"
-          },
-          {
-            "frequency": 0.5942028985507246,
-            "n": 246,
-            "population": "EUR"
-          },
-          {
-            "frequency": 0.40925925925925927,
-            "n": 221,
-            "population": "EAS"
-          },
-          {
-            "frequency": 0.387037037037037,
-            "n": 209,
-            "population": "SAS"
-          },
-          {
-            "frequency": 0.4142857142857143,
-            "n": 116,
-            "population": "AMR"
-          }
-        ],
-        'population':
-        [
-          {
-            "frequency": 0.12658227848101267,
-            "n": 10,
-            "population": "ACB"
-          },
-          {
-            "frequency": 0.3387096774193548,
-            "n": 21,
-            "population": "ASW"
-          },
-          {
-            "frequency": 0.1592920353982301,
-            "n": 18,
-            "population": "ESN"
-          },
-          {
-            "frequency": 0.29411764705882354,
-            "n": 35,
-            "population": "GWD"
-          },
-          {
-            "frequency": 0.2689075630252101,
-            "n": 32,
-            "population": "LWK"
-          },
-          {
-            "frequency": 0.1836734693877551,
-            "n": 18,
-            "population": "MSL"
-          },
-          {
-            "frequency": 0.13559322033898305,
-            "n": 16,
-            "population": "YRI"
-          },
-          {
-            "frequency": 0.65,
-            "n": 65,
-            "population": "FIN"
-          },
-          {
-            "frequency": 0.7722772277227723,
-            "n": 78,
-            "population": "GBR"
-          },
-          {
-            "frequency": 0.40404040404040403,
-            "n": 40,
-            "population": "IBS"
-          },
-          {
-            "frequency": 0.5526315789473685,
-            "n": 63,
-            "population": "TSI"
-          },
-          {
-            "frequency": 0.44,
-            "n": 55,
-            "population": "CDX"
-          },
-          {
-            "frequency": 0.36363636363636365,
-            "n": 40,
-            "population": "CHB"
-          },
-          {
-            "frequency": 0.43,
-            "n": 43,
-            "population": "CHS"
-          },
-          {
-            "frequency": 0.4,
-            "n": 42,
-            "population": "JPT"
-          },
-          {
-            "frequency": 0.41,
-            "n": 41,
-            "population": "KHV"
-          },
-          {
-            "frequency": 0.4077669902912621,
-            "n": 42,
-            "population": "BEB"
-          },
-          {
-            "frequency": 0.5504587155963303,
-            "n": 60,
-            "population": "GIH"
-          },
-          {
-            "frequency": 0.4732142857142857,
-            "n": 53,
-            "population": "ITU"
-          },
-          {
-            "frequency": 0.28703703703703703,
-            "n": 31,
-            "population": "PJL"
-          },
-          {
-            "frequency": 0.21296296296296297,
-            "n": 23,
-            "population": "STU"
-          },
-          {
-            "frequency": 0.5142857142857142,
-            "n": 36,
-            "population": "CLM"
-          },
-          {
-            "frequency": 0.44285714285714284,
-            "n": 31,
-            "population": "MXL"
-          },
-          {
-            "frequency": 0.4142857142857143,
-            "n": 29,
-            "population": "PEL"
-          },
-          {
-            "frequency": 0.2857142857142857,
-            "n": 20,
-            "population": "PUR"
-          }
-        ],
-        'SNPscore': "0.0",
-        'SNPsnips': [
-          "rs112806369(A:98,106452766)"
-        ],
-      },
-      'IGHV1-2*06':
-      {
-        'superpopulation':
-        [
-          {
-            "frequency": 0.211864406779661,
-            "n": 150,
-            "population": "AFR"
-          },
-          {
-            "frequency": 0.1473429951690821,
-            "n": 61,
-            "population": "EUR"
-          },
-          {
-            "frequency": 0.07962962962962963,
-            "n": 43,
-            "population": "EAS"
-          },
-          {
-            "frequency": 0.21851851851851853,
-            "n": 118,
-            "population": "SAS"
-          },
-          {
-            "frequency": 0.16428571428571428,
-            "n": 46,
-            "population": "AMR"
-          }
-        ],
-        'population':
-        [
-          {
-            "frequency": 0.0759493670886076,
-            "n": 6,
-            "population": "ACB"
-          },
-          {
-            "frequency": 0.1774193548387097,
-            "n": 11,
-            "population": "ASW"
-          },
-          {
-            "frequency": 0.20353982300884957,
-            "n": 23,
-            "population": "ESN"
-          },
-          {
-            "frequency": 0.2689075630252101,
-            "n": 32,
-            "population": "GWD"
-          },
-          {
-            "frequency": 0.17647058823529413,
-            "n": 21,
-            "population": "LWK"
-          },
-          {
-            "frequency": 0.3163265306122449,
-            "n": 31,
-            "population": "MSL"
-          },
-          {
-            "frequency": 0.22033898305084745,
-            "n": 26,
-            "population": "YRI"
-          },
-          {
-            "frequency": 0.16,
-            "n": 16,
-            "population": "FIN"
-          },
-          {
-            "frequency": 0.1782178217821782,
-            "n": 18,
-            "population": "GBR"
-          },
-          {
-            "frequency": 0.16161616161616163,
-            "n": 16,
-            "population": "IBS"
-          },
-          {
-            "frequency": 0.09649122807017543,
-            "n": 11,
-            "population": "TSI"
-          },
-          {
-            "frequency": 0.048,
-            "n": 6,
-            "population": "CDX"
-          },
-          {
-            "frequency": 0.07272727272727272,
-            "n": 8,
-            "population": "CHB"
-          },
-          {
-            "frequency": 0.03,
-            "n": 3,
-            "population": "CHS"
-          },
-          {
-            "frequency": 0.18095238095238095,
-            "n": 19,
-            "population": "JPT"
-          },
-          {
-            "frequency": 0.07,
-            "n": 7,
-            "population": "KHV"
-          },
-          {
-            "frequency": 0.21359223300970873,
-            "n": 22,
-            "population": "BEB"
-          },
-          {
-            "frequency": 0.3302752293577982,
-            "n": 36,
-            "population": "GIH"
-          },
-          {
-            "frequency": 0.32142857142857145,
-            "n": 36,
-            "population": "ITU"
-          },
-          {
-            "frequency": 0.08333333333333333,
-            "n": 9,
-            "population": "PJL"
-          },
-          {
-            "frequency": 0.1388888888888889,
-            "n": 15,
-            "population": "STU"
-          },
-          {
-            "frequency": 0.2857142857142857,
-            "n": 20,
-            "population": "CLM"
-          },
-          {
-            "frequency": 0.11428571428571428,
-            "n": 8,
-            "population": "MXL"
-          },
-          {
-            "frequency": 0.12857142857142856,
-            "n": 9,
-            "population": "PEL"
-          },
-          {
-            "frequency": 0.12857142857142856,
-            "n": 9,
-            "population": "PUR"
-          }
-        ],
-        'SNPscore': "0.0",
-        'SNPsnips': [
-          "rs1065059(G:149,106452817)"
-        ],
-      }
     }
     if (currentPicks.alleleDropdown && !hasCookie('password')) {
       const fullAlleleStr = 
@@ -679,15 +346,14 @@ export default function PlotPage(): ReactElement {
       const strToKey = fullAlleleStr as keyof typeof tmpAlleleData;
       setSuperpopFreqAPIData(tmpAlleleData[strToKey].superpopulation);
       setPopFreqAPIData(tmpAlleleData[strToKey].population);
-      setIgSNPerScore(tmpAlleleData[strToKey].SNPscore);
-      setIgSNPerSNPs(tmpAlleleData[strToKey].SNPsnips);
+      setAlleleListAA(tmpAlleleData[strToKey].alleleListAA);
     } else {
       getGeneFreqData(
         currentPicks.geneDropdown +
           currentPicks.subtypeDropdown +
           currentPicks.alleleDropdown
       );
-      getGeneIgSNPerData(
+      getAlleleListAA(
         currentPicks.geneDropdown +
           currentPicks.subtypeDropdown +
           currentPicks.alleleDropdown
@@ -701,8 +367,7 @@ export default function PlotPage(): ReactElement {
 
   useEffect(() => {
     if (!currentPicks.alleleDropdown) {
-      setIgSNPerScore("");
-      setIgSNPerSNPs([]);
+      setAlleleListAA([]);
     }
   }, [
     currentPicks.geneSegmentDropdown,
@@ -841,11 +506,9 @@ export default function PlotPage(): ReactElement {
 
   useEffect(() => {
     if (!hasCookie('password')) {
-      setSubtypeDropDownItemsArray(['1-2']);
+      setSubtypeDropDownItemsArray(['1-18']);
       setAlleleDropDownItemsArray([
-        '*02_S4953',
-        '*04',
-        '*06'
+        '*01_AA',
       ])
     }
     else {
@@ -894,7 +557,7 @@ export default function PlotPage(): ReactElement {
   return (
     <>
       <div className={BODY_CLASSES}>
-        <h1 className={H_1}>Generate population frequency plots for alleles</h1>
+        <h1 className={H_1}>Generate population frequency plots for translated alleles</h1>
         {!hasCookie('password') &&
         <button
           className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
@@ -1018,9 +681,6 @@ export default function PlotPage(): ReactElement {
           superpopulationRegions={superpopulationRegions}
         />
         <div className="flex flex-col lg:flex-row items-start justify-between pt-8 gap-4">
-          <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/8">
-            IgSNPer SCORE: {igSNPerScore}
-          </p>
           <div className="overflow-x-auto lg:w-2/4">
             <div className="p-1.5 min-w-full inline-block align-middle">
               <div className="border rounded-lg overflow-hidden">
@@ -1031,12 +691,12 @@ export default function PlotPage(): ReactElement {
                         scope="col"
                         className="px-6 py-3 text-start text-lg lg:text-xl font-semibold"
                       >
-                        Associated SNPs
+                        Alleles translating to the same amino acid
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-neutral text-base lg:text-lg">
-                    {igSNPerSNPs.map((value) => {
+                    {alleleListAA.map((value) => {
                       return (
                         <tr key={value}>
                           <td className="px-6 py-4 whitespace-nowrap font-medium">

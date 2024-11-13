@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { ILink } from "@/interfaces/types";
@@ -7,7 +7,11 @@ import { LINK_CLASSES } from "@/constants";
 export default function HeaderComponent() {
   const links: { [id: string]: ILink } = {
     l1: { text: "Download", classes: LINK_CLASSES, link: "/download" },
-    l2: { text: "Population frequencies", classes: LINK_CLASSES, link: "/plot" },
+    l2: {
+      text: "Population frequencies",
+      classes: LINK_CLASSES,
+      link: "/plot",
+    },
     l3: { text: "Methodology", classes: LINK_CLASSES, link: "/methodology" },
     l4: { text: "Change log", classes: LINK_CLASSES, link: "/changelog" },
     l5: { text: "Publications", classes: LINK_CLASSES, link: "/publications" },
@@ -16,15 +20,6 @@ export default function HeaderComponent() {
 
   return (
     <>
-      <div className="min-h-screen bg-primary flex flex-col items-center justify-center">
-        <h1 className="text-5xl text-primary-content font-bold mb-8 animate-pulse">
-          Coming Soon
-        </h1>
-        <p className="text-primary-content text-lg mb-8">
-          We&apos;re working hard to bring you KIARVA. Stay tuned! The launch is
-          planned for August 2024.
-        </p>
-      </div>
       <div className="bg-gradient-to-b from-primary to-secondary">
         <div className="py-4 lg:px-36 lg:pt-16 max-w-screen-13inch 2xl:mx-auto">
           <div className="navbar text-primary-content">
@@ -77,10 +72,7 @@ export default function HeaderComponent() {
               <ul className="menu menu-horizontal text-base">
                 {Object.keys(links).map((key) => (
                   <li key={key}>
-                    <Link
-                      className={links[key].classes}
-                      href={links[key].link}
-                    >
+                    <Link className={links[key].classes} href={links[key].link}>
                       {links[key].text}
                     </Link>
                   </li>
