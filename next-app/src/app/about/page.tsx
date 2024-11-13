@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { ReactElement } from "react";
 import ProfileComponent from "@/components/ProfileComponent";
@@ -20,7 +20,7 @@ export default function AboutPage(): ReactElement {
     <>
       <div className={BODY_CLASSES}>
         <div className={H_1}>{pageTitle}</div>
-        <div className="divider pt-4 ">TBD</div>
+        <div className="divider pt-4 ">KIARVA dashboard</div>
         <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
           To create KIARVA, we applied a high throughput genomic technique
           designed for adaptive immune receptor germline gene sequencing,

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { ReactElement } from "react";
 import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
@@ -29,13 +29,15 @@ export default function ChangeLogPage(): ReactElement {
         </svg>
         <span className="text-sm lg:text-base">
           The change log provides a comprehensive overview of all releases of
-          the KI Adaptive Immune Receptor Gene Variant Atlas. Each version&apos;s
-          card features two buttons: &apos;Frontend Repository&apos; and &apos;Backend
-          Repository&apos;. Clicking a button on the current version card will direct
-          you to the respective GitHub repository. For previous versions,
-          clicking a button will take you to the relevant GitHub pull request.
-          In the near future, we will include instructions in the README file on
-          how to run the selected version locally.
+          the KI Adaptive Immune Receptor Gene Variant Atlas. Each
+          version&apos;s card features two buttons: &apos;Frontend
+          Repository&apos; and &apos;Backend Repository&apos;. Clicking a button
+          on the current version card will direct you to the respective GitHub
+          repository. For previous versions, clicking a button will take you to
+          the relevant GitHub pull request. In the near future, we will include
+          instructions in the README file on how to run the selected version
+          locally. The links to the Github repositiories are not functional
+          until the publication of the data.
         </span>
       </div>
 
@@ -43,7 +45,9 @@ export default function ChangeLogPage(): ReactElement {
       <div className="pt-2 pb-4">
         <ChangeLogComponent
           title={`Version ${currentVersion}`}
-          databaseUpdates={["Initial release with IGHV data only"]}
+          databaseUpdates={[
+            "Initial release of the light version with example data points only",
+          ]}
           designAndBugFixes={["Initial release"]}
           isCurrent={true}
           frontEndLink="https://github.com/ScilifelabDataCentre/kiarva-frontend"
