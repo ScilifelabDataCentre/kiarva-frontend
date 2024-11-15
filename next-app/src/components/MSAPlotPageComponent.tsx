@@ -6,6 +6,7 @@ import {
 } from "@/constants";
 import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import {
+  IAlleleData,
   IAlleleDropDownConfig,
   IMSAData,
 } from "@/interfaces/types";
@@ -13,7 +14,7 @@ import { getCookie, hasCookie } from "cookies-next";
 import AlelleSelectionComponent from "./AlleleSelectionComponent";
 import { sampleMSAData } from "@/content/localPlotData";
 import axios from "axios";
-import MSAComponent from "./MSAComponent";
+import MSAViewer from "./MSAViewer";
 
 // Main function to render the PlotPage component
 export default function MSAPlotPageComponent(): ReactElement {
@@ -35,7 +36,7 @@ export default function MSAPlotPageComponent(): ReactElement {
 
   const [selectedAllele, setSelectedAllele] = useState<string>("");
 
-  const [MSAFasta, setMSAFasta] = useState<string>("");
+  const [sequenceData, setSequenceData] = useState<IAlleleData[]>([]);
   const [aminoAcidSequence, setAminoAcidSequence] = useState<string>("");
 
   async function AASeuqnceData(allele: string) {
@@ -46,7 +47,7 @@ export default function MSAPlotPageComponent(): ReactElement {
       .then((response) => {
         const responseData: IMSAData = response.data;
         setAminoAcidSequence(responseData.aa_sequence);
-        setMSAFasta(responseData.fasta);
+        setSequenceData(responseData.alleleData);
       })
       .catch((response) => console.log(response.error));
   }
@@ -56,7 +57,7 @@ export default function MSAPlotPageComponent(): ReactElement {
     if (selectedAllele) {
       if (!hasCookie('password')) {
         const strToKey = selectedAllele as keyof typeof sampleMSAData;
-        setMSAFasta(sampleMSAData[strToKey].fasta)
+        setSequenceData(sampleMSAData[strToKey].alleleData)
         setAminoAcidSequence(sampleMSAData[strToKey].aa_sequence)
       }
       else {
@@ -96,7 +97,7 @@ export default function MSAPlotPageComponent(): ReactElement {
       </div>
       <h2>Translated sequence:</h2>
       <p>{aminoAcidSequence}</p>
-      <MSAComponent alleleName={selectedAllele} alleleSequenceFasta={MSAFasta} />
+      <MSAViewer alleleSequenceData={sequenceData} />
     </>
   );
 }

@@ -139,7 +139,12 @@ export type IAlleleDropDownConfig = {
   geneSelectionEndpoint: string;
 }
 
+export type IAlleleData = {
+  alleleName: string;
+  alleleSequence: string;
+}
+
 export type IMSAData = {
   aa_sequence: string;
-  fasta: string;
+  alleleData: IAlleleData[];
 }
