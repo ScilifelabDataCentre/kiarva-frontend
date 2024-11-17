@@ -140,11 +140,11 @@ export type IAlleleDropDownConfig = {
 }
 
 export type IAlleleData = {
-  alleleName: string;
-  alleleSequence: string;
+  allele: string;
+  sequence: string;
 }
 
 export type IMSAData = {
   aa_sequence: string;
-  alleleData: IAlleleData[];
+  allele_data: IAlleleData[];
 }

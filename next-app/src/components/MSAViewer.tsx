@@ -8,7 +8,7 @@ interface MSAViewerProps {
 
 const MSAViewer: React.FC<MSAViewerProps> = ({ alleleSequenceData }) => {
   // Find the max length of sequences for proper alignment
-  const maxLength = Math.max(...alleleSequenceData.map(seq => seq.alleleSequence.length));
+  const maxLength = Math.max(...alleleSequenceData.map(seq => seq.sequence.length));
 
   // Define colors for each nucleotide
   const nucleotideColors: { [key: string]: string } = {
@@ -28,21 +28,21 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ alleleSequenceData }) => {
     <div className="flex flex-col items-start max-w-full overflow-x-auto">
       {/* Loop through sequences to display them in rows */}
       {alleleSequenceData.map((seq, seqIndex) => (
-        <div key={seq.alleleName} className="flex flex-row">
+        <div key={seq.allele} className="flex flex-row">
           {/* Allele name on the left */}
           <div style={{ width: '200px', textAlign: 'left', padding: '5px 10px', fontWeight: 'bold' }}>
-            {seq.alleleName}
+            {seq.allele}
           </div>
 
           {/* Sequence nucleotides on the right (with scrollable area) */}
           <div className="flex flex-row space-y-2">
             {Array.from({ length: maxLength }).map((_, index) => {
-              const nucleotide = seq.alleleSequence[index] || '-'; // Use "-" for gaps
+              const nucleotide = seq.sequence[index] || '-'; // Use "-" for gaps
               const color = getNucleotideColor(nucleotide);
 
               return (
                 <div
-                  key={seq.alleleName + '-' + index}
+                  key={seq.allele + '-' + index}
                   style={{
                     width: '20px',
                     height: '30px',

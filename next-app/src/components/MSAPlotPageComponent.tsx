@@ -31,7 +31,7 @@ export default function MSAPlotPageComponent(): ReactElement {
   const alleleDropdownConfig: IAlleleDropDownConfig = {
     'geneSegmentItemsArray': ["IGH"],
     'geneDropDownItemsArray': ["IGHV"],
-    'geneSelectionEndpoint': backendAPI + "data/plotoptions/"
+    'geneSelectionEndpoint': backendAPI + "data/aminoacidplotoptions/"
   }
 
   const [selectedAllele, setSelectedAllele] = useState<string>("");
@@ -40,14 +40,14 @@ export default function MSAPlotPageComponent(): ReactElement {
   const [aminoAcidSequence, setAminoAcidSequence] = useState<string>("");
 
   async function AASeuqnceData(allele: string) {
-    const AASequenceDataEndpoint: string = backendAPI + "data/sequences/aminoacidallelesfasta/" + allele;
+    const AASequenceDataEndpoint: string = backendAPI + "data/sequences/aminoacidalleles/" + allele;
 
     await axios
       .get(AASequenceDataEndpoint, axiosConfig)
       .then((response) => {
         const responseData: IMSAData = response.data;
         setAminoAcidSequence(responseData.aa_sequence);
-        setSequenceData(responseData.alleleData);
+        setSequenceData(responseData.allele_data);
       })
       .catch((response) => console.log(response.error));
   }
@@ -57,7 +57,7 @@ export default function MSAPlotPageComponent(): ReactElement {
     if (selectedAllele) {
       if (!hasCookie('password')) {
         const strToKey = selectedAllele as keyof typeof sampleMSAData;
-        setSequenceData(sampleMSAData[strToKey].alleleData)
+        setSequenceData(sampleMSAData[strToKey].allele_data)
         setAminoAcidSequence(sampleMSAData[strToKey].aa_sequence)
       }
       else {
