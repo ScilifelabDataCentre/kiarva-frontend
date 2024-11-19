@@ -68,7 +68,7 @@ export default function RootLayout({
             and allele. The page features associated SNPs and SNiPer scores.
           </span>
         </div>
-      <SelectionTabComponent paths={{"Genomic": "genomic", "Translated": "translated", "MSA": "msa"}} /> 
+      <SelectionTabComponent paths={{"Genomic": "genomic", "Translated": "translated"}} /> 
       {children}
     </div>
   );

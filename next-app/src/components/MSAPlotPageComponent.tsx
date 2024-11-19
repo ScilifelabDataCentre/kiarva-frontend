@@ -11,10 +11,10 @@ import {
   IMSAData,
 } from "@/interfaces/types";
 import { getCookie, hasCookie } from "cookies-next";
-import AlelleSelectionComponent from "./AlleleSelectionComponent";
+import AlelleSelectionComponent from "@/components/AlleleSelectionComponent";
 import { sampleMSAData } from "@/content/localPlotData";
 import axios from "axios";
-import MSAViewer from "./MSAViewer";
+import MSAViewer from "@/components/MSAViewer";
 
 // Main function to render the PlotPage component
 export default function MSAPlotPageComponent(): ReactElement {
