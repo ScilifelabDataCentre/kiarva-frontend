@@ -8,7 +8,7 @@ const AAPlotPageComponent = dynamic(() => import('@/components/AAPlotPageCompone
 })
 
 // Main function to render the PlotPage component
-export default function PlotPage(): ReactElement {
+export default function AminoAcidPlotPage(): ReactElement {
   return (
     <>
       <AAPlotPageComponent/>
