@@ -148,3 +148,8 @@ export type IMSAData = {
   aa_sequence: string;
   allele_data: IAlleleData[];
 }
+
+export type ISequenceData = {
+  allele: string;
+  sequence: string;
+}
