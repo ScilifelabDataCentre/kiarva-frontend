@@ -135,12 +135,9 @@ export default function PlotPage(): ReactElement {
         getGeneIgSNPerData(selectedAllele);
       }
     }
-  }, [
-    selectedAllele
-  ]);
-
-  useEffect(() => {
-    if (!selectedAllele) {
+    else {
+      setSuperpopFreqAPIData([]);
+      setPopFreqAPIData([]);
       setIgSNPerScore("");
       setIgSNPerSNPs([]);
     }

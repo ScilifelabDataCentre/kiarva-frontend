@@ -124,12 +124,9 @@ export default function AminoAcidPlotPage(): ReactElement {
         getAlleleListAA(selectedAllele);
       }
     }
-  }, [
-    selectedAllele
-  ]);
-
-  useEffect(() => {
-    if (!selectedAllele) {
+    else {
+      setSuperpopFreqAPIData([]);
+      setPopFreqAPIData([]);
       setAlleleListAA([]);
     }
   }, [

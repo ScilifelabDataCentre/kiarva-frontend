@@ -64,6 +64,10 @@ export default function MSAPlotPageComponent(): ReactElement {
         AASeuqnceData(selectedAllele);
       }
     }
+    else {
+      setSequenceData([]);
+      setAminoAcidSequence("");
+    }
   }, [
     selectedAllele
   ]);

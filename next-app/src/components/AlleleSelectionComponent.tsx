@@ -138,7 +138,6 @@ export default function AlelleSelectionComponent(prop: {
         );
     }
   }, [
-    currentPicks.geneSegmentDropdown,
     currentPicks.geneDropdown,
     currentPicks.subtypeDropdown,
     currentPicks.alleleDropdown
@@ -210,7 +209,7 @@ export default function AlelleSelectionComponent(prop: {
         </div>
         <div className="flex items-center justify-center pt-8">
           <p className="text-neutral-content text-xl font-semibold">
-            Plots for {currentPicks.geneDropdown} {currentPicks.subtypeDropdown}{" "}
+            Selected allele: {currentPicks.geneDropdown} {currentPicks.subtypeDropdown}{" "}
             {currentPicks.alleleDropdown}
           </p>
         </div>
