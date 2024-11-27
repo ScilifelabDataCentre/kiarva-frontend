@@ -18,12 +18,20 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement
 }
 
-const actionTypes = {
+// commented out because ESLint was complaining, but saved in case something breaks
+// const actionTypes = {
+//   ADD_TOAST: "ADD_TOAST",
+//   UPDATE_TOAST: "UPDATE_TOAST",
+//   DISMISS_TOAST: "DISMISS_TOAST",
+//   REMOVE_TOAST: "REMOVE_TOAST",
+// } as const
+
+type ActionType = {
   ADD_TOAST: "ADD_TOAST",
   UPDATE_TOAST: "UPDATE_TOAST",
   DISMISS_TOAST: "DISMISS_TOAST",
   REMOVE_TOAST: "REMOVE_TOAST",
-} as const
+}
 
 let count = 0
 
@@ -32,7 +40,7 @@ function genId() {
   return count.toString()
 }
 
-type ActionType = typeof actionTypes
+// type ActionType = typeof actionTypes
 
 type Action =
   | {

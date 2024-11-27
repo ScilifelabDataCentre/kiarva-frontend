@@ -12,10 +12,20 @@ export default function HeaderComponent() {
       classes: LINK_CLASSES,
       link: "/plot",
     },
-    l3: { text: "Methodology", classes: LINK_CLASSES, link: "/methodology" },
-    l4: { text: "Change log", classes: LINK_CLASSES, link: "/changelog" },
-    l5: { text: "Publications", classes: LINK_CLASSES, link: "/publications" },
-    l6: { text: "About", classes: LINK_CLASSES, link: "/about" },
+    l3: {
+      text: "Multiple sequence alignment",
+      classes: LINK_CLASSES,
+      link: "/msa",
+    },
+    l4: {
+      text: "Sequence search",
+      classes: LINK_CLASSES,
+      link: "/sequencesearch",
+    },
+    l5: { text: "Methodology", classes: LINK_CLASSES, link: "/methodology" },
+    l6: { text: "Change log", classes: LINK_CLASSES, link: "/changelog" },
+    l7: { text: "Publications", classes: LINK_CLASSES, link: "/publications" },
+    l8: { text: "About", classes: LINK_CLASSES, link: "/about" },
   };
 
   return (

@@ -9,7 +9,7 @@ import { IAlleleDropDownConfig } from "@/interfaces/types";
 // Main function to render the PlotPage component
 export default function AlelleSelectionComponent(prop: {
     alleleSelectionConfig: IAlleleDropDownConfig,
-    handleSetSelection: Function,
+    handleSetSelection: (allele: string) => void,
     plotType: string
   }): ReactElement {
   const [axiosConfig, setAxiosConfig] = useState({

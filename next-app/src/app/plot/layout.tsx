@@ -12,7 +12,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   function setIsDisclaimerPopupOpen(arg0: boolean): void {
-    console.log("Disclaimer popup button not implemented.")
+    if (arg0) {
+        console.log("Disclaimer popup button not implemented.")
+    }
   }
 
   return (
@@ -43,7 +45,7 @@ export default function RootLayout({
             onClose={() => setIsDisclaimerPopupOpen(false)}
             explanation="This page is fully developed and allows you to explore its
                       design and functionality. However, the underlying data has
-                      not been officially published yet. Therefore, we can currently only showcase three plots for demonstration purposes."
+                      not been officially published yet. Therefore, we can currently only showcase a sample of the data for demonstration purposes."
           />
         )}
 
@@ -65,7 +67,8 @@ export default function RootLayout({
             This page allows users to generate population frequency plots for
             the KI Adaptive Immune Receptor Gene Variant Atlas. You can select
             from various dropdowns to filter by gene segment, gene type, gene,
-            and allele. The page features associated SNPs and SNiPer scores.
+            and allele. The genomic plot page features associated SNPs and SNiPer scores,
+            while the translated plot page features a list of other alleles translating to the same amino acid.
           </span>
         </div>
       <SelectionTabComponent paths={{"Genomic": "genomic", "Translated": "translated"}} /> 

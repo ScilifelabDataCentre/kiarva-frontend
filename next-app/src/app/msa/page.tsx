@@ -9,7 +9,9 @@ import { ReactElement } from 'react';
 // Main function to render the PlotPage component
 export default function AminoAcidPlotPage(): ReactElement {
     function setIsDisclaimerPopupOpen(arg0: boolean): void {
-        console.log("Disclaimer popup button not implemented.")
+        if (arg0) {
+            console.log("Disclaimer popup button not implemented.")
+        }
         }
   return (
     <div className={BODY_CLASSES}>
@@ -39,7 +41,7 @@ export default function AminoAcidPlotPage(): ReactElement {
             onClose={() => setIsDisclaimerPopupOpen(false)}
             explanation="This page is fully developed and allows you to explore its
                       design and functionality. However, the underlying data has
-                      not been officially published yet. Therefore, we can currently only showcase three plots for demonstration purposes."
+                      not been officially published yet. Therefore, we can currently only showcase a sample of the data for demonstration purposes."
           />
         )}
 

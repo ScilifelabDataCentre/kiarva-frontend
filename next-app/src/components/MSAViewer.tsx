@@ -27,7 +27,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ alleleSequenceData }) => {
   return (
     <div className="flex flex-col items-start max-w-full overflow-x-auto">
       {/* Loop through sequences to display them in rows */}
-      {alleleSequenceData.map((seq, seqIndex) => (
+      {alleleSequenceData.map((seq) => (
         <div key={seq.allele} className="flex flex-row">
           {/* Allele name on the left */}
           <div className="w-[200px] text-left py-1 font-bold sticky left-0 bg-white">
