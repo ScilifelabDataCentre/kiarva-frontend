@@ -15,6 +15,7 @@ import AlelleSelectionComponent from "@/components/AlleleSelectionComponent";
 import { sampleMSAData } from "@/content/localPlotData";
 import axios from "axios";
 import MSAViewer from "@/components/MSAViewer";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 // Main function to render the PlotPage component
 export default function MSAPlotPageComponent(): ReactElement {
@@ -36,7 +37,7 @@ export default function MSAPlotPageComponent(): ReactElement {
 
   const [selectedAllele, setSelectedAllele] = useState<string>("");
 
-  const [sequenceData, setSequenceData] = useState<IAlleleData[]>([]);
+  const [sequenceData, setSequenceData] = useState<IAlleleData[]>([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
   const [aminoAcidSequence, setAminoAcidSequence] = useState<string>("");
 
   async function AASeuqnceData(allele: string) {
@@ -63,6 +64,10 @@ export default function MSAPlotPageComponent(): ReactElement {
       else {
         AASeuqnceData(selectedAllele);
       }
+    }
+    else {
+      setSequenceData([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
+      setAminoAcidSequence("");
     }
   }, [
     selectedAllele
@@ -95,9 +100,21 @@ export default function MSAPlotPageComponent(): ReactElement {
           plotType={"aminoAcidMSA"}
         />
       </div>
-      <h2>Translated sequence:</h2>
-      <p>{aminoAcidSequence}</p>
+      <div className="divider pt-4 "></div>
       <MSAViewer alleleSequenceData={sequenceData} />
+      {aminoAcidSequence &&
+      <>
+        <Card>
+          <CardHeader className="bg-muted">
+            <CardTitle className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              Translated sequence
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-4">
+            <p>{aminoAcidSequence}</p>
+          </CardContent>
+        </Card>
+      </>}
     </>
   );
 }

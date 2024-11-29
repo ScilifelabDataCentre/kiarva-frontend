@@ -135,12 +135,9 @@ export default function PlotPage(): ReactElement {
         getGeneIgSNPerData(selectedAllele);
       }
     }
-  }, [
-    selectedAllele
-  ]);
-
-  useEffect(() => {
-    if (!selectedAllele) {
+    else {
+      setSuperpopFreqAPIData([]);
+      setPopFreqAPIData([]);
       setIgSNPerScore("");
       setIgSNPerSNPs([]);
     }
@@ -157,7 +154,6 @@ export default function PlotPage(): ReactElement {
   }, []);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isDisclaimerPopupOpen, setIsDisclaimerPopupOpen] = useState(true);
 
   // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
   useEffect(() => {

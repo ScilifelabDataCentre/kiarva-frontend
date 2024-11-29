@@ -1,25 +1,21 @@
 'use client';
 
-import { BODY_CLASSES, H_1 } from "@/constants";
-import "../globals.css";
-import SelectionTabComponent from "@/components/SelectionTabComponent";
-import { hasCookie } from "cookies-next";
-import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent";
+import DisclaimerPopupComponent from '@/components/DisclaimerPopupComponent';
+import MSAPlotPageComponent from '@/components/MSAPlotPageComponent';
+import { BODY_CLASSES, H_1 } from '@/constants';
+import { hasCookie } from 'cookies-next';
+import { ReactElement } from 'react';
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  function setIsDisclaimerPopupOpen(arg0: boolean): void {
-    if (arg0) {
-        console.log("Disclaimer popup button not implemented.")
-    }
-  }
-
+// Main function to render the PlotPage component
+export default function AminoAcidPlotPage(): ReactElement {
+    function setIsDisclaimerPopupOpen(arg0: boolean): void {
+        if (arg0) {
+            console.log("Disclaimer popup button not implemented.")
+        }
+        }
   return (
     <div className={BODY_CLASSES}>
-      <h1 className={H_1}>Allele frequency in global populations</h1>
+      <h1 className={H_1}>Multiple sequence alignment of allele sequences translating to the same amino acid</h1>
         {!hasCookie('password') &&
         <button
           className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
@@ -64,15 +60,13 @@ export default function RootLayout({
             ></path>
           </svg>
           <span className="text-sm lg:text-base">
-            This page allows users to generate population frequency plots for
+            This page allows users to generate multiple sequence alignments for alleles in 
             the KI Adaptive Immune Receptor Gene Variant Atlas. You can select
             from various dropdowns to filter by gene segment, gene type, gene,
-            and allele. The genomic plot page features associated SNPs and SNiPer scores,
-            while the translated plot page features a list of other alleles translating to the same amino acid.
+            and allele.
           </span>
         </div>
-      <SelectionTabComponent paths={{"Genomic": "genomic", "Translated": "translated"}} /> 
-      {children}
+        <MSAPlotPageComponent />
     </div>
   );
 }

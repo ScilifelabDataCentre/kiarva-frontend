@@ -23,14 +23,14 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ alleleSequenceData }) => {
   const getNucleotideColor = (nucleotide: string) => {
     return nucleotideColors[nucleotide] || '#BDBDBD'; // Default to grey if unknown
   };
-
+  //{ width: '200px', textAlign: 'left', padding: '5px 10px', fontWeight: 'bold' }
   return (
     <div className="flex flex-col items-start max-w-full overflow-x-auto">
       {/* Loop through sequences to display them in rows */}
-      {alleleSequenceData.map((seq, seqIndex) => (
+      {alleleSequenceData.map((seq) => (
         <div key={seq.allele} className="flex flex-row">
           {/* Allele name on the left */}
-          <div style={{ width: '200px', textAlign: 'left', padding: '5px 10px', fontWeight: 'bold' }}>
+          <div className="w-[200px] text-left py-1 font-bold sticky left-0 bg-white">
             {seq.allele}
           </div>
 

@@ -3,8 +3,14 @@
 import Link from "next/link";
 import { ILink } from "@/interfaces/types";
 import { LINK_CLASSES } from "@/constants";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import clsx from "clsx";
+import { HeaderDropdown } from "@/components/ui/header-dropdown";
 
 export default function HeaderComponent() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
   const links: { [id: string]: ILink } = {
     l1: { text: "Download", classes: LINK_CLASSES, link: "/download" },
     l2: {
@@ -12,76 +18,94 @@ export default function HeaderComponent() {
       classes: LINK_CLASSES,
       link: "/plot",
     },
-    l3: { text: "Methodology", classes: LINK_CLASSES, link: "/methodology" },
-    l4: { text: "Change log", classes: LINK_CLASSES, link: "/changelog" },
-    l5: { text: "Publications", classes: LINK_CLASSES, link: "/publications" },
-    l6: { text: "About", classes: LINK_CLASSES, link: "/about" },
+    l3: {
+      text: "Multiple sequence alignment",
+      classes: LINK_CLASSES,
+      link: "/msa",
+    },
+    l4: {
+      text: "Sequence search",
+      classes: LINK_CLASSES,
+      link: "/sequencesearch",
+    },
+    l5: { text: "Methodology", classes: LINK_CLASSES, link: "/methodology" },
+    l6: { text: "Change log", classes: LINK_CLASSES, link: "/changelog" },
+    l7: { text: "Publications", classes: LINK_CLASSES, link: "/publications" },
+    l8: { text: "About", classes: LINK_CLASSES, link: "/about" },
   };
 
+  const mainLinks = Object.fromEntries(Object.entries(links).slice(0, 4));
+  const dropdownLinks = Object.fromEntries(Object.entries(links).slice(4));
+
   return (
-    <>
-      <div className="bg-gradient-to-b from-primary to-secondary">
-        <div className="py-4 lg:px-36 lg:pt-16 max-w-screen-13inch 2xl:mx-auto">
-          <div className="navbar text-primary-content">
-            <div className="navbar-start 13inch:hidden">
-              <div className="dropdown">
-                <label tabIndex={0} className="btn btn-ghost">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M4 6h16M4 12h16M4 18h7"
-                    />
-                  </svg>
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-base-content"
-                >
-                  {Object.keys(links).map((key) => (
-                    <li key={key}>
-                      <Link
-                        className={links[key].classes}
-                        href={links[key].link}
-                      >
-                        {links[key].text}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+    <div className="bg-gradient-to-b from-primary to-secondary">
+      <div className="text-white 2xl:max-w-screen-2xl 2xl:mx-auto">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between py-4 px-6">
+          <div className="flex justify-between items-center">
+            <Link href="/">
+              <div className="font-bold text-center">
+                <p className="text-2xl">KIARVA</p>
+                <span className="lg:whitespace-nowrap text-xl">
+                  KI Adaptive Immune Receptor Gene Variant Atlas
+                </span>
               </div>
-            </div>
-            <div className="navbar-end 13inch:navbar-start">
-              <Link href="/">
-                <div className="font-bold text-center">
-                  <p className="text-2xl">KIARVA</p>
-                  <span className="lg:whitespace-nowrap text-xl">
-                    KI Adaptive Immune Receptor Gene Variant Atlas
-                  </span>
-                </div>
-              </Link>
-            </div>
-            <div className="hidden 13inch:flex 13inch:navbar-center">
-              <ul className="menu menu-horizontal text-base">
-                {Object.keys(links).map((key) => (
-                  <li key={key}>
-                    <Link className={links[key].classes} href={links[key].link}>
-                      {links[key].text}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            </Link>
+            <button
+              className="lg:hidden text-white focus:outline-none"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
           </div>
+          <nav
+            className={`${
+              isMenuOpen ? "block" : "hidden"
+            } lg:block mt-4 lg:mt-0`}
+          >
+            <ul className="flex flex-col lg:flex-row lg:flex-wrap lg:items-center lg:space-x-6 space-y-2 lg:space-y-0 text-lg">
+              {Object.entries(links).map(([key, link], index) => (
+                <li key={key} className={index >= 4 ? "lg:hidden" : ""}>
+                  <Link
+                    className={clsx(
+                      link.classes,
+                      "block",
+                      pathname === link.link && "underline"
+                    )}
+                    href={link.link}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
+              <li className="hidden lg:block">
+                <HeaderDropdown links={dropdownLinks} />
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
-    </>
+    </div>
   );
 }
