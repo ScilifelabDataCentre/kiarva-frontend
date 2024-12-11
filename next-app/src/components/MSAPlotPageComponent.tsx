@@ -6,7 +6,7 @@ import {
 } from "@/constants";
 import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import {
-  IAlleleData,
+  ISequenceData,
   IAlleleDropDownConfig,
   IMSAData,
 } from "@/interfaces/types";
@@ -15,7 +15,6 @@ import AlelleSelectionComponent from "@/components/AlleleSelectionComponent";
 import { sampleMSAData } from "@/content/localPlotData";
 import axios from "axios";
 import MSAViewer from "@/components/MSAViewer";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 // Main function to render the PlotPage component
 export default function MSAPlotPageComponent(): ReactElement {
@@ -37,18 +36,25 @@ export default function MSAPlotPageComponent(): ReactElement {
 
   const [selectedAllele, setSelectedAllele] = useState<string>("");
 
-  const [sequenceData, setSequenceData] = useState<IAlleleData[]>([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
-  const [aminoAcidSequence, setAminoAcidSequence] = useState<string>("");
+  const [sequenceData, setSequenceData] = useState<ISequenceData[]>([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
+  const [aminoAcidSequence, setAminoAcidSequence] = useState<ISequenceData[]>([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
 
-  async function AASeuqnceData(allele: string) {
+  async function AASequenceData(allele: string) {
     const AASequenceDataEndpoint: string = backendAPI + "data/sequences/aminoacidalleles/" + allele;
 
     await axios
       .get(AASequenceDataEndpoint, axiosConfig)
       .then((response) => {
-        const responseData: IMSAData = response.data;
-        setAminoAcidSequence(responseData.aa_sequence);
-        setSequenceData(responseData.allele_data);
+        const responseData: IMSAData[] = response.data;
+        let item: IMSAData;
+        let tmpAminoAcidSequence = [];
+        let tmpSequenceData = [];
+        for (item of responseData) {
+          tmpAminoAcidSequence.push({'allele': item.aa_allele, 'sequence': item.aa_sequence});
+          tmpSequenceData.push(item.allele_data[0])
+        }
+        setAminoAcidSequence(tmpAminoAcidSequence);
+        setSequenceData(tmpSequenceData);
       })
       .catch((response) => console.log(response.error));
   }
@@ -57,17 +63,18 @@ export default function MSAPlotPageComponent(): ReactElement {
   useEffect(() => {
     if (selectedAllele) {
       if (!hasCookie('password')) {
-        const strToKey = selectedAllele as keyof typeof sampleMSAData;
-        setSequenceData(sampleMSAData[strToKey].allele_data)
-        setAminoAcidSequence(sampleMSAData[strToKey].aa_sequence)
+        const allele_data_sample: string = "IGHV1-18*01_AA"
+        const strToKey = allele_data_sample as keyof typeof sampleMSAData[0];
+        setSequenceData(sampleMSAData[0][strToKey].allele_data)
+        setAminoAcidSequence([{'allele': "IGHV1-18*01", 'sequence': sampleMSAData[0][strToKey].aa_sequence}])
       }
       else {
-        AASeuqnceData(selectedAllele);
+        AASequenceData(selectedAllele);
       }
     }
     else {
       setSequenceData([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
-      setAminoAcidSequence("");
+      setAminoAcidSequence([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
     }
   }, [
     selectedAllele
@@ -101,20 +108,11 @@ export default function MSAPlotPageComponent(): ReactElement {
         />
       </div>
       <div className="divider pt-4 "></div>
-      <MSAViewer alleleSequenceData={sequenceData} />
-      {aminoAcidSequence &&
-      <>
-        <Card>
-          <CardHeader className="bg-muted">
-            <CardTitle className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              Translated sequence
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="pt-4">
-            <p>{aminoAcidSequence}</p>
-          </CardContent>
-        </Card>
-      </>}
+      <h1 className="text-black">Nucleotide sequence alignment</h1>
+      <MSAViewer sequenceData={sequenceData} />
+      <div className="divider pt-4 "></div>
+      <h1 className="text-black">Translated sequence alignment</h1>
+      <MSAViewer sequenceData={aminoAcidSequence} />
     </>
   );
 }
