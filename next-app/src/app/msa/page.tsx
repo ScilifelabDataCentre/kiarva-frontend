@@ -12,10 +12,10 @@ export default function AminoAcidPlotPage(): ReactElement {
         if (arg0) {
             console.log("Disclaimer popup button not implemented.")
         }
-        }
+    }
   return (
     <div className={BODY_CLASSES}>
-      <h1 className={H_1}>Multiple sequence alignment of allele sequences translating to the same amino acid</h1>
+      <h1 className={H_1}>Multiple sequence alignments</h1>
         {!hasCookie('password') &&
         <button
           className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
@@ -45,7 +45,7 @@ export default function AminoAcidPlotPage(): ReactElement {
           />
         )}
 
-        <div className="alert">
+        <div className="bg-muted alert">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -60,10 +60,9 @@ export default function AminoAcidPlotPage(): ReactElement {
             ></path>
           </svg>
           <span className="text-sm lg:text-base">
-            This page allows users to generate multiple sequence alignments for alleles in 
+            This page allows users to see sequence alignments for nucleotide and translated sequences in 
             the KI Adaptive Immune Receptor Gene Variant Atlas. You can select
-            from various dropdowns to filter by gene segment, gene type, gene,
-            and allele.
+            from various dropdowns to filter by gene segment, gene type and gene.
           </span>
         </div>
         <MSAPlotPageComponent />

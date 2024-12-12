@@ -127,15 +127,28 @@ export default function AlelleSelectionComponent(prop: {
   }, [])
 
   useEffect(() => {
-    if (!currentPicks.alleleDropdown) {
-      prop.handleSetSelection("");
+    if (!(prop.plotType == "aminoAcidMSA")) {
+      if (!currentPicks.alleleDropdown) {
+        prop.handleSetSelection("");
+      }
+      else {
+          prop.handleSetSelection(
+              currentPicks.geneDropdown+
+              currentPicks.subtypeDropdown+
+              currentPicks.alleleDropdown
+          );
+      }
     }
     else {
-        prop.handleSetSelection(
-            currentPicks.geneDropdown+
-            currentPicks.subtypeDropdown+
-            currentPicks.alleleDropdown
-        );
+      if (!currentPicks.subtypeDropdown) {
+        prop.handleSetSelection("");
+      }
+      else {
+          prop.handleSetSelection(
+              currentPicks.geneDropdown+
+              currentPicks.subtypeDropdown
+          );
+      }     
     }
   }, [
     currentPicks.geneDropdown,
@@ -197,6 +210,7 @@ export default function AlelleSelectionComponent(prop: {
                 : ""
             }`}
           >
+          {!(prop.plotType == "aminoAcidMSA") && 
             <DropdownComponent
               menuName="Allele"
               menuItemsArray={alleleDropDownItemsArray}
@@ -205,11 +219,12 @@ export default function AlelleSelectionComponent(prop: {
                 handleSetCurrentPick("alleleDropdown", value)
               }
             />
+          }
           </div>
         </div>
         <div className="flex items-center justify-center pt-8">
           <p className="text-neutral-content text-xl font-semibold">
-            Selected allele: {currentPicks.geneDropdown} {currentPicks.subtypeDropdown}{" "}
+            Current selection: {currentPicks.geneDropdown}{currentPicks.subtypeDropdown}
             {currentPicks.alleleDropdown}
           </p>
         </div>

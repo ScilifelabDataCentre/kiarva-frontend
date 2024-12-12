@@ -19,7 +19,7 @@ export default function HeaderComponent() {
       link: "/plot",
     },
     l3: {
-      text: "Multiple sequence alignment",
+      text: "Alignments",
       classes: LINK_CLASSES,
       link: "/msa",
     },
