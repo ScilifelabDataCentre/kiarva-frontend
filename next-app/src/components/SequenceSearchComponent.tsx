@@ -47,6 +47,15 @@ const SequenceSearchComponent: React.FC<SequenceSearchProps> = ({ sequenceData, 
   return (
     <div className="flex flex-col items-start max-w-full overflow-x-auto">
       {/* Loop through sequences to display them in rows */}
+      <div className="flex flex-row">
+        <h2 className="w-[250px] font-bold">
+          Allele
+        </h2>
+        <h2 className="font-bold">
+          Sequence
+        </h2>
+      </div>
+      <div className="divider pt-4 "></div>
       {sequenceData.map((seq) => (
         <div key={seq.allele} className="flex flex-row">
           {/* Allele name on the left */}
@@ -64,13 +73,13 @@ const SequenceSearchComponent: React.FC<SequenceSearchProps> = ({ sequenceData, 
                 <div
                   key={seq.allele + '-' + index}
                   style={{
-                    width: '20px',
+                    width: '13px',
                     height: '30px',
                     textAlign: 'center',
                     backgroundColor: color.background,
                     color: color.text,
-                    padding: '5px',
-                    margin: '1px',
+                    padding: '0px',
+                    margin: '0px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
