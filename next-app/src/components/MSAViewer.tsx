@@ -20,7 +20,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
     //   '#BDBDBD', // Grey
     //   '#f1f5f9', // bg-muted
     if (differingIndexes.includes(index)) {
-      return {'background': '#2196F3', 'text': 'white'}
+      return {'background': '#045C64', 'text': 'white'}
     }
     else {
       return {'background': 'bg-base-100', 'text': 'black'}

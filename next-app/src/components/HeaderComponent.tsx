@@ -34,7 +34,7 @@ export default function HeaderComponent() {
     l8: { text: "About", classes: LINK_CLASSES, link: "/about" },
   };
 
-  const mainLinks = Object.fromEntries(Object.entries(links).slice(0, 4));
+  // const mainLinks = Object.fromEntries(Object.entries(links).slice(0, 4));
   const dropdownLinks = Object.fromEntries(Object.entries(links).slice(4));
 
   return (
