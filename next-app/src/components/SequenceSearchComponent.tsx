@@ -32,7 +32,7 @@ const SequenceSearchComponent: React.FC<SequenceSearchProps> = ({ sequenceData, 
     //   '#BDBDBD', // Grey
     //   '#f1f5f9', // bg-muted
     if (isCharInsideSearchTerm(index, searchTermPositions)) {
-      return {'background': '#2196F3', 'text': 'white'}
+      return {'background': '#045C64', 'text': 'white'}
     }
     else {
       return {'background': '#f8fafc', 'text': 'black'}

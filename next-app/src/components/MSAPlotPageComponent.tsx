@@ -47,8 +47,8 @@ export default function MSAPlotPageComponent(): ReactElement {
       .then((response) => {
         const responseData: IMSAData[] = response.data;
         let item: IMSAData;
-        let tmpAminoAcidSequence = [];
-        let tmpSequenceData = [];
+        const tmpAminoAcidSequence = [];
+        const tmpSequenceData = [];
         for (item of responseData) {
           tmpAminoAcidSequence.push({'allele': item.aa_allele, 'sequence': item.aa_sequence});
           tmpSequenceData.push(item.allele_data[0])

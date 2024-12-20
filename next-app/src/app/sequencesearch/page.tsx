@@ -21,8 +21,6 @@ import axios from "axios"
 import { getCookie, hasCookie } from "cookies-next"
 import { backendAPI, BODY_CLASSES, H_1 } from "@/constants"
 import { ISequenceSearchData } from "@/interfaces/types"
-import { DataTable } from "@/components/ui/data-table"
-import { columns } from "./columns"
 import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent"
 import SequenceSearchComponent from "@/components/SequenceSearchComponent"
 
