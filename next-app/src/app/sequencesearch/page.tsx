@@ -20,10 +20,11 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { getCookie, hasCookie } from "cookies-next"
 import { backendAPI, BODY_CLASSES, H_1 } from "@/constants"
-import { ISequenceData } from "@/interfaces/types"
+import { ISequenceSearchData } from "@/interfaces/types"
 import { DataTable } from "@/components/ui/data-table"
 import { columns } from "./columns"
 import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent"
+import SequenceSearchComponent from "@/components/SequenceSearchComponent"
 
 const FormSchema = z.object({
   sequence: z.string().min(10, {
@@ -39,7 +40,8 @@ export default function SequenceSearchInputForm() {
       })
 
     const sequenceSearchEndpoint = backendAPI + "data/sequences/"
-    const [sequenceData, setSequenceData] = useState<ISequenceData[]>([]);
+    const [sequenceData, setSequenceData] = useState<ISequenceSearchData[]>([]);
+    const [searchTermLength, setSearchTermLength] = useState<number>(0);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -60,6 +62,7 @@ export default function SequenceSearchInputForm() {
     await axios
     .get(sequenceSearchEndpoint + data.sequence, axiosConfig)
     .then((response) => {
+      setSearchTermLength(data.sequence.length);
       setSequenceData(response.data);
     })
     .catch((response) => console.log(response.error));
@@ -158,7 +161,7 @@ export default function SequenceSearchInputForm() {
           </Form>
         </div>
         {hasCookie('password') ? 
-            <DataTable columns={columns} data={sequenceData} />
+            <SequenceSearchComponent sequenceData={sequenceData} searchTermLength={searchTermLength} />
             :
             <p>Sequence seach disabled for light version. Will be available for full release.</p>}
     </div>

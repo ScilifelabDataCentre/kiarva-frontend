@@ -144,6 +144,12 @@ export type ISequenceData = {
   sequence: string;
 }
 
+export type ISequenceSearchData = {
+  allele: string;
+  sequence: string;
+  positions: number[];
+}
+
 export type IMSAData = {
   aa_allele: string;
   aa_sequence: string;
