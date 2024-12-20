@@ -1,33 +1,76 @@
 /** @type {import('tailwindcss').Config} */
 declare var require: any;
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    darkMode: ["class"],
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {
-      colors: {
-        primary: "#045c64", // Teal, primary color
-        "primary-content": "#ffffff", // White, text color on primary
-        secondary: "#777373", // Gray, secondary color
-        "secondary-content": "#ffffff", // White, text color on secondary
-        accent: "#a7c947", // SciLifeLab Lime, accent color
-        "accent-content": "#ffffff", // White, text color on accent
-        neutral: "#e5e5e5", // SciLifeLab Light Gray, neutral color
-        "neutral-content": "#000000", // Black, text color on neutral
-        "base-100": "#f8fafc", // Light slate gray, base color
-        "base-100-content": "#000000", // Black, text color on base-100
-        info: "#491f53", // SciLifeLab Grape, Info color
-        "info-content": "#ffffff", // White, text color on info
-        success: "#a7c947", // SciLifeLab Green, Success color
-        "success-content": "#ffffff", // White, text color on success
-        warning: "#ff9900", // Orange, Warning color
-        "warning-content": "#ffffff", // White, text color on warning
-        error: "#ff5724", // Red, Error color
-        "error-content": "#ffffff", // White, text color on error
-      },
-      screens: {
-        "13inch": "1440px", // Customize this value based on the resolution you target
-      },
-    },
+  	extend: {
+  		colors: {
+  			primary: {
+  				DEFAULT: 'hsl(var(--primary))',
+  				foreground: 'hsl(var(--primary-foreground))'
+  			},
+  			'primary-content': '#ffffff',
+  			secondary: {
+  				DEFAULT: 'hsl(var(--secondary))',
+  				foreground: 'hsl(var(--secondary-foreground))'
+  			},
+  			'secondary-content': '#ffffff',
+  			accent: {
+  				DEFAULT: 'hsl(var(--accent))',
+  				foreground: 'hsl(var(--accent-foreground))'
+  			},
+  			'accent-content': '#ffffff',
+  			neutral: '#e5e5e5',
+  			'neutral-content': '#000000',
+  			'base-100': '#f8fafc',
+  			'base-100-content': '#000000',
+  			info: '#491f53',
+  			'info-content': '#ffffff',
+  			success: '#a7c947',
+  			'success-content': '#ffffff',
+  			warning: '#ff9900',
+  			'warning-content': '#ffffff',
+  			error: '#ff5724',
+  			'error-content': '#ffffff',
+  			background: 'hsl(var(--background))',
+  			foreground: 'hsl(var(--foreground))',
+  			card: {
+  				DEFAULT: 'hsl(var(--card))',
+  				foreground: 'hsl(var(--card-foreground))'
+  			},
+  			popover: {
+  				DEFAULT: 'hsl(var(--popover))',
+  				foreground: 'hsl(var(--popover-foreground))'
+  			},
+  			muted: {
+  				DEFAULT: 'hsl(var(--muted))',
+  				foreground: 'hsl(var(--muted-foreground))'
+  			},
+  			destructive: {
+  				DEFAULT: 'hsl(var(--destructive))',
+  				foreground: 'hsl(var(--destructive-foreground))'
+  			},
+  			border: 'hsl(var(--border))',
+  			input: 'hsl(var(--input))',
+  			ring: 'hsl(var(--ring))',
+  			chart: {
+  				'1': 'hsl(var(--chart-1))',
+  				'2': 'hsl(var(--chart-2))',
+  				'3': 'hsl(var(--chart-3))',
+  				'4': 'hsl(var(--chart-4))',
+  				'5': 'hsl(var(--chart-5))'
+  			}
+  		},
+  		screens: {
+  			'13inch': '1440px'
+  		},
+  		borderRadius: {
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
+  		}
+  	}
   },
   plugins: [
     require("daisyui"),
@@ -38,5 +81,6 @@ export default {
         },
       });
     },
-  ],
+      require("tailwindcss-animate")
+],
 };
