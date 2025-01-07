@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { ReactElement, useEffect, useState } from "react";
 import axios from "axios";
@@ -8,15 +8,15 @@ import { IAlleleDropDownConfig } from "@/interfaces/types";
 
 // Main function to render the PlotPage component
 export default function AlelleSelectionComponent(prop: {
-    alleleSelectionConfig: IAlleleDropDownConfig,
-    handleSetSelection: (allele: string) => void,
-    plotType: string
-  }): ReactElement {
+  alleleSelectionConfig: IAlleleDropDownConfig;
+  handleSetSelection: (allele: string) => void;
+  plotType: string;
+}): ReactElement {
   const [axiosConfig, setAxiosConfig] = useState({
     headers: {
       "X-api-key": "",
-    }
-  })
+    },
+  });
 
   // Initialize state for dropdown selections
   const [currentPicks, setCurrentPicks] = useState({
@@ -29,8 +29,10 @@ export default function AlelleSelectionComponent(prop: {
   // ------------------------
   // temporary data, used until backend with live data is allowed to be published
   // Arrays for dropdown menu items
-  const geneSegmentItemsArray = prop.alleleSelectionConfig.geneSegmentItemsArray;
-  const geneDropDownItemsArray = prop.alleleSelectionConfig.geneDropDownItemsArray;
+  const geneSegmentItemsArray =
+    prop.alleleSelectionConfig.geneSegmentItemsArray;
+  const geneDropDownItemsArray =
+    prop.alleleSelectionConfig.geneDropDownItemsArray;
 
   const [subtypeDropDownItemsArray, setSubtypeDropDownItemsArray] = useState<
     string[]
@@ -38,7 +40,8 @@ export default function AlelleSelectionComponent(prop: {
   const [alleleDropDownItemsArray, setAlleleDropDownItemsArray] = useState<
     string[]
   >(["..."]);
-  const geneSelectionEndpoint: string = prop.alleleSelectionConfig.geneSelectionEndpoint;
+  const geneSelectionEndpoint: string =
+    prop.alleleSelectionConfig.geneSelectionEndpoint;
 
   // Function to update the current pick for dropdowns
   const handleSetCurrentPick = (dropdownName: string, value: string) => {
@@ -59,35 +62,21 @@ export default function AlelleSelectionComponent(prop: {
   };
 
   useEffect(() => {
-    if (!hasCookie('password')) {
-        if (prop.plotType == "genomicFreqPlot") {
-            setSubtypeDropDownItemsArray(['1-2']);
-            setAlleleDropDownItemsArray([
-                '*02_S4953',
-                '*04',
-                '*06'
-            ])
-        }
-        else if (prop.plotType == "aminoAcidFreqPlot") {
-            setSubtypeDropDownItemsArray(['1-18']);
-            setAlleleDropDownItemsArray([
-                '*01_AA',
-            ])
-        }
-        else if (prop.plotType == "aminoAcidMSA") {
-            setSubtypeDropDownItemsArray(['1-18']);
-            setAlleleDropDownItemsArray([
-                '*01_AA',
-            ])
-        }
-        else {
-            setSubtypeDropDownItemsArray(['...']);
-            setAlleleDropDownItemsArray([
-                '...',
-            ])
-        }
-    }
-    else {
+    if (!hasCookie("password")) {
+      if (prop.plotType == "genomicFreqPlot") {
+        setSubtypeDropDownItemsArray(["1-2"]);
+        setAlleleDropDownItemsArray(["*02_S4953", "*04", "*06"]);
+      } else if (prop.plotType == "aminoAcidFreqPlot") {
+        setSubtypeDropDownItemsArray(["1-18"]);
+        setAlleleDropDownItemsArray(["*01_AA"]);
+      } else if (prop.plotType == "aminoAcidMSA") {
+        setSubtypeDropDownItemsArray(["1-18"]);
+        setAlleleDropDownItemsArray(["*01_AA"]);
+      } else {
+        setSubtypeDropDownItemsArray(["..."]);
+        setAlleleDropDownItemsArray(["..."]);
+      }
+    } else {
       if (!currentPicks.subtypeDropdown) {
         setAlleleDropDownItemsArray(["..."]);
         const currentSelection = currentPicks.geneDropdown;
@@ -117,43 +106,39 @@ export default function AlelleSelectionComponent(prop: {
 
   // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
   useEffect(() => {
-    if (hasCookie('password')) {
+    if (hasCookie("password")) {
       setAxiosConfig({
         headers: {
-            'X-api-key': getCookie('password') as string,
-        }
-      })
+          "X-api-key": getCookie("password") as string,
+        },
+      });
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (!(prop.plotType == "aminoAcidMSA")) {
       if (!currentPicks.alleleDropdown) {
         prop.handleSetSelection("");
+      } else {
+        prop.handleSetSelection(
+          currentPicks.geneDropdown +
+            currentPicks.subtypeDropdown +
+            currentPicks.alleleDropdown
+        );
       }
-      else {
-          prop.handleSetSelection(
-              currentPicks.geneDropdown+
-              currentPicks.subtypeDropdown+
-              currentPicks.alleleDropdown
-          );
-      }
-    }
-    else {
+    } else {
       if (!currentPicks.subtypeDropdown) {
         prop.handleSetSelection("");
+      } else {
+        prop.handleSetSelection(
+          currentPicks.geneDropdown + currentPicks.subtypeDropdown
+        );
       }
-      else {
-          prop.handleSetSelection(
-              currentPicks.geneDropdown+
-              currentPicks.subtypeDropdown
-          );
-      }     
     }
   }, [
     currentPicks.geneDropdown,
     currentPicks.subtypeDropdown,
-    currentPicks.alleleDropdown
+    currentPicks.alleleDropdown,
   ]);
 
   // Render the component
@@ -210,22 +195,30 @@ export default function AlelleSelectionComponent(prop: {
                 : ""
             }`}
           >
-          {!(prop.plotType == "aminoAcidMSA") && 
-            <DropdownComponent
-              menuName="Allele"
-              menuItemsArray={alleleDropDownItemsArray}
-              currentPick={currentPicks.alleleDropdown}
-              setCurrentPick={(value) =>
-                handleSetCurrentPick("alleleDropdown", value)
-              }
-            />
-          }
+            {!(prop.plotType == "aminoAcidMSA") && (
+              <DropdownComponent
+                menuName="Allele"
+                menuItemsArray={alleleDropDownItemsArray}
+                currentPick={currentPicks.alleleDropdown}
+                setCurrentPick={(value) =>
+                  handleSetCurrentPick("alleleDropdown", value)
+                }
+              />
+            )}
           </div>
         </div>
         <div className="flex items-center justify-center pt-8">
           <p className="text-neutral-content text-xl font-semibold">
-            Current selection: {currentPicks.geneDropdown}{currentPicks.subtypeDropdown}
-            {currentPicks.alleleDropdown}
+            {currentPicks.geneDropdown &&
+            currentPicks.subtypeDropdown &&
+            currentPicks.alleleDropdown ? (
+              <>
+                Plot for {currentPicks.geneDropdown}{" "}
+                {currentPicks.subtypeDropdown} {currentPicks.alleleDropdown}
+              </>
+            ) : (
+              "Please select the gene type, gene and allele above"
+            )}
           </p>
         </div>
       </div>
