@@ -802,24 +802,44 @@ export const sampleAlleleDataAminoAcidPlot = {
   }
 
 export const sampleMSAData = [
-  {
-    "IGHV1-18*01_AA": {
-      "aa_sequence": "QVQLVQSGAEVKKPGASVKVSCKASGYTFTSYGISWVRQAPGQGLEWMGWISAYNGNTNYAQKLQGRVTMTTDTSTSTAYMELRSLRSDDTAVYYCAR",
-      "allele_data": 
-        [
-          {"allele": "IGHV1-18*01",
-          "sequence": "CAGGTTCAGCTGGTGCAGTCTGGAGCTGAGGTGAAGAAGCCTGGGGCCTCAGTGAAGGTCTCCTGCAAGGCTTCTGGTTACACCTTTACCAGCTATGGTATCAGCTGGGTGCGACAGGCCCCTGGACAAGGGCTTGAGTGGATGGGATGGATCAGCGCTTACAATGGTAACACAAACTATGCACAGAAGCTCCAGGGCAGAGTCACCATGACCACAGACACATCCACGAGCACAGCCTACATGGAGCTGAGGAGCCTGAGATCTGACGACACGGCCGTGTATTACTGTGCGAGAGA"
-          },
-          {"allele": "IGHV1-18*01_S0898",
-          "sequence": "CAGGTGCAGCTGGTGCAGTCTGGAGCTGAGGTGAAGAAGCCTGGGGCCTCAGTGAAGGTCTCCTGCAAGGCTTCTGGTTACACCTTTACCAGCTATGGTATCAGCTGGGTGCGACAGGCCCCTGGACAAGGGCTTGAGTGGATGGGATGGATCAGCGCTTACAATGGTAACACAAACTATGCACAGAAGCTCCAGGGCAGAGTCACCATGACCACAGACACATCCACGAGCACAGCCTACATGGAGCTGAGGAGCCTGAGATCTGACGACACGGCCGTGTATTACTGTGCGAGAGA"
-          },
-          {"allele": "IGHV1-18*01_S1946",
-          "sequence": "CAGGTCCAGCTGGTGCAGTCTGGAGCTGAGGTGAAGAAGCCTGGGGCCTCAGTGAAGGTCTCCTGCAAGGCTTCTGGTTACACCTTTACCAGCTATGGTATCAGCTGGGTGCGACAGGCCCCTGGACAAGGGCTTGAGTGGATGGGATGGATCAGCGCTTACAATGGTAACACAAACTATGCACAGAAGCTCCAGGGCAGAGTCACCATGACCACAGACACATCCACGAGCACAGCCTACATGGAGCTGAGGAGCCTGAGATCTGACGACACGGCCGTGTATTACTGTGCGAGAGA"
-          },
-          {"allele": "IGHV1-18*04",
-          "sequence": "CAGGTTCAGCTGGTGCAGTCTGGAGCTGAGGTGAAGAAGCCTGGGGCCTCAGTGAAGGTCTCCTGCAAGGCTTCTGGTTACACCTTTACCAGCTACGGTATCAGCTGGGTGCGACAGGCCCCTGGACAAGGGCTTGAGTGGATGGGATGGATCAGCGCTTACAATGGTAACACAAACTATGCACAGAAGCTCCAGGGCAGAGTCACCATGACCACAGACACATCCACGAGCACAGCCTACATGGAGCTGAGGAGCCTGAGATCTGACGACACGGCCGTGTATTACTGTGCGAGAGA"
-          }
-        ]
-    }
-  }
+	{
+		"allele": "IGHV1-18*01",
+		"sequence_aa": "QVQLVQSGAEVKKPGASVKVSCKASGYTFTSYGISWVRQAPGQGLEWMGWISAYNGNTNYAQKLQGRVTMTTDTSTSTAYMELRSLRSDDTAVYYCAR",
+		"sequence_nt": "caggttcagctggtgcagtctggagctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggcttctggttacacctttaccagctatggtatcagctgggtgcgacaggcccctggacaagggcttgagtggatgggatggatcagcgcttacaatggtaacacaaactatgcacagaagctccagggcagagtcaccatgaccacagacacatccacgagcacagcctacatggagctgaggagcctgagatctgacgacacggccgtgtattactgtgcgagaga"
+	},
+	{
+		"allele": "IGHV1-18*01_S0898",
+		"sequence_aa": "QVQLVQSGAEVKKPGASVKVSCKASGYTFTSYGISWVRQAPGQGLEWMGWISAYNGNTNYAQKLQGRVTMTTDTSTSTAYMELRSLRSDDTAVYYCAR",
+		"sequence_nt": "caggtgcagctggtgcagtctggagctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggcttctggttacacctttaccagctatggtatcagctgggtgcgacaggcccctggacaagggcttgagtggatgggatggatcagcgcttacaatggtaacacaaactatgcacagaagctccagggcagagtcaccatgaccacagacacatccacgagcacagcctacatggagctgaggagcctgagatctgacgacacggccgtgtattactgtgcgagaga"
+	},
+	{
+		"allele": "IGHV1-18*01_S1946",
+		"sequence_aa": "QVQLVQSGAEVKKPGASVKVSCKASGYTFTSYGISWVRQAPGQGLEWMGWISAYNGNTNYAQKLQGRVTMTTDTSTSTAYMELRSLRSDDTAVYYCAR",
+		"sequence_nt": "caggtccagctggtgcagtctggagctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggcttctggttacacctttaccagctatggtatcagctgggtgcgacaggcccctggacaagggcttgagtggatgggatggatcagcgcttacaatggtaacacaaactatgcacagaagctccagggcagagtcaccatgaccacagacacatccacgagcacagcctacatggagctgaggagcctgagatctgacgacacggccgtgtattactgtgcgagaga"
+	},
+	{
+		"allele": "IGHV1-18*01_S2590",
+		"sequence_aa": "QVQLVQSGAEVKKPGASVKVSCKASGYTFTSYGISWVRQAPGQGLEWMGWISAYNGNTNYAQKLQDRVTMTTDTSTSTAYMELRSLRSDDTAVYYCAR",
+		"sequence_nt": "caggttcagctggtgcagtctggagctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggcttctggttacacctttaccagctatggtatcagctgggtgcgacaggcccctggacaagggcttgagtggatgggatggatcagcgcttacaatggtaacacaaactatgcacagaagctccaggacagagtcaccatgaccacagacacatccacgagcacagcctacatggagctgaggagcctgagatctgacgacacggccgtgtattactgtgcgagaga"
+	},
+	{
+		"allele": "IGHV1-18*01_S4206",
+		"sequence_aa": "QVQLVQSGAEVKKPGASVKVSCKASGYTFTSYGISWVRQAPGQGLEWMGWISAYNGDTNYAQKLQGRVTMTTDTSTSTAYMELRSLRSDDTAVYYCAR",
+		"sequence_nt": "caggttcagctggtgcagtctggagctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggcttctggttacacctttaccagctatggtatcagctgggtgcgacaggcccctggacaagggcttgagtggatgggatggatcagcgcttacaatggtgacacaaactatgcacagaagctccagggcagagtcaccatgaccacagacacatccacgagcacagcctacatggagctgaggagcctgagatctgacgacacggccgtgtattactgtgcgagaga"
+	},
+	{
+		"allele": "IGHV1-18*01_S8907",
+		"sequence_aa": "QVQLVQSGAEVKKPGASVKVSCKASGYTFTSYGISWVRQAPGQGLEWMGWISAYNGNTNYAQKLQGRVTMTTDTSTSTAYMELRRLRSDDTAVYYCAR",
+		"sequence_nt": "caggttcagctggtgcagtctggagctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggcttctggttacacctttaccagctatggtatcagctgggtgcgacaggcccctggacaagggcttgagtggatgggatggatcagcgcttacaatggtaacacaaactatgcacagaagctccagggcagagtcaccatgaccacagacacatccacgagcacagcctacatggagctgaggaggctgagatctgacgacacggccgtgtattactgtgcgagaga"
+	},
+	{
+		"allele": "IGHV1-18*03",
+		"sequence_aa": "QVQLVQSGAEVKKPGASVKVSCKASGYTFTSYGISWVRQAPGQGLEWMGWISAYNGNTNYAQKLQGRVTMTTDTSTSTAYMELRSLRSDDMAVYYCAR",
+		"sequence_nt": "caggttcagctggtgcagtctggagctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggcttctggttacacctttaccagctatggtatcagctgggtgcgacaggcccctggacaagggcttgagtggatgggatggatcagcgcttacaatggtaacacaaactatgcacagaagctccagggcagagtcaccatgaccacagacacatccacgagcacagcctacatggagctgaggagcctgagatctgacgacatggccgtgtattactgtgcgagaga"
+	},
+	{
+		"allele": "IGHV1-18*04",
+		"sequence_aa": "QVQLVQSGAEVKKPGASVKVSCKASGYTFTSYGISWVRQAPGQGLEWMGWISAYNGNTNYAQKLQGRVTMTTDTSTSTAYMELRSLRSDDTAVYYCAR",
+		"sequence_nt": "caggttcagctggtgcagtctggagctgaggtgaagaagcctggggcctcagtgaaggtctcctgcaaggcttctggttacacctttaccagctacggtatcagctgggtgcgacaggcccctggacaagggcttgagtggatgggatggatcagcgcttacaatggtaacacaaactatgcacagaagctccagggcagagtcaccatgaccacagacacatccacgagcacagcctacatggagctgaggagcctgagatctgacgacacggccgtgtattactgtgcgagaga"
+	}
 ]
