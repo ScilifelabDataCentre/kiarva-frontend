@@ -151,7 +151,7 @@ export type ISequenceSearchData = {
 }
 
 export type IMSAData = {
-  aa_allele: string;
-  aa_sequence: string;
-  allele_data: ISequenceData[];
+  allele: string;
+  sequence_nt: string;
+  sequence_aa: string;
 }
