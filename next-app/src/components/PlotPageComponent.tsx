@@ -176,23 +176,12 @@ export default function PlotPage(): ReactElement {
   return (
     <>
       <div>
-        <AlelleSelectionComponent 
-          alleleSelectionConfig={alleleDropdownConfig}
-          handleSetSelection={handleSetSelection}
-          plotType={"genomicFreqPlot"}
-        />
-        <FrequencyPlotComponent
-          superpopulationAPIData={superpopFreqAPIData}
-          superpopulationColors={superPopulationColorsDict}
-          populationAPIData={popFreqAPIData}
-          superpopulationRegions={superpopulationRegions}
-        />
-        <div className="flex flex-col lg:flex-row items-start justify-between pt-8 gap-4">
-          <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/8">
+        <div className="flex flex-col lg:flex-row items-start justify-between pb-8 gap-4">
+          <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/8 pt-2">
             IgSNPer SCORE: {igSNPerScore}
           </p>
           <div className="overflow-x-auto lg:w-2/4">
-            <div className="p-1.5 min-w-full inline-block align-middle">
+            <div className="min-w-full inline-block align-middle">
               <div className="border rounded-lg overflow-hidden">
                 <table className="min-w-full divide-y divide-neutral text-base-content">
                   <thead className="bg-neutral">
@@ -245,6 +234,17 @@ export default function PlotPage(): ReactElement {
         {isPopupOpen && (
           <AbbreviationPopupComponent onClose={() => setIsPopupOpen(false)} />
         )}
+        <AlelleSelectionComponent 
+          alleleSelectionConfig={alleleDropdownConfig}
+          handleSetSelection={handleSetSelection}
+          plotType={"genomicFreqPlot"}
+        />
+        <FrequencyPlotComponent
+          superpopulationAPIData={superpopFreqAPIData}
+          superpopulationColors={superPopulationColorsDict}
+          populationAPIData={popFreqAPIData}
+          superpopulationRegions={superpopulationRegions}
+        />
       </div>
     </>
   );

@@ -31,7 +31,7 @@ export default function MSAPlotPageComponent(): ReactElement {
   const alleleDropdownConfig: IAlleleDropDownConfig = {
     'geneSegmentItemsArray': ["IGH"],
     'geneDropDownItemsArray': ["IGHV"],
-    'geneSelectionEndpoint': backendAPI + "data/aminoacidplotoptions/"
+    'geneSelectionEndpoint': backendAPI + "data/plotoptions/"
   }
 
   const [selectedGene, setSelectedGene] = useState<string>("");
@@ -39,22 +39,22 @@ export default function MSAPlotPageComponent(): ReactElement {
   const [sequenceData, setSequenceData] = useState<ISequenceData[]>([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
   const [aminoAcidSequence, setAminoAcidSequence] = useState<ISequenceData[]>([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
 
-  async function AASequenceData(allele: string) {
-    const AASequenceDataEndpoint: string = backendAPI + "data/sequences/aminoacidalleles/" + allele;
+  async function AlignedSequenceData(gene: string) {
+    const AlignedSequenceDataEndpoint: string = backendAPI + "data/sequences/alignedsequences/" + gene;
 
     await axios
-      .get(AASequenceDataEndpoint, axiosConfig)
+      .get(AlignedSequenceDataEndpoint, axiosConfig)
       .then((response) => {
         const responseData: IMSAData[] = response.data;
         let item: IMSAData;
-        const tmpAminoAcidSequence = [];
         const tmpSequenceData = [];
+        const tmpAminoAcidSequence = [];
         for (item of responseData) {
           tmpSequenceData.push({'allele': item.allele, 'sequence': item.sequence_nt})
           tmpAminoAcidSequence.push({'allele': item.allele, 'sequence': item.sequence_aa});
         }
-        setAminoAcidSequence(tmpAminoAcidSequence);
         setSequenceData(tmpSequenceData);
+        setAminoAcidSequence(tmpAminoAcidSequence);
       })
       .catch((response) => console.log(response.error));
   }
@@ -63,8 +63,6 @@ export default function MSAPlotPageComponent(): ReactElement {
   useEffect(() => {
     if (selectedGene) {
       if (!hasCookie('password')) {
-        const allele_data_sample: string = "IGHV1-18*01_AA"
-        const strToKey = allele_data_sample as keyof typeof sampleMSAData[0];
         const tmpAminoAcidSequenceLite = [];
         const tmpSequenceDataLite = [];
         for (let item of sampleMSAData) {
@@ -75,7 +73,7 @@ export default function MSAPlotPageComponent(): ReactElement {
         setAminoAcidSequence(tmpAminoAcidSequenceLite)
       }
       else {
-        AASequenceData(selectedGene);
+        AlignedSequenceData(selectedGene);
       }
     }
     else {
