@@ -237,7 +237,7 @@ export default function DownloadPage(): ReactElement {
           geneObjectArray={[
             { name: "IGHV", isAvailable: true },
             { name: "IGHD", isAvailable: true },
-            { name: "IGHJ", isAvailable: true },
+            { name: "IGHJ", isAvailable: (fastaTypeSelected === 'coding') },
             { name: "IGH constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setIghSelectionArray}
