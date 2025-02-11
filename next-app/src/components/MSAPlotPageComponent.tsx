@@ -65,7 +65,8 @@ export default function MSAPlotPageComponent(): ReactElement {
       if (!hasCookie('password')) {
         const tmpAminoAcidSequenceLite = [];
         const tmpSequenceDataLite = [];
-        for (let item of sampleMSAData) {
+        let item;
+        for (item of sampleMSAData) {
           tmpSequenceDataLite.push({'allele': item.allele, 'sequence': item.sequence_nt})
           tmpAminoAcidSequenceLite.push({'allele': item.allele, 'sequence': item.sequence_aa});
         }
