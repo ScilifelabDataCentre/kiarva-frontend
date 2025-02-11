@@ -66,10 +66,24 @@ export default function AminoAcidPlotPage(): ReactElement {
   const alleleDropdownConfig: IAlleleDropDownConfig = {
     'geneSegmentItemsArray': ["IGH"],
     'geneDropDownItemsArray': ["IGHV"],
-    'geneSelectionEndpoint': backendAPI + "data/aminoacidplotoptions/"
+    'geneSelectionEndpoint': backendAPI + "data/plotoptions/"
   }
 
   const [selectedAllele, setSelectedAllele] = useState<string>("");
+  const [topAlleleAA, setTopAlleleAA] = useState<string>("");
+
+  async function getTopLevelAlleleAA(allele: string) {
+    allele = allele.replace('/', '&slash&');
+    const topAlleleAAEndpoint: string =
+      backendAPI + "/data/aminoacidalleles/" + allele;
+
+    await axios
+      .get(topAlleleAAEndpoint, axiosConfig)
+      .then((response) => {
+        setTopAlleleAA(response.data.allele_aa);
+      })
+      .catch((response) => console.log(response.error));
+  }
 
   async function getGeneFreqData(allele: string) {
     const alleleFrequenciesEndpoint: string = backendAPI + "data/aminoacidfrequencies/";
@@ -110,18 +124,24 @@ export default function AminoAcidPlotPage(): ReactElement {
       .catch((response) => console.log(response.error));
   }
 
-  // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
     if (selectedAllele) {
+      getTopLevelAlleleAA(selectedAllele);
+    }
+  }, [selectedAllele])
+
+  // Fetch gene frequency data when allele dropdown changes
+  useEffect(() => {
+    if (topAlleleAA) {
       if (!hasCookie('password')) {
-        const strToKey = selectedAllele as keyof typeof sampleAlleleDataAminoAcidPlot;
+        const strToKey = topAlleleAA as keyof typeof sampleAlleleDataAminoAcidPlot;
         setSuperpopFreqAPIData(sampleAlleleDataAminoAcidPlot[strToKey].superpopulation);
         setPopFreqAPIData(sampleAlleleDataAminoAcidPlot[strToKey].population);
         setAlleleListAA(sampleAlleleDataAminoAcidPlot[strToKey].alleleListAA);
       }
       else {
-        getGeneFreqData(selectedAllele);
-        getAlleleListAA(selectedAllele);
+        getGeneFreqData(topAlleleAA);
+        getAlleleListAA(topAlleleAA);
       }
     }
     else {
@@ -130,7 +150,7 @@ export default function AminoAcidPlotPage(): ReactElement {
       setAlleleListAA([]);
     }
   }, [
-    selectedAllele
+    topAlleleAA
   ]);
 
   // fetch region data (which subpopulation belongs to which superpopulation)
@@ -164,18 +184,7 @@ export default function AminoAcidPlotPage(): ReactElement {
   return (
     <>
       <div>
-        <AlelleSelectionComponent 
-          alleleSelectionConfig={alleleDropdownConfig}
-          handleSetSelection={handleSetSelection}
-          plotType={"aminoAcidFreqPlot"}
-        />
-        <FrequencyPlotComponent
-          superpopulationAPIData={superpopFreqAPIData}
-          superpopulationColors={superPopulationColorsDict}
-          populationAPIData={popFreqAPIData}
-          superpopulationRegions={superpopulationRegions}
-        />
-        <div className="flex flex-col lg:flex-row items-start justify-between pt-8 gap-4">
+        <div className="flex flex-col lg:flex-row items-start justify-between pb-8 gap-4">
           <div className="overflow-x-auto lg:w-2/4">
             <div className="p-1.5 min-w-full inline-block align-middle">
               <div className="border rounded-lg overflow-hidden">
@@ -230,6 +239,17 @@ export default function AminoAcidPlotPage(): ReactElement {
         {isPopupOpen && (
           <AbbreviationPopupComponent onClose={() => setIsPopupOpen(false)} />
         )}
+        <AlelleSelectionComponent 
+          alleleSelectionConfig={alleleDropdownConfig}
+          handleSetSelection={handleSetSelection}
+          plotType={"aminoAcidFreqPlot"}
+        />
+        <FrequencyPlotComponent
+          superpopulationAPIData={superpopFreqAPIData}
+          superpopulationColors={superPopulationColorsDict}
+          populationAPIData={popFreqAPIData}
+          superpopulationRegions={superpopulationRegions}
+        />
       </div>
     </>
   );

@@ -31,45 +31,50 @@ export default function MSAPlotPageComponent(): ReactElement {
   const alleleDropdownConfig: IAlleleDropDownConfig = {
     'geneSegmentItemsArray': ["IGH"],
     'geneDropDownItemsArray': ["IGHV"],
-    'geneSelectionEndpoint': backendAPI + "data/aminoacidplotoptions/"
+    'geneSelectionEndpoint': backendAPI + "data/plotoptions/"
   }
 
-  const [selectedAllele, setSelectedAllele] = useState<string>("");
+  const [selectedGene, setSelectedGene] = useState<string>("");
 
   const [sequenceData, setSequenceData] = useState<ISequenceData[]>([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
   const [aminoAcidSequence, setAminoAcidSequence] = useState<ISequenceData[]>([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
 
-  async function AASequenceData(allele: string) {
-    const AASequenceDataEndpoint: string = backendAPI + "data/sequences/aminoacidalleles/" + allele;
+  async function AlignedSequenceData(gene: string) {
+    const AlignedSequenceDataEndpoint: string = backendAPI + "data/sequences/alignedsequences/" + gene;
 
     await axios
-      .get(AASequenceDataEndpoint, axiosConfig)
+      .get(AlignedSequenceDataEndpoint, axiosConfig)
       .then((response) => {
         const responseData: IMSAData[] = response.data;
         let item: IMSAData;
-        const tmpAminoAcidSequence = [];
         const tmpSequenceData = [];
+        const tmpAminoAcidSequence = [];
         for (item of responseData) {
-          tmpAminoAcidSequence.push({'allele': item.aa_allele, 'sequence': item.aa_sequence});
-          tmpSequenceData.push(item.allele_data[0])
+          tmpSequenceData.push({'allele': item.allele, 'sequence': item.sequence_nt})
+          tmpAminoAcidSequence.push({'allele': item.allele, 'sequence': item.sequence_aa});
         }
-        setAminoAcidSequence(tmpAminoAcidSequence);
         setSequenceData(tmpSequenceData);
+        setAminoAcidSequence(tmpAminoAcidSequence);
       })
       .catch((response) => console.log(response.error));
   }
 
   // Fetch data when allele dropdown changes
   useEffect(() => {
-    if (selectedAllele) {
+    if (selectedGene) {
       if (!hasCookie('password')) {
-        const allele_data_sample: string = "IGHV1-18*01_AA"
-        const strToKey = allele_data_sample as keyof typeof sampleMSAData[0];
-        setSequenceData(sampleMSAData[0][strToKey].allele_data)
-        setAminoAcidSequence([{'allele': "IGHV1-18*01", 'sequence': sampleMSAData[0][strToKey].aa_sequence}])
+        const tmpAminoAcidSequenceLite = [];
+        const tmpSequenceDataLite = [];
+        let item;
+        for (item of sampleMSAData) {
+          tmpSequenceDataLite.push({'allele': item.allele, 'sequence': item.sequence_nt})
+          tmpAminoAcidSequenceLite.push({'allele': item.allele, 'sequence': item.sequence_aa});
+        }
+        setSequenceData(tmpSequenceDataLite)
+        setAminoAcidSequence(tmpAminoAcidSequenceLite)
       }
       else {
-        AASequenceData(selectedAllele);
+        AlignedSequenceData(selectedGene);
       }
     }
     else {
@@ -77,7 +82,7 @@ export default function MSAPlotPageComponent(): ReactElement {
       setAminoAcidSequence([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
     }
   }, [
-    selectedAllele
+    selectedGene
   ]);
 
   // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
@@ -94,7 +99,7 @@ export default function MSAPlotPageComponent(): ReactElement {
   // function to be passed as prop to AlleleSelectionComponent, so that it can modify
   // state in parent component
   function handleSetSelection(allele: string) {
-    setSelectedAllele(allele);
+    setSelectedGene(allele);
   }
 
   // Render the component
