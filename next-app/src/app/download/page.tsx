@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { ReactElement, useEffect, useState } from "react";
 import {
@@ -35,10 +35,10 @@ export default function DownloadPage(): ReactElement {
     headers: {
       "X-api-key": "",
       "Content-Type": "attachment",
-    }
-  })
+    },
+  });
 
-  async function downloadGeneFasta(gene: string) {  
+  async function downloadGeneFasta(gene: string) {
     const fastaType =
       fastaTypeSelected === "coding" ? "" : fastaTypeSelected + "/";
     const fastaEndpoint = backendAPI + "fasta/" + fastaType + gene;
@@ -119,19 +119,19 @@ export default function DownloadPage(): ReactElement {
 
   // Combine the selection arrays and use them when the download button is pressed
 
-  const [isPopupOpen, setIsPopupOpen] = useState(true);
+  // const [isPopupOpen, setIsPopupOpen] = useState(true);
 
   useEffect(() => {
-    if (hasCookie('password')) {
+    if (hasCookie("password")) {
       setAxiosConfig({
         headers: {
-            'X-api-key': getCookie('password') as string,
-            "Content-Type": "attachment",
-        }
-      })
+          "X-api-key": getCookie("password") as string,
+          "Content-Type": "attachment",
+        },
+      });
     }
-  }, [])
-  
+  }, []);
+
   function setIsDisclaimerPopupOpen(arg0: boolean): void {
     if (arg0) {
       console.log("Disclaimer popup button not implemented.");
@@ -141,7 +141,7 @@ export default function DownloadPage(): ReactElement {
   return (
     <div className={BODY_CLASSES}>
       <h1 className={H_1}>Download FASTA files</h1>
-      
+
       {!hasCookie("password") && (
         <button
           className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
@@ -191,9 +191,9 @@ export default function DownloadPage(): ReactElement {
           gene segment and/or individual genes you want to download by ticking
           the appropriate boxes—ticking a gene segment will automatically select
           all individual genes within that chain. After making your selections,
-          click the &quot;Download&quot; button. This will generate and start a download
-          of your chosen file(s). If you have selected more than one file, a
-          .zip file wil be generated.
+          click the &quot;Download&quot; button. This will generate and start a
+          download of your chosen file(s). If you have selected more than one
+          file, a .zip file wil be generated.
         </span>
       </div>
       <div className={H_1}>Fasta type</div>
@@ -243,7 +243,7 @@ export default function DownloadPage(): ReactElement {
           geneObjectArray={[
             { name: "IGHV", isAvailable: true },
             { name: "IGHD", isAvailable: true },
-            { name: "IGHJ", isAvailable: (fastaTypeSelected === 'coding') },
+            { name: "IGHJ", isAvailable: fastaTypeSelected === "coding" },
             { name: "IGH constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setIghSelectionArray}
@@ -271,7 +271,7 @@ export default function DownloadPage(): ReactElement {
       {/* <div className={H_1}>TCR</div>
       <div className="divider !my-0"></div>
       <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16"> */}
-        {/* <DownloadBoxComponent
+      {/* <DownloadBoxComponent
           geneSegment="TRA"
           geneObjectArray={[
             { name: "TRAV", isAvailable: true },
@@ -280,7 +280,7 @@ export default function DownloadPage(): ReactElement {
           ]}
           setPropsSelectionArray={setTraSelectionArray}
         ></DownloadBoxComponent> */}
-        {/* <DownloadBoxComponent
+      {/* <DownloadBoxComponent
           geneSegment="TRB"
           geneObjectArray={[
             { name: "TRBV", isAvailable: true },
@@ -290,7 +290,7 @@ export default function DownloadPage(): ReactElement {
           ]}
           setPropsSelectionArray={setTrbSelectionArray}
         ></DownloadBoxComponent> */}
-        {/* <DownloadBoxComponent
+      {/* <DownloadBoxComponent
           geneSegment="TRG"
           geneObjectArray={[
             { name: "TRGV", isAvailable: true },
@@ -299,7 +299,7 @@ export default function DownloadPage(): ReactElement {
           ]}
           setPropsSelectionArray={setTrgSelectionArray}
         ></DownloadBoxComponent> */}
-        {/* <DownloadBoxComponent
+      {/* <DownloadBoxComponent
           geneSegment="TRD"
           geneObjectArray={[
             { name: "TRDV", isAvailable: true },
@@ -315,8 +315,10 @@ export default function DownloadPage(): ReactElement {
         {/* Delete the button disabled and className when officially launching */}
         <button
           onClick={handleDownload}
-          disabled={!hasCookie('password')}
-          className={"opacity-50" + (!hasCookie('password') && " cursor-not-allowed")}
+          disabled={!hasCookie("password")}
+          className={
+            "opacity-50" + (!hasCookie("password") && " cursor-not-allowed")
+          }
         >
           <div className="bg-gradient-to-r from-[rgba(67,133,139)] to-primary text-primary-content text-lg tracking-wide flex gap-4 justify-center items-center w-64 lg:w-96 h-14 font-extrabold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90">
             Download
