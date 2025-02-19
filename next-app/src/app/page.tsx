@@ -1,17 +1,70 @@
 "use client";
 
-import { ReactElement } from "react";
-import {
-  BODY_CLASSES,
-  // BUTTON_TYPE_ONE,
-  // H_1,
-  H_2,
-} from "@/constants";
+import { ReactElement, ReactNode } from "react";
+import { BODY_CLASSES } from "@/constants";
 import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import Link from "next/link";
+import { BadgeInfo, Rss, type LucideIcon } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const downloadHeroBackground = "images/heroDownloadImage.jpg";
 const plotHeroBackground = "images/heroPlotImage.jpg";
+
+const newsDate = new Date("2024-11-13");
+
+interface FadeAlertProps {
+  children: ReactNode;
+  title: string;
+  icon: LucideIcon;
+}
+
+function FadeAlert({ children, title, icon: Icon }: FadeAlertProps) {
+  const [showFade, setShowFade] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (contentRef.current) {
+        const { scrollHeight, clientHeight, scrollTop } = contentRef.current;
+        setShowFade(
+          scrollHeight > clientHeight &&
+            scrollHeight - clientHeight - scrollTop > 1
+        );
+      }
+    };
+
+    checkOverflow();
+    window.addEventListener("resize", checkOverflow);
+    const currentRef = contentRef.current;
+    if (currentRef) {
+      currentRef.addEventListener("scroll", checkOverflow);
+    }
+
+    return () => {
+      window.removeEventListener("resize", checkOverflow);
+      if (currentRef) {
+        currentRef.removeEventListener("scroll", checkOverflow);
+      }
+    };
+  }, []);
+
+  return (
+    <Alert className="flex-grow lg:basis-1/2 lg:my-5">
+      <Icon className="h-6 w-6" />
+      <AlertTitle className="text-sm lg:text-base mb-4">{title}</AlertTitle>
+      <AlertDescription className="text-sm lg:text-base relative">
+        <div ref={contentRef} className="max-h-60 overflow-y-auto pr-2">
+          {children}
+        </div>
+        {showFade && (
+          <div className="absolute bottom-0 left-0 right-2 h-8 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+        )}
+      </AlertDescription>
+    </Alert>
+  );
+}
 
 export default function HomePage(): ReactElement {
   TrackPageViewIfEnabled();
@@ -20,81 +73,47 @@ export default function HomePage(): ReactElement {
     <div>
       <div className={BODY_CLASSES}>
         <div className="flex flex-col lg:flex-row items-stretch place-items-center gap-6 mb-6">
-          <div className="flex-grow lg:basis-1/2 alert lg:my-5 shadow-lg bg-white border-white rounded-none">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="h-6 w-6 shrink-0 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-            <div>
-              <label className={`font-bold ${H_2}`}>Welcome to KIARVA</label>
-              <p className="mt-4 pr-2 max-h-60 overflow-auto text-sm lg:text-base">
-                Variation between individuals and populations within the
-                immunoglobulin (IG) locus involves both structural and allelic
-                diversity. The Karolinska Institutet Adaptive Immune Receptor
-                Gene Variant Atlas (<b>KIARVA</b>) hosts germline-encoded IG
-                heavy chain (IGH) alleles identified in 2485 individuals from
-                the 1000 Genomes Project (1KGP) collection, in total 479 IGHV,
-                10 IGHJ and 40 IGHD alleles. <b>KIARVA</b> is open source and
-                provides downloadable FASTA files with all sequences, as well as
-                information about the frequency of each allele in 5
-                superpopulations and 25 subpopulations. In the near future,
-                KIARVA will be extended to also contain population-based
-                information about IG kappa and lambda genes, as well as T cell
-                receptor genes. When using this database, please cite Corcoran
-                et al. BioRxivXX, and when using the resource for commercial
-                purposes, contact the authors.
-              </p>
-            </div>
-          </div>
+          <FadeAlert title="Welcome to KIARVA" icon={BadgeInfo}>
+            <p>
+              Variation between individuals and populations within the
+              immunoglobulin (IG) locus involves both structural and allelic
+              diversity. The Karolinska Institutet Adaptive Immune Receptor Gene
+              Variant Atlas (<b>KIARVA</b>) hosts germline-encoded IG heavy
+              chain (IGH) alleles identified in 2485 individuals from the 1000
+              Genomes Project (1KGP) collection, in total 479 IGHV, 10 IGHJ and
+              40 IGHD alleles. <b>KIARVA</b> is open source and provides
+              downloadable FASTA files with all sequences, as well as
+              information about the frequency of each allele in 5
+              superpopulations and 25 subpopulations. In the near future, KIARVA
+              will be extended to also contain population-based information
+              about IG kappa and lambda genes, as well as T cell receptor genes.
+              When using this database, please cite Corcoran et al. BioRxivXX,
+              and when using the resource for commercial purposes, contact the
+              authors.
+            </p>
+          </FadeAlert>
 
-          <div className="flex-grow lg:basis-1/2 alert lg:my-5 shadow-lg bg-white border-white rounded-none">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 32 32"
-              className="h-6 w-6 shrink-0 stroke-current"
+          <FadeAlert title="News" icon={Rss}>
+            <time
+              dateTime={newsDate.toISOString()}
+              className="block italic mb-2 text-muted-foreground"
             >
-              <path
-                strokeWidth="0.5"
-                d="M30.56 8.47a8 8 0 0 0-7-7 64.29 64.29 0 0 0-15.06 0 8 8 0 0 0-7 7 64.29 64.29 0 0 0 0 15.06 8 8 0 0 0 7 7 64.29 64.29 0 0 0 15.06 0 8 8 0 0 0 7-7 64.29 64.29 0 0 0 0-15.06zm-2 14.83a6 6 0 0 1-5.28 5.28 63.65 63.65 0 0 1-14.6 0 6 6 0 0 1-5.26-5.28 63.65 63.65 0 0 1 0-14.6A6 6 0 0 1 8.7 3.42a63.65 63.65 0 0 1 14.6 0 6 6 0 0 1 5.28 5.28 63.65 63.65 0 0 1 0 14.6z"
-              />
-              <path d="M13 7H9a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-4 8V9h4v6zM14 19h-4a1 1 0 0 0 0 2h4a1 1 0 0 0 0-2zM14 23H8a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2zM25 11h-7a1 1 0 0 0 0 2h7a1 1 0 0 0 0-2zM25 7h-7a1 1 0 0 0 0 2h7a1 1 0 0 0 0-2zM25 15h-7a1 1 0 0 0 0 2h7a1 1 0 0 0 0-2zM25 19h-7a1 1 0 0 0 0 2h7a1 1 0 0 0 0-2zM23 23h-5a1 1 0 0 0 0 2h5a1 1 0 0 0 0-2z" />
-            </svg>
-            <div>
-              <label className={`font-bold ${H_2}`}>News</label>
-              <div className="mt-4 pr-2 max-h-60 overflow-auto text-sm lg:text-base">
-                <p className="italic">Date: 2024-11-13</p>
-                <p>
-                  We are excited to introduce the <b>light version</b> of our
-                  new research tool, designed to provide an early glimpse into
-                  the DSN&apos;s first dashboard. This preliminary release
-                  includes a few example plots to showcase the tool&apos;s
-                  analytical capabilities, while the full functionality is being
-                  finalized. In this light version, users can explore data
-                  visualizations but won&apos;t have access to download FASTA
-                  files at this stage. The complete tool, including all data and
-                  download options, will be available once the research team has
-                  published their findings.
-                </p>
-              </div>
-              <Link className="float-end pt-2" href="/changelog">
-                <button
-                  className="text-info-content text-base flex justify-center items-center h-10 px-2 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800"
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  See change log
-                </button>
-              </Link>
-            </div>
-          </div>
+              {newsDate.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </time>
+            We are excited to introduce the <b>light version</b> of our new
+            research tool, designed to provide an early glimpse into the
+            DSN&apos;s first dashboard. This preliminary release includes a few
+            example plots to showcase the tool&apos;s analytical capabilities,
+            while the full functionality is being finalized. In this light
+            version, users can explore data visualizations but won&apos;t have
+            access to download FASTA files at this stage. The complete tool,
+            including all data and download options, will be available once the
+            research team has published their findings.
+          </FadeAlert>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center gap-6">
