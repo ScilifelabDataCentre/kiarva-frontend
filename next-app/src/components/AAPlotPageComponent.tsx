@@ -1,9 +1,7 @@
-'use client';
+"use client";
 
 import { ReactElement, useEffect, useState } from "react";
-import {
-  backendAPI,
-} from "@/constants";
+import { backendAPI } from "@/constants";
 import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import FrequencyPlotComponent from "@/components/FrequencyPlotComponent";
 import {
@@ -16,7 +14,13 @@ import axios from "axios";
 import AbbreviationPopupComponent from "@/components/AbbreviationPopupComponent";
 import { getCookie, hasCookie } from "cookies-next";
 import AlelleSelectionComponent from "./AlleleSelectionComponent";
-import { populationSubsets, sampleAlleleDataAminoAcidPlot, subPopulations, superPopulationColorsDict, superPopulations } from "@/content/localPlotData";
+import {
+  populationSubsets,
+  sampleAlleleDataAminoAcidPlot,
+  subPopulations,
+  superPopulationColorsDict,
+  superPopulations,
+} from "@/content/localPlotData";
 
 // Main function to render the PlotPage component
 export default function AminoAcidPlotPage(): ReactElement {
@@ -26,8 +30,8 @@ export default function AminoAcidPlotPage(): ReactElement {
   const [axiosConfig, setAxiosConfig] = useState({
     headers: {
       "X-api-key": "",
-    }
-  })
+    },
+  });
 
   // Initialize superpopulation frequency data with zero values
   const superpopFreqDataNoSelection: IGeneFrequencyData[] = [];
@@ -64,16 +68,16 @@ export default function AminoAcidPlotPage(): ReactElement {
 
   // config for AlleleSelectionComponent which sets up the allele segment dropdown menu
   const alleleDropdownConfig: IAlleleDropDownConfig = {
-    'geneSegmentItemsArray': ["IGH"],
-    'geneDropDownItemsArray': ["IGHV"],
-    'geneSelectionEndpoint': backendAPI + "data/plotoptions/"
-  }
+    geneSegmentItemsArray: ["IGH"],
+    geneDropDownItemsArray: ["IGHV"],
+    geneSelectionEndpoint: backendAPI + "data/plotoptions/",
+  };
 
   const [selectedAllele, setSelectedAllele] = useState<string>("");
   const [topAlleleAA, setTopAlleleAA] = useState<string>("");
 
   async function getTopLevelAlleleAA(allele: string) {
-    allele = allele.replace('/', '&slash&');
+    allele = allele.replace("/", "&slash&");
     const topAlleleAAEndpoint: string =
       backendAPI + "/data/aminoacidalleles/" + allele;
 
@@ -86,10 +90,11 @@ export default function AminoAcidPlotPage(): ReactElement {
   }
 
   async function getGeneFreqData(allele: string) {
-    const alleleFrequenciesEndpoint: string = backendAPI + "data/aminoacidfrequencies/";
+    const alleleFrequenciesEndpoint: string =
+      backendAPI + "data/aminoacidfrequencies/";
     // allele names sometimes contain slashes, which breaks the functionality of the API as it interprets it as a path
     // replace with '&slash&' and replace again with '/' in the api
-    allele = allele.replace('/', '&slash&');
+    allele = allele.replace("/", "&slash&");
     const superpopulationsEndpoint: string =
       alleleFrequenciesEndpoint + "superpopulations/" + allele;
 
@@ -118,7 +123,7 @@ export default function AminoAcidPlotPage(): ReactElement {
       .then((response) => {
         const responseData: AlleleListAA = response.data;
         if (responseData.aa_allele_list) {
-            setAlleleListAA(responseData.aa_allele_list);
+          setAlleleListAA(responseData.aa_allele_list);
         }
       })
       .catch((response) => console.log(response.error));
@@ -128,30 +133,29 @@ export default function AminoAcidPlotPage(): ReactElement {
     if (selectedAllele) {
       getTopLevelAlleleAA(selectedAllele);
     }
-  }, [selectedAllele])
+  }, [selectedAllele]);
 
   // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
     if (topAlleleAA) {
-      if (!hasCookie('password')) {
-        const strToKey = topAlleleAA as keyof typeof sampleAlleleDataAminoAcidPlot;
-        setSuperpopFreqAPIData(sampleAlleleDataAminoAcidPlot[strToKey].superpopulation);
+      if (!hasCookie("password")) {
+        const strToKey =
+          topAlleleAA as keyof typeof sampleAlleleDataAminoAcidPlot;
+        setSuperpopFreqAPIData(
+          sampleAlleleDataAminoAcidPlot[strToKey].superpopulation
+        );
         setPopFreqAPIData(sampleAlleleDataAminoAcidPlot[strToKey].population);
         setAlleleListAA(sampleAlleleDataAminoAcidPlot[strToKey].alleleListAA);
-      }
-      else {
+      } else {
         getGeneFreqData(topAlleleAA);
         getAlleleListAA(topAlleleAA);
       }
-    }
-    else {
+    } else {
       setSuperpopFreqAPIData([]);
       setPopFreqAPIData([]);
       setAlleleListAA([]);
     }
-  }, [
-    topAlleleAA
-  ]);
+  }, [topAlleleAA]);
 
   // fetch region data (which subpopulation belongs to which superpopulation)
   // either on page load or when currentPicks is changed
@@ -165,14 +169,14 @@ export default function AminoAcidPlotPage(): ReactElement {
 
   // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
   useEffect(() => {
-    if (hasCookie('password')) {
+    if (hasCookie("password")) {
       setAxiosConfig({
         headers: {
-            'X-api-key': getCookie('password') as string,
-        }
-      })
+          "X-api-key": getCookie("password") as string,
+        },
+      });
     }
-  }, [])
+  }, []);
 
   // function to be passed as prop to AlleleSelectionComponent, so that it can modify
   // state in parent component
@@ -186,7 +190,7 @@ export default function AminoAcidPlotPage(): ReactElement {
       <div>
         <div className="flex flex-col lg:flex-row items-start justify-between pb-8 gap-4">
           <div className="overflow-x-auto lg:w-2/4">
-            <div className="p-1.5 min-w-full inline-block align-middle">
+            <div className="min-w-full inline-block align-middle">
               <div className="border rounded-lg overflow-hidden">
                 <table className="min-w-full divide-y divide-neutral text-base-content">
                   <thead className="bg-neutral">
@@ -239,7 +243,7 @@ export default function AminoAcidPlotPage(): ReactElement {
         {isPopupOpen && (
           <AbbreviationPopupComponent onClose={() => setIsPopupOpen(false)} />
         )}
-        <AlelleSelectionComponent 
+        <AlelleSelectionComponent
           alleleSelectionConfig={alleleDropdownConfig}
           handleSetSelection={handleSetSelection}
           plotType={"aminoAcidFreqPlot"}
