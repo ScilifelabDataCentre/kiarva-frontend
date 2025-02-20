@@ -7,6 +7,7 @@ export const superPopulationColorsDict = {
     EAS: "#70c265",
     EUR: "#5480f0",
     SAS: "#999999",
+    ALL: "#8d1774"
   };
 
   // Define populations and their corresponding color
@@ -36,6 +37,7 @@ export const subPopulations: string[] = [
     "MXL",
     "PEL",
     "PUR",
+    "ALL"
   ];
 
 export const populationSubsets = [
@@ -138,6 +140,10 @@ export const populationSubsets = [
     {
       "population": "PUR",
       "superpopulation": "AMR"
+    },
+    {
+      "population": "ALL",
+      "superpopulation": "ALL" 
     }
   ]
 
