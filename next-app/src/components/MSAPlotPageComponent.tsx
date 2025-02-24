@@ -40,6 +40,9 @@ export default function MSAPlotPageComponent(): ReactElement {
   const [aminoAcidSequence, setAminoAcidSequence] = useState<ISequenceData[]>([{'allele': 'Allele', 'sequence': 'SEQUENCE'}]);
 
   async function AlignedSequenceData(gene: string) {
+    // allele names sometimes contain slashes, which breaks the functionality of the API as it interprets it as a path
+    // replace with '&slash&' and replace again with '/' in the api
+    gene = gene.replace('/', '&slash&');
     const AlignedSequenceDataEndpoint: string = backendAPI + "data/sequences/alignedsequences/" + gene;
 
     await axios
