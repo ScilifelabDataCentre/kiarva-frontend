@@ -13,12 +13,6 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
 
   // Get the color for each sequence character
   const getCharColor = (index: number) => {
-    //   '#4CAF50',  // Green
-    //   '#2196F3',  // Blue
-    //   '#FF9800',  // Orange
-    //   '#F44336',  // Red
-    //   '#BDBDBD', // Grey
-    //   '#f1f5f9', // bg-muted
     if (differingIndexes.includes(index)) {
       return {'background': '#045C64', 'text': 'white'}
     }
@@ -31,12 +25,16 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
     const nrOfSeqs: number = sequences.length;
     if (nrOfSeqs > 1) {
       for (let i = 0; i < maxLength; i++) {
-        const firstCharacter = sequences[0][i];
-        for (let j = 1; j < nrOfSeqs; j++) {
-          if (!(firstCharacter == sequences[j][i])) {
-            differingIndexes.push(i);
-            break;
-          }
+        if (!(sequences[0][i] == "X")) {
+          const firstCharacter = sequences[0][i];
+          for (let j = 1; j < nrOfSeqs; j++) {
+            if (!(firstCharacter == sequences[j][i])) {
+              if (!(sequences[j][i] == "X")) {
+                differingIndexes.push(i);
+                break;
+              }
+            }
+          } 
         }
       }
     }
@@ -48,8 +46,77 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
   }
   findDifferingCharacters(sequences);
 
+  const width = "20px";
+  const height = "30px";
+  const textAlign = "center";
+  const padding = "5px";
+  const margin = "1px";
+  const display = "flex";
+  const alignItems = "center";
+  const justifyContent = "center";
+
   return (
     <div className="flex flex-col items-start max-w-full overflow-x-auto">
+      {sequenceData[0].sequence != "SEQUENCE" && <div className="flex flex-row">
+          {/* Allele name on the left */}
+          <div className="w-[250px] text-left text-black py-1 font-bold sticky left-0 bg-base-100">
+            {""}
+          </div>
+
+          {/* Sequence nucleotides on the right (with scrollable area) */}
+          <div className="flex flex-row space-y-2">
+            {Array.from({ length: maxLength }).map((_, index) => {
+              let output: string = (index+1) % 10 == 0 ? (index+1).toString() : ""
+              return (
+                <div
+                  key={index}
+                  style={{
+                    width: width,
+                    height: height,
+                    textAlign: textAlign,
+                    backgroundColor: 'bg-base-100',
+                    color: 'black',
+                    padding: padding,
+                    margin: margin,
+                    display: display,
+                    alignItems: alignItems,
+                    justifyContent: justifyContent,
+                  }}
+                >
+                  {output}
+                </div>
+              );
+            })}
+          </div>
+        </div>}
+        {sequenceData[0].sequence != "SEQUENCE" && <div className="flex flex-row">
+          {/* Allele name on the left */}
+          <div className="w-[250px] text-left text-black py-1 font-bold sticky left-0 bg-base-100">
+            {""}
+          </div>
+        {Array.from({ length: maxLength }).map((_, index) => {
+              let output: string = (index+1) % 5 == 0 ? "|" : "."
+              return (
+                <div
+                  key={index}
+                  style={{
+                    width: width,
+                    height: height,
+                    textAlign: textAlign,
+                    backgroundColor: 'bg-base-100',
+                    color: 'black',
+                    padding: padding,
+                    margin: margin,
+                    display: display,
+                    alignItems: alignItems,
+                    justifyContent: justifyContent,
+                  }}
+                >
+                  {output}
+                </div>
+              );
+            })}
+          </div>}
       {/* Loop through sequences to display them in rows */}
       {sequenceData.map((seq) => (
         <div key={seq.allele} className="flex flex-row">
@@ -68,16 +135,16 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
                 <div
                   key={seq.allele + '-' + index}
                   style={{
-                    width: '20px',
-                    height: '30px',
-                    textAlign: 'center',
+                    width: width,
+                    height: height,
+                    textAlign: textAlign,
                     backgroundColor: color.background,
                     color: color.text,
-                    padding: '5px',
-                    margin: '1px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    padding: padding,
+                    margin: margin,
+                    display: display,
+                    alignItems: alignItems,
+                    justifyContent: justifyContent,
                   }}
                 >
                   {character}
