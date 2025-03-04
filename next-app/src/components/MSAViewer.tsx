@@ -66,7 +66,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
           {/* Sequence nucleotides on the right (with scrollable area) */}
           <div className="flex flex-row space-y-2">
             {Array.from({ length: maxLength }).map((_, index) => {
-              let output: string = (index+1) % 10 == 0 ? (index+1).toString() : ""
+              const output: string = (index+1) % 10 == 0 ? (index+1).toString() : ""
               return (
                 <div
                   key={index}
@@ -95,7 +95,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
             {""}
           </div>
         {Array.from({ length: maxLength }).map((_, index) => {
-              let output: string = (index+1) % 5 == 0 ? "|" : "."
+              const output: string = (index+1) % 5 == 0 ? "|" : "."
               return (
                 <div
                   key={index}
