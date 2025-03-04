@@ -46,7 +46,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
   }
   findDifferingCharacters(sequences);
 
-  const width = "20px";
+  const width = "16px";
   const height = "30px";
   const textAlign = "center";
   const padding = "5px";
@@ -56,7 +56,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
   const justifyContent = "center";
 
   return (
-    <div className="flex flex-col items-start max-w-full overflow-x-auto">
+    <div className="flex flex-col items-start overflow-x-auto -mx-20">
       {sequenceData[0].sequence != "SEQUENCE" && <div className="flex flex-row">
           {/* Allele name on the left */}
           <div className="w-[250px] text-left text-black py-1 font-bold sticky left-0 bg-base-100">
