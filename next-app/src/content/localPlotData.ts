@@ -7,7 +7,7 @@ export const superPopulationColorsDict = {
     EAS: "#70c265",
     EUR: "#5480f0",
     SAS: "#999999",
-    ALL: "#8d1774"
+    ALL: "#000000"
   };
 
   // Define populations and their corresponding color
