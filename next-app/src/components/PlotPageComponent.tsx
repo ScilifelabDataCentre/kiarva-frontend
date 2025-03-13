@@ -127,7 +127,8 @@ export default function PlotPage(): ReactElement {
   useEffect(() => {
     if (selectedAllele) {
       if (!hasCookie('password')) {
-        const strToKey = selectedAllele as keyof typeof sampleAlleleDataGenomicPlot;
+        const selectedAlleleTmp = selectedAllele.replace('*', '');
+        const strToKey = selectedAlleleTmp as keyof typeof sampleAlleleDataGenomicPlot;
         setSuperpopFreqAPIData(sampleAlleleDataGenomicPlot[strToKey].superpopulation);
         setPopFreqAPIData(sampleAlleleDataGenomicPlot[strToKey].population);
         setIgSNPerScore(sampleAlleleDataGenomicPlot[strToKey].SNPscore);
