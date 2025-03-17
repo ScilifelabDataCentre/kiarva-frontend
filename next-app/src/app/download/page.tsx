@@ -19,6 +19,8 @@ export default function DownloadPage(): ReactElement {
   // Track the page view for analytics if enabled in the application settings
   TrackPageViewIfEnabled();
 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  
   // State to keep track of the selected type of fasta file
   const [fastaTypeSelected, setFastaTypeSelected] = useState("coding");
 
@@ -132,12 +134,6 @@ export default function DownloadPage(): ReactElement {
     }
   }, []);
 
-  function setIsDisclaimerPopupOpen(arg0: boolean): void {
-    if (arg0) {
-      console.log("Disclaimer popup button not implemented.");
-    }
-  }
-
   return (
     <div className={BODY_CLASSES}>
       <h1 className={H_1}>Download FASTA files</h1>
@@ -145,7 +141,7 @@ export default function DownloadPage(): ReactElement {
       {!hasCookie("password") && (
         <button
           className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
-          onClick={() => setIsDisclaimerPopupOpen(true)}
+          onClick={() => setIsPopupOpen(true)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -163,9 +159,9 @@ export default function DownloadPage(): ReactElement {
           Disclaimer
         </button>
       )}
-      {!hasCookie("password") && setIsDisclaimerPopupOpen && (
+      {!hasCookie("password") && isPopupOpen && (
         <DisclaimerPopupComponent
-          onClose={() => setIsDisclaimerPopupOpen(false)}
+          onClose={() => setIsPopupOpen(false)}
           explanation="This page is fully developed and allows you to explore its
                       design and functionality. However, the underlying data has
                       not been officially published yet. Therefore, we can currently only showcase a sample of the data for demonstration purposes."
