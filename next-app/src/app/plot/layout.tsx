@@ -6,17 +6,14 @@ import { hasCookie } from "cookies-next";
 import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useState } from 'react';
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  function setIsDisclaimerPopupOpen(arg0: boolean): void {
-    if (arg0) {
-      console.log("Disclaimer popup button not implemented.");
-    }
-  }
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const currentRoute = usePathname();
 
@@ -31,7 +28,7 @@ export default function RootLayout({
       {!hasCookie("password") && (
         <button
           className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
-          onClick={() => setIsDisclaimerPopupOpen(true)}
+          onClick={() => setIsPopupOpen(true)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -49,9 +46,9 @@ export default function RootLayout({
           Disclaimer
         </button>
       )}
-      {!hasCookie("password") && setIsDisclaimerPopupOpen && (
+      {!hasCookie("password") && isPopupOpen && (
         <DisclaimerPopupComponent
-          onClose={() => setIsDisclaimerPopupOpen(false)}
+          onClose={() => setIsPopupOpen(false)}
           explanation="This page is fully developed and allows you to explore its
                       design and functionality. However, the underlying data has
                       not been officially published yet. Therefore, we can currently only showcase a sample of the data for demonstration purposes."

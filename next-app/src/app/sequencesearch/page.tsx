@@ -31,15 +31,18 @@ const FormSchema = z.object({
 })
 
 export default function SequenceSearchInputForm() {
-    const [axiosConfig, setAxiosConfig] = useState({
-        headers: {
-          "X-api-key": "",
-        }
-      })
 
-    const sequenceSearchEndpoint = backendAPI + "data/sequences/"
-    const [sequenceData, setSequenceData] = useState<ISequenceSearchData[]>([]);
-    const [searchTermLength, setSearchTermLength] = useState<number>(0);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const [axiosConfig, setAxiosConfig] = useState({
+      headers: {
+        "X-api-key": "",
+      }
+    })
+
+  const sequenceSearchEndpoint = backendAPI + "data/sequences/"
+  const [sequenceData, setSequenceData] = useState<ISequenceSearchData[]>([]);
+  const [searchTermLength, setSearchTermLength] = useState<number>(0);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -77,19 +80,13 @@ export default function SequenceSearchInputForm() {
     }
   }, [])
 
-  function setIsDisclaimerPopupOpen(arg0: boolean): void {
-    if (arg0) {
-        console.log("Disclaimer popup button not implemented.")
-    }
-  }
-
   return (
     <div className={BODY_CLASSES}>
       <h1 className={H_1}>Sequence search</h1>
         {!hasCookie('password') &&
         <button
           className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
-          onClick={() => setIsDisclaimerPopupOpen(true)}
+          onClick={() => setIsPopupOpen(true)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -106,9 +103,9 @@ export default function SequenceSearchInputForm() {
           </svg>
           Disclaimer
         </button>}
-        {!hasCookie('password') && setIsDisclaimerPopupOpen && (
+        {!hasCookie('password') && isPopupOpen && (
           <DisclaimerPopupComponent
-            onClose={() => setIsDisclaimerPopupOpen(false)}
+            onClose={() => setIsPopupOpen(false)}
             explanation="This page is fully developed and allows you to explore its
                       design and functionality. However, the underlying data has
                       not been officially published yet."
