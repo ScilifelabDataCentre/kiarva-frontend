@@ -131,25 +131,27 @@ export default function AminoAcidPlotPage(): ReactElement {
 
   useEffect(() => {
     if (selectedAllele) {
-      getTopLevelAlleleAA(selectedAllele);
+      if (hasCookie("password")) {
+        getTopLevelAlleleAA(selectedAllele);
+      }
+      else {
+        const selectedAlleleTmp = selectedAllele.replace('$', '');
+        const strToKey =
+          selectedAlleleTmp as keyof typeof sampleAlleleDataAminoAcidPlot;
+        setSuperpopFreqAPIData(
+          sampleAlleleDataAminoAcidPlot[strToKey].superpopulation
+        );
+        setPopFreqAPIData(sampleAlleleDataAminoAcidPlot[strToKey].population);
+        setAlleleListAA(sampleAlleleDataAminoAcidPlot[strToKey].alleleListAA);
+      }
     }
   }, [selectedAllele]);
 
   // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
     if (topAlleleAA) {
-      if (!hasCookie("password")) {
-        const strToKey =
-          topAlleleAA as keyof typeof sampleAlleleDataAminoAcidPlot;
-        setSuperpopFreqAPIData(
-          sampleAlleleDataAminoAcidPlot[strToKey].superpopulation
-        );
-        setPopFreqAPIData(sampleAlleleDataAminoAcidPlot[strToKey].population);
-        setAlleleListAA(sampleAlleleDataAminoAcidPlot[strToKey].alleleListAA);
-      } else {
-        getGeneFreqData(topAlleleAA);
-        getAlleleListAA(topAlleleAA);
-      }
+      getGeneFreqData(topAlleleAA);
+      getAlleleListAA(topAlleleAA);
     } else {
       setSuperpopFreqAPIData([]);
       setPopFreqAPIData([]);

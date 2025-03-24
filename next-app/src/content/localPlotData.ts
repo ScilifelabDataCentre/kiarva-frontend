@@ -7,7 +7,7 @@ export const superPopulationColorsDict = {
     EAS: "#70c265",
     EUR: "#5480f0",
     SAS: "#999999",
-    ALL: "#8d1774"
+    ALL: "#000000"
   };
 
   // Define populations and their corresponding color
@@ -148,13 +148,13 @@ export const populationSubsets = [
   ]
 
 export const sampleAlleleDataGenomicPlot = {
-    'IGHV1-2*02_S4953': 
+    'IGHV1-2$02_S4953': 
     {
       'superpopulation':
       [
         {
-          "frequency": 0.031073446327683617,
-          "n": 22,
+          "frequency": 0.03531073446327684,
+          "n": 25,
           "population": "AFR"
         },
         {
@@ -176,13 +176,18 @@ export const sampleAlleleDataGenomicPlot = {
           "frequency": 0.0,
           "n": 0,
           "population": "AMR"
+        },
+        {
+          "frequency": 0.01005631536604988,
+          "n": 25,
+          "population": "ALL"
         }
       ],
       'population':
       [
         {
-          "frequency": 0.0379746835443038,
-          "n": 3,
+          "frequency": 0.06329113924050633,
+          "n": 5,
           "population": "ACB"
         },
         {
@@ -191,8 +196,8 @@ export const sampleAlleleDataGenomicPlot = {
           "population": "ASW"
         },
         {
-          "frequency": 0.035398230088495575,
-          "n": 4,
+          "frequency": 0.04424778761061947,
+          "n": 5,
           "population": "ESN"
         },
         {
@@ -304,6 +309,11 @@ export const sampleAlleleDataGenomicPlot = {
           "frequency": 0.0,
           "n": 0,
           "population": "PUR"
+        },
+        {
+          "frequency": 0.01005631536604988,
+          "n": 25,
+          "population": "ALL"
         }
       ],
       'SNPscore': "0.0",
@@ -311,61 +321,66 @@ export const sampleAlleleDataGenomicPlot = {
         "rs373342578(T:261,106452929)"
       ],
     },
-    'IGHV1-2*04':
+    'IGHV1-2$04':
     {
       'superpopulation':
       [
         {
-          "frequency": 0.211864406779661,
-          "n": 150,
+          "frequency": 0.24858757062146894,
+          "n": 176,
           "population": "AFR"
         },
         {
-          "frequency": 0.5942028985507246,
-          "n": 246,
+          "frequency": 0.6497584541062802,
+          "n": 269,
           "population": "EUR"
         },
         {
-          "frequency": 0.40925925925925927,
-          "n": 221,
+          "frequency": 0.4425925925925926,
+          "n": 239,
           "population": "EAS"
         },
         {
-          "frequency": 0.387037037037037,
-          "n": 209,
+          "frequency": 0.4843462246777164,
+          "n": 263,
           "population": "SAS"
         },
         {
-          "frequency": 0.4142857142857143,
-          "n": 116,
+          "frequency": 0.46619217081850534,
+          "n": 131,
           "population": "AMR"
+        },
+        {
+          "frequency": 0.4336283185840708,
+          "n": 1078,
+          "population": "ALL"
         }
       ],
       'population':
       [
         {
-          "frequency": 0.12658227848101267,
-          "n": 10,
+          "frequency": 0.26582278481012656,
+          "n": 21,
           "population": "ACB"
         },
         {
-          "frequency": 0.3387096774193548,
-          "n": 21,
+          "frequency": 0.3548387096774194,
+          "n": 22,
           "population": "ASW"
         },
         {
-          "frequency": 0.1592920353982301,
-          "n": 18,
+          "frequency": 0.168141592920354,
+          "n": 19,
           "population": "ESN"
         },
         {
-          "frequency": 0.29411764705882354,
-          "n": 35,
+          "frequency": 0.33613445378151263,
+          "n": 40,
           "population": "GWD"
         },
         {
-          "frequency": 0.2689075630252101,
-          "n": 32,
+          "frequency": 0.31092436974789917,
+          "n": 37,
           "population": "LWK"
         },
         {
@@ -374,78 +389,78 @@ export const sampleAlleleDataGenomicPlot = {
           "population": "MSL"
         },
         {
-          "frequency": 0.13559322033898305,
-          "n": 16,
+          "frequency": 0.16101694915254236,
+          "n": 19,
           "population": "YRI"
         },
         {
-          "frequency": 0.65,
-          "n": 65,
+          "frequency": 0.66,
+          "n": 66,
           "population": "FIN"
         },
         {
-          "frequency": 0.7722772277227723,
-          "n": 78,
+          "frequency": 0.801980198019802,
+          "n": 81,
           "population": "GBR"
         },
         {
-          "frequency": 0.40404040404040403,
-          "n": 40,
+          "frequency": 0.5757575757575758,
+          "n": 57,
           "population": "IBS"
         },
         {
-          "frequency": 0.5526315789473685,
-          "n": 63,
+          "frequency": 0.5701754385964912,
+          "n": 65,
           "population": "TSI"
         },
         {
-          "frequency": 0.44,
-          "n": 55,
+          "frequency": 0.464,
+          "n": 58,
           "population": "CDX"
         },
         {
-          "frequency": 0.36363636363636365,
-          "n": 40,
+          "frequency": 0.41818181818181815,
+          "n": 46,
           "population": "CHB"
         },
         {
-          "frequency": 0.43,
-          "n": 43,
+          "frequency": 0.48,
+          "n": 48,
           "population": "CHS"
         },
         {
-          "frequency": 0.4,
-          "n": 42,
+          "frequency": 0.42857142857142855,
+          "n": 45,
           "population": "JPT"
         },
         {
-          "frequency": 0.41,
-          "n": 41,
+          "frequency": 0.42,
+          "n": 42,
           "population": "KHV"
         },
         {
-          "frequency": 0.4077669902912621,
-          "n": 42,
+          "frequency": 0.4174757281553398,
+          "n": 43,
           "population": "BEB"
         },
         {
-          "frequency": 0.5504587155963303,
-          "n": 60,
+          "frequency": 0.5688073394495413,
+          "n": 62,
           "population": "GIH"
         },
         {
-          "frequency": 0.4732142857142857,
-          "n": 53,
+          "frequency": 0.49107142857142855,
+          "n": 55,
           "population": "ITU"
         },
         {
-          "frequency": 0.28703703703703703,
-          "n": 31,
+          "frequency": 0.48148148148148145,
+          "n": 52,
           "population": "PJL"
         },
         {
-          "frequency": 0.21296296296296297,
-          "n": 23,
+          "frequency": 0.4594594594594595,
+          "n": 51,
           "population": "STU"
         },
         {
@@ -454,19 +469,24 @@ export const sampleAlleleDataGenomicPlot = {
           "population": "CLM"
         },
         {
-          "frequency": 0.44285714285714284,
-          "n": 31,
+          "frequency": 0.5070422535211268,
+          "n": 36,
           "population": "MXL"
         },
         {
-          "frequency": 0.4142857142857143,
-          "n": 29,
+          "frequency": 0.44285714285714284,
+          "n": 31,
           "population": "PEL"
         },
         {
-          "frequency": 0.2857142857142857,
-          "n": 20,
+          "frequency": 0.4,
+          "n": 28,
           "population": "PUR"
+        },
+        {
+          "frequency": 0.4336283185840708,
+          "n": 1078,
+          "population": "ALL"
         }
       ],
       'SNPscore': "0.0",
@@ -474,41 +494,46 @@ export const sampleAlleleDataGenomicPlot = {
         "rs112806369(A:98,106452766)"
       ],
     },
-    'IGHV1-2*06':
+    'IGHV1-2$06':
     {
       'superpopulation':
       [
         {
-          "frequency": 0.211864406779661,
-          "n": 150,
+          "frequency": 0.2401129943502825,
+          "n": 170,
           "population": "AFR"
         },
         {
-          "frequency": 0.1473429951690821,
-          "n": 61,
+          "frequency": 0.15942028985507245,
+          "n": 66,
           "population": "EUR"
         },
         {
-          "frequency": 0.07962962962962963,
-          "n": 43,
+          "frequency": 0.08888888888888889,
+          "n": 48,
           "population": "EAS"
         },
         {
-          "frequency": 0.21851851851851853,
-          "n": 118,
+          "frequency": 0.2578268876611418,
+          "n": 140,
           "population": "SAS"
         },
         {
-          "frequency": 0.16428571428571428,
-          "n": 46,
+          "frequency": 0.20284697508896798,
+          "n": 57,
           "population": "AMR"
+        },
+        {
+          "frequency": 0.19348350764279967,
+          "n": 481,
+          "population": "ALL"
         }
       ],
       'population':
       [
         {
-          "frequency": 0.0759493670886076,
-          "n": 6,
+          "frequency": 0.20253164556962025,
+          "n": 16,
           "population": "ACB"
         },
         {
@@ -517,28 +542,28 @@ export const sampleAlleleDataGenomicPlot = {
           "population": "ASW"
         },
         {
-          "frequency": 0.20353982300884957,
-          "n": 23,
+          "frequency": 0.21238938053097345,
+          "n": 24,
           "population": "ESN"
         },
         {
-          "frequency": 0.2689075630252101,
-          "n": 32,
+          "frequency": 0.2857142857142857,
+          "n": 34,
           "population": "GWD"
         },
         {
-          "frequency": 0.17647058823529413,
-          "n": 21,
+          "frequency": 0.18487394957983194,
+          "n": 22,
           "population": "LWK"
         },
         {
-          "frequency": 0.3163265306122449,
-          "n": 31,
+          "frequency": 0.32653061224489793,
+          "n": 32,
           "population": "MSL"
         },
         {
-          "frequency": 0.22033898305084745,
-          "n": 26,
+          "frequency": 0.2627118644067797,
+          "n": 31,
           "population": "YRI"
         },
         {
@@ -547,18 +572,18 @@ export const sampleAlleleDataGenomicPlot = {
           "population": "FIN"
         },
         {
-          "frequency": 0.1782178217821782,
-          "n": 18,
+          "frequency": 0.18811881188118812,
+          "n": 19,
           "population": "GBR"
         },
         {
-          "frequency": 0.16161616161616163,
-          "n": 16,
+          "frequency": 0.1919191919191919,
+          "n": 19,
           "population": "IBS"
         },
         {
-          "frequency": 0.09649122807017543,
-          "n": 11,
+          "frequency": 0.10526315789473684,
+          "n": 12,
           "population": "TSI"
         },
         {
@@ -567,8 +592,8 @@ export const sampleAlleleDataGenomicPlot = {
           "population": "CDX"
         },
         {
-          "frequency": 0.07272727272727272,
-          "n": 8,
+          "frequency": 0.10909090909090909,
+          "n": 12,
           "population": "CHB"
         },
         {
@@ -577,8 +602,8 @@ export const sampleAlleleDataGenomicPlot = {
           "population": "CHS"
         },
         {
-          "frequency": 0.18095238095238095,
-          "n": 19,
+          "frequency": 0.19047619047619047,
+          "n": 20,
           "population": "JPT"
         },
         {
@@ -592,8 +617,8 @@ export const sampleAlleleDataGenomicPlot = {
           "population": "BEB"
         },
         {
-          "frequency": 0.3302752293577982,
-          "n": 36,
+          "frequency": 0.3394495412844037,
+          "n": 37,
           "population": "GIH"
         },
         {
@@ -602,34 +627,39 @@ export const sampleAlleleDataGenomicPlot = {
           "population": "ITU"
         },
         {
-          "frequency": 0.08333333333333333,
-          "n": 9,
+          "frequency": 0.14814814814814814,
+          "n": 16,
           "population": "PJL"
         },
         {
-          "frequency": 0.1388888888888889,
-          "n": 15,
+          "frequency": 0.26126126126126126,
+          "n": 29,
           "population": "STU"
         },
         {
-          "frequency": 0.2857142857142857,
-          "n": 20,
+          "frequency": 0.3,
+          "n": 21,
           "population": "CLM"
         },
         {
-          "frequency": 0.11428571428571428,
-          "n": 8,
+          "frequency": 0.14084507042253522,
+          "n": 10,
           "population": "MXL"
         },
         {
-          "frequency": 0.12857142857142856,
-          "n": 9,
+          "frequency": 0.14285714285714285,
+          "n": 10,
           "population": "PEL"
         },
         {
-          "frequency": 0.12857142857142856,
-          "n": 9,
+          "frequency": 0.22857142857142856,
+          "n": 16,
           "population": "PUR"
+        },
+        {
+          "frequency": 0.19348350764279967,
+          "n": 481,
+          "population": "ALL"
         }
       ],
       'SNPscore': "0.0",
@@ -644,165 +674,175 @@ export const sampleAlleleDataAminoAcidPlot = {
     {
       'superpopulation':
       [
-          {
-              "frequency": 0.8319209039548022,
-              "n": 589,
-              "population": "AFR"
-          },
-          {
-              "frequency": 0.9396135265700483,
-              "n": 389,
-              "population": "EUR"
-          },
-          {
-              "frequency": 0.9481481481481482,
-              "n": 512,
-              "population": "EAS"
-          },
-          {
-              "frequency": 0.7685185185185185,
-              "n": 415,
-              "population": "SAS"
-          },
-          {
-              "frequency": 0.8821428571428571,
-              "n": 247,
-              "population": "AMR"
-          }
+        {
+          "frequency": 0.942090395480226,
+          "n": 667,
+          "population": "AFR"
+        },
+        {
+          "frequency": 0.9927536231884058,
+          "n": 411,
+          "population": "EUR"
+        },
+        {
+          "frequency": 0.9851851851851852,
+          "n": 532,
+          "population": "EAS"
+        },
+        {
+          "frequency": 0.990791896869245,
+          "n": 538,
+          "population": "SAS"
+        },
+        {
+          "frequency": 0.9857651245551602,
+          "n": 277,
+          "population": "AMR"
+        },
+        {
+          "frequency": 0.9754625905068383,
+          "n": 2425,
+          "population": "ALL"
+        }
       ],
       'population':
       [
-          {
-              "frequency": 0.5822784810126582,
-              "n": 46,
-              "population": "ACB"
-          },
-          {
-              "frequency": 0.8064516129032258,
-              "n": 50,
-              "population": "ASW"
-          },
-          {
-              "frequency": 0.9292035398230089,
-              "n": 105,
-              "population": "ESN"
-          },
-          {
-              "frequency": 0.8739495798319328,
-              "n": 104,
-              "population": "GWD"
-          },
-          {
-              "frequency": 0.8487394957983193,
-              "n": 101,
-              "population": "LWK"
-          },
-          {
-              "frequency": 0.7244897959183674,
-              "n": 71,
-              "population": "MSL"
-          },
-          {
-              "frequency": 0.9491525423728814,
-              "n": 112,
-              "population": "YRI"
-          },
-          {
-              "frequency": 1.0,
-              "n": 100,
-              "population": "FIN"
-          },
-          {
-              "frequency": 0.9801980198019802,
-              "n": 99,
-              "population": "GBR"
-          },
-          {
-              "frequency": 0.8080808080808081,
-              "n": 80,
-              "population": "IBS"
-          },
-          {
-              "frequency": 0.9649122807017544,
-              "n": 110,
-              "population": "TSI"
-          },
-          {
-              "frequency": 0.984,
-              "n": 123,
-              "population": "CDX"
-          },
-          {
-              "frequency": 0.8454545454545455,
-              "n": 93,
-              "population": "CHB"
-          },
-          {
-              "frequency": 0.94,
-              "n": 94,
-              "population": "CHS"
-          },
-          {
-              "frequency": 0.9809523809523809,
-              "n": 103,
-              "population": "JPT"
-          },
-          {
-              "frequency": 0.99,
-              "n": 99,
-              "population": "KHV"
-          },
-          {
-              "frequency": 0.9805825242718447,
-              "n": 101,
-              "population": "BEB"
-          },
-          {
-              "frequency": 0.9908256880733946,
-              "n": 108,
-              "population": "GIH"
-          },
-          {
-              "frequency": 0.9464285714285714,
-              "n": 106,
-              "population": "ITU"
-          },
-          {
-              "frequency": 0.49074074074074076,
-              "n": 53,
-              "population": "PJL"
-          },
-          {
-              "frequency": 0.4351851851851852,
-              "n": 47,
-              "population": "STU"
-          },
-          {
-              "frequency": 1.0,
-              "n": 70,
-              "population": "CLM"
-          },
-          {
-              "frequency": 0.8285714285714286,
-              "n": 58,
-              "population": "MXL"
-          },
-          {
-              "frequency": 0.9857142857142858,
-              "n": 69,
-              "population": "PEL"
-          },
-          {
-              "frequency": 0.7142857142857143,
-              "n": 50,
-              "population": "PUR"
-          }
+        {
+          "frequency": 0.9873417721518988,
+          "n": 78,
+          "population": "ACB"
+        },
+        {
+          "frequency": 0.9032258064516129,
+          "n": 56,
+          "population": "ASW"
+        },
+        {
+          "frequency": 0.9557522123893806,
+          "n": 108,
+          "population": "ESN"
+        },
+        {
+          "frequency": 0.957983193277311,
+          "n": 114,
+          "population": "GWD"
+        },
+        {
+          "frequency": 0.9327731092436975,
+          "n": 111,
+          "population": "LWK"
+        },
+        {
+          "frequency": 0.8775510204081632,
+          "n": 86,
+          "population": "MSL"
+        },
+        {
+          "frequency": 0.9661016949152542,
+          "n": 114,
+          "population": "YRI"
+        },
+        {
+          "frequency": 1.0,
+          "n": 100,
+          "population": "FIN"
+        },
+        {
+          "frequency": 1.0,
+          "n": 101,
+          "population": "GBR"
+        },
+        {
+          "frequency": 0.98989898989899,
+          "n": 98,
+          "population": "IBS"
+        },
+        {
+          "frequency": 0.9824561403508771,
+          "n": 112,
+          "population": "TSI"
+        },
+        {
+          "frequency": 0.992,
+          "n": 124,
+          "population": "CDX"
+        },
+        {
+          "frequency": 0.990909090909091,
+          "n": 109,
+          "population": "CHB"
+        },
+        {
+          "frequency": 0.96,
+          "n": 96,
+          "population": "CHS"
+        },
+        {
+          "frequency": 0.9904761904761905,
+          "n": 104,
+          "population": "JPT"
+        },
+        {
+          "frequency": 0.99,
+          "n": 99,
+          "population": "KHV"
+        },
+        {
+          "frequency": 0.9902912621359223,
+          "n": 102,
+          "population": "BEB"
+        },
+        {
+          "frequency": 1.0,
+          "n": 109,
+          "population": "GIH"
+        },
+        {
+          "frequency": 0.9910714285714286,
+          "n": 111,
+          "population": "ITU"
+        },
+        {
+          "frequency": 0.9907407407407407,
+          "n": 107,
+          "population": "PJL"
+        },
+        {
+          "frequency": 0.9819819819819819,
+          "n": 109,
+          "population": "STU"
+        },
+        {
+          "frequency": 1.0,
+          "n": 70,
+          "population": "CLM"
+        },
+        {
+          "frequency": 0.9577464788732394,
+          "n": 68,
+          "population": "MXL"
+        },
+        {
+          "frequency": 0.9857142857142858,
+          "n": 69,
+          "population": "PEL"
+        },
+        {
+          "frequency": 1.0,
+          "n": 70,
+          "population": "PUR"
+        },
+        {
+          "frequency": 0.9754625905068383,
+          "n": 2425,
+          "population": "ALL"
+        }
       ],
       'alleleListAA': [
           "IGHV1-18*01",
+          "IGHV1-18*04",
           "IGHV1-18*01_S0898",
-          "IGHV1-18*01_S1946",
-          "IGHV1-18*04"
+          "IGHV1-18*01_S1946"
       ],
     },
   }
