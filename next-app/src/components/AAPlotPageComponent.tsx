@@ -2,7 +2,6 @@
 
 import { ReactElement, useEffect, useState } from "react";
 import { backendAPI } from "@/constants";
-import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import FrequencyPlotComponent from "@/components/FrequencyPlotComponent";
 import {
   IGeneFrequencyData,
@@ -24,9 +23,6 @@ import {
 
 // Main function to render the PlotPage component
 export default function AminoAcidPlotPage(): ReactElement {
-  // Track page views if cookies handling is enabled
-  TrackPageViewIfEnabled();
-
   const [axiosConfig, setAxiosConfig] = useState({
     headers: {
       "X-api-key": "",

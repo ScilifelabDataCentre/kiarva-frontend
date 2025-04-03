@@ -1,13 +1,10 @@
 "use client";
 
 import { ReactElement } from "react";
-import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import { BODY_CLASSES, H_1, currentVersion } from "@/constants";
 import ChangeLogComponent from "@/components/ChangeLogComponent";
 
 export default function ChangeLogPage(): ReactElement {
-  TrackPageViewIfEnabled();
-
   const pageTitle: string = "Change log";
 
   return (

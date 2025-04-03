@@ -2,7 +2,6 @@
 
 import { ReactElement, useEffect, useState } from "react";
 import { backendAPI } from "@/constants";
-import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import {
   ISequenceData,
   IAlleleDropDownConfig,
@@ -16,8 +15,6 @@ import MSAViewer from "@/components/MSAViewer";
 
 // Main function to render the PlotPage component
 export default function MSAPlotPageComponent(): ReactElement {
-  // Track page views if cookies handling is enabled
-  TrackPageViewIfEnabled();
 
   const [axiosConfig, setAxiosConfig] = useState({
     headers: {
