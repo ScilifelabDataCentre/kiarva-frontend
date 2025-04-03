@@ -2,13 +2,10 @@
 
 import { ReactElement } from "react";
 import { BODY_CLASSES, H_1 } from "@/constants";
-import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 
 // const test2 = "images/test2.png";
 
 export default function MethodologyPage(): ReactElement {
-  TrackPageViewIfEnabled();
-
   const pageTitle: string = "Methodology";
 
   return (

@@ -7,7 +7,6 @@ import {
   H_1,
   currentVersionFormatted,
 } from "@/constants";
-import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import DownloadBoxComponent from "@/components/DownloadBoxComponent";
 import axios from "axios";
 import fileDownload from "js-file-download";
@@ -16,9 +15,6 @@ import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent";
 import { getCookie, hasCookie } from "cookies-next";
 
 export default function DownloadPage(): ReactElement {
-  // Track the page view for analytics if enabled in the application settings
-  TrackPageViewIfEnabled();
-
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   
   // State to keep track of the selected type of fasta file

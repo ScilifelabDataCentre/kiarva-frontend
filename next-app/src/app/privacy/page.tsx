@@ -1,34 +1,37 @@
 'use client';
 
-import { ReactElement, useState } from "react";
-import { BODY_CLASSES, BUTTON_TYPE_ONE, H_1 } from "@/constants";
-import { trackingDisabled, TrackPageViewIfEnabled } from "@/util/cookiesHandling";
+import { 
+  ReactElement, 
+  // useState 
+} from "react";
+import { 
+  BODY_CLASSES, 
+  // BUTTON_TYPE_ONE, 
+  H_1 } from "@/constants";
 import Link from "next/link";
-import { deleteCookie, setCookie } from "cookies-next";
+// import { deleteCookie, hasCookie, setCookie } from "cookies-next";
 
 export default function PrivacyPage(): ReactElement {
-  TrackPageViewIfEnabled();
+  // const optInOrOutTextActive = (isTrackingEnabled: boolean): string[] => {
+  //   if (isTrackingEnabled) {
+  //       return ["Click on the button to the right to opt out of tracking", "Opt Out"]
+  //   }
+  //   else {
+  //       return ["Click on the button to the right to opt in to tracking", "Opt In"]
+  //   }
+  // }
 
-  const optInOrOutTextActive = (isTrackingEnabled: boolean): string[] => {
-    if (isTrackingEnabled) {
-        return ["Click on the button to the right to opt out of tracking", "Opt Out"]
-    }
-    else {
-        return ["Click on the button to the right to opt in to tracking", "Opt In"]
-    }
-  }
+  // const [ optInText, setOptInText ] = useState(optInOrOutTextActive(!hasCookie('trackingDisabled')))
 
-  const [ optInText, setOptInText ] = useState(optInOrOutTextActive(!trackingDisabled()))
-
-  const handleOptOut = () => {
-    if (trackingDisabled()) {
-      deleteCookie("trackingDisabled")
-    }
-    else {
-      setCookie("trackingDisabled", "true", { maxAge: 60*60*24*365 });
-    }
-    setOptInText(optInOrOutTextActive(!trackingDisabled()));
-  }
+  // const handleOptOut = () => {
+  //   if (hasCookie('trackingDisabled')) {
+  //     deleteCookie("trackingDisabled")
+  //   }
+  //   else {
+  //     setCookie("trackingDisabled", "true", { maxAge: 60*60*24*365 });
+  //   }
+  //   setOptInText(optInOrOutTextActive(!hasCookie('trackingDisabled')));
+  // }
   
   return (
     <>
@@ -48,13 +51,13 @@ export default function PrivacyPage(): ReactElement {
           and of the Council of 27 April 2016, the General Data Protection
           Regulation.
         </p>
-        <div role="alert" className="alert bg-neutral text-neutral-content">
+        {/* <div role="alert" className="alert bg-neutral text-neutral-content">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           <span>{optInText[0]}</span>
           <div className="space-x-2">
               <button onClick={handleOptOut} className={BUTTON_TYPE_ONE}>{optInText[1]}</button>
           </div>
-        </div>
+        </div> */}
         <div className="divider">Links to Other Sites</div>
         <p>
           Our Service may contain links to other sites. If you click on a
