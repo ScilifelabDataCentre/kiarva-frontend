@@ -2,7 +2,6 @@
 
 import { ReactElement, ReactNode } from "react";
 import { BODY_CLASSES } from "@/constants";
-import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 import Link from "next/link";
 import { BadgeInfo, Rss, type LucideIcon } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
@@ -67,7 +66,6 @@ function FadeAlert({ children, title, icon: Icon }: FadeAlertProps) {
 }
 
 export default function HomePage(): ReactElement {
-  TrackPageViewIfEnabled();
 
   return (
     <div>

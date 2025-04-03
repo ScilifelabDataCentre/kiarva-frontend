@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import HeaderComponent from "@/components/HeaderComponent";
 import FooterComponent from "@/components/FooterComponent";
-import React from "react";
+import MatomoInit from "@/components/MatomoInit";
+
 
 export const metadata: Metadata = {
   title: "KIARVA",
@@ -16,8 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <MatomoInit></MatomoInit>
         <HeaderComponent />
-        {children}
+            {children}
         <FooterComponent />
       </body>
     </html>

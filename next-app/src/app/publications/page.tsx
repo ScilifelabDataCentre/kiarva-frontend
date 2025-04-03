@@ -3,10 +3,8 @@
 import { ReactElement } from "react";
 import PublicationComponent from "@/components/PublicationComponent";
 import { BODY_CLASSES, H_1 } from "@/constants";
-import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 
 export default function PublicationsPage(): ReactElement {
-  TrackPageViewIfEnabled();
 
   return (
     <>

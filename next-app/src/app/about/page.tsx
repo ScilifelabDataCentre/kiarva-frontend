@@ -3,7 +3,6 @@
 import { ReactElement } from "react";
 import ProfileComponent from "@/components/ProfileComponent";
 import { BODY_CLASSES, H_1, LINK_CLASSES } from "@/constants";
-import { TrackPageViewIfEnabled } from "@/util/cookiesHandling";
 
 const martinCorcoran = "/images/martinCorcoran.png";
 const sanjanaNarang = "/images/sanjanaNarang.png";
@@ -12,8 +11,6 @@ const markChernyshev = "/images/markChernyshev.png";
 const gunillaKarlssonHedestam = "/images/gunillaKarlssonHedestam.png";
 
 export default function AboutPage(): ReactElement {
-  TrackPageViewIfEnabled();
-
   const pageTitle: string = "About Us";
 
   return (
