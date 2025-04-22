@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 import { ReactElement } from "react";
 import { ILink } from "@/interfaces/types";
 import { LINK_CLASSES } from "@/constants";
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const footerBackground = "images/hedestamFooterImage.png";
 
@@ -45,7 +45,11 @@ export default function FooterComponent(): ReactElement {
             {Object.keys(links)
               .filter((key) => links[key].link !== currentPath) // Filter out the current page link
               .map((key) => (
-                <Link key={key} href={links[key].link} rel="noopener noreferrer">
+                <Link
+                  key={key}
+                  href={links[key].link}
+                  rel="noopener noreferrer"
+                >
                   <div
                     className="text-info-content text-sm lg:text-base flex justify-center items-center h-8 lg:h-10 p-2 lg:px-4 bg-info font-medium opacity-80 rounded-2xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800 hover:opacity-90"
                     onClick={() => window.scrollTo(0, 0)}
@@ -57,13 +61,17 @@ export default function FooterComponent(): ReactElement {
           </nav>
         </div>
         <nav className="justify-self-end">
-          <Link href="/privacy" rel="noopener noreferrer">
+          <a
+            href="https://precision-medicine-portal.scilifelab.se/privacy"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <p
               className={`text-info-content text-opacity-80 text-sm ${LINK_CLASSES}`}
             >
               Privacy Policy
             </p>
-          </Link>
+          </a>
         </nav>
       </footer>
     </div>
