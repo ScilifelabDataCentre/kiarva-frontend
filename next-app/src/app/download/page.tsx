@@ -16,7 +16,7 @@ import { getCookie, hasCookie } from "cookies-next";
 
 export default function DownloadPage(): ReactElement {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  
+
   // State to keep track of the selected type of fasta file
   const [fastaTypeSelected, setFastaTypeSelected] = useState("coding");
 
@@ -160,7 +160,7 @@ export default function DownloadPage(): ReactElement {
           onClose={() => setIsPopupOpen(false)}
           explanation="This page is fully developed and allows you to explore its
                       design and functionality. However, the underlying data has
-                      not been officially published yet. Therefore, we can currently only showcase a sample of the data for demonstration purposes."
+                      not been officially published yet. Therefore, we can currently only demonstrate the page without its intended functionality."
         />
       )}
 
