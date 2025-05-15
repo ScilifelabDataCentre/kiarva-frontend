@@ -64,30 +64,30 @@ export default function PlotPage(): ReactElement {
   const alleleDropdownConfig: IAlleleDropDownConfig = {
     'geneSegmentItemsArray': ["IGH"],
     'geneDropDownItemsArray': ["IGHV"],
-    'geneSelectionEndpoint': backendAPI + "data/plotoptions/"
+    'geneSelectionEndpoint': backendAPI + "data/plotoptions?current_selection="
   }
 
   const [selectedAllele, setSelectedAllele] = useState<string>("");
 
   async function getGeneFreqData(allele: string) {
     const alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
-    // allele names sometimes contain slashes, which breaks the functionality of the API as it interprets it as a path
-    // replace with '&slash&' and replace again with '/' in the api
-    allele = allele.replace('/', '&slash&');
-    const superpopulationsEndpoint: string =
-      alleleFrequenciesEndpoint + "superpopulations/" + allele;
 
+    const superpopulationsEndpoint: string =
+      alleleFrequenciesEndpoint + "superpopulations?allele_name=" + allele;
+
+    const superPopEncodedURI = encodeURI(superpopulationsEndpoint);
     await axios
-      .get(superpopulationsEndpoint, axiosConfig)
+      .get(superPopEncodedURI, axiosConfig)
       .then((response) => {
         setSuperpopFreqAPIData(response.data);
       })
       .catch((response) => console.log(response.error));
 
     const populationsEndpoint: string =
-      alleleFrequenciesEndpoint + "populations/" + allele;
+      alleleFrequenciesEndpoint + "populations?allele_name=" + allele;
+    const popEncodedURI = encodeURI(populationsEndpoint);
     await axios
-      .get(populationsEndpoint, axiosConfig)
+      .get(popEncodedURI, axiosConfig)
       .then((response) => {
         setPopFreqAPIData(response.data);
       })
@@ -95,13 +95,13 @@ export default function PlotPage(): ReactElement {
   }
 
   async function getGeneIgSNPerData(allele: string) {
-    // allele names sometimes contain slashes, which breaks the functionality of the API as it interprets it as a path
-    // replace with '&slash&' and replace again with '/' in the api
-    allele = allele.replace('/', '&slash&');
+
     const alleleIgSNPerDataEndpoint: string =
-      backendAPI + "data/igsnperdata/" + allele;
+      backendAPI + "data/igsnperdata?allele_name=" + allele;
+
+    const encodedURI = encodeURI(alleleIgSNPerDataEndpoint);
     await axios
-      .get(alleleIgSNPerDataEndpoint, axiosConfig)
+      .get(encodedURI, axiosConfig)
       .then((response) => {
         const responseData: IgSNPerData = response.data;
         if (responseData.igSNPer_score || responseData.igSNPer_score === 0) {

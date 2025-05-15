@@ -80,9 +80,7 @@ export default function AlelleSelectionComponent(prop: {
       if (!currentPicks.subtypeDropdown) {
         setAlleleDropDownItemsArray(["..."]);
         let currentSelection = currentPicks.geneDropdown;
-        // allele names sometimes contain slashes, which breaks the functionality of the API as it interprets it as a path
-        // replace with '&slash&' and replace again with '/' in the api
-        currentSelection = currentSelection.replace('/', '&slash&');
+
         axios
           .get(geneSelectionEndpoint + currentSelection, axiosConfig)
           .then((response) => {
@@ -93,11 +91,8 @@ export default function AlelleSelectionComponent(prop: {
           .catch((response) => console.log(response.error));
       } else {
         let currentSelection =
-          currentPicks.geneDropdown + currentPicks.subtypeDropdown + "$";
+          currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
 
-        // allele names sometimes contain slashes, which breaks the functionality of the API as it interprets it as a path
-        // replace with '&slash&' and replace again with '/' in the api
-        currentSelection = currentSelection.replace('/', '&slash&');
         setAlleleDropDownItemsArray([]);
         axios
           .get(geneSelectionEndpoint + currentSelection, axiosConfig)
@@ -130,7 +125,7 @@ export default function AlelleSelectionComponent(prop: {
         prop.handleSetSelection(
           currentPicks.geneDropdown +
             currentPicks.subtypeDropdown +
-            "$" +
+            "*" +
             currentPicks.alleleDropdown
         );
       }
