@@ -26,7 +26,7 @@ export default function MSAPlotPageComponent(): ReactElement {
   const alleleDropdownConfig: IAlleleDropDownConfig = {
     geneSegmentItemsArray: ["IGH"],
     geneDropDownItemsArray: ["IGHV"],
-    geneSelectionEndpoint: backendAPI + "data/plotoptions/",
+    geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
   };
 
   const [selectedGene, setSelectedGene] = useState<string>("");
@@ -39,14 +39,13 @@ export default function MSAPlotPageComponent(): ReactElement {
   ]);
 
   async function AlignedSequenceData(gene: string) {
-    // allele names sometimes contain slashes, which breaks the functionality of the API as it interprets it as a path
-    // replace with '&slash&' and replace again with '/' in the api
-    gene = gene.replace("/", "&slash&");
-    const AlignedSequenceDataEndpoint: string =
-      backendAPI + "data/sequences/alignedsequences/" + gene;
 
+    const alignedSequenceDataEndpoint: string =
+      backendAPI + "data/sequences/alignedsequences?gene_name=" + gene;
+
+    const encodedURI = encodeURI(alignedSequenceDataEndpoint);
     await axios
-      .get(AlignedSequenceDataEndpoint, axiosConfig)
+      .get(encodedURI, axiosConfig)
       .then((response) => {
         const responseData: IMSAData[] = response.data;
         let item: IMSAData;

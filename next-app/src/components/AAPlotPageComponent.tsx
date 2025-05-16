@@ -66,19 +66,19 @@ export default function AminoAcidPlotPage(): ReactElement {
   const alleleDropdownConfig: IAlleleDropDownConfig = {
     geneSegmentItemsArray: ["IGH"],
     geneDropDownItemsArray: ["IGHV"],
-    geneSelectionEndpoint: backendAPI + "data/plotoptions/",
+    geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
   };
 
   const [selectedAllele, setSelectedAllele] = useState<string>("");
   const [topAlleleAA, setTopAlleleAA] = useState<string>("");
 
   async function getTopLevelAlleleAA(allele: string) {
-    allele = allele.replace("/", "&slash&");
     const topAlleleAAEndpoint: string =
-      backendAPI + "/data/aminoacidalleles/" + allele;
+      backendAPI + "/data/aminoacidalleles?aa_allele_name=" + allele;
 
+    const encodedURI = encodeURI(topAlleleAAEndpoint);
     await axios
-      .get(topAlleleAAEndpoint, axiosConfig)
+      .get(encodedURI, axiosConfig)
       .then((response) => {
         setTopAlleleAA(response.data.allele_aa);
       })
@@ -88,23 +88,23 @@ export default function AminoAcidPlotPage(): ReactElement {
   async function getGeneFreqData(allele: string) {
     const alleleFrequenciesEndpoint: string =
       backendAPI + "data/aminoacidfrequencies/";
-    // allele names sometimes contain slashes, which breaks the functionality of the API as it interprets it as a path
-    // replace with '&slash&' and replace again with '/' in the api
-    allele = allele.replace("/", "&slash&");
-    const superpopulationsEndpoint: string =
-      alleleFrequenciesEndpoint + "superpopulations/" + allele;
 
+    const superpopulationsEndpoint: string =
+      alleleFrequenciesEndpoint + "superpopulations?aa_allele_name=" + allele;
+
+    const superPopEncodedURI = encodeURI(superpopulationsEndpoint);
     await axios
-      .get(superpopulationsEndpoint, axiosConfig)
+      .get(superPopEncodedURI, axiosConfig)
       .then((response) => {
         setSuperpopFreqAPIData(response.data);
       })
       .catch((response) => console.log(response.error));
 
     const populationsEndpoint: string =
-      alleleFrequenciesEndpoint + "populations/" + allele;
+      alleleFrequenciesEndpoint + "populations?aa_allele_name=" + allele;
+    const popEncodedURI = encodeURI(populationsEndpoint);
     await axios
-      .get(populationsEndpoint, axiosConfig)
+      .get(popEncodedURI, axiosConfig)
       .then((response) => {
         setPopFreqAPIData(response.data);
       })
@@ -113,9 +113,10 @@ export default function AminoAcidPlotPage(): ReactElement {
 
   async function getAlleleListAA(allele: string) {
     const alleleListAADataEndpoint: string =
-      backendAPI + "data/aminoacidlist/" + allele;
+      backendAPI + "data/aminoacidlist?aa_allele_name=" + allele;
+    const encodedURI = encodeURI(alleleListAADataEndpoint);
     await axios
-      .get(alleleListAADataEndpoint, axiosConfig)
+      .get(encodedURI, axiosConfig)
       .then((response) => {
         const responseData: AlleleListAA = response.data;
         if (responseData.aa_allele_list) {
@@ -131,7 +132,7 @@ export default function AminoAcidPlotPage(): ReactElement {
         getTopLevelAlleleAA(selectedAllele);
       }
       else {
-        const selectedAlleleTmp = selectedAllele.replace('$', '');
+        const selectedAlleleTmp = selectedAllele.replace('*', '');
         const strToKey =
           selectedAlleleTmp as keyof typeof sampleAlleleDataAminoAcidPlot;
         setSuperpopFreqAPIData(
