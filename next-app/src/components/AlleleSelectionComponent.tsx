@@ -79,7 +79,7 @@ export default function AlelleSelectionComponent(prop: {
     } else {
       if (!currentPicks.subtypeDropdown) {
         setAlleleDropDownItemsArray(["..."]);
-        let currentSelection = currentPicks.geneDropdown;
+        const currentSelection = currentPicks.geneDropdown;
 
         axios
           .get(geneSelectionEndpoint + currentSelection, axiosConfig)
@@ -90,7 +90,7 @@ export default function AlelleSelectionComponent(prop: {
           })
           .catch((response) => console.log(response.error));
       } else {
-        let currentSelection =
+        const currentSelection =
           currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
 
         setAlleleDropDownItemsArray([]);
