@@ -16,7 +16,7 @@ import { getCookie, hasCookie } from "cookies-next";
 
 export default function DownloadPage(): ReactElement {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  
+
   // State to keep track of the selected type of fasta file
   const [fastaTypeSelected, setFastaTypeSelected] = useState("coding");
 
@@ -38,10 +38,11 @@ export default function DownloadPage(): ReactElement {
 
   async function downloadGeneFasta(gene: string) {
     const fastaType =
-      fastaTypeSelected === "coding" ? "" : fastaTypeSelected + "/";
-    const fastaEndpoint = backendAPI + "fasta/" + fastaType + gene;
+      fastaTypeSelected === "coding" ? "" : "/" + fastaTypeSelected;
+    const fastaEndpoint = backendAPI + "fasta" + fastaType + "?file_name=" + gene;
+    const encodedURI = encodeURI(fastaEndpoint);
     await axios
-      .get(fastaEndpoint, axiosConfig)
+      .get(encodedURI, axiosConfig)
       .then((response) => {
         const responseData: Blob = response.data;
         fileDownload(
@@ -61,11 +62,12 @@ export default function DownloadPage(): ReactElement {
     const zip = new JSZip();
     let gene: string;
     const fastaType =
-      fastaTypeSelected === "coding" ? "" : fastaTypeSelected + "/";
+      fastaTypeSelected === "coding" ? "" : "/" + fastaTypeSelected;
     for (gene of genes) {
-      const fastaEndpoint = backendAPI + "fasta/" + fastaType + gene;
+      const fastaEndpoint = backendAPI + "fasta" + fastaType + "?file_name=" + gene;
+      const encodedURI = encodeURI(fastaEndpoint);
       await axios
-        .get(fastaEndpoint, axiosConfig)
+        .get(encodedURI, axiosConfig)
         .then((response) => {
           const responseData: Blob = response.data;
           zip.file(
@@ -160,7 +162,7 @@ export default function DownloadPage(): ReactElement {
           onClose={() => setIsPopupOpen(false)}
           explanation="This page is fully developed and allows you to explore its
                       design and functionality. However, the underlying data has
-                      not been officially published yet. Therefore, we can currently only showcase a sample of the data for demonstration purposes."
+                      not been officially published yet. Therefore, we can currently only demonstrate the page without its intended functionality."
         />
       )}
 

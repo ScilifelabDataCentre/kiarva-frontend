@@ -79,10 +79,8 @@ export default function AlelleSelectionComponent(prop: {
     } else {
       if (!currentPicks.subtypeDropdown) {
         setAlleleDropDownItemsArray(["..."]);
-        let currentSelection = currentPicks.geneDropdown;
-        // allele names sometimes contain slashes, which breaks the functionality of the API as it interprets it as a path
-        // replace with '&slash&' and replace again with '/' in the api
-        currentSelection = currentSelection.replace('/', '&slash&');
+        const currentSelection = currentPicks.geneDropdown;
+
         axios
           .get(geneSelectionEndpoint + currentSelection, axiosConfig)
           .then((response) => {
@@ -92,12 +90,9 @@ export default function AlelleSelectionComponent(prop: {
           })
           .catch((response) => console.log(response.error));
       } else {
-        let currentSelection =
-          currentPicks.geneDropdown + currentPicks.subtypeDropdown + "$";
+        const currentSelection =
+          currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
 
-        // allele names sometimes contain slashes, which breaks the functionality of the API as it interprets it as a path
-        // replace with '&slash&' and replace again with '/' in the api
-        currentSelection = currentSelection.replace('/', '&slash&');
         setAlleleDropDownItemsArray([]);
         axios
           .get(geneSelectionEndpoint + currentSelection, axiosConfig)
@@ -130,7 +125,7 @@ export default function AlelleSelectionComponent(prop: {
         prop.handleSetSelection(
           currentPicks.geneDropdown +
             currentPicks.subtypeDropdown +
-            "$" +
+            "*" +
             currentPicks.alleleDropdown
         );
       }
@@ -222,7 +217,7 @@ export default function AlelleSelectionComponent(prop: {
             currentPicks.alleleDropdown ? (
               <>
                 Plot for {currentPicks.geneDropdown}
-                {currentPicks.subtypeDropdown} {"*"} {currentPicks.alleleDropdown}
+                {currentPicks.subtypeDropdown}{currentPicks.alleleDropdown}
               </>
             ) : (
               "Please select the gene type, gene and allele above"

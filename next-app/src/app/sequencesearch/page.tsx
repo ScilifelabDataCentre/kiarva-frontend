@@ -40,7 +40,7 @@ export default function SequenceSearchInputForm() {
       }
     })
 
-  const sequenceSearchEndpoint = backendAPI + "data/sequences/"
+  const sequenceSearchEndpoint = backendAPI + "data/sequences?sequence_str="
   const [sequenceData, setSequenceData] = useState<ISequenceSearchData[]>([]);
   const [searchTermLength, setSearchTermLength] = useState<number>(0);
 
@@ -60,8 +60,9 @@ export default function SequenceSearchInputForm() {
         </pre>
       ),
     })
+    const encodedURI = encodeURI(sequenceSearchEndpoint + data.sequence);
     await axios
-    .get(sequenceSearchEndpoint + data.sequence, axiosConfig)
+    .get(encodedURI, axiosConfig)
     .then((response) => {
       setSearchTermLength(data.sequence.length);
       setSequenceData(response.data);
