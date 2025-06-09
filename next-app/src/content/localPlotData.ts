@@ -148,7 +148,7 @@ export const populationSubsets = [
   ]
 
 export const sampleAlleleDataGenomicPlot = {
-    'IGHV1-2$02_S4953': 
+    'IGHV1-2*02_S4953': 
     {
       'superpopulation':
       [
@@ -321,7 +321,7 @@ export const sampleAlleleDataGenomicPlot = {
         "rs373342578(T:261,106452929)"
       ],
     },
-    'IGHV1-2$04':
+    'IGHV1-2*04':
     {
       'superpopulation':
       [
@@ -494,7 +494,7 @@ export const sampleAlleleDataGenomicPlot = {
         "rs112806369(A:98,106452766)"
       ],
     },
-    'IGHV1-2$06':
+    'IGHV1-2*06':
     {
       'superpopulation':
       [

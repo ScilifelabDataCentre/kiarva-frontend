@@ -36,7 +36,7 @@ export default function SequenceSearchInputForm() {
     },
   });
 
-  const sequenceSearchEndpoint = backendAPI + "data/sequences/";
+  const sequenceSearchEndpoint = backendAPI + "data/sequences?sequence_str="
   const [sequenceData, setSequenceData] = useState<ISequenceSearchData[]>([]);
   const [searchTermLength, setSearchTermLength] = useState<number>(0);
 
@@ -55,14 +55,15 @@ export default function SequenceSearchInputForm() {
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
-    });
+    })
+    const encodedURI = encodeURI(sequenceSearchEndpoint + data.sequence);
     await axios
-      .get(sequenceSearchEndpoint + data.sequence, axiosConfig)
-      .then((response) => {
-        setSearchTermLength(data.sequence.length);
-        setSequenceData(response.data);
-      })
-      .catch((response) => console.log(response.error));
+    .get(encodedURI, axiosConfig)
+    .then((response) => {
+      setSearchTermLength(data.sequence.length);
+      setSequenceData(response.data);
+    })
+    .catch((response) => console.log(response.error));
   }
 
   // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
