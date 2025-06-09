@@ -1,15 +1,12 @@
 "use client";
 
-import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent";
 import MSAPlotPageComponent from "@/components/MSAPlotPageComponent";
 import { BODY_CLASSES, H_1 } from "@/constants";
 import { hasCookie } from "cookies-next";
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 
 // Main function to render the PlotPage component
 export default function AminoAcidPlotPage(): ReactElement {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
   return (
     <div className={BODY_CLASSES}>
       <h1 className={H_1}>Multiple sequence alignments</h1>
@@ -31,10 +28,10 @@ export default function AminoAcidPlotPage(): ReactElement {
             <path d="M12 13h.01" />
           </svg>
           <span className="text-sm lg:text-base">
-            This page is fully developed and allows you to explore its design
-            and functionality. However, the underlying data has not been
-            officially published yet. Therefore, we can currently only
-            demonstrate the page without its intended functionality.
+            You are currently exploring the light version of KIARVA. The full
+            version will be released once the underlying data has been
+            published. Until then, the pages are visible as a demonstration but
+            without full data access.
           </span>
         </div>
       )}

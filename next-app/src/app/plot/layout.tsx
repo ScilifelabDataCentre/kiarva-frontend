@@ -3,18 +3,14 @@
 import { BODY_CLASSES, H_1 } from "@/constants";
 import "../globals.css";
 import { hasCookie } from "cookies-next";
-import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
   const currentRoute = usePathname();
 
   const paths = {
@@ -43,10 +39,10 @@ export default function RootLayout({
             <path d="M12 13h.01" />
           </svg>
           <span className="text-sm lg:text-base">
-            This page is fully developed and allows you to explore its design
-            and functionality. However, the underlying data has not been
-            officially published yet. Therefore, we can currently only
-            demonstrate the page without its intended functionality.
+            You are currently exploring the light version of KIARVA. The full
+            version will be released once the underlying data has been
+            published. Until then, the pages are visible as a demonstration but
+            without full data access.
           </span>
         </div>
       )}

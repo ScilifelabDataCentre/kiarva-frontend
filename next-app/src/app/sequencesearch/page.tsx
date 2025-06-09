@@ -21,7 +21,6 @@ import axios from "axios";
 import { getCookie, hasCookie } from "cookies-next";
 import { backendAPI, BODY_CLASSES, H_1 } from "@/constants";
 import { ISequenceSearchData } from "@/interfaces/types";
-import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent";
 import SequenceSearchComponent from "@/components/SequenceSearchComponent";
 
 const FormSchema = z.object({
@@ -31,8 +30,6 @@ const FormSchema = z.object({
 });
 
 export default function SequenceSearchInputForm() {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
   const [axiosConfig, setAxiosConfig] = useState({
     headers: {
       "X-api-key": "",
@@ -100,10 +97,10 @@ export default function SequenceSearchInputForm() {
             <path d="M12 13h.01" />
           </svg>
           <span className="text-sm lg:text-base">
-            This page is fully developed and allows you to explore its design
-            and functionality. However, the underlying data has not been
-            officially published yet. Therefore, we can currently only
-            demonstrate the page without its intended functionality.
+            You are currently exploring the light version of KIARVA. The full
+            version will be released once the underlying data has been
+            published. Until then, the pages are visible as a demonstration but
+            without full data access.
           </span>
         </div>
       )}

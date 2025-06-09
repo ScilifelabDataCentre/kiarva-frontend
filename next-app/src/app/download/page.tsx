@@ -11,14 +11,9 @@ import DownloadBoxComponent from "@/components/DownloadBoxComponent";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import JSZip from "jszip";
-import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent";
 import { getCookie, hasCookie } from "cookies-next";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { MessageSquareWarning } from "lucide-react";
 
 export default function DownloadPage(): ReactElement {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
   // State to keep track of the selected type of fasta file
   const [fastaTypeSelected, setFastaTypeSelected] = useState("coding");
 
@@ -119,8 +114,6 @@ export default function DownloadPage(): ReactElement {
 
   // Combine the selection arrays and use them when the download button is pressed
 
-  // const [isPopupOpen, setIsPopupOpen] = useState(true);
-
   useEffect(() => {
     if (hasCookie("password")) {
       setAxiosConfig({
@@ -154,10 +147,10 @@ export default function DownloadPage(): ReactElement {
             <path d="M12 13h.01" />
           </svg>
           <span className="text-sm lg:text-base">
-            This page is fully developed and allows you to explore its design
-            and functionality. However, the underlying data has not been
-            officially published yet. Therefore, we can currently only
-            demonstrate the page without its intended functionality.
+            You are currently exploring the light version of KIARVA. The full
+            version will be released once the underlying data has been
+            published. Until then, the pages are visible as a demonstration but
+            without full data access.
           </span>
         </div>
       )}
