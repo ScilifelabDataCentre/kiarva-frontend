@@ -3,18 +3,14 @@
 import { BODY_CLASSES, H_1 } from "@/constants";
 import "../globals.css";
 import { hasCookie } from "cookies-next";
-import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useState } from 'react';
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
   const currentRoute = usePathname();
 
   const paths = {
@@ -26,33 +22,29 @@ export default function RootLayout({
     <div className={BODY_CLASSES}>
       <h1 className={H_1}>Allele frequency in global populations</h1>
       {!hasCookie("password") && (
-        <button
-          className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
-          onClick={() => setIsPopupOpen(true)}
-        >
+        <div className="alert alert-info bg-info text-info-content">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 shrink-0 stroke-current"
-            fill="none"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            <path d="M12 7v2" />
+            <path d="M12 13h.01" />
           </svg>
-          Disclaimer
-        </button>
-      )}
-      {!hasCookie("password") && isPopupOpen && (
-        <DisclaimerPopupComponent
-          onClose={() => setIsPopupOpen(false)}
-          explanation="This page is fully developed and allows you to explore its
-                      design and functionality. However, the underlying data has
-                      not been officially published yet. Therefore, we can currently only showcase a sample of the data for demonstration purposes."
-        />
+          <span className="text-sm lg:text-base">
+            You are currently exploring the light version of KIARVA. The full
+            version will be released once the underlying data has been
+            published. Until then, the pages are visible as a demonstration but
+            without full data access.
+          </span>
+        </div>
       )}
 
       <div className="bg-muted alert">
