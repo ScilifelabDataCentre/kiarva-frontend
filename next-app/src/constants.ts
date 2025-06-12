@@ -18,9 +18,7 @@ let backendAPI_tmp = '';
 if (typeof window !== 'undefined') {
   backendAPI_tmp =
   window.location.origin === "http://localhost:3000"
-    ? process.env.BACKEND_API_URL
-      ? process.env.BACKEND_API_URL
-      : "https://kiarva.scilifelab-2-dev.sys.kth.se/api/"
+    ? "http://localhost:5000"
     : window.location.origin + "/api/";
 }
 export const backendAPI = backendAPI_tmp;

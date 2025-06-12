@@ -5,6 +5,7 @@ import { ILink } from "@/interfaces/types";
 import { LINK_CLASSES } from "@/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import DisplayAppVersion from "@/components/DisplayAppVersion";
 
 const footerBackground = "images/hedestamFooterImage.png";
 
@@ -60,6 +61,7 @@ export default function FooterComponent(): ReactElement {
               ))}
           </nav>
         </div>
+        <DisplayAppVersion />
         <nav className="justify-self-end">
           <a
             href="https://precision-medicine-portal.scilifelab.se/privacy"
