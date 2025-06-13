@@ -17,7 +17,7 @@ export default function FooterVersion() {
   return (
     <div className="flex flex-col">
       <nav>
-        <a href={frontendImage || '/'}>
+        <a href={'https://'+frontendImage || '/'}>
           <p className="text-info-content text-opacity-80 text-sm">
             Frontend version:{' '}
             {frontendImage?.split(':')[1] || 'Unable to find version'}
@@ -25,7 +25,7 @@ export default function FooterVersion() {
         </a>
       </nav>
       <nav>
-        <a href={backendImage || '/'}>
+        <a href={'https://'+backendImage || '/'}>
           <p className="text-info-content text-opacity-80 text-sm">
             Backend version:{' '}
             {backendImage?.split(':')[1] || 'Unable to find version'}
