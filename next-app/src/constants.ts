@@ -10,16 +10,16 @@ export const BUTTON_TYPE_TWO: string =
   "btn bg-gray-950 text-white hover:bg-gray-800 active:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-300";
 
 export const BODY_CLASSES: string =
-  "bg-base-100 space-y-4 lg:space-y-8 p-4 lg:px-36 lg:pb-28 2xl:max-w-screen-2xl 2xl:mx-auto";
+  "bg-base-100 space-y-4 lg:space-y-6 p-4 lg:px-36 lg:pb-28 2xl:max-w-screen-2xl 2xl:mx-auto";
 
 export const LINK_CLASSES: string = "link link-hover";
 
-let backendAPI_tmp = '';
-if (typeof window !== 'undefined') {
+let backendAPI_tmp = "";
+if (typeof window !== "undefined") {
   backendAPI_tmp =
-  window.location.origin === "http://localhost:3000"
-    ? "http://localhost:5000"
-    : window.location.origin + "/api/";
+    window.location.origin === "http://localhost:3000"
+      ? "http://localhost:5000"
+      : window.location.origin + "/api/";
 }
 export const backendAPI = backendAPI_tmp;
 
