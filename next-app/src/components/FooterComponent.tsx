@@ -60,21 +60,8 @@ export default function FooterComponent(): ReactElement {
                 </Link>
               ))}
           </nav>
+          <DisplayAppVersion />
         </div>
-        <DisplayAppVersion />
-        <nav className="justify-self-end">
-          <a
-            href="https://precision-medicine-portal.scilifelab.se/privacy"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <p
-              className={`text-info-content text-opacity-80 text-sm ${LINK_CLASSES}`}
-            >
-              Privacy Policy
-            </p>
-          </a>
-        </nav>
       </footer>
     </div>
   );
