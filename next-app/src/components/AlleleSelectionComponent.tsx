@@ -81,8 +81,10 @@ export default function AlelleSelectionComponent(prop: {
         setAlleleDropDownItemsArray(["..."]);
         const currentSelection = currentPicks.geneDropdown;
 
+        const encodedCurrentSelection = encodeURIComponent(currentSelection);
+
         axios
-          .get(geneSelectionEndpoint + currentSelection, axiosConfig)
+          .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
           .then((response) => {
             const responseData = response.data;
             //  responseData.push("...");
@@ -91,11 +93,13 @@ export default function AlelleSelectionComponent(prop: {
           .catch((response) => console.log(response.error));
       } else {
         const currentSelection =
-          currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
+          currentPicks.geneDropdown + currentPicks.subtypeDropdown + '*';
+
+        const encodedCurrentSelection = encodeURIComponent(currentSelection);
 
         setAlleleDropDownItemsArray([]);
         axios
-          .get(geneSelectionEndpoint + currentSelection, axiosConfig)
+          .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
           .then((response) => {
             const responseData = response.data;
             // responseData.push("...");

@@ -70,24 +70,24 @@ export default function PlotPage(): ReactElement {
   const [selectedAllele, setSelectedAllele] = useState<string>("");
 
   async function getGeneFreqData(allele: string) {
+    const encodedAllele = encodeURIComponent(allele)
     const alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
 
     const superpopulationsEndpoint: string =
-      alleleFrequenciesEndpoint + "superpopulations?allele_name=" + allele;
+      alleleFrequenciesEndpoint + "superpopulations?allele_name=" + encodedAllele;
 
-    const superPopEncodedURI = encodeURI(superpopulationsEndpoint);
     await axios
-      .get(superPopEncodedURI, axiosConfig)
+      .get(superpopulationsEndpoint, axiosConfig)
       .then((response) => {
         setSuperpopFreqAPIData(response.data);
       })
       .catch((response) => console.log(response.error));
 
     const populationsEndpoint: string =
-      alleleFrequenciesEndpoint + "populations?allele_name=" + allele;
-    const popEncodedURI = encodeURI(populationsEndpoint);
+      alleleFrequenciesEndpoint + "populations?allele_name=" + encodedAllele;
+
     await axios
-      .get(popEncodedURI, axiosConfig)
+      .get(populationsEndpoint, axiosConfig)
       .then((response) => {
         setPopFreqAPIData(response.data);
       })
@@ -95,13 +95,13 @@ export default function PlotPage(): ReactElement {
   }
 
   async function getGeneIgSNPerData(allele: string) {
+    const encodedAllele = encodeURIComponent(allele)
 
     const alleleIgSNPerDataEndpoint: string =
-      backendAPI + "data/igsnperdata?allele_name=" + allele;
+      backendAPI + "data/igsnperdata?allele_name=" + encodedAllele;
 
-    const encodedURI = encodeURI(alleleIgSNPerDataEndpoint);
     await axios
-      .get(encodedURI, axiosConfig)
+      .get(alleleIgSNPerDataEndpoint, axiosConfig)
       .then((response) => {
         const responseData: IgSNPerData = response.data;
         if (responseData.igSNPer_score || responseData.igSNPer_score === 0) {

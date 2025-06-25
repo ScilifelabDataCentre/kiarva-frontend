@@ -16,6 +16,7 @@ export default function PasswordPage(): ReactElement {
     }
 
     async function handleSubmit(): Promise<void> {
+        console.log(backend_password_uri)
         const config = {
             headers: {
                 'X-api-key': inputField,

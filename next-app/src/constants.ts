@@ -18,7 +18,7 @@ let backendAPI_tmp = "";
 if (typeof window !== "undefined") {
   backendAPI_tmp =
     window.location.origin === "http://localhost:3000"
-      ? "http://localhost:5000"
+      ? "http://localhost:5000/"
       : window.location.origin + "/api/";
 }
 export const backendAPI = backendAPI_tmp;

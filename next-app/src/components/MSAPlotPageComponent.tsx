@@ -39,13 +39,12 @@ export default function MSAPlotPageComponent(): ReactElement {
   ]);
 
   async function AlignedSequenceData(gene: string) {
-
+    const encodedGene = encodeURIComponent(gene)
     const alignedSequenceDataEndpoint: string =
-      backendAPI + "data/sequences/alignedsequences?gene_name=" + gene;
+      backendAPI + "data/sequences/alignedsequences?gene_name=" + encodedGene;
 
-    const encodedURI = encodeURI(alignedSequenceDataEndpoint);
     await axios
-      .get(encodedURI, axiosConfig)
+      .get(alignedSequenceDataEndpoint, axiosConfig)
       .then((response) => {
         const responseData: IMSAData[] = response.data;
         let item: IMSAData;
