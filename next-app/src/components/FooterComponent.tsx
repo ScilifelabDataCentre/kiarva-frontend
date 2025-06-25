@@ -48,16 +48,13 @@ export default function FooterComponent(): ReactElement {
               .filter((key) => links[key].link !== currentPath) // Filter out the current page link
               .map((key) => (
                 <Button
+                  key={key}
                   variant="default"
                   size="sm"
                   asChild
                   onClick={() => window.scrollTo(0, 0)}
                 >
-                  <Link
-                    key={key}
-                    href={links[key].link}
-                    rel="noopener noreferrer"
-                  >
+                  <Link href={links[key].link} rel="noopener noreferrer">
                     {links[key].text}
                   </Link>
                 </Button>
