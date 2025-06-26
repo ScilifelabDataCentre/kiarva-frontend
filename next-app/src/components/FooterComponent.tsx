@@ -6,6 +6,7 @@ import { LINK_CLASSES } from "@/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import DisplayAppVersion from "@/components/DisplayAppVersion";
+import { Button } from "@/components/ui/button";
 
 const footerBackground = "images/hedestamFooterImage.png";
 
@@ -46,18 +47,17 @@ export default function FooterComponent(): ReactElement {
             {Object.keys(links)
               .filter((key) => links[key].link !== currentPath) // Filter out the current page link
               .map((key) => (
-                <Link
+                <Button
                   key={key}
-                  href={links[key].link}
-                  rel="noopener noreferrer"
+                  variant="default"
+                  size="sm"
+                  asChild
+                  onClick={() => window.scrollTo(0, 0)}
                 >
-                  <div
-                    className="text-info-content text-sm lg:text-base flex justify-center items-center h-8 lg:h-10 p-2 lg:px-4 bg-info font-medium opacity-80 rounded-2xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800 hover:opacity-90"
-                    onClick={() => window.scrollTo(0, 0)}
-                  >
+                  <Link href={links[key].link} rel="noopener noreferrer">
                     {links[key].text}
-                  </div>
-                </Link>
+                  </Link>
+                </Button>
               ))}
           </nav>
           <DisplayAppVersion />

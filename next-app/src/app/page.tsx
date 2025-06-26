@@ -7,11 +7,12 @@ import { BadgeInfo, Rss, type LucideIcon } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 
 const downloadHeroBackground = "images/heroDownloadImage.jpg";
 const plotHeroBackground = "images/heroPlotImage.jpg";
 
-const newsDate = new Date("2024-11-13");
+const newsDate = new Date("2025-06-25");
 
 interface FadeAlertProps {
   children: ReactNode;
@@ -66,7 +67,6 @@ function FadeAlert({ children, title, icon: Icon }: FadeAlertProps) {
 }
 
 export default function HomePage(): ReactElement {
-
   return (
     <div>
       <div className={BODY_CLASSES}>
@@ -127,17 +127,14 @@ export default function HomePage(): ReactElement {
                 <h1 className="mb-5 text-2xl lg:text-3xl font-bold text-nowrap">
                   Download FASTA files
                 </h1>
-                <p className="mb-5 text-sm lg:text-base">
-                  Click on the button to see the light version
-                </p>
-                <Link href="/download">
-                  <button
-                    className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800"
-                    onClick={() => window.scrollTo(0, 0)}
-                  >
-                    Go
-                  </button>
-                </Link>
+                <Button
+                  variant="default"
+                  size="default"
+                  asChild
+                  onClick={() => window.scrollTo(0, 0)}
+                >
+                  <Link href="/download">Go to page</Link>
+                </Button>
               </div>
             </div>
           </div>
@@ -153,17 +150,14 @@ export default function HomePage(): ReactElement {
                 <h1 className="mb-5 text-2xl lg:text-3xl font-bold">
                   Population frequencies
                 </h1>
-                <p className="mb-5 text-sm lg:text-base">
-                  Click on the button to see the light version
-                </p>
-                <Link href="/plot">
-                  <button
-                    className="text-info-content text-base flex justify-center items-center w-24 sm:w-36 h-10 px-8 py-2 bg-info font-bold opacity-100 rounded-lg shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-fuchsia-800"
-                    onClick={() => window.scrollTo(0, 0)}
-                  >
-                    Go
-                  </button>
-                </Link>
+                <Button
+                  variant="default"
+                  size="default"
+                  asChild
+                  onClick={() => window.scrollTo(0, 0)}
+                >
+                  <Link href="/plot">Go to page</Link>
+                </Button>
               </div>
             </div>
           </div>
