@@ -3,8 +3,6 @@
 import { ReactElement } from "react";
 import { BODY_CLASSES, H_1 } from "@/constants";
 
-// const test2 = "images/test2.png";
-
 export default function MethodologyPage(): ReactElement {
   const pageTitle: string = "Methodology";
 
@@ -25,8 +23,7 @@ export default function MethodologyPage(): ReactElement {
           we utilized the ability to assign IGHV, IGHD and IGHJ sequences to
           defined genomic loci within the same assemblies, thereby confirming
           the individual SNP variant locations within verified IG gene variants.
-        </p>
-        <p className="text-left lg:text-justify text-sm lg:text-base">
+          <br />
           The resultant program, termed IgSNPer, analyzes each nucleotide
           position within a complete variant allele, identifying whether
           specific nucleotide variations can be explained through the presence
@@ -43,15 +40,6 @@ export default function MethodologyPage(): ReactElement {
             individuals.
           </li>
           <li className="mb-1">
-            1000Genomes: Includes data for 2,504 individuals from a total of 26
-            populations.
-          </li>
-          <li className="mb-1">
-            GnomAD: A variant collection incorporating 602M SNVs and 105M indels
-            identified through whole-genome sequencing of 71,702 samples that
-            were subsequently mapped to the GRCh38 reference assembly.
-          </li>
-          <li className="mb-1">
             ExAC: The Exome Aggregation Consortium (ExAC) dataset accumulated
             SNP variation data on 60,706 unrelated individuals that were
             sequenced during the analysis of several disease specific and
@@ -65,9 +53,13 @@ export default function MethodologyPage(): ReactElement {
             TOMMO: An allele frequency panel produced from the genomic sequence
             analysis of 8380 Japanese individuals.
           </li>
-          <li>
+          <li className="mb-1">
             KOREAN Reference Genome Database: containing SNP variation data on
-            1465 Korean individuals
+            1465 Korean individuals.
+          </li>
+          <li className="mb-1">
+            GoESP : an exon sequencing project dataset containing 6,503
+            individuals.
           </li>
         </ol>
         <p className="text-left lg:text-justify text-sm lg:text-base">
@@ -101,10 +93,10 @@ export default function MethodologyPage(): ReactElement {
           sequences.
         </p>
 
-        <div className="divider pt-4">Populations</div>
+        {/* <div className="divider pt-4">Populations</div>
         <p className="pb-4 text-left lg:text-justify text-sm lg:text-base">
           Currenly under construction, this section will be provided later.
-        </p>
+        </p> */}
       </div>
     </>
   );

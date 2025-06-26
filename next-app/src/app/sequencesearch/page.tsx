@@ -1,11 +1,12 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { toast } from "@/components/hooks/use-toast"
-import { Button } from "@/components/ui/button"
+import { toast } from "@/components/hooks/use-toast";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -14,33 +15,29 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { useEffect, useState } from "react"
-import axios from "axios"
-import { getCookie, hasCookie } from "cookies-next"
-import { backendAPI, BODY_CLASSES, H_1 } from "@/constants"
-import { ISequenceSearchData } from "@/interfaces/types"
-import DisclaimerPopupComponent from "@/components/DisclaimerPopupComponent"
-import SequenceSearchComponent from "@/components/SequenceSearchComponent"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { getCookie, hasCookie } from "cookies-next";
+import { backendAPI, BODY_CLASSES, H_1 } from "@/constants";
+import { ISequenceSearchData } from "@/interfaces/types";
+import SequenceSearchComponent from "@/components/SequenceSearchComponent";
 
 const FormSchema = z.object({
   sequence: z.string().min(10, {
     message: "Sequence must be at least 10 nucleotides.",
   }),
-})
+});
 
 export default function SequenceSearchInputForm() {
-
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
   const [axiosConfig, setAxiosConfig] = useState({
-      headers: {
-        "X-api-key": "",
-      }
-    })
+    headers: {
+      "X-api-key": "",
+    },
+  });
 
-  const sequenceSearchEndpoint = backendAPI + "data/sequences?sequence_str="
+  const sequenceSearchEndpoint = backendAPI + "data/sequences?sequence_str=";
   const [sequenceData, setSequenceData] = useState<ISequenceSearchData[]>([]);
   const [searchTermLength, setSearchTermLength] = useState<number>(0);
 
@@ -49,7 +46,7 @@ export default function SequenceSearchInputForm() {
     defaultValues: {
       sequence: "",
     },
-  })
+  });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
@@ -59,107 +56,118 @@ export default function SequenceSearchInputForm() {
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
-    })
+    });
     const encodedURI = encodeURI(sequenceSearchEndpoint + data.sequence);
     await axios
-    .get(encodedURI, axiosConfig)
-    .then((response) => {
-      setSearchTermLength(data.sequence.length);
-      setSequenceData(response.data);
-    })
-    .catch((response) => console.log(response.error));
+      .get(encodedURI, axiosConfig)
+      .then((response) => {
+        setSearchTermLength(data.sequence.length);
+        setSequenceData(response.data);
+      })
+      .catch((response) => console.log(response.error));
   }
 
   // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
   useEffect(() => {
-    if (hasCookie('password')) {
+    if (hasCookie("password")) {
       setAxiosConfig({
         headers: {
-            'X-api-key': getCookie('password') as string,
-        }
-      })
+          "X-api-key": getCookie("password") as string,
+        },
+      });
     }
-  }, [])
+  }, []);
 
   return (
     <div className={BODY_CLASSES}>
       <h1 className={H_1}>Sequence search</h1>
-        {!hasCookie('password') &&
-        <button
-          className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
-          onClick={() => setIsPopupOpen(true)}
-        >
+      {!hasCookie("password") && (
+        <div className="alert alert-info bg-info text-info-content">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 shrink-0 stroke-current"
-            fill="none"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
-          Disclaimer
-        </button>}
-        {!hasCookie('password') && isPopupOpen && (
-          <DisclaimerPopupComponent
-            onClose={() => setIsPopupOpen(false)}
-            explanation="This page is fully developed and allows you to explore its
-                      design and functionality. However, the underlying data has
-                      not been officially published yet."
-          />
-        )}
-
-        <div className="bg-muted alert">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
             fill="none"
-            viewBox="0 0 24 24"
-            className="h-6 w-6 shrink-0 stroke-current"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            <path d="M12 7v2" />
+            <path d="M12 13h.01" />
           </svg>
           <span className="text-sm lg:text-base">
-            This page allows users to search for subsets or exact matches of genomic sequences in
-            the KI Adaptive Immune Receptor Gene Variant Atlas. Enter a sequence of at least 10 nucleotides
-            and receive matches from the KIARVA database.
+            You are currently exploring the light version of KIARVA. The full
+            version will be released once the underlying data has been
+            published. Until then, the pages are visible as a demonstration but
+            without full data access.
           </span>
         </div>
-        <div className="border-2 p-4 rounded-md">
-          <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
-              <FormField
+      )}
+
+      <div className="bg-muted alert">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          className="h-6 w-6 shrink-0 stroke-current"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <span className="text-sm lg:text-base">
+          This page allows users to search for subsets or exact matches of
+          genomic sequences in the KI Adaptive Immune Receptor Gene Variant
+          Atlas. Enter a sequence of at least 10 nucleotides and receive matches
+          from the KIARVA database.
+        </span>
+      </div>
+      <div className="border-2 p-4 rounded-md">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="w-2/3 space-y-6"
+          >
+            <FormField
               control={form.control}
               name="sequence"
               render={({ field }) => (
-                  <FormItem>
+                <FormItem>
                   <FormLabel>Sequence</FormLabel>
                   <FormControl>
-                      <Input placeholder="Enter sequence" {...field} />
+                    <Input placeholder="Enter sequence" {...field} />
                   </FormControl>
                   <FormDescription>
-                      Search for a sequence in the KIARVA database.
+                    Search for a sequence in the KIARVA database.
                   </FormDescription>
                   <FormMessage />
-                  </FormItem>
+                </FormItem>
               )}
-              />
-              <Button type="submit">Search</Button>
+            />
+            <Button variant="default" size="default" type="submit">
+              <Search />
+              Search
+            </Button>
           </form>
-          </Form>
-        </div>
-        {hasCookie('password') ? 
-            <SequenceSearchComponent sequenceData={sequenceData} searchTermLength={searchTermLength} />
-            :
-            <p>Sequence seach disabled for light version. Will be available for full release.</p>}
+        </Form>
+      </div>
+      {hasCookie("password") ? (
+        <SequenceSearchComponent
+          sequenceData={sequenceData}
+          searchTermLength={searchTermLength}
+        />
+      ) : (
+        <p>
+          Sequence search is currently disabled in the light version. The
+          feature will be available in the full release.
+        </p>
+      )}
     </div>
-  )
+  );
 }

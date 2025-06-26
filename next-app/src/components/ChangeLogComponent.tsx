@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
 import React from "react";
 import { ChangeLogComponentProps } from "@/interfaces/types";
+import { Button } from "@/components/ui/button";
 
 const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
   title,
@@ -14,10 +15,6 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
   // Conditional variable assignments
   const bgColor = isCurrent ? "bg-accent opacity-60" : "bg-neutral opacity-60";
   const borderColor = isCurrent ? "border-accent" : "border-neutral";
-  const buttonColor = isCurrent
-    ? "bg-gradient-to-r from-[rgba(249,250,251,0.65)] to-neutral-200"
-    : "bg-gradient-to-r from-[rgba(74,4,78,0.7)] to-fuchsia-950";
-  const textColor = isCurrent ? "text-neutral-content" : "text-info-content";
 
   // Ensure databaseUpdates & designAndBugFixes is an array
   const updatesDatabaseUpdatesArray = Array.isArray(databaseUpdates)
@@ -41,30 +38,16 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
             </p>
           </div>
           <div className="flex flex-row justify-self-end gap-2 lg:gap-x-2.5">
-            <a
-              className="flex"
-              href={frontEndLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div
-                className={`${buttonColor} ${textColor} flex justify-center items-center w-full px-1 lg:px-0 lg:w-44 h-10 font-medium opacity-60 rounded-2xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90`}
-              >
+            <Button variant="default" size="sm" asChild>
+              <a href={frontEndLink} target="_blank" rel="noopener noreferrer">
                 Frontend Repository
-              </div>
-            </a>
-            <a
-              className="flex"
-              href={backEndLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div
-                className={`${buttonColor} ${textColor} flex justify-center items-center w-full px-1 lg:px-0 lg:w-44 h-10 font-medium opacity-60 rounded-2xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:opacity-90`}
-              >
+              </a>
+            </Button>
+            <Button variant="default" size="sm" asChild>
+              <a href={backEndLink} target="_blank" rel="noopener noreferrer">
                 Backend Repository
-              </div>
-            </a>
+              </a>
+            </Button>
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

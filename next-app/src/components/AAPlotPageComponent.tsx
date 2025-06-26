@@ -20,6 +20,8 @@ import {
   superPopulationColorsDict,
   superPopulations,
 } from "@/content/localPlotData";
+import { Info } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 // Main function to render the PlotPage component
 export default function AminoAcidPlotPage(): ReactElement {
@@ -73,12 +75,12 @@ export default function AminoAcidPlotPage(): ReactElement {
   const [topAlleleAA, setTopAlleleAA] = useState<string>("");
 
   async function getTopLevelAlleleAA(allele: string) {
+    const encodedAllele = encodeURIComponent(allele)
     const topAlleleAAEndpoint: string =
-      backendAPI + "/data/aminoacidalleles?aa_allele_name=" + allele;
+      backendAPI + "/data/aminoacidalleles?aa_allele_name=" + encodedAllele;
 
-    const encodedURI = encodeURI(topAlleleAAEndpoint);
     await axios
-      .get(encodedURI, axiosConfig)
+      .get(topAlleleAAEndpoint, axiosConfig)
       .then((response) => {
         setTopAlleleAA(response.data.allele_aa);
       })
@@ -86,25 +88,25 @@ export default function AminoAcidPlotPage(): ReactElement {
   }
 
   async function getGeneFreqData(allele: string) {
+    const encodedAllele = encodeURIComponent(allele)
     const alleleFrequenciesEndpoint: string =
       backendAPI + "data/aminoacidfrequencies/";
 
     const superpopulationsEndpoint: string =
-      alleleFrequenciesEndpoint + "superpopulations?aa_allele_name=" + allele;
+      alleleFrequenciesEndpoint + "superpopulations?aa_allele_name=" + encodedAllele;
 
-    const superPopEncodedURI = encodeURI(superpopulationsEndpoint);
     await axios
-      .get(superPopEncodedURI, axiosConfig)
+      .get(superpopulationsEndpoint, axiosConfig)
       .then((response) => {
         setSuperpopFreqAPIData(response.data);
       })
       .catch((response) => console.log(response.error));
 
     const populationsEndpoint: string =
-      alleleFrequenciesEndpoint + "populations?aa_allele_name=" + allele;
-    const popEncodedURI = encodeURI(populationsEndpoint);
+      alleleFrequenciesEndpoint + "populations?aa_allele_name=" + encodedAllele;
+
     await axios
-      .get(popEncodedURI, axiosConfig)
+      .get(populationsEndpoint, axiosConfig)
       .then((response) => {
         setPopFreqAPIData(response.data);
       })
@@ -112,11 +114,12 @@ export default function AminoAcidPlotPage(): ReactElement {
   }
 
   async function getAlleleListAA(allele: string) {
+    const encodedAllele = encodeURIComponent(allele)
     const alleleListAADataEndpoint: string =
-      backendAPI + "data/aminoacidlist?aa_allele_name=" + allele;
-    const encodedURI = encodeURI(alleleListAADataEndpoint);
+      backendAPI + "data/aminoacidlist?aa_allele_name=" + encodedAllele;
+
     await axios
-      .get(encodedURI, axiosConfig)
+      .get(alleleListAADataEndpoint, axiosConfig)
       .then((response) => {
         const responseData: AlleleListAA = response.data;
         if (responseData.aa_allele_list) {
@@ -130,9 +133,8 @@ export default function AminoAcidPlotPage(): ReactElement {
     if (selectedAllele) {
       if (hasCookie("password")) {
         getTopLevelAlleleAA(selectedAllele);
-      }
-      else {
-        const selectedAlleleTmp = selectedAllele.replace('*', '');
+      } else {
+        const selectedAlleleTmp = selectedAllele.replace("*", "");
         const strToKey =
           selectedAlleleTmp as keyof typeof sampleAlleleDataAminoAcidPlot;
         setSuperpopFreqAPIData(
@@ -218,26 +220,15 @@ export default function AminoAcidPlotPage(): ReactElement {
             </div>
           </div>
           <div className="lg:w-1/8"></div>
-          <button
-            className="bg-gradient-to-r from-[rgba(4,92,100,0.7)] to-primary text-primary-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:order-4 lg:px-0 lg:w-1/4 h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
+          <Button
+            variant="default"
+            size="lg"
+            className="order-first lg:order-4"
             onClick={() => setIsPopupOpen(true)}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
-              />
-            </svg>
+            <Info />
             Population abbreviations
-          </button>
+          </Button>
         </div>
         {isPopupOpen && (
           <AbbreviationPopupComponent onClose={() => setIsPopupOpen(false)} />

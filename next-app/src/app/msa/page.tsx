@@ -1,68 +1,63 @@
-'use client';
+"use client";
 
-import DisclaimerPopupComponent from '@/components/DisclaimerPopupComponent';
-import MSAPlotPageComponent from '@/components/MSAPlotPageComponent';
-import { BODY_CLASSES, H_1 } from '@/constants';
-import { hasCookie } from 'cookies-next';
-import { ReactElement, useState } from 'react';
+import MSAPlotPageComponent from "@/components/MSAPlotPageComponent";
+import { BODY_CLASSES, H_1 } from "@/constants";
+import { hasCookie } from "cookies-next";
+import { ReactElement } from "react";
 
 // Main function to render the PlotPage component
 export default function AminoAcidPlotPage(): ReactElement {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
   return (
     <div className={BODY_CLASSES}>
       <h1 className={H_1}>Multiple sequence alignments</h1>
-        {!hasCookie('password') &&
-        <button
-          className="bg-warning text-warning-content text-base lg:text-lg flex gap-2 justify-center items-center px-4 order-first lg:px-0 w-full h-12 font-bold rounded-3xl shadow-inner backdrop-blur-2xl transform transition duration-300 ease-in-out hover:opacity-90"
-          onClick={() => setIsPopupOpen(true)}
-        >
+      {!hasCookie("password") && (
+        <div className="alert alert-info bg-info text-info-content">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 shrink-0 stroke-current"
-            fill="none"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
-          Disclaimer
-        </button>}
-        {!hasCookie('password') && isPopupOpen && (
-          <DisclaimerPopupComponent
-            onClose={() => setIsPopupOpen(false)}
-            explanation="This page is fully developed and allows you to explore its
-                      design and functionality. However, the underlying data has
-                      not been officially published yet. Therefore, we can currently only showcase a sample of the data for demonstration purposes."
-          />
-        )}
-
-        <div className="bg-muted alert">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
             fill="none"
-            viewBox="0 0 24 24"
-            className="h-6 w-6 shrink-0 stroke-current"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            <path d="M12 7v2" />
+            <path d="M12 13h.01" />
           </svg>
           <span className="text-sm lg:text-base">
-            This page allows users to see sequence alignments for nucleotide and translated sequences in 
-            the KI Adaptive Immune Receptor Gene Variant Atlas. You can select
-            from various dropdowns to filter by gene segment, gene type and gene.
+            You are currently exploring the light version of KIARVA. The full
+            version will be released once the underlying data has been
+            published. Until then, the pages are visible as a demonstration but
+            without full data access.
           </span>
         </div>
-        <MSAPlotPageComponent />
+      )}
+
+      <div className="bg-muted alert">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          className="h-6 w-6 shrink-0 stroke-current"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <span className="text-sm lg:text-base">
+          This page allows users to see sequence alignments for nucleotide and
+          translated sequences in the KI Adaptive Immune Receptor Gene Variant
+          Atlas. You can select from various dropdowns to filter by gene
+          segment, gene type and gene.
+        </span>
+      </div>
+      <MSAPlotPageComponent />
     </div>
   );
 }
