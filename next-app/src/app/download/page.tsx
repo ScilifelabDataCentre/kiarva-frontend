@@ -36,13 +36,12 @@ export default function DownloadPage(): ReactElement {
   });
 
   async function downloadGeneFasta(gene: string) {
+    const encodedGene = encodeURIComponent(gene);
     const fastaType =
       fastaTypeSelected === "coding" ? "" : "/" + fastaTypeSelected;
-    const fastaEndpoint =
-      backendAPI + "fasta" + fastaType + "?file_name=" + gene;
-    const encodedURI = encodeURI(fastaEndpoint);
+    const fastaEndpoint = backendAPI + "fasta" + fastaType + "?file_name=" + encodedGene;
     await axios
-      .get(encodedURI, axiosConfig)
+      .get(fastaEndpoint, axiosConfig)
       .then((response) => {
         const responseData: Blob = response.data;
         fileDownload(
@@ -64,11 +63,10 @@ export default function DownloadPage(): ReactElement {
     const fastaType =
       fastaTypeSelected === "coding" ? "" : "/" + fastaTypeSelected;
     for (gene of genes) {
-      const fastaEndpoint =
-        backendAPI + "fasta" + fastaType + "?file_name=" + gene;
-      const encodedURI = encodeURI(fastaEndpoint);
+      const encodedGene = encodeURIComponent(gene);
+      const fastaEndpoint = backendAPI + "fasta" + fastaType + "?file_name=" + encodedGene;
       await axios
-        .get(encodedURI, axiosConfig)
+        .get(fastaEndpoint, axiosConfig)
         .then((response) => {
           const responseData: Blob = response.data;
           zip.file(

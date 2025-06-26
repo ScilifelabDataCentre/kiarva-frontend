@@ -75,12 +75,12 @@ export default function AminoAcidPlotPage(): ReactElement {
   const [topAlleleAA, setTopAlleleAA] = useState<string>("");
 
   async function getTopLevelAlleleAA(allele: string) {
+    const encodedAllele = encodeURIComponent(allele)
     const topAlleleAAEndpoint: string =
-      backendAPI + "/data/aminoacidalleles?aa_allele_name=" + allele;
+      backendAPI + "/data/aminoacidalleles?aa_allele_name=" + encodedAllele;
 
-    const encodedURI = encodeURI(topAlleleAAEndpoint);
     await axios
-      .get(encodedURI, axiosConfig)
+      .get(topAlleleAAEndpoint, axiosConfig)
       .then((response) => {
         setTopAlleleAA(response.data.allele_aa);
       })
@@ -88,25 +88,25 @@ export default function AminoAcidPlotPage(): ReactElement {
   }
 
   async function getGeneFreqData(allele: string) {
+    const encodedAllele = encodeURIComponent(allele)
     const alleleFrequenciesEndpoint: string =
       backendAPI + "data/aminoacidfrequencies/";
 
     const superpopulationsEndpoint: string =
-      alleleFrequenciesEndpoint + "superpopulations?aa_allele_name=" + allele;
+      alleleFrequenciesEndpoint + "superpopulations?aa_allele_name=" + encodedAllele;
 
-    const superPopEncodedURI = encodeURI(superpopulationsEndpoint);
     await axios
-      .get(superPopEncodedURI, axiosConfig)
+      .get(superpopulationsEndpoint, axiosConfig)
       .then((response) => {
         setSuperpopFreqAPIData(response.data);
       })
       .catch((response) => console.log(response.error));
 
     const populationsEndpoint: string =
-      alleleFrequenciesEndpoint + "populations?aa_allele_name=" + allele;
-    const popEncodedURI = encodeURI(populationsEndpoint);
+      alleleFrequenciesEndpoint + "populations?aa_allele_name=" + encodedAllele;
+
     await axios
-      .get(popEncodedURI, axiosConfig)
+      .get(populationsEndpoint, axiosConfig)
       .then((response) => {
         setPopFreqAPIData(response.data);
       })
@@ -114,11 +114,12 @@ export default function AminoAcidPlotPage(): ReactElement {
   }
 
   async function getAlleleListAA(allele: string) {
+    const encodedAllele = encodeURIComponent(allele)
     const alleleListAADataEndpoint: string =
-      backendAPI + "data/aminoacidlist?aa_allele_name=" + allele;
-    const encodedURI = encodeURI(alleleListAADataEndpoint);
+      backendAPI + "data/aminoacidlist?aa_allele_name=" + encodedAllele;
+
     await axios
-      .get(encodedURI, axiosConfig)
+      .get(alleleListAADataEndpoint, axiosConfig)
       .then((response) => {
         const responseData: AlleleListAA = response.data;
         if (responseData.aa_allele_list) {
