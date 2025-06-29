@@ -221,7 +221,7 @@ export default function AlelleSelectionComponent(prop: {
             currentPicks.alleleDropdown ? (
               <>
                 Plot for {currentPicks.geneDropdown}
-                {currentPicks.subtypeDropdown}{currentPicks.alleleDropdown}
+                {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
               </>
             ) : (
               "Please select the gene type, gene and allele above"
