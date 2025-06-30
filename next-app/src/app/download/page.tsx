@@ -39,7 +39,8 @@ export default function DownloadPage(): ReactElement {
     const encodedGene = encodeURIComponent(gene);
     const fastaType =
       fastaTypeSelected === "coding" ? "" : "/" + fastaTypeSelected;
-    const fastaEndpoint = backendAPI + "fasta" + fastaType + "?file_name=" + encodedGene;
+    const fastaEndpoint =
+      backendAPI + "fasta" + fastaType + "?file_name=" + encodedGene;
     await axios
       .get(fastaEndpoint, axiosConfig)
       .then((response) => {
@@ -64,7 +65,8 @@ export default function DownloadPage(): ReactElement {
       fastaTypeSelected === "coding" ? "" : "/" + fastaTypeSelected;
     for (gene of genes) {
       const encodedGene = encodeURIComponent(gene);
-      const fastaEndpoint = backendAPI + "fasta" + fastaType + "?file_name=" + encodedGene;
+      const fastaEndpoint =
+        backendAPI + "fasta" + fastaType + "?file_name=" + encodedGene;
       await axios
         .get(fastaEndpoint, axiosConfig)
         .then((response) => {
@@ -151,7 +153,7 @@ export default function DownloadPage(): ReactElement {
             <path d="M12 13h.01" />
           </svg>
           <span className="text-sm lg:text-base">
-            You are currently exploring the light version of KIARVA. The full
+            You are currently exploring the demo version of KIARVA. The full
             version will be released once the underlying data has been
             published. Until then, the pages are visible as a demonstration but
             without full data access.
