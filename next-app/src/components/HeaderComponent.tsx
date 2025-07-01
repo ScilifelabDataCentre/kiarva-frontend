@@ -8,6 +8,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import { HeaderDropdown } from "@/components/ui/header-dropdown";
 import { Badge } from "@/components/ui/badge";
+import { hasCookie } from "cookies-next";
 
 export default function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,7 +48,9 @@ export default function HeaderComponent() {
               <div className="font-bold text-center">
                 <div className="flex items-center justify-center gap-2">
                   <p className="text-2xl">KIARVA</p>
-                  <Badge variant="accent">Demo</Badge>
+                  {!hasCookie("password") && (
+                    <Badge variant="accent">Demo</Badge>
+                  )}
                 </div>
                 <span className="lg:whitespace-nowrap text-xl">
                   KI Adaptive Immune Receptor Gene Variant Atlas
