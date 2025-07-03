@@ -5,7 +5,7 @@ import { init } from "@socialgouv/matomo-next";
 
 export default function MatomoInit() {
   useEffect(() => {
-    if (window.location.origin === "https://kiarva.scilifelab.se") {
+    if (window.location.origin.includes("kiarva.scilifelab.se")) {
       init({
           url: 'https://matomo.dc.scilifelab.se/', 
           siteId: '12',
