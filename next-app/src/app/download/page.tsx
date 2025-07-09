@@ -37,10 +37,8 @@ export default function DownloadPage(): ReactElement {
 
   async function downloadGeneFasta(gene: string) {
     const encodedGene = encodeURIComponent(gene);
-    const fastaType =
-      fastaTypeSelected === "coding" ? "" : "/" + fastaTypeSelected;
     const fastaEndpoint =
-      backendAPI + "fasta" + fastaType + "?file_name=" + encodedGene;
+      backendAPI + "fasta/" + fastaTypeSelected + "?file_name=" + encodedGene;
     await axios
       .get(fastaEndpoint, axiosConfig)
       .then((response) => {
@@ -61,12 +59,10 @@ export default function DownloadPage(): ReactElement {
   async function downloadGeneFastaZip(genes: string[]) {
     const zip = new JSZip();
     let gene: string;
-    const fastaType =
-      fastaTypeSelected === "coding" ? "" : "/" + fastaTypeSelected;
     for (gene of genes) {
       const encodedGene = encodeURIComponent(gene);
       const fastaEndpoint =
-        backendAPI + "fasta" + fastaType + "?file_name=" + encodedGene;
+        backendAPI + "fasta/" + fastaTypeSelected + "?file_name=" + encodedGene;
       await axios
         .get(fastaEndpoint, axiosConfig)
         .then((response) => {
@@ -117,8 +113,6 @@ export default function DownloadPage(): ReactElement {
       downloadGeneFastaZip(selectionArr);
     }
   }
-
-  // Combine the selection arrays and use them when the download button is pressed
 
   useEffect(() => {
     if (hasCookie("password")) {
@@ -213,10 +207,9 @@ export default function DownloadPage(): ReactElement {
             </span>
           </label>
 
-          {/* Once the fasta type is available, only delete the className part from cursor-not-allowed */}
           <label
-            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer cursor-not-allowed pointer-events-none opacity-50"
-            onClick={() => setFastaTypeSelected("aminoacids")}
+            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
+            onClick={() => setFastaTypeSelected("translated")}
           >
             <input type="radio" name="fastaRadio" className="radio" />
             <span className="pl-2">Translated V gene sequences</span>
@@ -231,11 +224,12 @@ export default function DownloadPage(): ReactElement {
           geneSegment="IGH"
           geneObjectArray={[
             { name: "IGHV", isAvailable: true },
-            { name: "IGHD", isAvailable: true },
+            { name: "IGHD", isAvailable: fastaTypeSelected === "coding" || fastaTypeSelected === "genomic" },
             { name: "IGHJ", isAvailable: fastaTypeSelected === "coding" },
             { name: "IGH constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setIghSelectionArray}
+          radialSelected={fastaTypeSelected}
         ></DownloadBoxComponent>
         {/* <DownloadBoxComponent
           geneSegment="IGK"
