@@ -17,7 +17,7 @@ import { Download } from "lucide-react";
 
 export default function DownloadPage(): ReactElement {
   // State to keep track of the selected type of fasta file
-  const [fastaTypeSelected, setFastaTypeSelected] = useState("coding");
+  const [fastaTypeSelected, setFastaTypeSelected] = useState("genomic");
 
   // States to keep track of the selected genes for each gene segment
   const [ighSelectionArray, setIghSelectionArray] = useState<string[]>([]);
@@ -45,12 +45,13 @@ export default function DownloadPage(): ReactElement {
         const responseData: Blob = response.data;
         fileDownload(
           responseData,
-          gene +
-            "-" +
+            "Homo-sapiens_Ig_Heavy_" + 
+            gene[gene.length-1] +
+            "_" +
             fastaTypeSelected +
-            "-v" +
+            "_v" +
             currentVersionFormatted +
-            ".fasta"
+            ".fasta",
         );
       })
       .catch((response) => console.log(response.error));
@@ -68,10 +69,11 @@ export default function DownloadPage(): ReactElement {
         .then((response) => {
           const responseData: Blob = response.data;
           zip.file(
-            gene +
-              "-" +
+              "Homo-sapiens_Ig_Heavy_" + 
+              gene[gene.length-1] +
+              "_" +
               fastaTypeSelected +
-              "-v" +
+              "_v" +
               currentVersionFormatted +
               ".fasta",
             responseData
@@ -83,9 +85,9 @@ export default function DownloadPage(): ReactElement {
       function (blob) {
         fileDownload(
           blob,
-          "kiarva-" +
+          "Homo-sapiens_Ig_" +
             fastaTypeSelected +
-            "-v" +
+            "_v" +
             currentVersionFormatted +
             "-fastas.zip"
         );
@@ -186,7 +188,7 @@ export default function DownloadPage(): ReactElement {
         <div>
           <label
             className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
-            onClick={() => setFastaTypeSelected("coding")}
+            onClick={() => setFastaTypeSelected("genomic")}
           >
             <input
               type="radio"
@@ -199,7 +201,7 @@ export default function DownloadPage(): ReactElement {
 
           <label
             className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
-            onClick={() => setFastaTypeSelected("genomic")}
+            onClick={() => setFastaTypeSelected("genomic_fl")}
           >
             <input type="radio" name="fastaRadio" className="radio" />
             <span className="pl-2">
@@ -224,8 +226,8 @@ export default function DownloadPage(): ReactElement {
           geneSegment="IGH"
           geneObjectArray={[
             { name: "IGHV", isAvailable: true },
-            { name: "IGHD", isAvailable: fastaTypeSelected === "coding" || fastaTypeSelected === "genomic" },
-            { name: "IGHJ", isAvailable: fastaTypeSelected === "coding" },
+            { name: "IGHD", isAvailable: fastaTypeSelected === "genomic" || fastaTypeSelected === "genomic_fl" },
+            { name: "IGHJ", isAvailable: fastaTypeSelected === "genomic" },
             { name: "IGH constant", isAvailable: false },
           ]}
           setPropsSelectionArray={setIghSelectionArray}
