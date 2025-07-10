@@ -104,6 +104,7 @@ export type DownloadBoxComponentProps = {
   geneSegment: string;
   geneObjectArray: GeneObject[];
   setPropsSelectionArray: (propsSelectionArray: string[]) => void;
+  radialSelected: string;
 };
 
 export interface GeneObject {

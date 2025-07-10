@@ -102,15 +102,15 @@ export default function HomePage(): ReactElement {
                 day: "numeric",
               })}
             </time>
-            We are excited to introduce the <b>light version</b> of our new
+            We are excited to introduce the <b>demo version</b> of our new
             research tool, designed to provide an early glimpse into the
             DSN&apos;s first dashboard. This preliminary release includes a few
             example plots to showcase the tool&apos;s analytical capabilities,
-            while the full functionality is being finalized. In this light
-            version, users can explore data visualizations but won&apos;t have
-            access to download FASTA files at this stage. The complete tool,
-            including all data and download options, will be available once the
-            research team has published their findings.
+            while the full functionality is being finalized. In this demo
+            version, users can explore data features but won&apos;t have access
+            to all data or access to download FASTA files at this stage. The
+            complete tool, including all data and download options, will be
+            available once the research team has published their findings.
           </FadeAlert>
         </div>
 

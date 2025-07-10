@@ -8,6 +8,7 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
   geneSegment,
   geneObjectArray,
   setPropsSelectionArray,
+  radialSelected
 }) => {
   // State to track if the whole gene segment is selected
   const [wholeGeneSegmentSelected, setWholeGeneSegmentSelected] =
@@ -20,6 +21,11 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
   const availableGeneObjectArray = geneObjectArray.filter(
     (gene) => gene.isAvailable
   );
+
+  useEffect(() => {
+    setGenesSelectedArray([]);
+    setWholeGeneSegmentSelected(false);
+  }, [radialSelected]);
 
   // Effect to update selected genes array when wholeGeneSegmentSelected changes
   useEffect(() => {

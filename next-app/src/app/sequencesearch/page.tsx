@@ -99,7 +99,7 @@ export default function SequenceSearchInputForm() {
             <path d="M12 13h.01" />
           </svg>
           <span className="text-sm lg:text-base">
-            You are currently exploring the light version of KIARVA. The full
+            You are currently exploring the demo version of KIARVA. The full
             version will be released once the underlying data has been
             published. Until then, the pages are visible as a demonstration but
             without full data access.
@@ -164,8 +164,8 @@ export default function SequenceSearchInputForm() {
         />
       ) : (
         <p>
-          Sequence search is currently disabled in the light version. The
-          feature will be available in the full release.
+          Sequence search is currently disabled in the demo version. The feature
+          will be available in the full release.
         </p>
       )}
     </div>

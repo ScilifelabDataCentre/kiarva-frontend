@@ -39,7 +39,7 @@ export default function RootLayout({
             <path d="M12 13h.01" />
           </svg>
           <span className="text-sm lg:text-base">
-            You are currently exploring the light version of KIARVA. The full
+            You are currently exploring the demo version of KIARVA. The full
             version will be released once the underlying data has been
             published. Until then, the pages are visible as a demonstration but
             without full data access.
