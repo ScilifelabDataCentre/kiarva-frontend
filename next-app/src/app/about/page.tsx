@@ -19,9 +19,9 @@ export default function AboutPage(): ReactElement {
         <div className={H_1}>{pageTitle}</div>
         <div className="divider pt-4 ">KIARVA dashboard</div>
         <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
-          To create KIARVA, we applied a high throughput genomic technique
-          designed for adaptive immune receptor germline gene sequencing,
-          ImmuneDiscover (Corcoran et al. BioRXiv), to 2481 cases from the 1000
+          To create KIARVA, we applied a high throughput genomic technique 
+          designed for adaptive immune receptor germline gene sequencing, 
+          ImmuneDiscover (Corcoran et al. BioRXiv), to 2486 cases from the 1000 
           Genomes Project (1KGP),{" "}
           <a
             href="https://www.internationalgenome.org/"
@@ -31,19 +31,19 @@ export default function AboutPage(): ReactElement {
           >
             https://www.internationalgenome.org/
           </a>
-          . The 1KGP sample set comprises 5 super-populations: 708 African cases
-          (AFR), 414 European cases (EUR), 540 East Asian cases (EAS) and 539
-          South Asian cases (SAS) and 280 American cases (AMR) representing 25
-          sub-population groups. This resulted in the identification of 544
-          IGHV, 12 IGHJ and 70 IGHD germline variants, many of which are
-          reported here for the first time, as well as information about their
-          population frequencies and validation scores using the IgSNPer
-          program. KIARVA will host downloadable IGHV, IGHD and IGHJ allele
-          database files comprising sequences with and without flanking regions
-          for use in highly accurate antibody sequence assignment analysis and
-          gene association studies. Future updates of KIARVA will include
-          immunoglobulin light chain (kappa and lambda) and TCR (alpha, beta,
-          delta and gamma) variants from the 1KGP sample collection in addition
+          . The 1KGP sample set comprises 5 super-populations: 708 African cases 
+          (AFR), 414 European cases (EUR), 540 East Asian cases (EAS) and 543 
+          South Asian cases (SAS) and 281 American cases (AMR) representing 25 
+          sub-population groups. This resulted in the identification of 561 
+          IGHV, 51 IGHD and 12 IGHJ germline variants, many of which are 
+          reported here for the first time, as well as information about their 
+          population frequencies and validation scores using the IgSNPer 
+          program. KIARVA will host downloadable IGHV, IGHD and IGHJ allele 
+          database files comprising sequences with and without flanking regions 
+          for use in highly accurate antibody sequence assignment analysis and 
+          gene association studies. Future updates of KIARVA will include 
+          immunoglobulin light chain (kappa and lambda) and TCR (alpha, beta, 
+          delta and gamma) variants from the 1KGP sample collection in addition 
           to constant exon variants from each of the receptor subtypes.
         </p>
         <div className="divider pt-4">Funding</div>
