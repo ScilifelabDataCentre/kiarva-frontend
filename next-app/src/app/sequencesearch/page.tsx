@@ -158,13 +158,15 @@ export default function SequenceSearchInputForm() {
         </Form>
       </div>
       {hasCookie("password") ? (
-        sequenceData[0].allele ?
-        <SequenceSearchComponent
-          sequenceData={sequenceData}
-          searchTermLength={searchTermLength}
-        />
-        :
-        <p>No matches in database for the requested sequence.</p>
+        sequenceData[0] &&
+          (sequenceData[0].allele ? 
+          <SequenceSearchComponent
+            sequenceData={sequenceData}
+            searchTermLength={searchTermLength}
+          />
+          :
+          <p>No matches in database for the requested sequence.</p>
+          )
       ) : (
         <p>
           Sequence search is currently disabled in the demo version. The feature
