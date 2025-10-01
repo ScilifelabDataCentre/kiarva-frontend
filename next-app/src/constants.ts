@@ -23,6 +23,11 @@ if (typeof window !== "undefined") {
 }
 export const backendAPI = backendAPI_tmp;
 
+// currentVersion is used in two ways: 
+// 1. To add a suffix to downloaded Fasta data indicating the current version
+// 2. To label the changelog page with the current version when creating a new changelog
+// Currently, currentVersion is a placeholder and not used correctly. The version number is
+// not automatic or controlled by any entity. TBD
 export const currentVersion: string = "0.1.0";
 export const currentVersionFormatted: string = `${
   currentVersion.split(".")[0]
