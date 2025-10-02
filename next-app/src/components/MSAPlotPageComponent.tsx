@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactElement, useEffect, useState } from "react";
-import { backendAPI } from "@/constants";
+import { backendAPI, LINK_CLASSES } from "@/constants";
 import {
   ISequenceData,
   IAlleleDropDownConfig,
@@ -131,6 +131,15 @@ export default function MSAPlotPageComponent(): ReactElement {
         Translated sequence alignment
       </h1>
       <MSAViewer sequenceData={aminoAcidSequence} />
+      <div className="pt-24">
+        <p className="text-sm lg:text-base">
+          Genetic sequences are aligned using 
+          <a className={`${LINK_CLASSES} italic`} href="https://mafft.cbrc.jp/alignment/software/source.html"> MAFFT v7.525</a>. 
+          Amino acid sequences are aligned with a
+          <a className={`${LINK_CLASSES} italic`} href="https://github.com/ScilifelabDataCentre/kiarva-backend/blob/dev/services/alignment.py"> custom script</a>,
+          based on the MAFFT genetic alignment output. 
+        </p> 
+      </div>
     </>
   );
 }
