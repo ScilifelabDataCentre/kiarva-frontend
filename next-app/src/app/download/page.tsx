@@ -176,9 +176,9 @@ export default function DownloadPage(): ReactElement {
           gene segment and/or individual genes you want to download by ticking
           the appropriate boxes—ticking a gene segment will automatically select
           all individual genes within that chain. After making your selections,
-          click the &quot;Download&quot; button. This will generate and start a
-          download of your chosen file(s). If you have selected more than one
-          file, a .zip file wil be generated.
+          click the &quot;Download&quot; button. This will start a
+          download of your chosen FASTA file(s). If you have selected more than one
+          file, they will be downloaded in a .zip.
         </span>
       </div>
       <div className={H_1}>Fasta type</div>
