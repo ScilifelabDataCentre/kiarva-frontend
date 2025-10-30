@@ -116,7 +116,7 @@ export default function HomePage(): ReactElement {
           </FadeAlert>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+        <div className="flex flex-col max-w-xs md:max-w-sm lg:max-w-full lg:flex-row m-auto gap-6 mb-6">
           <div className="relative hero min-h-80 bg-neutral">
             <img
               className="object-cover size-full"
@@ -165,7 +165,7 @@ export default function HomePage(): ReactElement {
           </div>
           <div className="relative hero min-h-80 bg-neutral">
             <img
-              className="object-cover w-full h-full"
+              className="object-cover size-full"
               src={alignmentHeroBackground}
               alt="Plot Image"
             />
@@ -188,7 +188,7 @@ export default function HomePage(): ReactElement {
           </div>
           <div className="relative hero min-h-80 bg-neutral">
             <img
-              className="object-cover w-full h-full"
+              className="object-cover size-full"
               src={searchHeroBackground}
               alt="Plot Image"
             />
