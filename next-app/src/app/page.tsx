@@ -9,8 +9,10 @@ import { useState, useRef, useEffect } from "react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 
-const downloadHeroBackground = "images/heroDownloadImage.jpg";
-const plotHeroBackground = "images/heroPlotImage.jpg";
+const downloadHeroBackground = "images/heroFastaImage.png";
+const plotHeroBackground = "images/heroPlotImage.png";
+const alignmentHeroBackground = "images/heroAlignmentImage.png";
+const searchHeroBackground = "images/heroSearchImage.png";
 
 const newsDate = new Date("2025-06-25");
 
@@ -114,17 +116,17 @@ export default function HomePage(): ReactElement {
           </FadeAlert>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center gap-6">
-          <div className="relative hero min-h-96 bg-neutral">
+        <div className="flex flex-col max-w-xs md:max-w-sm lg:max-w-full lg:flex-row m-auto gap-6 mb-6">
+          <div className="relative hero min-h-80 bg-neutral">
             <img
-              className="object-cover w-full h-full"
+              className="object-cover size-full"
               src={downloadHeroBackground}
               alt="Download Hero Image"
             />
             <div className="absolute inset-0 bg-gray-700 opacity-85"></div>
             <div className="hero-content text-secondary-content text-center">
               <div className="max-w-md flex flex-col items-center">
-                <h1 className="mb-5 text-2xl lg:text-3xl font-bold text-nowrap">
+                <h1 className="mb-5 text-2xl lg:text-3xl font-bold">
                   Download FASTA files
                 </h1>
                 <Button
@@ -138,9 +140,9 @@ export default function HomePage(): ReactElement {
               </div>
             </div>
           </div>
-          <div className="relative hero min-h-96 bg-neutral">
+          <div className="relative hero min-h-80 bg-neutral">
             <img
-              className="object-cover w-full h-full"
+              className="object-cover size-full"
               src={plotHeroBackground}
               alt="Plot Image"
             />
@@ -148,7 +150,7 @@ export default function HomePage(): ReactElement {
             <div className="hero-content text-secondary-content text-center">
               <div className="max-w-md flex flex-col items-center">
                 <h1 className="mb-5 text-2xl lg:text-3xl font-bold">
-                  Population frequencies
+                  View population frequencies
                 </h1>
                 <Button
                   variant="default"
@@ -157,6 +159,52 @@ export default function HomePage(): ReactElement {
                   onClick={() => window.scrollTo(0, 0)}
                 >
                   <Link href="/plot">Go to page</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div className="relative hero min-h-80 bg-neutral">
+            <img
+              className="object-cover size-full"
+              src={alignmentHeroBackground}
+              alt="Plot Image"
+            />
+            <div className="absolute inset-0 bg-gray-700 opacity-85"></div>
+            <div className="hero-content text-secondary-content text-center">
+              <div className="max-w-md flex flex-col items-center">
+                <h1 className="mb-5 text-2xl lg:text-3xl font-bold">
+                  View sequence alignments
+                </h1>
+                <Button
+                  variant="default"
+                  size="default"
+                  asChild
+                  onClick={() => window.scrollTo(0, 0)}
+                >
+                  <Link href="/msa">Go to page</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div className="relative hero min-h-80 bg-neutral">
+            <img
+              className="object-cover size-full"
+              src={searchHeroBackground}
+              alt="Plot Image"
+            />
+            <div className="absolute inset-0 bg-gray-700 opacity-85"></div>
+            <div className="hero-content text-secondary-content text-center">
+              <div className="max-w-md flex flex-col items-center">
+                <h1 className="mb-5 text-2xl lg:text-3xl font-bold">
+                  Search for sequences
+                </h1>
+                <Button
+                  variant="default"
+                  size="default"
+                  asChild
+                  onClick={() => window.scrollTo(0, 0)}
+                >
+                  <Link href="/sequencesearch">Go to page</Link>
                 </Button>
               </div>
             </div>
