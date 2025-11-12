@@ -1,4 +1,4 @@
-// Should be server component
+// Should be server component, has no user interactivity.
 
 "use client";
 

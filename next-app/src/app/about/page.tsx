@@ -1,4 +1,5 @@
-// change to server?
+// Should be server component, has no user interactivity that I can see.
+
 "use client";
 
 import { ReactElement } from "react";

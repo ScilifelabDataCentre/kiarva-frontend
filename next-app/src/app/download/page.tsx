@@ -1,4 +1,5 @@
-// split out API calls and UI into separate server and client components?
+// Handles API requests, which should probably be done on a server component. Other than that uses a lot of
+// state changes based on user, so should be client.
 
 "use client";
 
