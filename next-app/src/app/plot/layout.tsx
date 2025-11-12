@@ -1,3 +1,5 @@
+// Should be possible to make into server component, but useage of hasCookie may cause problems.
+
 "use client";
 
 import { BODY_CLASSES, H_1 } from "@/constants";

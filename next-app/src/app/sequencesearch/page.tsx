@@ -1,3 +1,6 @@
+// split out API calls and UI into separate server and client components? Should be doable, but could be
+// a bit complicated.
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";

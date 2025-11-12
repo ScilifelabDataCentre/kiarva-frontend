@@ -1,3 +1,6 @@
+// relies heavily on client side functionality. Could be rewritten in a better way, but may be a lot of work.
+// not prioritized imo.
+
 "use client";
 
 import { ReactElement, useEffect, useState } from "react";

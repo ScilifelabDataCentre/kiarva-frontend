@@ -1,3 +1,7 @@
+// Probably leave as client component. Only consists of loading icon or showing a client component child.
+// May be able to change to server component for optimization/SEO, but dunno if Suspense/Loading works
+// on server
+
 'use client';
 
 import dynamic from 'next/dynamic'

@@ -1,3 +1,6 @@
+// Should probably be looked over and rewritten, but unsure if it can be a server component.
+// The plotly library we use is for default react, so possibly needs client behaviour.
+
 'use client';
 
 // set up plotly with TypeScript:

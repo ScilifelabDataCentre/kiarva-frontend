@@ -1,3 +1,5 @@
+// split out API calls and UI into separate server and client components?
+
 "use client";
 
 import { ReactElement, useEffect, useState } from "react";

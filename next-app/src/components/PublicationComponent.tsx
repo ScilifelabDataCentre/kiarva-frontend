@@ -1,3 +1,5 @@
+// Should be server component, has no user interactivity.
+
 'use client';
 
 import React from "react";

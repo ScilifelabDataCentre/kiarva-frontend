@@ -1,3 +1,5 @@
+// turn into server component
+
 'use client';
 
 import { ReactElement } from "react";

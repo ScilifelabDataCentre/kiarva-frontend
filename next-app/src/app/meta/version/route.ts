@@ -1,3 +1,6 @@
+// server component now, but env variables are public client env vars. Should try to change into private
+// server env vars (not sensitive, but for optimization)
+
 import { NextResponse } from 'next/server'
 
 export function GET() {
