@@ -1,3 +1,6 @@
+// Should probably be server component, has no user interactivity except for buttons. But since they are
+// children, could probably have them as client components while keeping this as server component.
+
 "use client";
 
 import React from "react";

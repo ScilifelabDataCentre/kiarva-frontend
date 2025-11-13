@@ -1,3 +1,6 @@
+// API call should probably be done on server for security, but this component is not officially part of the app
+// so not sure if we need to prioritize changing it.
+
 "use client";
 
 import { ChangeEvent, ReactElement, useState } from "react";

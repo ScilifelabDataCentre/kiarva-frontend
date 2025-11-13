@@ -1,3 +1,5 @@
+// Should be client component, but could potentially separate out the raw data? Don't know if it's beneficial
+
 'use client';
 
 import React from "react";

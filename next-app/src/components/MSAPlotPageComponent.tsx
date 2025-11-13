@@ -1,3 +1,6 @@
+// Handles API requests, which should probably be done on a server component. Other than that uses a lot of
+// state changes based on user, so should be client.
+
 "use client";
 
 import { ReactElement, useEffect, useState } from "react";

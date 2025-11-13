@@ -1,3 +1,6 @@
+// Could be server component except for the use of hasCookie, don't know if that's useable on server.
+// Also has child client component, but that should not be a problem.
+
 "use client";
 
 import MSAPlotPageComponent from "@/components/MSAPlotPageComponent";

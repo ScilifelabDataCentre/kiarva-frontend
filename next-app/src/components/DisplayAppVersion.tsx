@@ -1,4 +1,8 @@
+// currently is used as a client component due how env variables are handled. If we change the current env
+// variables to be on server, could change this to server comp
+
 "use client";
+
 import { useEffect, useState } from "react";
 import { LINK_CLASSES } from "@/constants";
 

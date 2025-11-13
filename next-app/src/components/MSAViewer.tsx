@@ -1,3 +1,6 @@
+// no header, so already server component. However, since it's used inside a client component, I think
+// we need to explicitly add a server header, need to look into it.
+
 import { ISequenceData } from "@/interfaces/types";
 import React from "react";
 

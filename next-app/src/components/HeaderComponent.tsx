@@ -1,3 +1,5 @@
+// Could be server except for the dropdown menu. Split the dropdown out into its own client component?
+
 "use client";
 
 import Link from "next/link";
