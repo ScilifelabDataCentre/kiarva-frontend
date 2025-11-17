@@ -48,13 +48,13 @@ export default function DownloadPage(): ReactElement {
         const responseData: Blob = response.data;
         fileDownload(
           responseData,
-            "Homo-sapiens_Ig_Heavy_" + 
-            gene[gene.length-1] +
+          "Homo-sapiens_Ig_Heavy_" +
+            gene[gene.length - 1] +
             "_" +
             fastaTypeSelected +
             "_v" +
             currentVersionFormatted +
-            ".fasta",
+            ".fasta"
         );
       })
       .catch((response) => console.log(response.error));
@@ -72,8 +72,8 @@ export default function DownloadPage(): ReactElement {
         .then((response) => {
           const responseData: Blob = response.data;
           zip.file(
-              "Homo-sapiens_Ig_Heavy_" + 
-              gene[gene.length-1] +
+            "Homo-sapiens_Ig_Heavy_" +
+              gene[gene.length - 1] +
               "_" +
               fastaTypeSelected +
               "_v" +
@@ -131,11 +131,15 @@ export default function DownloadPage(): ReactElement {
   }, []);
 
   return (
-    <div className={BODY_CLASSES}>
+    <main className={BODY_CLASSES}>
       <h1 className={H_1}>Download FASTA files</h1>
 
       {!hasCookie("password") && (
-        <div className="alert alert-info bg-info text-info-content">
+        <aside
+          className="alert alert-info bg-info text-info-content"
+          role="alert"
+          aria-label="Demo version notice"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -146,26 +150,28 @@ export default function DownloadPage(): ReactElement {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
           >
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             <path d="M12 7v2" />
             <path d="M12 13h.01" />
           </svg>
-          <span className="text-sm lg:text-base">
+          <p className="text-sm lg:text-base">
             You are currently exploring the demo version of KIARVA. The full
             version will be released once the underlying data has been
             published. Until then, the pages are visible as a demonstration but
             without full data access.
-          </span>
-        </div>
+          </p>
+        </aside>
       )}
 
-      <div className="alert">
+      <aside className="alert" role="note" aria-label="Download instructions">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           className="h-6 w-6 shrink-0 stroke-current"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -174,69 +180,94 @@ export default function DownloadPage(): ReactElement {
             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           ></path>
         </svg>
-        <span className="text-sm lg:text-base">
+        <p className="text-sm lg:text-base">
           Start by choosing the type of fasta file you want. Then, select the
           gene segment and/or individual genes you want to download by ticking
           the appropriate boxes—ticking a gene segment will automatically select
           all individual genes within that chain. After making your selections,
-          click the &quot;Download&quot; button. This will start a
-          download of your chosen FASTA file(s). If you have selected more than one
-          file, they will be downloaded in a .zip.
-        </span>
-      </div>
-      <div className={H_1}>Fasta type</div>
-      <div className="divider !my-0"></div>
+          click the &quot;Download&quot; button. This will start a download of
+          your chosen FASTA file(s). If you have selected more than one file,
+          they will be downloaded in a .zip.
+        </p>
+      </aside>
 
-      <div className="w-full !my-0">
-        <div>
-          <label
-            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
-            onClick={() => setFastaTypeSelected("genomic")}
-          >
-            <input
-              type="radio"
-              name="fastaRadio"
-              className="radio"
-              defaultChecked
-            />
-            <span className="pl-2">Genomic coding sequence</span>
-          </label>
+      <section aria-labelledby="fasta-type-heading">
+        <h2 id="fasta-type-heading" className={H_1}>
+          Fasta type
+        </h2>
+        <div className="divider !my-0" aria-hidden="true"></div>
 
-          <label
-            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
-            onClick={() => setFastaTypeSelected("genomic_fl")}
-          >
-            <input type="radio" name="fastaRadio" className="radio" />
-            <span className="pl-2">
-              Genomic coding sequence with flanking regions
-            </span>
-          </label>
+        <fieldset className="w-full !my-0">
+          <legend className="sr-only">Select FASTA file type</legend>
+          <div>
+            <label
+              className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
+              onClick={() => setFastaTypeSelected("genomic")}
+            >
+              <input
+                type="radio"
+                name="fastaRadio"
+                className="radio"
+                defaultChecked
+                value="genomic"
+              />
+              <span className="pl-2">Genomic coding sequence</span>
+            </label>
 
-          <label
-            className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
-            onClick={() => setFastaTypeSelected("translated")}
-          >
-            <input type="radio" name="fastaRadio" className="radio" />
-            <span className="pl-2">Translated V gene sequences</span>
-          </label>
-        </div>
-      </div>
+            <label
+              className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
+              onClick={() => setFastaTypeSelected("genomic_fl")}
+            >
+              <input
+                type="radio"
+                name="fastaRadio"
+                className="radio"
+                value="genomic_fl"
+              />
+              <span className="pl-2">
+                Genomic coding sequence with flanking regions
+              </span>
+            </label>
 
-      <div className={H_1}>BCR</div>
-      <div className="divider !my-0"></div>
-      <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16">
-        <DownloadBoxComponent
-          geneSegment="IGH"
-          geneObjectArray={[
-            { name: "IGHV", isAvailable: true },
-            { name: "IGHD", isAvailable: fastaTypeSelected === "genomic" || fastaTypeSelected === "genomic_fl" },
-            { name: "IGHJ", isAvailable: fastaTypeSelected === "genomic" },
-            { name: "IGH constant", isAvailable: false },
-          ]}
-          setPropsSelectionArray={setIghSelectionArray}
-          radialSelected={fastaTypeSelected}
-        ></DownloadBoxComponent>
-        {/* <DownloadBoxComponent
+            <label
+              className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
+              onClick={() => setFastaTypeSelected("translated")}
+            >
+              <input
+                type="radio"
+                name="fastaRadio"
+                className="radio"
+                value="translated"
+              />
+              <span className="pl-2">Translated V gene sequences</span>
+            </label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section aria-labelledby="bcr-heading">
+        <h2 id="bcr-heading" className={H_1}>
+          BCR
+        </h2>
+        <div className="divider !my-0" aria-hidden="true"></div>
+        <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16">
+          <DownloadBoxComponent
+            geneSegment="IGH"
+            geneObjectArray={[
+              { name: "IGHV", isAvailable: true },
+              {
+                name: "IGHD",
+                isAvailable:
+                  fastaTypeSelected === "genomic" ||
+                  fastaTypeSelected === "genomic_fl",
+              },
+              { name: "IGHJ", isAvailable: fastaTypeSelected === "genomic" },
+              { name: "IGH constant", isAvailable: false },
+            ]}
+            setPropsSelectionArray={setIghSelectionArray}
+            radialSelected={fastaTypeSelected}
+          ></DownloadBoxComponent>
+          {/* <DownloadBoxComponent
           geneSegment="IGK"
           geneObjectArray={[
             { name: "IGKV", isAvailable: true },
@@ -245,7 +276,7 @@ export default function DownloadPage(): ReactElement {
           ]}
           setPropsSelectionArray={setIgkSelectionArray}
         ></DownloadBoxComponent> */}
-        {/* <DownloadBoxComponent
+          {/* <DownloadBoxComponent
           geneSegment="IGL"
           geneObjectArray={[
             { name: "IGLV", isAvailable: true },
@@ -254,11 +285,13 @@ export default function DownloadPage(): ReactElement {
           ]}
           setPropsSelectionArray={setIglSelectionArray}
         ></DownloadBoxComponent> */}
-      </div>
+        </div>
+      </section>
 
-      {/* <div className={H_1}>TCR</div>
-      <div className="divider !my-0"></div>
-      <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16"> */}
+      {/* <section aria-labelledby="tcr-heading">
+        <h2 id="tcr-heading" className={H_1}>TCR</h2>
+        <div className="divider !my-0" aria-hidden="true"></div>
+        <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16"> */}
       {/* <DownloadBoxComponent
           geneSegment="TRA"
           geneObjectArray={[
@@ -297,23 +330,26 @@ export default function DownloadPage(): ReactElement {
           ]}
           setPropsSelectionArray={setTrdSelectionArray}
         ></DownloadBoxComponent> */}
-      {/* </div> */}
+      {/* </div>
+      </section> */}
 
-      <div className="flex justify-center py-8 lg:py-0">
-        {/* Delete the button disabled and className when officially launching */}
-        <Button
-          variant="default"
-          size="xl"
-          onClick={handleDownload}
-          disabled={!hasCookie("password")}
-          className={
-            "opacity-50" + (!hasCookie("password") && " cursor-not-allowed")
-          }
-        >
-          <Download />
-          Download
-        </Button>
-      </div>
-    </div>
+      <section aria-label="Download actions">
+        <div className="flex justify-center py-8 lg:py-0">
+          {/* Delete the button disabled and className when officially launching */}
+          <Button
+            variant="default"
+            size="xl"
+            onClick={handleDownload}
+            disabled={!hasCookie("password")}
+            className={
+              "opacity-50" + (!hasCookie("password") && " cursor-not-allowed")
+            }
+          >
+            <Download />
+            Download
+          </Button>
+        </div>
+      </section>
+    </main>
   );
 }

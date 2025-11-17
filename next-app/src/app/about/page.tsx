@@ -69,38 +69,46 @@ export default function AboutPage(): ReactElement {
         <h2 id="contact-heading" className="divider pt-4">
           Contact
         </h2>
-        <p className="text-left lg:text-justify text-sm lg:text-base">
-          For technical questions related to the website, please contact:
-          <br />
-          <strong>Data Science Node in Precision Medicine & Diagnostics</strong>
-          —
-          <a
-            href="mailto:precisionmedicine@scilifelab.se"
-            className={`${LINK_CLASSES} italic`}
-          >
-            precisionmedicine@scilifelab.se
-          </a>
-          <br />
-        </p>
-        <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
-          For questions related to the scientific content, please contact:
-          <br />
-          <strong>Martin Corcoran</strong>—
-          <a
-            href="mailto:Martin.Corcoran@ki.se"
-            className={`${LINK_CLASSES} italic`}
-          >
-            Martin.Corcoran@ki.se
-          </a>
-          <br />
-          <strong>Gunilla Karlsson Hedestam</strong>—
-          <a
-            href="mailto:Gunilla.Karlsson.Hedestam@ki.se"
-            className={`${LINK_CLASSES} italic`}
-          >
-            Gunilla.Karlsson.Hedestam@ki.se
-          </a>
-        </p>
+        <address className="not-italic pb-8">
+          <p className="text-left lg:text-justify text-sm lg:text-base mb-4">
+            For technical questions related to the website, please contact:
+          </p>
+          <p className="text-left lg:text-justify text-sm lg:text-base mb-4">
+            <strong>
+              Data Science Node in Precision Medicine & Diagnostics
+            </strong>
+            {" — "}
+            <a
+              href="mailto:precisionmedicine@scilifelab.se"
+              className={`${LINK_CLASSES} italic`}
+            >
+              precisionmedicine@scilifelab.se
+            </a>
+          </p>
+          <p className="text-left lg:text-justify text-sm lg:text-base mb-4">
+            For questions related to the scientific content, please contact:
+          </p>
+          <p className="text-left lg:text-justify text-sm lg:text-base mb-4">
+            <strong>Martin Corcoran</strong>
+            {" — "}
+            <a
+              href="mailto:Martin.Corcoran@ki.se"
+              className={`${LINK_CLASSES} italic`}
+            >
+              Martin.Corcoran@ki.se
+            </a>
+          </p>
+          <p className="text-left lg:text-justify text-sm lg:text-base">
+            <strong>Gunilla Karlsson Hedestam</strong>
+            {" — "}
+            <a
+              href="mailto:Gunilla.Karlsson.Hedestam@ki.se"
+              className={`${LINK_CLASSES} italic`}
+            >
+              Gunilla.Karlsson.Hedestam@ki.se
+            </a>
+          </p>
+        </address>
       </section>
 
       <section aria-labelledby="team-heading">
