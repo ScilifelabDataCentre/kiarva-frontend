@@ -47,31 +47,56 @@ export default function PasswordPage(): ReactElement {
   }
 
   return (
-    <div className={BODY_CLASSES}>
+    <main className={BODY_CLASSES}>
       {!hasCookie("password") ? (
-        <div className="flex flex-col w-full max-w-xs gap-4">
-          <input
-            type="password"
-            name="password"
-            placeholder="Type here"
-            className="input bg-white input-bordered border-neutral"
-            defaultValue={inputField}
-            onChange={handleChange}
-            required
-          />
-          <Button variant="default" size="default" onClick={handleSubmit}>
-            Submit
-          </Button>
-          <p>{correctPassword}</p>
-        </div>
+        <section aria-labelledby="password-form-heading">
+          <h1 id="password-form-heading" className="sr-only">
+            Enter password
+          </h1>
+          <form
+            className="flex flex-col w-full max-w-xs gap-4"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
+            <label htmlFor="password-input" className="sr-only">
+              Password
+            </label>
+            <input
+              id="password-input"
+              type="password"
+              name="password"
+              placeholder="Type here"
+              className="input bg-white input-bordered border-neutral"
+              value={inputField}
+              onChange={handleChange}
+              required
+              aria-describedby="password-status"
+            />
+            <Button type="submit" variant="default" size="default">
+              Submit
+            </Button>
+            {correctPassword && (
+              <p id="password-status" role="status" aria-live="polite">
+                {correctPassword}
+              </p>
+            )}
+          </form>
+        </section>
       ) : (
-        <div className="flex flex-col w-full max-w-xs gap-4">
-          <p>Password saved.</p>
-          <Button variant="default" size="default" onClick={handleReset}>
-            Reset password
-          </Button>
-        </div>
+        <section aria-labelledby="password-saved-heading">
+          <h1 id="password-saved-heading" className="sr-only">
+            Password saved
+          </h1>
+          <div className="flex flex-col w-full max-w-xs gap-4">
+            <p>Password saved.</p>
+            <Button variant="default" size="default" onClick={handleReset}>
+              Reset password
+            </Button>
+          </div>
+        </section>
       )}
-    </div>
+    </main>
   );
 }
