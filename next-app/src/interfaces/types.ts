@@ -4,50 +4,6 @@ export interface ILink {
   link: string;
 }
 
-export interface ISVG {
-  href: string;
-  xmlns: string;
-  width: string;
-  height: string;
-  viewBox: string;
-  classes: string;
-  svg: string;
-}
-
-export interface ICardConfig {
-  cardClasses: string;
-  textClasses: string;
-  imgClasses: string;
-  buttonClasses: string;
-  buttonPlacement: string;
-}
-
-export interface ICardContent {
-  text: string;
-  buttonText: string;
-  imageSrc: string;
-  imageAlt: string;
-}
-
-export interface IDataSourceFilters {
-  dataTypes: string[];
-  diseaseTypes: string[];
-}
-
-export interface IDataSourcesDC {
-  data: string[];
-  ddls: string[];
-  description: string;
-  name: string;
-  search_tags: string[];
-  target: string[];
-  thumbnail: string;
-  thumbnail_border?: boolean;
-  type: string[];
-  url: string;
-  disease_type: string[];
-}
-
 export interface IGeneFrequencyData {
   frequency: number;
   n: number;
@@ -116,11 +72,6 @@ export type AbbreviationPopupComponentProps = {
   onClose: () => void;
 };
 
-export type DisclaimerPopupComponentProps = {
-  onClose: () => void;
-  explanation: string;
-};
-
 export type IgSNPerData = {
   igSNPer_score: number;
   igSNPer_SNPs: string[];
@@ -128,31 +79,27 @@ export type IgSNPerData = {
 
 export type AlleleListAA = {
   aa_allele_list: string[];
-}
-
-export type IPaths = {
-  [key: string]: string;
-}
+};
 
 export type IAlleleDropDownConfig = {
   geneSegmentItemsArray: string[];
   geneDropDownItemsArray: string[];
   geneSelectionEndpoint: string;
-}
+};
 
 export type ISequenceData = {
   allele: string;
   sequence: string;
-}
+};
 
 export type ISequenceSearchData = {
   allele: string;
   sequence: string;
   positions: number[];
-}
+};
 
 export type IMSAData = {
   allele: string;
   sequence_nt: string;
   sequence_aa: string;
-}
+};

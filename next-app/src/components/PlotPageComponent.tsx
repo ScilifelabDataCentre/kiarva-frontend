@@ -75,11 +75,13 @@ export default function PlotPage(): ReactElement {
   const [selectedAllele, setSelectedAllele] = useState<string>("");
 
   async function getGeneFreqData(allele: string) {
-    const encodedAllele = encodeURIComponent(allele)
+    const encodedAllele = encodeURIComponent(allele);
     const alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
 
     const superpopulationsEndpoint: string =
-      alleleFrequenciesEndpoint + "superpopulations?allele_name=" + encodedAllele;
+      alleleFrequenciesEndpoint +
+      "superpopulations?allele_name=" +
+      encodedAllele;
 
     await axios
       .get(superpopulationsEndpoint, axiosConfig)
@@ -100,8 +102,7 @@ export default function PlotPage(): ReactElement {
   }
 
   async function getGeneIgSNPerData(allele: string) {
-
-    const encodedAllele = encodeURIComponent(allele)
+    const encodedAllele = encodeURIComponent(allele);
 
     const alleleIgSNPerDataEndpoint: string =
       backendAPI + "data/igsnperdata?allele_name=" + encodedAllele;
@@ -180,66 +181,74 @@ export default function PlotPage(): ReactElement {
   // Render the component
   return (
     <>
-      <div>
-        <div className="flex flex-col lg:flex-row items-start justify-between pb-8 gap-4">
-          <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/8 pt-2">
-            IgSNPer SCORE: {igSNPerScore}
-          </p>
-          <div className="overflow-x-auto lg:w-2/4">
-            <div className="min-w-full inline-block align-middle">
-              <div className="border rounded-lg overflow-hidden">
-                <table className="min-w-full divide-y divide-neutral text-base-content">
-                  <thead className="bg-neutral">
-                    <tr>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-start text-lg lg:text-xl font-semibold"
-                      >
-                        Associated SNPs
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-neutral text-base lg:text-lg">
-                    {igSNPerSNPs.map((value) => {
-                      return (
-                        <tr key={value}>
-                          <td className="px-6 py-4 whitespace-nowrap font-medium">
-                            {value}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+      <section
+        aria-labelledby="igsnper-data-heading"
+        className="flex flex-col lg:flex-row items-start justify-between pb-8 gap-4"
+      >
+        <h2 id="igsnper-data-heading" className="sr-only">
+          IgSNPer score and associated SNPs
+        </h2>
+        <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/8 pt-2">
+          IgSNPer SCORE: {igSNPerScore}
+        </p>
+        <div className="overflow-x-auto lg:w-2/4">
+          <div className="min-w-full inline-block align-middle">
+            <div className="border rounded-lg overflow-hidden">
+              <table className="min-w-full divide-y divide-neutral text-base-content">
+                <caption className="sr-only">
+                  List of associated SNPs for the selected allele
+                </caption>
+                <thead className="bg-neutral">
+                  <tr>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-start text-lg lg:text-xl font-semibold"
+                    >
+                      Associated SNPs
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-neutral text-base lg:text-lg">
+                  {igSNPerSNPs.map((value) => {
+                    return (
+                      <tr key={value}>
+                        <td className="px-6 py-4 whitespace-nowrap font-medium">
+                          {value}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
-          <div className="lg:w-1/8"></div>
-          <Button
-            variant="default"
-            size="lg"
-            className="order-first lg:order-4"
-            onClick={() => setIsPopupOpen(true)}
-          >
-            <Info />
-            Population abbreviations
-          </Button>
         </div>
-        {isPopupOpen && (
-          <AbbreviationPopupComponent onClose={() => setIsPopupOpen(false)} />
-        )}
-        <AlelleSelectionComponent
-          alleleSelectionConfig={alleleDropdownConfig}
-          handleSetSelection={handleSetSelection}
-          plotType={"genomicFreqPlot"}
-        />
-        <FrequencyPlotComponent
-          superpopulationAPIData={superpopFreqAPIData}
-          superpopulationColors={superPopulationColorsDict}
-          populationAPIData={popFreqAPIData}
-          superpopulationRegions={superpopulationRegions}
-        />
-      </div>
+        <div className="lg:w-1/8" aria-hidden="true"></div>
+        <Button
+          variant="default"
+          size="lg"
+          className="order-first lg:order-4"
+          onClick={() => setIsPopupOpen(true)}
+          aria-label="View population abbreviations"
+        >
+          <Info aria-hidden="true" />
+          Population abbreviations
+        </Button>
+      </section>
+      {isPopupOpen && (
+        <AbbreviationPopupComponent onClose={() => setIsPopupOpen(false)} />
+      )}
+      <AlelleSelectionComponent
+        alleleSelectionConfig={alleleDropdownConfig}
+        handleSetSelection={handleSetSelection}
+        plotType={"genomicFreqPlot"}
+      />
+      <FrequencyPlotComponent
+        superpopulationAPIData={superpopFreqAPIData}
+        superpopulationColors={superPopulationColorsDict}
+        populationAPIData={popFreqAPIData}
+        superpopulationRegions={superpopulationRegions}
+      />
     </>
   );
 }
