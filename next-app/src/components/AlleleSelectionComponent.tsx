@@ -159,7 +159,7 @@ export default function AlelleSelectionComponent(prop: {
       </h2>
       <fieldset>
         <legend className="sr-only">
-          Select gene segment, gene type, gene, and allele
+          Select gene segment, gene type, gene and allele
         </legend>
         <div className="flex flex-col lg:flex-row gap-4">
           <div className="w-full lg:w-1/4">
@@ -233,9 +233,16 @@ export default function AlelleSelectionComponent(prop: {
         aria-live="polite"
       >
         <p className="text-neutral-content text-xl font-semibold">
-          {currentPicks.geneDropdown &&
-          currentPicks.subtypeDropdown &&
-          currentPicks.alleleDropdown ? (
+          {prop.plotType === "aminoAcidMSA" &&
+          currentPicks.geneDropdown &&
+          currentPicks.subtypeDropdown ? (
+            <>
+              Sequence alignments for {currentPicks.geneDropdown}
+              {currentPicks.subtypeDropdown}
+            </>
+          ) : currentPicks.geneDropdown &&
+            currentPicks.subtypeDropdown &&
+            currentPicks.alleleDropdown ? (
             <>
               Plot for {currentPicks.geneDropdown}
               {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}

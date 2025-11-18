@@ -42,33 +42,35 @@ export default function HeaderComponent() {
   const dropdownLinks = Object.fromEntries(Object.entries(links).slice(4));
 
   return (
-    <div className="bg-gradient-to-b from-primary to-secondary">
+    <header className="bg-gradient-to-b from-primary to-secondary">
       <div className="text-white 2xl:max-w-screen-2xl 2xl:mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between py-4 px-6">
           <div className="flex justify-between items-center">
-            <Link href="/">
-              <div className="font-bold text-center">
-                <div className="flex items-center justify-center gap-2">
-                  <p className="text-2xl">KIARVA</p>
-                  {!hasCookie("password") && (
-                    <Badge variant="accent">Demo</Badge>
-                  )}
-                </div>
-                <span className="lg:whitespace-nowrap text-xl">
-                  KI Adaptive Immune Receptor Gene Variant Atlas
-                </span>
+            <Link href="/" className="font-bold text-center">
+              <div className="flex items-center justify-center gap-2">
+                <h1 className="text-2xl">KIARVA</h1>
+                {!hasCookie("password") && <Badge variant="accent">Demo</Badge>}
               </div>
+              <p className="lg:whitespace-nowrap text-xl">
+                KI Adaptive Immune Receptor Gene Variant Atlas
+              </p>
             </Link>
 
             <button
               className="lg:hidden text-white focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-expanded={isMenuOpen}
+              aria-controls="main-navigation"
+              aria-label={
+                isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+              }
             >
               <svg
                 className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 {isMenuOpen ? (
                   <path
@@ -89,9 +91,11 @@ export default function HeaderComponent() {
             </button>
           </div>
           <nav
+            id="main-navigation"
             className={`${
               isMenuOpen ? "block" : "hidden"
             } lg:block mt-4 lg:mt-0`}
+            aria-label="Main navigation"
           >
             <ul className="flex flex-col lg:flex-row lg:flex-wrap lg:items-center lg:space-x-6 space-y-2 lg:space-y-0 text-lg">
               {Object.entries(links).map(([key, link], index) => (
@@ -104,6 +108,7 @@ export default function HeaderComponent() {
                     )}
                     href={link.link}
                     onClick={() => setIsMenuOpen(false)}
+                    aria-current={pathname === link.link ? "page" : undefined}
                   >
                     {link.text}
                   </Link>
@@ -116,6 +121,6 @@ export default function HeaderComponent() {
           </nav>
         </div>
       </div>
-    </div>
+    </header>
   );
 }

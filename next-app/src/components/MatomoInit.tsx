@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
+import { useEffect } from "react";
 import { init } from "@socialgouv/matomo-next";
 
 export default function MatomoInit() {
   useEffect(() => {
     if (window.location.origin.includes("kiarva.scilifelab.se")) {
       init({
-          url: 'https://matomo.dc.scilifelab.se/', 
-          siteId: '12',
-          disableCookies: true,
-          excludeUrlsPatterns: [/^\/password/,],
-      })
+        url: "https://matomo.dc.scilifelab.se/",
+        siteId: "12",
+        disableCookies: true,
+        excludeUrlsPatterns: [/^\/password/],
+      });
     }
-  }, [])
+  }, []);
 
-  return null
+  return null;
 }
