@@ -14,19 +14,16 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
   const selectedRowClasses: string = "text-secondary-content bg-info";
 
   return (
-    <div
-      className="group relative cursor-pointer"
-      role="combobox"
-      aria-expanded="false"
-      aria-haspopup="listbox"
-      aria-label={menuName}
-    >
+    <div className="group relative cursor-pointer">
       {/* Group wrapper for the dropdown component */}
 
       {/* Dropdown button */}
       <div
         className="flex items-center justify-between bg-white px-4"
         role="button"
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        aria-label={menuName}
         tabIndex={0}
       >
         <span
