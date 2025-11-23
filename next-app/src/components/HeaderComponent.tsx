@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ILink } from "@/interfaces/types";
 import { LINK_CLASSES } from "@/constants";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import clsx from "clsx";
 import { HeaderDropdown } from "@/components/ui/header-dropdown";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +14,12 @@ import { hasCookie } from "cookies-next";
 
 export default function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showDemoBadge, setShowDemoBadge] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setShowDemoBadge(!hasCookie("password"));
+  }, []);
   const links: { [id: string]: ILink } = {
     l1: { text: "Download", classes: LINK_CLASSES, link: "/download" },
     l2: {
@@ -49,7 +54,7 @@ export default function HeaderComponent() {
             <Link href="/" className="font-bold text-center">
               <div className="flex items-center justify-center gap-2">
                 <h1 className="text-2xl">KIARVA</h1>
-                {!hasCookie("password") && <Badge variant="accent">Demo</Badge>}
+                {showDemoBadge && <Badge variant="accent">Demo</Badge>}
               </div>
               <p className="lg:whitespace-nowrap text-xl">
                 KI Adaptive Immune Receptor Gene Variant Atlas
