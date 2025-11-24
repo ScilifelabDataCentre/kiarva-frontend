@@ -3,7 +3,7 @@
 
 "use client";
 
-import { ChangeEvent, ReactElement, useState } from "react";
+import { ChangeEvent, ReactElement, useState, useEffect } from "react";
 import { backendAPI, BODY_CLASSES } from "@/constants";
 import axios from "axios";
 import { setCookie, hasCookie, deleteCookie } from "cookies-next";
@@ -12,8 +12,13 @@ import { Button } from "@/components/ui/button";
 export default function PasswordPage(): ReactElement {
   const [inputField, setInputField] = useState("");
   const [correctPassword, setCorrectPassword] = useState("");
+  const [hasPasswordCookie, setHasPasswordCookie] = useState(false);
 
   const backend_password_uri: string = backendAPI + "checkapikey";
+
+  useEffect(() => {
+    setHasPasswordCookie(hasCookie("password"));
+  }, []);
 
   function handleChange(
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -34,6 +39,7 @@ export default function PasswordPage(): ReactElement {
         console.log(response);
         setCorrectPassword("Password correct, unlocking full functionality.");
         setCookie("password", inputField, { maxAge: 365 * 24 * 60 * 60 });
+        setHasPasswordCookie(true);
       })
       .catch(() => {
         setCorrectPassword(
@@ -44,11 +50,12 @@ export default function PasswordPage(): ReactElement {
 
   function handleReset(): void {
     deleteCookie("password");
+    setHasPasswordCookie(false);
   }
 
   return (
     <main className={BODY_CLASSES}>
-      {!hasCookie("password") ? (
+      {!hasPasswordCookie ? (
         <section aria-labelledby="password-form-heading">
           <h1 id="password-form-heading" className="sr-only">
             Enter password

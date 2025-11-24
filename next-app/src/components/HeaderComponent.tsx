@@ -19,7 +19,7 @@ export default function HeaderComponent() {
 
   useEffect(() => {
     setShowDemoBadge(!hasCookie("password"));
-  }, []);
+  }, [pathname]);
   const links: { [id: string]: ILink } = {
     l1: { text: "Download", classes: LINK_CLASSES, link: "/download" },
     l2: {
