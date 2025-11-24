@@ -52,68 +52,52 @@ const SequenceSearchComponent: React.FC<SequenceSearchProps> = ({
   }
 
   return (
-    <figure
+    <section
       className="flex flex-col items-start max-w-full overflow-x-auto"
       aria-label="Sequence search results"
     >
-      <caption className="sr-only">
-        Sequence alignment table showing alleles and their sequences with
-        highlighted search term matches
-      </caption>
-      <div className="min-w-full inline-block align-middle">
-        <table className="w-full">
-          <thead>
-            <tr>
-              <th
-                scope="col"
-                className="w-[250px] text-left font-bold sticky left-0 bg-base-100 z-10"
-              >
-                Allele
-              </th>
-              <th scope="col" className="text-left font-bold">
-                Sequence
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {sequenceData.map((seq) => (
-              <tr key={seq.allele}>
-                <td className="w-[250px] text-left text-black py-1 font-bold sticky left-0 bg-base-100 z-10">
-                  {seq.allele}
-                </td>
-                <td>
-                  <div className="flex flex-row">
-                    {Array.from({ length: maxLength }).map((_, index) => {
-                      const character = seq.sequence[index] || "-"; // Use "-" for gaps
-                      const color = getCharColor(index, seq.positions);
-
-                      return (
-                        <span
-                          key={seq.allele + "-" + index}
-                          className="inline-flex items-center justify-center"
-                          style={{
-                            width: "13px",
-                            height: "30px",
-                            textAlign: "center",
-                            backgroundColor: color.background,
-                            color: color.text,
-                            padding: "0px",
-                            margin: "0px",
-                          }}
-                          aria-label={`Position ${index + 1}: ${character}`}
-                        >
-                          {character}
-                        </span>
-                      );
-                    })}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="flex flex-row w-full">
+        <h2 className="w-[250px] font-bold">Allele</h2>
+        <h2 className="font-bold">Sequence</h2>
       </div>
-    </figure>
+      <div className="divider pt-4"></div>
+      {sequenceData.map((seq) => (
+        <div key={seq.allele} className="flex flex-row" role="row">
+          {/* Allele name on the left */}
+          <div className="w-[250px] text-left text-black py-1 font-bold sticky left-0 bg-base-100">
+            {seq.allele}
+          </div>
+
+          {/* Sequence nucleotides on the right (with scrollable area) */}
+          <div className="flex flex-row space-y-2">
+            {Array.from({ length: maxLength }).map((_, index) => {
+              const character = seq.sequence[index] || "-"; // Use "-" for gaps
+              const color = getCharColor(index, seq.positions);
+
+              return (
+                <span
+                  key={seq.allele + "-" + index}
+                  className="inline-flex items-center justify-center"
+                  style={{
+                    width: "13px",
+                    height: "30px",
+                    textAlign: "center",
+                    backgroundColor: color.background,
+                    color: color.text,
+                    padding: "0px",
+                    margin: "0px",
+                  }}
+                  aria-label={`Position ${index + 1}: ${character}`}
+                  role="gridcell"
+                >
+                  {character}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </section>
   );
 };
 
