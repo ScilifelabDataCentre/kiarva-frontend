@@ -78,7 +78,7 @@ export default function AminoAcidPlotPage(): ReactElement {
   const [topAlleleAA, setTopAlleleAA] = useState<string>("");
 
   async function getTopLevelAlleleAA(allele: string) {
-    const encodedAllele = encodeURIComponent(allele)
+    const encodedAllele = encodeURIComponent(allele);
     const topAlleleAAEndpoint: string =
       backendAPI + "/data/aminoacidalleles?aa_allele_name=" + encodedAllele;
 
@@ -91,12 +91,14 @@ export default function AminoAcidPlotPage(): ReactElement {
   }
 
   async function getGeneFreqData(allele: string) {
-    const encodedAllele = encodeURIComponent(allele)
+    const encodedAllele = encodeURIComponent(allele);
     const alleleFrequenciesEndpoint: string =
       backendAPI + "data/aminoacidfrequencies/";
 
     const superpopulationsEndpoint: string =
-      alleleFrequenciesEndpoint + "superpopulations?aa_allele_name=" + encodedAllele;
+      alleleFrequenciesEndpoint +
+      "superpopulations?aa_allele_name=" +
+      encodedAllele;
 
     await axios
       .get(superpopulationsEndpoint, axiosConfig)
@@ -117,7 +119,7 @@ export default function AminoAcidPlotPage(): ReactElement {
   }
 
   async function getAlleleListAA(allele: string) {
-    const encodedAllele = encodeURIComponent(allele)
+    const encodedAllele = encodeURIComponent(allele);
     const alleleListAADataEndpoint: string =
       backendAPI + "data/aminoacidlist?aa_allele_name=" + encodedAllele;
 
@@ -191,63 +193,81 @@ export default function AminoAcidPlotPage(): ReactElement {
   // Render the component
   return (
     <>
-      <div>
-        <div className="flex flex-col lg:flex-row items-start justify-between pb-8 gap-4">
-          <div className="overflow-x-auto lg:w-2/4">
-            <div className="min-w-full inline-block align-middle">
-              <div className="border rounded-lg overflow-hidden">
-                <table className="min-w-full divide-y divide-neutral text-base-content">
-                  <thead className="bg-neutral">
-                    <tr>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-start text-lg lg:text-xl font-semibold"
-                      >
-                        Alleles translating to the same amino acid
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-neutral text-base lg:text-lg">
-                    {alleleListAA.map((value) => {
-                      return (
-                        <tr key={value}>
-                          <td className="px-6 py-4 whitespace-nowrap font-medium">
-                            {value}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+      <section
+        aria-labelledby="alleles-table-heading"
+        className="flex flex-col lg:flex-row items-start justify-between pb-8 gap-4"
+      >
+        <h2 id="alleles-table-heading" className="sr-only">
+          Alleles translating to the same amino acid
+        </h2>
+        <div className="overflow-x-auto lg:w-2/4">
+          <div className="min-w-full inline-block align-middle">
+            <div className="border rounded-lg overflow-hidden">
+              <table className="min-w-full divide-y divide-neutral text-base-content">
+                <caption className="sr-only">
+                  List of alleles that translate to the same amino acid sequence
+                </caption>
+                <thead className="bg-neutral">
+                  <tr>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-start text-lg lg:text-xl font-semibold"
+                    >
+                      Alleles translating to the same amino acid
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-neutral text-base lg:text-lg">
+                  {alleleListAA.map((value) => {
+                    return (
+                      <tr key={value}>
+                        <td className="px-6 py-4 whitespace-nowrap font-medium">
+                          {value}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
-          <div className="lg:w-1/8"></div>
-          <Button
-            variant="default"
-            size="lg"
-            className="order-first lg:order-4"
-            onClick={() => setIsPopupOpen(true)}
-          >
-            <Info />
-            Population abbreviations
-          </Button>
         </div>
-        {isPopupOpen && (
-          <AbbreviationPopupComponent onClose={() => setIsPopupOpen(false)} />
-        )}
+        <div className="lg:w-1/8" aria-hidden="true"></div>
+        <Button
+          variant="default"
+          size="lg"
+          className="order-first lg:order-4"
+          onClick={() => setIsPopupOpen(true)}
+          aria-label="View population abbreviations"
+        >
+          <Info aria-hidden="true" />
+          Population abbreviations
+        </Button>
+      </section>
+      {isPopupOpen && (
+        <AbbreviationPopupComponent onClose={() => setIsPopupOpen(false)} />
+      )}
+      <section aria-labelledby="allele-selection-heading">
+        <h2 id="allele-selection-heading" className="sr-only">
+          Allele selection
+        </h2>
         <AlelleSelectionComponent
           alleleSelectionConfig={alleleDropdownConfig}
           handleSetSelection={handleSetSelection}
           plotType={"aminoAcidFreqPlot"}
         />
+      </section>
+      <section aria-labelledby="frequency-plot-heading">
+        <h2 id="frequency-plot-heading" className="sr-only">
+          Population frequency plot
+        </h2>
         <FrequencyPlotComponent
           superpopulationAPIData={superpopFreqAPIData}
           superpopulationColors={superPopulationColorsDict}
           populationAPIData={popFreqAPIData}
           superpopulationRegions={superpopulationRegions}
         />
-      </div>
+      </section>
     </>
   );
 }

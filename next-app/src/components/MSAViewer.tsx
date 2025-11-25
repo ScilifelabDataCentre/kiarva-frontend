@@ -57,22 +57,31 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
   const justifyContent = "center";
 
   return (
-    <div className="flex flex-col items-start overflow-x-auto lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96">
+    <figure
+      className="flex flex-col items-start overflow-x-auto lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
+      aria-label="Multiple sequence alignment visualization"
+    >
       {sequenceData[0].sequence != "SEQUENCE" && (
-        <div className="flex flex-row">
+        <div className="flex flex-row" role="row" aria-label="Position numbers">
           {/* Allele name on the left */}
-          <div className="w-[250px] text-left text-black py-1 font-bold sticky left-0 bg-base-100">
+          <div
+            className="w-[250px] text-left text-black py-1 font-bold sticky left-0 bg-base-100"
+            role="columnheader"
+            aria-label="Position header"
+          >
             {""}
           </div>
 
           {/* Sequence nucleotides on the right (with scrollable area) */}
-          <div className="flex flex-row space-y-2">
+          <div className="flex flex-row space-y-2" role="rowgroup">
             {Array.from({ length: maxLength }).map((_, index) => {
               const output: string =
                 (index + 1) % 10 == 0 ? (index + 1).toString() : "";
               return (
                 <div
                   key={index}
+                  role="gridcell"
+                  aria-label={`Position ${index + 1}`}
                   style={{
                     width: width,
                     height: height,
@@ -94,9 +103,17 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
         </div>
       )}
       {sequenceData[0].sequence != "SEQUENCE" && (
-        <div className="flex flex-row">
+        <div
+          className="flex flex-row"
+          role="row"
+          aria-label="Position separator"
+          aria-hidden="true"
+        >
           {/* Allele name on the left */}
-          <div className="w-[250px] text-left text-black py-1 font-bold sticky left-0 bg-base-100">
+          <div
+            className="w-[250px] text-left text-black py-1 font-bold sticky left-0 bg-base-100"
+            aria-hidden="true"
+          >
             {""}
           </div>
           {Array.from({ length: maxLength }).map((_, index) => {
@@ -104,6 +121,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
             return (
               <div
                 key={index}
+                aria-hidden="true"
                 style={{
                   width: width,
                   height: height,
@@ -125,14 +143,17 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
       )}
       {/* Loop through sequences to display them in rows */}
       {sequenceData.map((seq) => (
-        <div key={seq.allele} className="flex flex-row">
+        <div key={seq.allele} className="flex flex-row" role="row">
           {/* Allele name on the left */}
-          <div className="w-[250px] text-left text-black py-1 font-bold sticky left-0 bg-base-100">
+          <div
+            className="w-[250px] text-left text-black py-1 font-bold sticky left-0 bg-base-100"
+            role="rowheader"
+          >
             {seq.allele}
           </div>
 
           {/* Sequence nucleotides on the right (with scrollable area) */}
-          <div className="flex flex-row space-y-2">
+          <div className="flex flex-row space-y-2" role="rowgroup">
             {Array.from({ length: maxLength }).map((_, index) => {
               const character = seq.sequence[index] || "-"; // Use "-" for gaps
               const color = getCharColor(index);
@@ -140,6 +161,10 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
               return (
                 <div
                   key={seq.allele + "-" + index}
+                  role="gridcell"
+                  aria-label={`${seq.allele} position ${
+                    index + 1
+                  }: ${character}`}
                   style={{
                     width: width,
                     height: height,
@@ -160,7 +185,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
           </div>
         </div>
       ))}
-    </div>
+    </figure>
   );
 };
 

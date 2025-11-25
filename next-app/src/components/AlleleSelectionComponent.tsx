@@ -96,7 +96,7 @@ export default function AlelleSelectionComponent(prop: {
           .catch((response) => console.log(response.error));
       } else {
         const currentSelection =
-          currentPicks.geneDropdown + currentPicks.subtypeDropdown + '*';
+          currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
 
         const encodedCurrentSelection = encodeURIComponent(currentSelection);
 
@@ -153,8 +153,14 @@ export default function AlelleSelectionComponent(prop: {
 
   // Render the component
   return (
-    <>
-      <div>
+    <section aria-labelledby="allele-selection-form-heading">
+      <h2 id="allele-selection-form-heading" className="sr-only">
+        Allele selection form
+      </h2>
+      <fieldset>
+        <legend className="sr-only">
+          Select gene segment, gene type, gene and allele
+        </legend>
         <div className="flex flex-col lg:flex-row gap-4">
           <div className="w-full lg:w-1/4">
             <DropdownComponent
@@ -172,6 +178,7 @@ export default function AlelleSelectionComponent(prop: {
                 ? "cursor-not-allowed pointer-events-none opacity-50"
                 : ""
             }`}
+            aria-disabled={currentPicks.geneSegmentDropdown === ""}
           >
             <DropdownComponent
               menuName="Gene type"
@@ -188,6 +195,7 @@ export default function AlelleSelectionComponent(prop: {
                 ? "cursor-not-allowed pointer-events-none opacity-50"
                 : ""
             }`}
+            aria-disabled={currentPicks.geneDropdown === ""}
           >
             <DropdownComponent
               menuName="Gene"
@@ -204,6 +212,7 @@ export default function AlelleSelectionComponent(prop: {
                 ? "cursor-not-allowed pointer-events-none opacity-50"
                 : ""
             }`}
+            aria-disabled={currentPicks.subtypeDropdown === ""}
           >
             {!(prop.plotType == "aminoAcidMSA") && (
               <DropdownComponent
@@ -217,21 +226,32 @@ export default function AlelleSelectionComponent(prop: {
             )}
           </div>
         </div>
-        <div className="flex items-center justify-center pt-8">
-          <p className="text-neutral-content text-xl font-semibold">
-            {currentPicks.geneDropdown &&
+      </fieldset>
+      <div
+        className="flex items-center justify-center pt-8"
+        role="status"
+        aria-live="polite"
+      >
+        <p className="text-neutral-content text-xl font-semibold">
+          {prop.plotType === "aminoAcidMSA" &&
+          currentPicks.geneDropdown &&
+          currentPicks.subtypeDropdown ? (
+            <>
+              Sequence alignments for {currentPicks.geneDropdown}
+              {currentPicks.subtypeDropdown}
+            </>
+          ) : currentPicks.geneDropdown &&
             currentPicks.subtypeDropdown &&
             currentPicks.alleleDropdown ? (
-              <>
-                Plot for {currentPicks.geneDropdown}
-                {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
-              </>
-            ) : (
-              "Please select the gene type, gene and allele above"
-            )}
-          </p>
-        </div>
+            <>
+              Plot for {currentPicks.geneDropdown}
+              {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
+            </>
+          ) : (
+            "Please select the gene type, gene and allele above"
+          )}
+        </p>
       </div>
-    </>
+    </section>
   );
 }

@@ -20,43 +20,48 @@ export default function FooterVersion() {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
-      <nav>
-        <a href={"https://" + frontendImage || "/"}>
-          <p className={`text-info-content/70 text-sm ${LINK_CLASSES}`}>
-            Frontend version: {frontendImage?.split(":")[1] || "n/a"}
-          </p>
-        </a>
-      </nav>
-      <nav>
-        <a href={"https://" + backendImage || "/"}>
-          <p className={`text-info-content/70 text-sm ${LINK_CLASSES}`}>
-            Backend version: {backendImage?.split(":")[1] || "n/a"}
-          </p>
-        </a>
-      </nav>
-      <nav>
-        <a
-          href="https://precision-medicine-portal.scilifelab.se/privacy"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <p className={`text-info-content/70 text-sm ${LINK_CLASSES}`}>
-            Privacy policy
-          </p>
-        </a>
-      </nav>
-      <nav>
-        <a
-          href="https://precision-medicine-portal.scilifelab.se/citation-and-license"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <p className={`text-info-content/70 text-sm ${LINK_CLASSES}`}>
-            Citation and license
-          </p>
-        </a>
-      </nav>
-    </div>
+    <nav
+      aria-label="Footer extra navigation"
+      className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8"
+    >
+      <ul className="contents">
+        <li>
+          <a href={"https://" + frontendImage || "/"}>
+            <span className={`text-info-content/70 text-sm ${LINK_CLASSES}`}>
+              Frontend version: {frontendImage?.split(":")[1] || "n/a"}
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href={"https://" + backendImage || "/"}>
+            <span className={`text-info-content/70 text-sm ${LINK_CLASSES}`}>
+              Backend version: {backendImage?.split(":")[1] || "n/a"}
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://precision-medicine-portal.scilifelab.se/privacy"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span className={`text-info-content/70 text-sm ${LINK_CLASSES}`}>
+              Privacy policy
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://precision-medicine-portal.scilifelab.se/citation-and-license"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span className={`text-info-content/70 text-sm ${LINK_CLASSES}`}>
+              Citation and license
+            </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   );
 }
