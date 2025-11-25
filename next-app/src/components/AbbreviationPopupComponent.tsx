@@ -1,4 +1,6 @@
-'use client';
+// Should be client component, but could potentially separate out the raw data? Don't know if it's beneficial
+
+"use client";
 
 import React from "react";
 import { useState } from "react";
@@ -116,6 +118,7 @@ const AbbreviationPopupComponent: React.FC<AbbreviationPopupComponentProps> = ({
                     strokeWidth={1.5}
                     stroke="white"
                     className="size-6"
+                    aria-hidden="true"
                   >
                     <path
                       strokeLinecap="round"
@@ -129,34 +132,47 @@ const AbbreviationPopupComponent: React.FC<AbbreviationPopupComponentProps> = ({
                     Abbreviations
                   </DialogTitle>
                   <div className="mt-6">
-                    <span className="font-semibold">Superpopulations</span>
-                    <ul className="list-disc list-inside space-y-1 mb-4 mt-2">
-                      {Object.keys(superPopulations).map((key) => (
-                        <li key={key} className="flex items-center">
-                          <span
-                            className="inline-block w-3 h-3 rounded-full mr-2"
-                            style={{
-                              backgroundColor: superPopulationColorsDict[key],
-                            }}
-                          ></span>
-                          {key} - {superPopulations[key]}
-                        </li>
-                      ))}
-                    </ul>
-                    <span className="font-semibold">Populations</span>
-                    <ul className="list-disc list-inside space-y-1 mt-2">
-                      {Object.keys(populations).map((key) => (
-                        <li key={key} className="flex items-center">
-                          <span
-                            className="inline-block w-3 h-3 rounded-full mr-2"
-                            style={{
-                              backgroundColor: populationColorsDict[key],
-                            }}
-                          ></span>
-                          {key} - {populations[key]}
-                        </li>
-                      ))}
-                    </ul>
+                    <section aria-labelledby="superpopulations-heading">
+                      <h3
+                        id="superpopulations-heading"
+                        className="font-semibold"
+                      >
+                        Superpopulations
+                      </h3>
+                      <ul className="list-disc list-inside space-y-1 mb-4 mt-2">
+                        {Object.keys(superPopulations).map((key) => (
+                          <li key={key} className="flex items-center">
+                            <span
+                              className="inline-block w-3 h-3 rounded-full mr-2"
+                              style={{
+                                backgroundColor: superPopulationColorsDict[key],
+                              }}
+                              aria-hidden="true"
+                            ></span>
+                            {key} - {superPopulations[key]}
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                    <section aria-labelledby="populations-heading">
+                      <h3 id="populations-heading" className="font-semibold">
+                        Populations
+                      </h3>
+                      <ul className="list-disc list-inside space-y-1 mt-2">
+                        {Object.keys(populations).map((key) => (
+                          <li key={key} className="flex items-center">
+                            <span
+                              className="inline-block w-3 h-3 rounded-full mr-2"
+                              style={{
+                                backgroundColor: populationColorsDict[key],
+                              }}
+                              aria-hidden="true"
+                            ></span>
+                            {key} - {populations[key]}
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
                   </div>
                 </div>
               </div>
@@ -166,8 +182,9 @@ const AbbreviationPopupComponent: React.FC<AbbreviationPopupComponentProps> = ({
               data-autofocus
               onClick={handleClose}
               className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              aria-label="Close abbreviations dialog"
             >
-              ✕
+              <span aria-hidden="true">✕</span>
             </button>
           </DialogPanel>
         </div>

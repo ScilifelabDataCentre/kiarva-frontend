@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from "react";
 import { DropdownComponentProps } from "@/interfaces/types";
@@ -18,12 +18,22 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
       {/* Group wrapper for the dropdown component */}
 
       {/* Dropdown button */}
-      <div className="flex items-center justify-between bg-white px-4">
-        <a className="my-2 py-2 text-base lg:text-lg font-medium text-neutral-content lg:mx-4">
+      <div
+        className="flex items-center justify-between bg-white px-4"
+        role="button"
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        aria-label={menuName}
+        tabIndex={0}
+      >
+        <span
+          className="my-2 py-2 text-base lg:text-lg font-medium text-neutral-content lg:mx-4"
+          aria-live="polite"
+        >
           {/* Display the current pick or prompt to pick an item if none is selected */}
           {currentPick === "" ? `${menuName}` : currentPick}
-        </a>
-        <span>
+        </span>
+        <span aria-hidden="true">
           {/* SVG icon for the dropdown button - arrow down */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -32,6 +42,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
             strokeWidth="1.5"
             stroke="currentColor"
             className="h-6 w-6 opacity-100 group-hover:hidden group-hover:opacity-0"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -47,6 +58,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
             strokeWidth="1.5"
             stroke="currentColor"
             className="h-6 w-6 hidden opacity-0 group-hover:inline group-hover:opacity-100"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -58,20 +70,27 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
       </div>
 
       {/* Dropdown menu */}
-      <div className="invisible overflow-y-auto max-h-80 lg:max-h-[500px] opacity-0 absolute z-10 flex flex-col w-full bg-white py-2 px-4 shadow-xl transition-all duration-300 group-hover:visible group-hover:opacity-100">
+      <ul
+        role="listbox"
+        className="invisible overflow-y-auto max-h-80 lg:max-h-[500px] opacity-0 absolute z-10 flex flex-col w-full bg-white py-2 px-4 shadow-xl transition-all duration-300 group-hover:visible group-hover:opacity-100"
+      >
         {/* Map through the menu items array and create a clickable item for each */}
         {menuItemsArray.map((item, index) => (
-          <a
-            key={index}
-            className={`block py-3 font-semibold transition-all duration-300 hover:text-secondary-content hover:bg-info px-2 
-              ${currentPick === item ? selectedRowClasses : "text-secondary"} `}
-            onClick={() => setCurrentPick(item)}
-          >
-            {/* Display the menu item */}
-            {item}
-          </a>
+          <li key={index} role="option" aria-selected={currentPick === item}>
+            <button
+              type="button"
+              className={`block w-full text-left py-3 font-semibold transition-all duration-300 hover:text-secondary-content hover:bg-info px-2 
+                ${
+                  currentPick === item ? selectedRowClasses : "text-secondary"
+                } `}
+              onClick={() => setCurrentPick(item)}
+            >
+              {/* Display the menu item */}
+              {item}
+            </button>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

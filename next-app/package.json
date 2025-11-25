@@ -1,6 +1,6 @@
 {
   "name": "kiarva-frontend",
-  "version": "0.6.0",
+  "version": "0.10.4",
   "private": true,
   "scripts": {
     "dev": "next dev",

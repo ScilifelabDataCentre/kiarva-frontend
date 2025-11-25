@@ -1,3 +1,5 @@
+// Should be server component, has no user interactivity.
+
 "use client";
 
 import { ReactElement } from "react";
@@ -31,19 +33,27 @@ export default function FooterComponent(): ReactElement {
   const currentPath = usePathname();
 
   return (
-    <div className="relative bg-primary">
+    <footer className="relative bg-primary">
       <img
         className="h-64 w-full object-cover"
         src={footerBackground}
-        alt="Footer Background Image"
+        alt=""
+        aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-gray-700 opacity-85"></div>
-      <footer className="absolute inset-0 footer footer-center pt-4 lg:pt-10 px-4 lg:px-36 2xl:max-w-screen-2xl 2xl:mx-auto">
-        <div className="flex flex-col items-center justify-center space-y-4 z-10">
+      <div
+        className="absolute inset-0 bg-gray-700 opacity-85"
+        aria-hidden="true"
+      ></div>
+      <div className="absolute inset-0 footer footer-center pt-4 lg:pt-10 px-4 lg:px-36 2xl:max-w-screen-2xl 2xl:mx-auto">
+        <section className="flex flex-col items-center justify-center space-y-4 z-10">
+          <h2 className="sr-only">Footer navigation</h2>
           <p className="text-primary-content text-base lg:text-lg font-semibold">
             Please visit the other pages of KIARVA
           </p>
-          <nav className="grid grid-flow-row grid-cols-2 lg:grid-flow-col gap-2 lg:gap-4">
+          <nav
+            className="grid grid-flow-row grid-cols-2 lg:grid-flow-col gap-2 lg:gap-4"
+            aria-label="Footer navigation"
+          >
             {Object.keys(links)
               .filter((key) => links[key].link !== currentPath) // Filter out the current page link
               .map((key) => (
@@ -61,8 +71,8 @@ export default function FooterComponent(): ReactElement {
               ))}
           </nav>
           <DisplayAppVersion />
-        </div>
-      </footer>
-    </div>
+        </section>
+      </div>
+    </footer>
   );
 }

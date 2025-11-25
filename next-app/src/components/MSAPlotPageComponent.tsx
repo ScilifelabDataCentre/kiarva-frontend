@@ -1,7 +1,10 @@
+// Handles API requests, which should probably be done on a server component. Other than that uses a lot of
+// state changes based on user, so should be client.
+
 "use client";
 
 import { ReactElement, useEffect, useState } from "react";
-import { backendAPI } from "@/constants";
+import { backendAPI, LINK_CLASSES } from "@/constants";
 import {
   ISequenceData,
   IAlleleDropDownConfig,
@@ -15,7 +18,6 @@ import MSAViewer from "@/components/MSAViewer";
 
 // Main function to render the PlotPage component
 export default function MSAPlotPageComponent(): ReactElement {
-
   const [axiosConfig, setAxiosConfig] = useState({
     headers: {
       "X-api-key": "",
@@ -39,7 +41,7 @@ export default function MSAPlotPageComponent(): ReactElement {
   ]);
 
   async function AlignedSequenceData(gene: string) {
-    const encodedGene = encodeURIComponent(gene)
+    const encodedGene = encodeURIComponent(gene);
     const alignedSequenceDataEndpoint: string =
       backendAPI + "data/sequences/alignedsequences?gene_name=" + encodedGene;
 
@@ -114,23 +116,60 @@ export default function MSAPlotPageComponent(): ReactElement {
   // Render the component
   return (
     <>
-      <div>
-        <AlelleSelectionComponent
-          alleleSelectionConfig={alleleDropdownConfig}
-          handleSetSelection={handleSetSelection}
-          plotType={"aminoAcidMSA"}
-        />
-      </div>
-      <div className="divider pt-4 lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"></div>
-      <h1 className="text-black lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96">
-        Nucleotide sequence alignment
-      </h1>
-      <MSAViewer sequenceData={sequenceData} />
-      <div className="divider pt-4 lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"></div>
-      <h1 className="text-black lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96">
-        Translated sequence alignment
-      </h1>
-      <MSAViewer sequenceData={aminoAcidSequence} />
+      <AlelleSelectionComponent
+        alleleSelectionConfig={alleleDropdownConfig}
+        handleSetSelection={handleSetSelection}
+        plotType={"aminoAcidMSA"}
+      />
+      <div
+        className="divider pt-4 lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
+        aria-hidden="true"
+      ></div>
+      <section aria-labelledby="nucleotide-alignment">
+        <h2
+          id="nucleotide-alignment-heading"
+          className="text-black lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
+        >
+          Nucleotide sequence alignment
+        </h2>
+        <MSAViewer sequenceData={sequenceData} />
+      </section>
+      <div
+        className="divider pt-4 lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
+        aria-hidden="true"
+      ></div>
+      <section aria-labelledby="translated-alignment">
+        <h2
+          id="translated-alignment-heading"
+          className="text-black lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
+        >
+          Translated sequence alignment
+        </h2>
+        <MSAViewer sequenceData={aminoAcidSequence} />
+      </section>
+      <aside className="pt-24" aria-label="Alignment method information">
+        <p className="text-sm lg:text-base">
+          Genetic sequences are aligned using{" "}
+          <a
+            className={`${LINK_CLASSES} italic`}
+            href="https://mafft.cbrc.jp/alignment/software/source.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            MAFFT v7.525
+          </a>
+          . Amino acid sequences are aligned with a{" "}
+          <a
+            className={`${LINK_CLASSES} italic`}
+            href="https://github.com/ScilifelabDataCentre/kiarva-backend/blob/dev/services/alignment.py"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            custom script
+          </a>
+          , based on the MAFFT genetic alignment output.
+        </p>
+      </aside>
     </>
   );
 }

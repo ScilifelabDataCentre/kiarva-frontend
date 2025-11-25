@@ -1,3 +1,5 @@
+// Should be server component, has no user interactivity.
+
 "use client";
 
 import { ReactElement } from "react";
@@ -7,11 +9,14 @@ export default function MethodologyPage(): ReactElement {
   const pageTitle: string = "Methodology";
 
   return (
-    <>
-      <div className={BODY_CLASSES}>
-        <div className={H_1}>{pageTitle}</div>
-        <div className="divider pt-4">IgSNPer</div>
-        <p className="text-left lg:text-justify text-sm lg:text-base">
+    <main className={BODY_CLASSES}>
+      <h1 className={H_1}>{pageTitle}</h1>
+
+      <section aria-labelledby="igsnper-heading">
+        <h2 id="igsnper-heading" className="divider pt-4">
+          IgSNPer
+        </h2>
+        <p className="text-left lg:text-justify text-sm lg:text-base mb-4">
           Multiple research projects have accumulated data on the frequency of
           single nucleotide polymorphisms (SNPs) between individuals. These
           datasets provide an important resource to analyze individual and
@@ -23,7 +28,8 @@ export default function MethodologyPage(): ReactElement {
           we utilized the ability to assign IGHV, IGHD and IGHJ sequences to
           defined genomic loci within the same assemblies, thereby confirming
           the individual SNP variant locations within verified IG gene variants.
-          <br />
+        </p>
+        <p className="text-left lg:text-justify text-sm lg:text-base mb-4">
           The resultant program, termed IgSNPer, analyzes each nucleotide
           position within a complete variant allele, identifying whether
           specific nucleotide variations can be explained through the presence
@@ -34,7 +40,7 @@ export default function MethodologyPage(): ReactElement {
           (IGH) genes are located. This accumulated SNP reference set includes
           data from various population databases, including:
         </p>
-        <ol className="list-decimal list-inside text-sm lg:text-base">
+        <ol className="list-decimal list-inside text-sm lg:text-base mb-4">
           <li className="mb-1">
             dbGaP_PopFreq: Aggregated frequency data on over 1 million
             individuals.
@@ -62,7 +68,7 @@ export default function MethodologyPage(): ReactElement {
             individuals.
           </li>
         </ol>
-        <p className="text-left lg:text-justify text-sm lg:text-base">
+        <p className="text-left lg:text-justify text-sm lg:text-base mb-4">
           The program examines each full-length allelic sequence, identifying
           both common SNP variants according to the amalgamated SNP database,
           and uncommon variations that are either present at low frequency
@@ -92,12 +98,14 @@ export default function MethodologyPage(): ReactElement {
           truncated or incomplete alleles, or sequence errors present in such
           sequences.
         </p>
+      </section>
 
-        {/* <div className="divider pt-4">Populations</div>
+      {/* <section aria-labelledby="populations-heading">
+        <h2 id="populations-heading" className="divider pt-4">Populations</h2>
         <p className="pb-4 text-left lg:text-justify text-sm lg:text-base">
           Currenly under construction, this section will be provided later.
-        </p> */}
-      </div>
-    </>
+        </p>
+      </section> */}
+    </main>
   );
 }

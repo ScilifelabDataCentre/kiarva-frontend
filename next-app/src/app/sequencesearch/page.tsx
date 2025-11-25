@@ -1,3 +1,6 @@
+// split out API calls and UI into separate server and client components? Should be doable, but could be
+// a bit complicated.
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -79,10 +82,14 @@ export default function SequenceSearchInputForm() {
   }, []);
 
   return (
-    <div className={BODY_CLASSES}>
+    <main className={BODY_CLASSES}>
       <h1 className={H_1}>Sequence search</h1>
       {!hasCookie("password") && (
-        <div className="alert alert-info bg-info text-info-content">
+        <aside
+          className="alert alert-info bg-info text-info-content"
+          role="alert"
+          aria-label="Demo version notice"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -93,26 +100,32 @@ export default function SequenceSearchInputForm() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
           >
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             <path d="M12 7v2" />
             <path d="M12 13h.01" />
           </svg>
-          <span className="text-sm lg:text-base">
+          <p className="text-sm lg:text-base">
             You are currently exploring the demo version of KIARVA. The full
             version will be released once the underlying data has been
             published. Until then, the pages are visible as a demonstration but
             without full data access.
-          </span>
-        </div>
+          </p>
+        </aside>
       )}
 
-      <div className="bg-muted alert">
+      <aside
+        className="bg-muted alert"
+        role="note"
+        aria-label="Sequence search instructions"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           className="h-6 w-6 shrink-0 stroke-current"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -121,58 +134,72 @@ export default function SequenceSearchInputForm() {
             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           ></path>
         </svg>
-        <span className="text-sm lg:text-base">
+        <p className="text-sm lg:text-base">
           This page allows users to search for subsets or exact matches of
           genomic sequences in the KI Adaptive Immune Receptor Gene Variant
           Atlas. Enter a sequence of at least 10 nucleotides and receive matches
           from the KIARVA database.
-        </span>
-      </div>
-      <div className="border-2 p-4 rounded-md">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="w-2/3 space-y-6"
-          >
-            <FormField
-              control={form.control}
-              name="sequence"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Sequence</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter sequence" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Search for a sequence in the KIARVA database.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button variant="default" size="default" type="submit">
-              <Search />
-              Search
-            </Button>
-          </form>
-        </Form>
-      </div>
-      {hasCookie("password") ? (
-        sequenceData[0] &&
-          (sequenceData[0].allele ? 
-          <SequenceSearchComponent
-            sequenceData={sequenceData}
-            searchTermLength={searchTermLength}
-          />
-          :
-          <p>No matches in database for the requested sequence.</p>
-          )
-      ) : (
-        <p>
-          Sequence search is currently disabled in the demo version. The feature
-          will be available in the full release.
         </p>
-      )}
-    </div>
+      </aside>
+
+      <section aria-labelledby="search-form-heading">
+        <h2 id="search-form-heading" className="sr-only">
+          Search form
+        </h2>
+        <div className="border-2 p-4 rounded-md">
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="w-2/3 space-y-6"
+            >
+              <FormField
+                control={form.control}
+                name="sequence"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Sequence</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter sequence" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Search for a sequence in the KIARVA database.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button variant="default" size="default" type="submit">
+                <Search />
+                Search
+              </Button>
+            </form>
+          </Form>
+        </div>
+      </section>
+
+      <section aria-labelledby="search-results-heading">
+        <h2 id="search-results-heading" className="sr-only">
+          Search results
+        </h2>
+        {hasCookie("password") ? (
+          sequenceData[0] &&
+          (sequenceData[0].allele ? (
+            <SequenceSearchComponent
+              sequenceData={sequenceData}
+              searchTermLength={searchTermLength}
+            />
+          ) : (
+            <p role="status" aria-live="polite">
+              No matches in database for the requested sequence.
+            </p>
+          ))
+        ) : (
+          <p role="status">
+            Sequence search is currently disabled in the demo version. The
+            feature will be available in the full release.
+          </p>
+        )}
+      </section>
+    </main>
   );
 }
