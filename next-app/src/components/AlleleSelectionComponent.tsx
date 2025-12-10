@@ -8,7 +8,6 @@ import axios from "axios";
 import DropdownComponent from "@/components/DropdownComponent";
 import { getCookie, hasCookie } from "cookies-next";
 import { IAlleleDropDownConfig } from "@/interfaces/types";
-import { BUTTON_TYPE_ONE } from "@/constants";
 import DownloadPlotData from "./DownloadPlotData";
 
 // Main function to render the PlotPage component
