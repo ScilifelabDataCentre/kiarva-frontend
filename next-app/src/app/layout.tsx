@@ -4,7 +4,6 @@ import HeaderComponent from "@/components/HeaderComponent";
 import FooterComponent from "@/components/FooterComponent";
 import MatomoInit from "@/components/MatomoInit";
 
-
 export const metadata: Metadata = {
   title: "KIARVA",
 };
@@ -15,11 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <body>
         <MatomoInit></MatomoInit>
         <HeaderComponent />
-            {children}
+        {children}
         <FooterComponent />
       </body>
     </html>
