@@ -3,6 +3,26 @@ declare var require: any;
 export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+
+  /*
+   * DAISYUI CONFIGURATION
+   * =====================
+   * themes: ["light"] - Only include the light theme, excluding all dark themes
+   * darkTheme: false  - Disable automatic dark theme detection based on
+   *                     prefers-color-scheme media query
+   *
+   * Without this configuration, DaisyUI v4 automatically:
+   * 1. Includes multiple themes (light, dark, etc.)
+   * 2. Switches to dark theme when system preference is dark
+   *
+   * This ensures consistent light mode appearance regardless of user's
+   * system preferences.
+   */
+  daisyui: {
+    themes: ["light"],
+    darkTheme: false,
+  },
+
   theme: {
     extend: {
       colors: {

@@ -4,6 +4,21 @@
 
 @layer base {
   :root {
+    /*
+     * DARK MODE PREVENTION
+     * ====================
+     * color-scheme: light only - Forces the browser to render all native UI elements
+     * (form controls, scrollbars, etc.) in light mode only, ignoring the user's
+     * system dark mode preference. This prevents the browser from automatically
+     * applying dark mode styles to elements that don't have explicit colors set.
+     *
+     * Without this, browsers like Chrome/Brave in dark mode would render:
+     * - Input fields with dark backgrounds
+     * - Scrollbars in dark colors
+     * - Select dropdowns with inverted colors
+     */
+    color-scheme: light only;
+
     --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
 
@@ -35,33 +50,17 @@
     --radius: 0.5rem;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 187 92% 20%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 0 2% 46%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 84 47% 53%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-  }
+  /*
+   * REMOVED: .dark class CSS variables
+   * ==================================
+   * Previously, this file contained a .dark class with dark mode CSS variables.
+   * Since this application does not support dark mode, those variables were
+   * removed to:
+   * 1. Prevent accidental dark mode activation if any library/extension adds .dark class
+   * 2. Reduce CSS bundle size
+   * 3. Make the codebase intent clear: light mode only
+   *
+   * If dark mode support is needed in the future, re-add the .dark class variables
+   * and update tailwind.config.ts darkMode settings accordingly.
+   */
 }
