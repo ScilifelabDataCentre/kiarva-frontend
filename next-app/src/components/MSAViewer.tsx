@@ -14,7 +14,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
   // Get the color for each sequence character
   const getCharStyle = (index: number) => {
     if (differingIndexes.includes(index)) {
-      return "bg-[#045C64] text-white pb-2 pt-2 rounded-sm";
+      return "bg-[#B8CCE0] text-black pb-2 pt-2 rounded-sm";
     } else {
       return "bg-base-100 text-black"
     }
@@ -106,7 +106,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
 
   return (
     <figure
-      className="flex flex-col pt-4 text-xs items-start overflow-x-auto lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
+      className="flex flex-col tracking-wide pt-4 pb-1 text-xs items-start overflow-x-auto lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
       aria-label="Multiple sequence alignment visualization"
     >
       {sequenceData[0].sequence != "SEQUENCE" && (
@@ -148,7 +148,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
         <div key={seq.allele} className="flex flex-row" role="row">
           {/* Allele name on the left */}
           <div
-            className="w-[150px] text-left text-black py-1 font-bold sticky left-0 bg-base-100"
+            className="w-[150px] text-left text-black py-1 font-bold sticky left-0"
             role="rowheader"
           >
             {seq.allele}
