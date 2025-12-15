@@ -8,6 +8,7 @@ import axios from "axios";
 import DropdownComponent from "@/components/DropdownComponent";
 import { getCookie, hasCookie } from "cookies-next";
 import { IAlleleDropDownConfig } from "@/interfaces/types";
+import DownloadPlotData from "./DownloadPlotData";
 
 // Main function to render the PlotPage component
 export default function AlelleSelectionComponent(prop: {
@@ -232,25 +233,34 @@ export default function AlelleSelectionComponent(prop: {
         role="status"
         aria-live="polite"
       >
-        <p className="text-neutral-content text-xl font-semibold">
+        <div className="lg:w-1/2 md:w-1/2">
           {prop.plotType === "aminoAcidMSA" &&
           currentPicks.geneDropdown &&
           currentPicks.subtypeDropdown ? (
-            <>
+            <p className="text-neutral-content text-xl font-semibold">
               Sequence alignments for {currentPicks.geneDropdown}
               {currentPicks.subtypeDropdown}
-            </>
+            </p>
           ) : currentPicks.geneDropdown &&
             currentPicks.subtypeDropdown &&
             currentPicks.alleleDropdown ? (
-            <>
-              Plot for {currentPicks.geneDropdown}
-              {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
-            </>
+            <div className="flex justify-evenly">
+              <p className="text-neutral-content text-xl font-semibold p-2">
+                Plot for {currentPicks.geneDropdown}
+                {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
+              </p>
+              <DownloadPlotData 
+                alleleName={currentPicks.geneDropdown+currentPicks.subtypeDropdown+"*"+currentPicks.alleleDropdown}
+                tableType={prop.plotType}
+              >
+              </DownloadPlotData>
+            </div>
           ) : (
-            "Please select the gene type, gene and allele above"
+            <p className="text-neutral-content text-xl font-semibold">
+              Please select the gene type, gene and allele above
+            </p>
           )}
-        </p>
+        </div>
       </div>
     </section>
   );
