@@ -9,8 +9,9 @@ import { ReactElement, useEffect, useState } from 'react';
 
 // Component that fetches frequency plot data from API and allows user to download it
 export default function DownloadPlotData(prop: {
-        alleleName: string;
+        alleleOrGene: string;
         tableType: string;
+        fullGene: boolean;
     }): ReactElement {
     const [axiosConfig, setAxiosConfig] = useState({
         headers: {
@@ -20,13 +21,14 @@ export default function DownloadPlotData(prop: {
     });
 
     async function handleDownload() {
-        const encodedAlleleName = encodeURIComponent(prop.alleleName);
+        const encodedAlleleName = encodeURIComponent(prop.alleleOrGene);
         const tableTypeURI = prop.tableType == "genomicFreqPlot" ? "frequencies" : "aminoacidfrequencies";
-        const tableVariableName = prop.tableType == "genomicFreqPlot" ? "allele_name" : "aa_allele_name";
+        const alleleOrGene = prop.fullGene ? "gene" : "allele";
+        const tableVariableName = prop.tableType == "genomicFreqPlot" ? alleleOrGene + "_name" : "aa_"+alleleOrGene+"_name";
         const tableEndpoint =
-        backendAPI + "data/" + tableTypeURI + "/table?"+tableVariableName+"=" + encodedAlleleName;
+        backendAPI + "data/" + tableTypeURI + "/table/"+alleleOrGene+"?"+tableVariableName+"=" + encodedAlleleName;
         const tableFileNameSuffix = prop.tableType == "genomicFreqPlot" ? "genomic" : "aminoacid"; 
-        const tableFileName = prop.alleleName.replace("*", "_").replace("/","_") + "-" + tableFileNameSuffix +"_frequencies.tsv";
+        const tableFileName = prop.alleleOrGene.replace("*", "_").replace("/","_") + "-" + tableFileNameSuffix +"_frequencies.tsv";
         await axios
             .get(tableEndpoint, axiosConfig)
             .then((response) => {
@@ -54,7 +56,7 @@ export default function DownloadPlotData(prop: {
     return (
         <>
             <section aria-label="Download actions">
-                <div className="flex justify-center py-8 lg:py-0">
+                <div className="flex justify-center m-1">
                 {/* Delete the button disabled and className when officially launching */}
                 <Button
                     variant="default"
@@ -64,7 +66,7 @@ export default function DownloadPlotData(prop: {
                     "opacity-50" + (!hasCookie("password") && " cursor-not-allowed")
                     }
                 >
-                    Download frequency table
+                    {prop.fullGene ? "Download gene frequency table" : "Download allele frequency table"}
                 </Button>
                 </div>
             </section>
