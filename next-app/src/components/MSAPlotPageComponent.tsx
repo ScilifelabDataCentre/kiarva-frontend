@@ -158,7 +158,7 @@ export default function MSAPlotPageComponent(): ReactElement {
           >
             MAFFT v7.525
           </a>
-          . Translated sequences are based off of the MAFFT nucleotide sequence alignment output, 
+          . Translated sequence alignments are based off of the MAFFT output for the nucleotide sequences, 
           but aligned with a{" "}
           <a
             className={`${LINK_CLASSES} italic`}
