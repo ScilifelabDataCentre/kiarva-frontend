@@ -112,7 +112,7 @@ export default function MSAPlotPageComponent(): ReactElement {
       </section>
       <aside className="pt-24" aria-label="Alignment method information">
         <p className="text-sm lg:text-base">
-          Genetic sequences are aligned using{" "}
+          Nucleotide sequences are aligned using{" "}
           <a
             className={`${LINK_CLASSES} italic`}
             href="https://mafft.cbrc.jp/alignment/software/source.html"
@@ -121,7 +121,8 @@ export default function MSAPlotPageComponent(): ReactElement {
           >
             MAFFT v7.525
           </a>
-          . Amino acid sequences are aligned with a{" "}
+          . Translated sequence alignments are based off of the MAFFT output for the nucleotide sequences, 
+          but aligned with a{" "}
           <a
             className={`${LINK_CLASSES} italic`}
             href="https://github.com/ScilifelabDataCentre/kiarva-backend/blob/dev/services/alignment.py"
@@ -130,7 +131,7 @@ export default function MSAPlotPageComponent(): ReactElement {
           >
             custom script
           </a>
-          , based on the MAFFT genetic alignment output.
+          .
         </p>
       </aside>
     </>

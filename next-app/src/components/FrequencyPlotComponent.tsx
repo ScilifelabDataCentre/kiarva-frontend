@@ -10,6 +10,7 @@ import Plotly, { Datum, Layout } from "plotly.js";
 import createPlotlyComponent from "react-plotly.js/factory";
 import {
   IGeneFrequencyData,
+  IPlotDimensions,
   IPopulationRegion,
   ISuperpopulationColors,
 } from "@/interfaces/types";
@@ -97,10 +98,24 @@ export default function FrequencyPlotComponent(prop: {
   const data = [...superpopulationTraces, ...populationTraces];
 
   const [isLargeScreen, setIsLargeScreen] = useState(true);
+  const [plotDimensions, setPlotDimensions] = useState<IPlotDimensions>({height: 500, width: 1250});
 
   useEffect(() => {
     const handleResize = () => {
-      setIsLargeScreen(window.innerWidth >= 1280);
+      if (window.innerWidth < 750){
+        setIsLargeScreen(false);
+      } else {
+        setIsLargeScreen(true);
+      }
+      if (window.innerWidth >= 750 && window.innerWidth < 1000) {
+        setPlotDimensions({height: 400, width: 800});
+      }
+      else if (window.innerWidth < 1280) {
+        setPlotDimensions({height: 400, width: 1000});
+      }
+      else if (window.innerWidth >= 1280) {
+        setPlotDimensions({height: 500, width: 1250});
+      }
     };
     window.addEventListener("resize", handleResize);
     handleResize(); // Initial check
@@ -108,8 +123,8 @@ export default function FrequencyPlotComponent(prop: {
   }, []);
 
   const layout: Partial<Layout> = {
-    height: 500,
-    width: 1250,
+    height: plotDimensions.height,
+    width: plotDimensions.width,
     xaxis: {
       showticklabels: false,
     },
@@ -171,9 +186,8 @@ export default function FrequencyPlotComponent(prop: {
           />
         </svg>
         <p>
-          Error: Plots can only be displayed on a 13-inch screen and bigger.
-          Please resize your browser window to view the plots or use a laptop or
-          desktop computer.
+          Error: Plots can not be displayed on screens of this size.
+          Please resize your browser window to view the plots or use a device with a larger screen.
         </p>
       </aside>
     );

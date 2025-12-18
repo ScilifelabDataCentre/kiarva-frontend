@@ -103,3 +103,8 @@ export type IMSAData = {
   sequence_nt: string;
   sequence_aa: string;
 };
+
+export type IPlotDimensions = {
+  height: number;
+  width: number;
+};

@@ -7,6 +7,7 @@ import { ReactElement, useEffect, useState } from "react";
 import axios from "axios";
 import DropdownComponent from "@/components/DropdownComponent";
 import { IAlleleDropDownConfig } from "@/interfaces/types";
+import DownloadPlotData from "./DownloadPlotData";
 
 // Main function to render the PlotPage component
 export default function AlelleSelectionComponent(prop: {
@@ -206,25 +207,50 @@ export default function AlelleSelectionComponent(prop: {
         role="status"
         aria-live="polite"
       >
-        <p className="text-neutral-content text-xl font-semibold">
-          {prop.plotType === "aminoAcidMSA" &&
+        <div className="w-1/2">
+          {(!currentPicks.alleleDropdown || currentPicks.alleleDropdown == "...") &&
           currentPicks.geneDropdown &&
-          currentPicks.subtypeDropdown ? (
-            <>
-              Sequence alignments for {currentPicks.geneDropdown}
-              {currentPicks.subtypeDropdown}
-            </>
+          currentPicks.subtypeDropdown ? 
+            (prop.plotType == "aminoAcidMSA" ?
+              (<p className="text-neutral-content text-xl font-semibold">
+                Sequence alignments for {currentPicks.geneDropdown}
+                {currentPicks.subtypeDropdown}
+              </p>) :
+              (<DownloadPlotData 
+                alleleOrGene={currentPicks.geneDropdown+currentPicks.subtypeDropdown}
+                tableType={prop.plotType}
+                fullGene={true}
+              >
+              </DownloadPlotData>)
           ) : currentPicks.geneDropdown &&
             currentPicks.subtypeDropdown &&
             currentPicks.alleleDropdown ? (
-            <>
-              Plot for {currentPicks.geneDropdown}
-              {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
-            </>
+            <div className="flex items-center flex-col">
+              <p className="text-neutral-content text-xl font-semibold p-2">
+                Plot for {currentPicks.geneDropdown}
+                {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
+              </p>
+              <div className="flex flex-row">
+              <DownloadPlotData 
+                alleleOrGene={currentPicks.geneDropdown+currentPicks.subtypeDropdown+"*"+currentPicks.alleleDropdown}
+                tableType={prop.plotType}
+                fullGene={false}
+              >
+              </DownloadPlotData>
+              <DownloadPlotData 
+                alleleOrGene={currentPicks.geneDropdown+currentPicks.subtypeDropdown}
+                tableType={prop.plotType}
+                fullGene={true}
+              >
+              </DownloadPlotData>
+              </div>
+            </div>
           ) : (
-            "Please select the gene type, gene and allele above"
+            <p className="text-neutral-content text-xl font-semibold">
+              Please select the gene type, gene and allele above
+            </p>
           )}
-        </p>
+        </div>
       </div>
     </section>
   );
