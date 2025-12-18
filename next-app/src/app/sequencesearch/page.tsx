@@ -20,9 +20,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { getCookie, hasCookie } from "cookies-next";
 import { backendAPI, BODY_CLASSES, H_1 } from "@/constants";
 import { ISequenceSearchData } from "@/interfaces/types";
 import SequenceSearchComponent from "@/components/SequenceSearchComponent";
@@ -34,12 +33,6 @@ const FormSchema = z.object({
 });
 
 export default function SequenceSearchInputForm() {
-  const [axiosConfig, setAxiosConfig] = useState({
-    headers: {
-      "X-api-key": "",
-    },
-  });
-
   const sequenceSearchEndpoint = backendAPI + "data/sequences?sequence_str=";
   const [sequenceData, setSequenceData] = useState<ISequenceSearchData[]>([]);
   const [searchTermLength, setSearchTermLength] = useState<number>(0);
@@ -62,7 +55,7 @@ export default function SequenceSearchInputForm() {
     });
     const encodedURI = encodeURI(sequenceSearchEndpoint + data.sequence);
     await axios
-      .get(encodedURI, axiosConfig)
+      .get(encodedURI)
       .then((response) => {
         setSearchTermLength(data.sequence.length);
         setSequenceData(response.data);
@@ -70,50 +63,9 @@ export default function SequenceSearchInputForm() {
       .catch((response) => console.log(response.error));
   }
 
-  // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
-  useEffect(() => {
-    if (hasCookie("password")) {
-      setAxiosConfig({
-        headers: {
-          "X-api-key": getCookie("password") as string,
-        },
-      });
-    }
-  }, []);
-
   return (
     <main className={BODY_CLASSES}>
       <h1 className={H_1}>Sequence search</h1>
-      {!hasCookie("password") && (
-        <aside
-          className="alert alert-info bg-info text-info-content"
-          role="alert"
-          aria-label="Demo version notice"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            <path d="M12 7v2" />
-            <path d="M12 13h.01" />
-          </svg>
-          <p className="text-sm lg:text-base">
-            You are currently exploring the demo version of KIARVA. The full
-            version will be released once the underlying data has been
-            published. Until then, the pages are visible as a demonstration but
-            without full data access.
-          </p>
-        </aside>
-      )}
 
       <aside
         className="bg-muted alert"
@@ -181,22 +133,18 @@ export default function SequenceSearchInputForm() {
         <h2 id="search-results-heading" className="sr-only">
           Search results
         </h2>
-        {hasCookie("password") ? (
-          sequenceData[0] &&
-          (sequenceData[0].allele ? (
-            <SequenceSearchComponent
-              sequenceData={sequenceData}
-              searchTermLength={searchTermLength}
-            />
-          ) : (
-            <p role="status" aria-live="polite">
-              No matches in database for the requested sequence.
-            </p>
-          ))
+        {sequenceData.length === 0 ? (
+          <p role="status" aria-live="polite">
+            Submit a sequence above to see matches.
+          </p>
+        ) : sequenceData[0] && sequenceData[0].allele ? (
+          <SequenceSearchComponent
+            sequenceData={sequenceData}
+            searchTermLength={searchTermLength}
+          />
         ) : (
-          <p role="status">
-            Sequence search is currently disabled in the demo version. The
-            feature will be available in the full release.
+          <p role="status" aria-live="polite">
+            No matches in database for the requested sequence.
           </p>
         )}
       </section>

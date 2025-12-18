@@ -3,7 +3,7 @@
 
 "use client";
 
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { backendAPI } from "@/constants";
 import FrequencyPlotComponent from "@/components/FrequencyPlotComponent";
 import {
@@ -14,11 +14,9 @@ import {
 } from "@/interfaces/types";
 import axios from "axios";
 import AbbreviationPopupComponent from "@/components/AbbreviationPopupComponent";
-import { getCookie, hasCookie } from "cookies-next";
 import AlelleSelectionComponent from "./AlleleSelectionComponent";
 import {
   populationSubsets,
-  sampleAlleleDataAminoAcidPlot,
   subPopulations,
   superPopulationColorsDict,
   superPopulations,
@@ -28,12 +26,6 @@ import { Button } from "@/components/ui/button";
 
 // Main function to render the PlotPage component
 export default function AminoAcidPlotPage(): ReactElement {
-  const [axiosConfig, setAxiosConfig] = useState({
-    headers: {
-      "X-api-key": "",
-    },
-  });
-
   // Initialize superpopulation frequency data with zero values
   const superpopFreqDataNoSelection: IGeneFrequencyData[] = [];
   for (let i = 0; i < superPopulations.length; i++) {
@@ -83,7 +75,7 @@ export default function AminoAcidPlotPage(): ReactElement {
       backendAPI + "/data/aminoacidalleles?aa_allele_name=" + encodedAllele;
 
     await axios
-      .get(topAlleleAAEndpoint, axiosConfig)
+      .get(topAlleleAAEndpoint)
       .then((response) => {
         setTopAlleleAA(response.data.allele_aa);
       })
@@ -101,7 +93,7 @@ export default function AminoAcidPlotPage(): ReactElement {
       encodedAllele;
 
     await axios
-      .get(superpopulationsEndpoint, axiosConfig)
+      .get(superpopulationsEndpoint)
       .then((response) => {
         setSuperpopFreqAPIData(response.data);
       })
@@ -111,7 +103,7 @@ export default function AminoAcidPlotPage(): ReactElement {
       alleleFrequenciesEndpoint + "populations?aa_allele_name=" + encodedAllele;
 
     await axios
-      .get(populationsEndpoint, axiosConfig)
+      .get(populationsEndpoint)
       .then((response) => {
         setPopFreqAPIData(response.data);
       })
@@ -124,7 +116,7 @@ export default function AminoAcidPlotPage(): ReactElement {
       backendAPI + "data/aminoacidlist?aa_allele_name=" + encodedAllele;
 
     await axios
-      .get(alleleListAADataEndpoint, axiosConfig)
+      .get(alleleListAADataEndpoint)
       .then((response) => {
         const responseData: AlleleListAA = response.data;
         if (responseData.aa_allele_list) {
@@ -136,18 +128,7 @@ export default function AminoAcidPlotPage(): ReactElement {
 
   useEffect(() => {
     if (selectedAllele) {
-      if (hasCookie("password")) {
-        getTopLevelAlleleAA(selectedAllele);
-      } else {
-        const selectedAlleleTmp = selectedAllele.replace("*", "");
-        const strToKey =
-          selectedAlleleTmp as keyof typeof sampleAlleleDataAminoAcidPlot;
-        setSuperpopFreqAPIData(
-          sampleAlleleDataAminoAcidPlot[strToKey].superpopulation
-        );
-        setPopFreqAPIData(sampleAlleleDataAminoAcidPlot[strToKey].population);
-        setAlleleListAA(sampleAlleleDataAminoAcidPlot[strToKey].alleleListAA);
-      }
+      getTopLevelAlleleAA(selectedAllele);
     }
   }, [selectedAllele]);
 
@@ -173,22 +154,11 @@ export default function AminoAcidPlotPage(): ReactElement {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
-  useEffect(() => {
-    if (hasCookie("password")) {
-      setAxiosConfig({
-        headers: {
-          "X-api-key": getCookie("password") as string,
-        },
-      });
-    }
-  }, []);
-
   // function to be passed as prop to AlleleSelectionComponent, so that it can modify
   // state in parent component
-  function handleSetSelection(allele: string) {
+  const handleSetSelection = useCallback((allele: string) => {
     setSelectedAllele(allele);
-  }
+  }, []);
 
   // Render the component
   return (

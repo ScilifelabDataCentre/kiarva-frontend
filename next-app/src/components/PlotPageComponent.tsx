@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { backendAPI } from "@/constants";
 import FrequencyPlotComponent from "@/components/FrequencyPlotComponent";
 import {
@@ -11,11 +11,9 @@ import {
 } from "@/interfaces/types";
 import axios from "axios";
 import AbbreviationPopupComponent from "@/components/AbbreviationPopupComponent";
-import { getCookie, hasCookie } from "cookies-next";
 import AlelleSelectionComponent from "./AlleleSelectionComponent";
 import {
   populationSubsets,
-  sampleAlleleDataGenomicPlot,
   subPopulations,
   superPopulationColorsDict,
   superPopulations,
@@ -25,12 +23,6 @@ import { Info } from "lucide-react";
 
 // Main function to render the PlotPage component
 export default function PlotPage(): ReactElement {
-  const [axiosConfig, setAxiosConfig] = useState({
-    headers: {
-      "X-api-key": "",
-    },
-  });
-
   // Initialize superpopulation frequency data with zero values
   const superpopFreqDataNoSelection: IGeneFrequencyData[] = [];
   for (let i = 0; i < superPopulations.length; i++) {
@@ -84,7 +76,7 @@ export default function PlotPage(): ReactElement {
       encodedAllele;
 
     await axios
-      .get(superpopulationsEndpoint, axiosConfig)
+      .get(superpopulationsEndpoint)
       .then((response) => {
         setSuperpopFreqAPIData(response.data);
       })
@@ -94,7 +86,7 @@ export default function PlotPage(): ReactElement {
       alleleFrequenciesEndpoint + "populations?allele_name=" + encodedAllele;
 
     await axios
-      .get(populationsEndpoint, axiosConfig)
+      .get(populationsEndpoint)
       .then((response) => {
         setPopFreqAPIData(response.data);
       })
@@ -108,7 +100,7 @@ export default function PlotPage(): ReactElement {
       backendAPI + "data/igsnperdata?allele_name=" + encodedAllele;
 
     await axios
-      .get(alleleIgSNPerDataEndpoint, axiosConfig)
+      .get(alleleIgSNPerDataEndpoint)
       .then((response) => {
         const responseData: IgSNPerData = response.data;
         if (responseData.igSNPer_score || responseData.igSNPer_score === 0) {
@@ -129,20 +121,8 @@ export default function PlotPage(): ReactElement {
   // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
     if (selectedAllele) {
-      if (!hasCookie("password")) {
-        const selectedAlleleTmp = selectedAllele.replace("*", "");
-        const strToKey =
-          selectedAlleleTmp as keyof typeof sampleAlleleDataGenomicPlot;
-        setSuperpopFreqAPIData(
-          sampleAlleleDataGenomicPlot[strToKey].superpopulation
-        );
-        setPopFreqAPIData(sampleAlleleDataGenomicPlot[strToKey].population);
-        setIgSNPerScore(sampleAlleleDataGenomicPlot[strToKey].SNPscore);
-        setIgSNPerSNPs(sampleAlleleDataGenomicPlot[strToKey].SNPsnips);
-      } else {
-        getGeneFreqData(selectedAllele);
-        getGeneIgSNPerData(selectedAllele);
-      }
+      getGeneFreqData(selectedAllele);
+      getGeneIgSNPerData(selectedAllele);
     } else {
       setSuperpopFreqAPIData([]);
       setPopFreqAPIData([]);
@@ -161,22 +141,11 @@ export default function PlotPage(): ReactElement {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
-  useEffect(() => {
-    if (hasCookie("password")) {
-      setAxiosConfig({
-        headers: {
-          "X-api-key": getCookie("password") as string,
-        },
-      });
-    }
-  }, []);
-
   // function to be passed as prop to AlleleSelectionComponent, so that it can modify
   // state in parent component
-  function handleSetSelection(allele: string) {
+  const handleSetSelection = useCallback((allele: string) => {
     setSelectedAllele(allele);
-  }
+  }, []);
 
   // Render the component
   return (

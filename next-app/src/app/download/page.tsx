@@ -3,7 +3,7 @@
 
 "use client";
 
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import {
   backendAPI,
   BODY_CLASSES,
@@ -14,7 +14,6 @@ import DownloadBoxComponent from "@/components/DownloadBoxComponent";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import JSZip from "jszip";
-import { getCookie, hasCookie } from "cookies-next";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
@@ -31,12 +30,11 @@ export default function DownloadPage(): ReactElement {
   // const [trgSelectionArray, setTrgSelectionArray] = useState<string[]>([]);
   // const [trdSelectionArray, setTrdSelectionArray] = useState<string[]>([]);
 
-  const [axiosConfig, setAxiosConfig] = useState({
+  const axiosConfig = {
     headers: {
-      "X-api-key": "",
       "Content-Type": "attachment",
     },
-  });
+  };
 
   async function downloadGeneFasta(gene: string) {
     const encodedGene = encodeURIComponent(gene);
@@ -119,51 +117,9 @@ export default function DownloadPage(): ReactElement {
     }
   }
 
-  useEffect(() => {
-    if (hasCookie("password")) {
-      setAxiosConfig({
-        headers: {
-          "X-api-key": getCookie("password") as string,
-          "Content-Type": "attachment",
-        },
-      });
-    }
-  }, []);
-
   return (
     <main className={BODY_CLASSES}>
       <h1 className={H_1}>Download FASTA files</h1>
-
-      {!hasCookie("password") && (
-        <aside
-          className="alert alert-info bg-info text-info-content"
-          role="alert"
-          aria-label="Demo version notice"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            <path d="M12 7v2" />
-            <path d="M12 13h.01" />
-          </svg>
-          <p className="text-sm lg:text-base">
-            You are currently exploring the demo version of KIARVA. The full
-            version will be released once the underlying data has been
-            published. Until then, the pages are visible as a demonstration but
-            without full data access.
-          </p>
-        </aside>
-      )}
 
       <aside className="alert" role="note" aria-label="Download instructions">
         <svg
@@ -340,9 +296,11 @@ export default function DownloadPage(): ReactElement {
             variant="default"
             size="xl"
             onClick={handleDownload}
-            disabled={!hasCookie("password")}
+            disabled={ighSelectionArray.length === 0}
             className={
-              "opacity-50" + (!hasCookie("password") && " cursor-not-allowed")
+              ighSelectionArray.length === 0
+                ? "opacity-50 cursor-not-allowed"
+                : ""
             }
           >
             <Download />

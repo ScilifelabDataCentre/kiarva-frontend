@@ -3,27 +3,19 @@
 
 "use client";
 
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { backendAPI, LINK_CLASSES } from "@/constants";
 import {
   ISequenceData,
   IAlleleDropDownConfig,
   IMSAData,
 } from "@/interfaces/types";
-import { getCookie, hasCookie } from "cookies-next";
 import AlelleSelectionComponent from "@/components/AlleleSelectionComponent";
-import { sampleMSAData } from "@/content/localPlotData";
 import axios from "axios";
 import MSAViewer from "@/components/MSAViewer";
 
 // Main function to render the PlotPage component
 export default function MSAPlotPageComponent(): ReactElement {
-  const [axiosConfig, setAxiosConfig] = useState({
-    headers: {
-      "X-api-key": "",
-    },
-  });
-
   // config for AlleleSelectionComponent which sets up the allele segment dropdown menu
   const alleleDropdownConfig: IAlleleDropDownConfig = {
     geneSegmentItemsArray: ["IGH"],
@@ -46,7 +38,7 @@ export default function MSAPlotPageComponent(): ReactElement {
       backendAPI + "data/sequences/alignedsequences?gene_name=" + encodedGene;
 
     await axios
-      .get(alignedSequenceDataEndpoint, axiosConfig)
+      .get(alignedSequenceDataEndpoint)
       .then((response) => {
         const responseData: IMSAData[] = response.data;
         let item: IMSAData;
@@ -71,47 +63,18 @@ export default function MSAPlotPageComponent(): ReactElement {
   // Fetch data when allele dropdown changes
   useEffect(() => {
     if (selectedGene) {
-      if (!hasCookie("password")) {
-        const tmpAminoAcidSequenceLite = [];
-        const tmpSequenceDataLite = [];
-        let item;
-        for (item of sampleMSAData) {
-          tmpSequenceDataLite.push({
-            allele: item.allele,
-            sequence: item.sequence_nt,
-          });
-          tmpAminoAcidSequenceLite.push({
-            allele: item.allele,
-            sequence: item.sequence_aa,
-          });
-        }
-        setSequenceData(tmpSequenceDataLite);
-        setAminoAcidSequence(tmpAminoAcidSequenceLite);
-      } else {
-        AlignedSequenceData(selectedGene);
-      }
+      AlignedSequenceData(selectedGene);
     } else {
       setSequenceData([{ allele: "Allele", sequence: "SEQUENCE" }]);
       setAminoAcidSequence([{ allele: "Allele", sequence: "SEQUENCE" }]);
     }
   }, [selectedGene]);
 
-  // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
-  useEffect(() => {
-    if (hasCookie("password")) {
-      setAxiosConfig({
-        headers: {
-          "X-api-key": getCookie("password") as string,
-        },
-      });
-    }
-  }, []);
-
   // function to be passed as prop to AlleleSelectionComponent, so that it can modify
   // state in parent component
-  function handleSetSelection(allele: string) {
+  const handleSetSelection = useCallback((allele: string) => {
     setSelectedGene(allele);
-  }
+  }, []);
 
   // Render the component
   return (
