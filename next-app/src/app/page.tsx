@@ -113,7 +113,7 @@ export default function HomePage(): ReactElement {
             })}
           </time>
           <p>
-            We are excited to introduce our new research tool, designed to
+            We are excited to introduce our new gene variant atlas, designed to
             provide an interactive overview of the KIARVA dataset. This release
             includes population frequency plots, multiple sequence alignments,
             sequence search, and downloadable FASTA files.
