@@ -3,7 +3,6 @@
 import { backendAPI } from '@/constants';
 import { Button } from "@/components/ui/button";
 import axios from 'axios';
-import { getCookie, hasCookie } from 'cookies-next';
 import fileDownload from 'js-file-download';
 import { ReactElement, useEffect, useState } from 'react';
 
@@ -15,7 +14,7 @@ export default function DownloadPlotData(prop: {
     }): ReactElement {
     const [axiosConfig, setAxiosConfig] = useState({
         headers: {
-          "X-api-key": "",
+        //   "X-api-key": "",
           "Content-Type": "attachment",
         },
     });
@@ -41,18 +40,6 @@ export default function DownloadPlotData(prop: {
             .catch((response) => console.log(response.error));
     }
 
-    useEffect(() => {
-        if (hasCookie("password")) {
-        setAxiosConfig({
-            headers: {
-            "X-api-key": getCookie("password") as string,
-            "Content-Type": "attachment",
-            },
-        });
-        }
-    }, []);
-
-
     return (
         <>
             <section aria-label="Download actions">
@@ -61,9 +48,8 @@ export default function DownloadPlotData(prop: {
                 <Button
                     variant="default"
                     onClick={handleDownload}
-                    disabled={!hasCookie("password")}
                     className={
-                    "opacity-50" + (!hasCookie("password") && " cursor-not-allowed")
+                    "opacity-50"
                     }
                 >
                     {prop.fullGene ? "Download gene frequency table" : "Download allele frequency table"}
