@@ -51,10 +51,7 @@ export default function HeaderComponent() {
       <div className="text-white 2xl:max-w-screen-2xl 2xl:mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between py-4 px-6">
           <div className="flex justify-between items-center">
-            <Link
-              href="/#top"
-              className="font-bold text-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
-            >
+            <Link href="/" className="font-bold text-center">
               <div className="flex items-center justify-center gap-2">
                 <h1 className="text-2xl">KIARVA</h1>
                 {showDemoBadge && <Badge variant="accent">Demo</Badge>}
@@ -65,7 +62,7 @@ export default function HeaderComponent() {
             </Link>
 
             <button
-              className="lg:hidden text-white rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+              className="lg:hidden text-white focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-expanded={isMenuOpen}
               aria-controls="main-navigation"
@@ -111,7 +108,7 @@ export default function HeaderComponent() {
                   <Link
                     className={clsx(
                       link.classes,
-                      "block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50",
+                      "block",
                       pathname === link.link && "underline"
                     )}
                     href={link.link}

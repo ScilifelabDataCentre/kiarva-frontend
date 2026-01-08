@@ -4,13 +4,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-function toHref(value: string) {
-  const v = value.trim();
-  if (!v) return "#";
-  if (/^https?:\/\//i.test(v)) return v;
-  return `https://${v}`;
-}
+import { LINK_CLASSES } from "@/constants";
 
 export default function FooterVersion() {
   const [frontendImage, setFrontendImage] = useState<string | null>(null);
@@ -26,36 +20,48 @@ export default function FooterVersion() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-1 items-start lg:items-end">
-      {frontendImage ? (
-        <a
-          href={toHref(frontendImage)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
-          aria-label={`Frontend version ${frontendImage.split(":")[1] || ""}`}
-        >
-          Frontend version: {frontendImage.split(":")[1] || "n/a"}
-          <span className="sr-only"> (opens in a new tab)</span>
-        </a>
-      ) : (
-        <span>Frontend version: n/a</span>
-      )}
-
-      {backendImage ? (
-        <a
-          href={toHref(backendImage)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
-          aria-label={`Backend version ${backendImage.split(":")[1] || ""}`}
-        >
-          Backend version: {backendImage.split(":")[1] || "n/a"}
-          <span className="sr-only"> (opens in a new tab)</span>
-        </a>
-      ) : (
-        <span>Backend version: n/a</span>
-      )}
-    </div>
+    <nav
+      aria-label="Footer extra navigation"
+      className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8"
+    >
+      <ul className="contents">
+        <li>
+          <a href={"https://" + frontendImage || "/"}>
+            <span className={`text-info-content/70 text-sm ${LINK_CLASSES}`}>
+              Frontend version: {frontendImage?.split(":")[1] || "n/a"}
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href={"https://" + backendImage || "/"}>
+            <span className={`text-info-content/70 text-sm ${LINK_CLASSES}`}>
+              Backend version: {backendImage?.split(":")[1] || "n/a"}
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://precision-medicine-portal.scilifelab.se/privacy"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span className={`text-info-content/70 text-sm ${LINK_CLASSES}`}>
+              Privacy policy
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://precision-medicine-portal.scilifelab.se/citation-and-license"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span className={`text-info-content/70 text-sm ${LINK_CLASSES}`}>
+              Citation and license
+            </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   );
 }

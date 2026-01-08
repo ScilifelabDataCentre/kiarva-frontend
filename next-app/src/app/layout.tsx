@@ -16,7 +16,6 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="light">
       <body>
-        <div id="top" aria-hidden="true" />
         <MatomoInit></MatomoInit>
         <HeaderComponent />
         {children}
