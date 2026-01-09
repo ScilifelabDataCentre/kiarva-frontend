@@ -127,7 +127,11 @@ export default function AlelleSelectionComponent(prop: {
 
   useEffect(() => {
     if (!(prop.plotType == "aminoAcidMSA")) {
-      if (!currentPicks.alleleDropdown) {
+      // Treat placeholder values as "not selected"
+      if (
+        !currentPicks.alleleDropdown ||
+        currentPicks.alleleDropdown === "..."
+      ) {
         prop.handleSetSelection("");
       } else {
         prop.handleSetSelection(
@@ -138,7 +142,11 @@ export default function AlelleSelectionComponent(prop: {
         );
       }
     } else {
-      if (!currentPicks.subtypeDropdown) {
+      // Treat placeholder values as "not selected"
+      if (
+        !currentPicks.subtypeDropdown ||
+        currentPicks.subtypeDropdown === "..."
+      ) {
         prop.handleSetSelection("");
       } else {
         prop.handleSetSelection(
@@ -234,42 +242,59 @@ export default function AlelleSelectionComponent(prop: {
         aria-live="polite"
       >
         <div className="w-1/2">
-          {(!currentPicks.alleleDropdown || currentPicks.alleleDropdown == "...") &&
+          {(!currentPicks.alleleDropdown ||
+            currentPicks.alleleDropdown == "...") &&
           currentPicks.geneDropdown &&
-          currentPicks.subtypeDropdown ? 
-            (prop.plotType == "aminoAcidMSA" ?
-              (<p className="text-neutral-content text-xl font-semibold">
+          currentPicks.subtypeDropdown &&
+          currentPicks.subtypeDropdown !== "..." ? (
+            prop.plotType == "aminoAcidMSA" ? (
+              <p className="text-neutral-content text-xl font-semibold">
                 Sequence alignments for {currentPicks.geneDropdown}
                 {currentPicks.subtypeDropdown}
-              </p>) :
-              (<DownloadPlotData 
-                alleleOrGene={currentPicks.geneDropdown+currentPicks.subtypeDropdown}
-                tableType={prop.plotType}
-                fullGene={true}
-              >
-              </DownloadPlotData>)
+              </p>
+            ) : (
+              <div className="flex items-center flex-col">
+                <p className="text-neutral-content text-xl font-semibold p-2 text-center">
+                  Please select the allele above
+                </p>
+                <DownloadPlotData
+                  alleleOrGene={
+                    currentPicks.geneDropdown + currentPicks.subtypeDropdown
+                  }
+                  tableType={prop.plotType}
+                  fullGene={true}
+                ></DownloadPlotData>
+              </div>
+            )
           ) : currentPicks.geneDropdown &&
             currentPicks.subtypeDropdown &&
-            currentPicks.alleleDropdown ? (
+            currentPicks.alleleDropdown &&
+            currentPicks.subtypeDropdown !== "..." &&
+            currentPicks.alleleDropdown !== "..." ? (
             <div className="flex items-center flex-col">
+              <div className="flex flex-row">
+                <DownloadPlotData
+                  alleleOrGene={
+                    currentPicks.geneDropdown +
+                    currentPicks.subtypeDropdown +
+                    "*" +
+                    currentPicks.alleleDropdown
+                  }
+                  tableType={prop.plotType}
+                  fullGene={false}
+                ></DownloadPlotData>
+                <DownloadPlotData
+                  alleleOrGene={
+                    currentPicks.geneDropdown + currentPicks.subtypeDropdown
+                  }
+                  tableType={prop.plotType}
+                  fullGene={true}
+                ></DownloadPlotData>
+              </div>
               <p className="text-neutral-content text-xl font-semibold p-2">
                 Plot for {currentPicks.geneDropdown}
                 {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
               </p>
-              <div className="flex flex-row">
-              <DownloadPlotData 
-                alleleOrGene={currentPicks.geneDropdown+currentPicks.subtypeDropdown+"*"+currentPicks.alleleDropdown}
-                tableType={prop.plotType}
-                fullGene={false}
-              >
-              </DownloadPlotData>
-              <DownloadPlotData 
-                alleleOrGene={currentPicks.geneDropdown+currentPicks.subtypeDropdown}
-                tableType={prop.plotType}
-                fullGene={true}
-              >
-              </DownloadPlotData>
-              </div>
             </div>
           ) : (
             <p className="text-neutral-content text-xl font-semibold">
