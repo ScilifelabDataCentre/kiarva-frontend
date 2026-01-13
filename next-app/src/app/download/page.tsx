@@ -38,6 +38,27 @@ export default function DownloadPage(): ReactElement {
     },
   });
 
+  function getDownloadNamePartsFromGene(gene: string): {
+    filePrefix: string;
+    zipLocusTag: string;
+  } {
+    const normalizedGene = gene.trim().toUpperCase();
+
+    // TCR
+    if (normalizedGene.startsWith("TRG")) {
+      return { filePrefix: "Homo-sapiens_Trg_", zipLocusTag: "Trg" };
+    }
+
+    // IGH
+    if (normalizedGene.startsWith("IGH")) {
+      // Keep existing naming convention for individual FASTA files
+      return { filePrefix: "Homo-sapiens_Igh_", zipLocusTag: "Igh" };
+    }
+
+    // Unknown
+    return { filePrefix: "Homo-sapiens_", zipLocusTag: "Unknown" };
+  }
+
   async function downloadGeneFasta(gene: string) {
     const encodedGene = encodeURIComponent(gene);
     const fastaEndpoint =
@@ -46,9 +67,10 @@ export default function DownloadPage(): ReactElement {
       .get(fastaEndpoint, axiosConfig)
       .then((response) => {
         const responseData: Blob = response.data;
+        const { filePrefix } = getDownloadNamePartsFromGene(gene);
         fileDownload(
           responseData,
-          "Homo-sapiens_Ig_Heavy_" +
+          filePrefix +
             gene[gene.length - 1] +
             "_" +
             fastaTypeSelected +
@@ -71,8 +93,9 @@ export default function DownloadPage(): ReactElement {
         .get(fastaEndpoint, axiosConfig)
         .then((response) => {
           const responseData: Blob = response.data;
+          const { filePrefix } = getDownloadNamePartsFromGene(gene);
           zip.file(
-            "Homo-sapiens_Ig_Heavy_" +
+            filePrefix +
               gene[gene.length - 1] +
               "_" +
               fastaTypeSelected +
@@ -84,11 +107,19 @@ export default function DownloadPage(): ReactElement {
         })
         .catch((response) => console.log(response.error));
     }
+
+    const zipLoci = Array.from(
+      new Set(genes.map((g) => getDownloadNamePartsFromGene(g).zipLocusTag))
+    ).sort();
+    const zipLociPart = zipLoci.join("+");
+
     zip.generateAsync({ type: "blob" }).then(
       function (blob) {
         fileDownload(
           blob,
-          "Homo-sapiens_Ig_" +
+          "Homo-sapiens_" +
+            zipLociPart +
+            "_" +
             fastaTypeSelected +
             "_v" +
             currentVersionFormatted +
