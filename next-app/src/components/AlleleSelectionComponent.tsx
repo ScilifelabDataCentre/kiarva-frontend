@@ -291,13 +291,20 @@ export default function AlelleSelectionComponent(prop: {
                   fullGene={true}
                 ></DownloadPlotData>
               </div>
-              <p className="text-neutral-content text-xl font-semibold p-2">
-                Plot for {currentPicks.geneDropdown}
-                {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
-              </p>
+              {prop.plotType == "aminoAcidFreqPlot" ?
+                <p className="text-neutral-content text-xl font-semibold p-2 text-center">
+                  Combined frequency for {currentPicks.geneDropdown}
+                  {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown} and alleles with the same translated sequence
+                </p>
+                :
+                <p className="text-neutral-content text-xl font-semibold p-2">
+                  Plot for {currentPicks.geneDropdown}
+                  {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
+                </p>
+              }
             </div>
           ) : (
-            <p className="text-neutral-content text-xl font-semibold">
+            <p className="text-neutral-content text-xl font-semibold text-center">
               Please select the gene type, gene and allele above
             </p>
           )}
