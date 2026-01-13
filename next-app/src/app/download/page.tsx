@@ -28,7 +28,7 @@ export default function DownloadPage(): ReactElement {
   // const [iglSelectionArray, setIglSelectionArray] = useState<string[]>([]);
   // const [traSelectionArray, setTraSelectionArray] = useState<string[]>([]);
   // const [trbSelectionArray, setTrbSelectionArray] = useState<string[]>([]);
-  // const [trgSelectionArray, setTrgSelectionArray] = useState<string[]>([]);
+  const [trgSelectionArray, setTrgSelectionArray] = useState<string[]>([]);
   // const [trdSelectionArray, setTrdSelectionArray] = useState<string[]>([]);
 
   const [axiosConfig, setAxiosConfig] = useState({
@@ -102,15 +102,14 @@ export default function DownloadPage(): ReactElement {
   }
 
   function handleDownload() {
-    const selectionArr = ighSelectionArray;
-    // const selectionArr = ighSelectionArray.concat(
-    //   igkSelectionArray,
-    //   iglSelectionArray,
-    //   traSelectionArray,
-    //   trbSelectionArray,
-    //   trgSelectionArray,
-    //   trdSelectionArray
-    // );
+    const selectionArr = ighSelectionArray.concat(
+      //   igkSelectionArray,
+      //   iglSelectionArray,
+      //   traSelectionArray,
+      //   trbSelectionArray,
+      trgSelectionArray
+      //   trdSelectionArray
+    );
 
     if (selectionArr.length === 1) {
       downloadGeneFasta(selectionArr[0]);
@@ -288,11 +287,13 @@ export default function DownloadPage(): ReactElement {
         </div>
       </section>
 
-      {/* <section aria-labelledby="tcr-heading">
-        <h2 id="tcr-heading" className={H_1}>TCR</h2>
+      <section aria-labelledby="tcr-heading">
+        <h2 id="tcr-heading" className={H_1}>
+          TCR
+        </h2>
         <div className="divider !my-0" aria-hidden="true"></div>
-        <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16"> */}
-      {/* <DownloadBoxComponent
+        <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16">
+          {/* <DownloadBoxComponent
           geneSegment="TRA"
           geneObjectArray={[
             { name: "TRAV", isAvailable: true },
@@ -301,7 +302,7 @@ export default function DownloadPage(): ReactElement {
           ]}
           setPropsSelectionArray={setTraSelectionArray}
         ></DownloadBoxComponent> */}
-      {/* <DownloadBoxComponent
+          {/* <DownloadBoxComponent
           geneSegment="TRB"
           geneObjectArray={[
             { name: "TRBV", isAvailable: true },
@@ -311,16 +312,17 @@ export default function DownloadPage(): ReactElement {
           ]}
           setPropsSelectionArray={setTrbSelectionArray}
         ></DownloadBoxComponent> */}
-      {/* <DownloadBoxComponent
-          geneSegment="TRG"
-          geneObjectArray={[
-            { name: "TRGV", isAvailable: true },
-            { name: "TRGJ", isAvailable: false },
-            { name: "TRG constant", isAvailable: false },
-          ]}
-          setPropsSelectionArray={setTrgSelectionArray}
-        ></DownloadBoxComponent> */}
-      {/* <DownloadBoxComponent
+          <DownloadBoxComponent
+            geneSegment="TRG"
+            geneObjectArray={[
+              { name: "TRGV", isAvailable: true },
+              { name: "TRGJ", isAvailable: false },
+              { name: "TRG constant", isAvailable: false },
+            ]}
+            setPropsSelectionArray={setTrgSelectionArray}
+            radialSelected={fastaTypeSelected}
+          ></DownloadBoxComponent>
+          {/* <DownloadBoxComponent
           geneSegment="TRD"
           geneObjectArray={[
             { name: "TRDV", isAvailable: true },
@@ -330,8 +332,8 @@ export default function DownloadPage(): ReactElement {
           ]}
           setPropsSelectionArray={setTrdSelectionArray}
         ></DownloadBoxComponent> */}
-      {/* </div>
-      </section> */}
+        </div>
+      </section>
 
       <section aria-label="Download actions">
         <div className="flex justify-center py-8 lg:py-0">
