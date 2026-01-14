@@ -18,15 +18,14 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
     sequences.push(sequenceData[i].sequence);
   }
 
-
   // Get the color for each sequence character
   const getCharStyle = (index: number) => {
     if (differingIndices.includes(index)) {
       return "bg-[#B8CCE0] text-black pb-2 pt-2 rounded-xs";
     } else {
-      return "bg-base-100 text-black"
+      return "bg-base-100 text-black";
     }
-  }
+  };
 
   // Function that looks through the sequences and finds indices where all characters do not match
   // across the sequences, storing them in differingIndices for later use.
@@ -47,12 +46,13 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
         }
       }
     }
-  }
+  };
 
   findDifferingCharacters(sequences);
 
   // tailwind classes for rendered sequences, and helping "counters"
-  const renderedUnitClasses = "w-auto grid lg:tracking-widest font-mono h-auto text-center text-nowrap bg-base-100 text-black items-center justify-center";
+  const renderedUnitClasses =
+    "w-auto grid lg:tracking-widest font-mono h-auto text-center text-nowrap bg-base-100 text-black items-center justify-center";
 
   // Renders out a numerical counter, showing every tenth character
   const renderUnitCounter = () => {
@@ -65,35 +65,31 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
         {Array.from({ length: maxLength }).map((_, index) => {
           // we want to render every tenth index (or index+1 rather). Every time the counter
           // index gains an extra digit (e.g. 9->10, 99->100), the rendered index starts taking up
-          // one extra character space. To keep the index numbers aligned with the rest of the figure, we need 
-          // to dynamically skip "\u00A0" (whitespace) characters depending on the size of the current index. 
+          // one extra character space. To keep the index numbers aligned with the rest of the figure, we need
+          // to dynamically skip "\u00A0" (whitespace) characters depending on the size of the current index.
           // The number of characters we want to skip is the same as the number of digits in the shown index number
           // after the current one, minus one. E.g. if we're at indices 1-89, we always skip one character, so we
           // render 8 of "\u00A0", skip one character, and render one index value per 10 indices. Then
           // between indices 90-989 we skip two characters per 10 indices, and so on.
           const nextIndexNumDigits: number = (index + 11).toString().length;
           const output: string =
-          (index + 1) % 10 == 0
-            ? 
-            (index + 1).toString()
-            : 
-            ([...Array(nextIndexNumDigits)].map((_, i) => i).includes((index+1) % 10)
-              ?
-              ""
-              :
-              "\u00A0"
-            );
-          return(
-            <>{output}</>
-          )
+            (index + 1) % 10 == 0
+              ? (index + 1).toString()
+              : [...Array(nextIndexNumDigits)]
+                  .map((_, i) => i)
+                  .includes((index + 1) % 10)
+              ? ""
+              : "\u00A0";
+          // Return plain strings to avoid creating a list of React elements that would need keys
+          return output;
         })}
       </div>
     );
-  }
+  };
 
   // Renders helping dots and bars to make it easier to see which number nucleotide/aminoacid you are viewing.
   const renderUnitDots = () => {
-    return(
+    return (
       <div
         aria-hidden="true"
         className={renderedUnitClasses + " pb-2"}
@@ -102,17 +98,16 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
         {Array.from({ length: maxLength }).map((_, index) => {
           // Every fifth character is a bar, all other characters are dots
           const output: string = (index + 1) % 5 == 0 ? "|" : ".";
-          return (
-              <>{output}</>
-            );
+          // Return plain strings to avoid creating a list of React elements that would need keys
+          return output;
         })}
       </div>
-    )
-  }
+    );
+  };
 
-  // Renders the nucleotide/amino acid characters, adding different stylings to characters at 
+  // Renders the nucleotide/amino acid characters, adding different stylings to characters at
   // indices saved in differingIndices to indicate that they are misaligned from the rest of the sequence
- const renderColored = (seq: string) => {
+  const renderColored = (seq: string) => {
     return (
       <div
         className={renderedUnitClasses}
@@ -130,7 +125,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
         </p>
       </div>
     );
-  }
+  };
 
   return (
     <figure
