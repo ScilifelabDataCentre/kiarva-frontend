@@ -26,8 +26,11 @@ export default function MSAPlotPageComponent(): ReactElement {
 
   // config for AlleleSelectionComponent which sets up the allele segment dropdown menu
   const alleleDropdownConfig: IAlleleDropDownConfig = {
-    geneSegmentItemsArray: ["IGH"],
-    geneDropDownItemsArray: ["IGHV"],
+    loci: ["IGH", "TRG"],
+    geneTypesByLocus: {
+      IGH: ["IGHV"],
+      TRG: ["TRGV"],
+    },
     geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
   };
 
@@ -158,8 +161,8 @@ export default function MSAPlotPageComponent(): ReactElement {
           >
             MAFFT v7.525
           </a>
-          . Translated sequence alignments are based off of the MAFFT output for the nucleotide sequences, 
-          but aligned with a{" "}
+          . Translated sequence alignments are based off of the MAFFT output for
+          the nucleotide sequences, but aligned with a{" "}
           <a
             className={`${LINK_CLASSES} italic`}
             href="https://github.com/ScilifelabDataCentre/kiarva-backend/blob/dev/services/alignment.py"

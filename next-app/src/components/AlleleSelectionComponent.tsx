@@ -7,7 +7,7 @@ import { ReactElement, useEffect, useState } from "react";
 import axios from "axios";
 import DropdownComponent from "@/components/DropdownComponent";
 import { getCookie, hasCookie } from "cookies-next";
-import { IAlleleDropDownConfig } from "@/interfaces/types";
+import { GeneType, IAlleleDropDownConfig, Locus } from "@/interfaces/types";
 import DownloadPlotData from "./DownloadPlotData";
 
 // Main function to render the PlotPage component
@@ -23,7 +23,12 @@ export default function AlelleSelectionComponent(prop: {
   });
 
   // Initialize state for dropdown selections
-  const [currentPicks, setCurrentPicks] = useState({
+  const [currentPicks, setCurrentPicks] = useState<{
+    geneSegmentDropdown: Locus | "";
+    geneDropdown: GeneType | "";
+    subtypeDropdown: string;
+    alleleDropdown: string;
+  }>({
     geneSegmentDropdown: "",
     geneDropdown: "",
     subtypeDropdown: "",
@@ -33,10 +38,15 @@ export default function AlelleSelectionComponent(prop: {
   // ------------------------
   // temporary data, used until backend with live data is allowed to be published
   // Arrays for dropdown menu items
-  const geneSegmentItemsArray =
-    prop.alleleSelectionConfig.geneSegmentItemsArray;
+  const geneSegmentItemsArray = Array.from(prop.alleleSelectionConfig.loci);
   const geneDropDownItemsArray =
-    prop.alleleSelectionConfig.geneDropDownItemsArray;
+    currentPicks.geneSegmentDropdown === ""
+      ? []
+      : Array.from(
+          prop.alleleSelectionConfig.geneTypesByLocus[
+            currentPicks.geneSegmentDropdown
+          ] ?? []
+        );
 
   const [subtypeDropDownItemsArray, setSubtypeDropDownItemsArray] = useState<
     string[]
@@ -49,7 +59,7 @@ export default function AlelleSelectionComponent(prop: {
 
   // Function to update the current pick for dropdowns
   const handleSetCurrentPick = (dropdownName: string, value: string) => {
-    setCurrentPicks((prev: typeof currentPicks) => ({
+    setCurrentPicks((prev) => ({
       ...prev,
       [dropdownName]: value,
       ...(dropdownName === "subtypeDropdown" && { alleleDropdown: "" }), // Reset alleleDropdown if subtypeDropdown changes
@@ -81,6 +91,12 @@ export default function AlelleSelectionComponent(prop: {
         setAlleleDropDownItemsArray(["..."]);
       }
     } else {
+      // Don't hit the backend until a gene type is selected
+      if (!currentPicks.geneDropdown) {
+        setSubtypeDropDownItemsArray(["..."]);
+        setAlleleDropDownItemsArray(["..."]);
+        return;
+      }
       if (!currentPicks.subtypeDropdown) {
         setAlleleDropDownItemsArray(["..."]);
         const currentSelection = currentPicks.geneDropdown;

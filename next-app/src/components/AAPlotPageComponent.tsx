@@ -69,8 +69,12 @@ export default function AminoAcidPlotPage(): ReactElement {
 
   // config for AlleleSelectionComponent which sets up the allele segment dropdown menu
   const alleleDropdownConfig: IAlleleDropDownConfig = {
-    geneSegmentItemsArray: ["IGH"],
-    geneDropDownItemsArray: ["IGHV"],
+    loci: ["IGH", "TRG"],
+    geneTypesByLocus: {
+      IGH: ["IGHV"],
+      TRG: ["TRGV"],
+    },
+
     geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
   };
 
