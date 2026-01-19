@@ -77,7 +77,7 @@ export default function RootLayout({
           This page allows users to generate population frequency plots for the
           KI Adaptive Immune Receptor Gene Variant Atlas. You can select from
           various dropdowns to filter by gene segment, gene type, gene, and
-          allele. The genomic plot page features associated SNPs and SNiPer
+          allele. The genomic plot page features associated SNPs and IgSNPer
           scores, while the translated plot page features a list of other
           alleles translating to the same amino acid.
         </p>
