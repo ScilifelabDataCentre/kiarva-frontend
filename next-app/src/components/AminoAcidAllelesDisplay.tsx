@@ -44,10 +44,7 @@ export default function IgSNPerDisplay(prop: { selectedAllele: string, axiosConf
             if (hasCookie("password")) {
                 getTopLevelAlleleAA(selectedAllele);
             } else {
-                const selectedAlleleTmp = selectedAllele.replace("*", "");
-                const strToKey =
-                selectedAlleleTmp as keyof typeof sampleAlleleDataAminoAcidPlot;
-                setAlleleListAA(sampleAlleleDataAminoAcidPlot[strToKey].alleleListAA);
+                setTopAlleleAA(selectedAllele);
             }
         }
     }, [prop.selectedAllele]);
@@ -55,7 +52,14 @@ export default function IgSNPerDisplay(prop: { selectedAllele: string, axiosConf
     // Fetch gene frequency data when allele dropdown changes
     useEffect(() => {
         if (topAlleleAA) {
-            getAlleleListAA(topAlleleAA);
+            if (hasCookie("password")) {
+                getAlleleListAA(topAlleleAA);
+            } else {
+                const selectedAlleleTmp = topAlleleAA.replace("*", "");
+                const strToKey =
+                selectedAlleleTmp as keyof typeof sampleAlleleDataAminoAcidPlot;
+                setAlleleListAA(sampleAlleleDataAminoAcidPlot[strToKey].alleleListAA);                
+            }
         } else {
             setAlleleListAA([]);
         }

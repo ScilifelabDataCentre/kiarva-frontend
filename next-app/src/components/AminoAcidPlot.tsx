@@ -96,27 +96,36 @@ export default function AminoAcidPlot(prop: { selectedAllele: string, axiosConfi
       .catch((response) => console.log(response.error));
   }
 
+  // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
     if (prop.selectedAllele) {
       const selectedAllele = prop.selectedAllele;
-      if (hasCookie("password")) {
-        getTopLevelAlleleAA(selectedAllele);
+      if (!hasCookie("password")) {
+        setTopAlleleAA(selectedAllele);
       } else {
-        const selectedAlleleTmp = selectedAllele.replace("*", "");
-        const strToKey =
-          selectedAlleleTmp as keyof typeof sampleAlleleDataAminoAcidPlot;
-        setSuperpopFreqAPIData(
-          sampleAlleleDataAminoAcidPlot[strToKey].superpopulation
-        );
-        setPopFreqAPIData(sampleAlleleDataAminoAcidPlot[strToKey].population);
+        getTopLevelAlleleAA(selectedAllele);
+        // getGeneFreqData(selectedAllele);
       }
+    } else {
+      setSuperpopFreqAPIData([]);
+      setPopFreqAPIData([]);
     }
   }, [prop.selectedAllele]);
 
   // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
     if (topAlleleAA) {
-      getGeneFreqData(topAlleleAA);
+      if (hasCookie("password")) {
+        getGeneFreqData(topAlleleAA);
+      } else {
+        const selectedAlleleTmp = topAlleleAA.replace("*", "");
+        const strToKey =
+          selectedAlleleTmp as keyof typeof sampleAlleleDataAminoAcidPlot;
+        setSuperpopFreqAPIData(
+          sampleAlleleDataAminoAcidPlot[strToKey].superpopulation
+        );
+        setPopFreqAPIData(sampleAlleleDataAminoAcidPlot[strToKey].population);        
+      }
     } else {
       setSuperpopFreqAPIData([]);
       setPopFreqAPIData([]);
