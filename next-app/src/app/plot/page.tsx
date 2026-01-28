@@ -8,7 +8,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import PlotPageParent from '@/components/PlotPageParent';
 import { BODY_CLASSES, H_1 } from '@/constants';
 import { hasCookie } from 'cookies-next';
-import { Button } from '@headlessui/react';
+import { Button } from '@/components/ui/button';
 
 // Main function to render the plot components
 export default function PlotPage(): ReactElement {
@@ -88,12 +88,12 @@ export default function PlotPage(): ReactElement {
                     <Button
                     key={path}
                     role="tab"
-                    aria-selected={currentRoute == path.toLowerCase()}
+                    aria-selected={currentRoute == path}
                     onClick={handleTabClick}
                     className={`tab ${
-                        currentRoute == path.toLowerCase()
+                        currentRoute == path
                         ? "tab-active text-white !bg-info"
-                        : "bg-white shadow"
+                        : "text-black bg-white shadow"
                     }`}
                     >
                     {String(path).charAt(0).toUpperCase() + String(path).slice(1)}
