@@ -69,6 +69,7 @@ function FadeAlert({ children, title, icon: Icon }: FadeAlertProps) {
 }
 
 export default function HomePage(): ReactElement {
+  const textLinkClasses: string = "font-medium text-fg-brand hover:underline";
   return (
     <main className={BODY_CLASSES}>
       <h1 className="sr-only">
@@ -84,20 +85,23 @@ export default function HomePage(): ReactElement {
         </h2>
         <FadeAlert title="Welcome to KIARVA" icon={BadgeInfo}>
           <p>
-            Variation between individuals and populations within the
-            immunoglobulin (IG) locus involves both structural and allelic
-            diversity. The Karolinska Institutet Adaptive Immune Receptor Gene
-            Variant Atlas (<b>KIARVA</b>) hosts germline-encoded IG heavy chain
-            (IGH) alleles identified in 2486 individuals from the 1000 Genomes
-            Project (1KGP) collection, in total 561 IGHV, 51 IGHD and 12 IGHJ
-            alleles. <b>KIARVA</b> is open source and provides downloadable
-            FASTA files with all sequences, as well as information about the
-            frequency of each allele in 5 superpopulations and 25
-            subpopulations. In the near future, KIARVA will be extended to also
-            contain population-based information about IG kappa and lambda
-            genes, as well as T cell receptor genes. When using this database,
-            please cite Corcoran et al. BioRxivXX and if using the resource for
-            commercial purposes, please contact the authors.
+            Variation between individuals and populations within the 
+            immunoglobulin (IG) locus involves both structural and allelic 
+            diversity. The Karolinska Institutet Adaptive Immune Receptor Gene 
+            Variant Atlas (<b>KIARVA</b>) hosts germline-encoded IG heavy chain 
+            (IGH) alleles identified in 2486 individuals from the 1000 Genomes 
+            Project (1KGP) collection, in total 561 IGHV, 51 IGHD and 12 IGHJ 
+            alleles. <b>KIARVA</b> is open source and provides downloadable 
+            FASTA files with all sequences, as well as information about the 
+            frequency of each IGHV allele in 5 continental superpopulations and 25 
+            subpopulations. As soon as possible, <b>KIARVA</b> will be extended to also 
+            contain population-based information about IG kappa and lambda 
+            genes, as well as T cell receptor genes.<br /><br />
+
+            <b>When using this database, please cite Corcoran et al. Immunity 2026.
+            The resource should not be used for commercial purposes.
+            For question, please contact the authors.
+            </b>
           </p>
         </FadeAlert>
 
@@ -238,6 +242,9 @@ export default function HomePage(): ReactElement {
           </div>
         </article>
       </section>
+      <p className="pt-10 text-lg">
+        For more information about KIARVA, see the pages <Link href="/methodology" className={textLinkClasses}>Methodology</Link>, <Link href="/faq" className={textLinkClasses}>FAQ</Link> and <Link href="/about" className={textLinkClasses}>About</Link>.
+      </p>
     </main>
   );
 }

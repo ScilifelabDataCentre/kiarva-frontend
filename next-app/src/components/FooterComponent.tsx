@@ -15,6 +15,7 @@ const projectLinks: FooterLink[] = [
   { label: "Methodology", href: "/methodology" },
   { label: "Publications", href: "/publications" },
   { label: "Change log", href: "/changelog" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 const externalLinks: Array<FooterLink & { external?: boolean }> = [
