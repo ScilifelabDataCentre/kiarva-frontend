@@ -1,14 +1,10 @@
-// Should be server component, has no user interactivity.
-
-"use client";
-
 import { ReactElement } from "react";
 import { BODY_CLASSES, H_1, H_2 } from "@/constants";
 
 export default function FAQPage(): ReactElement {
   const pageTitle: string = "Frequently Asked Questions";
   const FAQH_2: string = H_2 + " pb-2 pt-2";
-  const FAQH_3: string = "text-left text-black text-l lg:text-l font-semibold pb-1 pt-2";
+  const FAQH_3: string = "text-left text-black text-lg lg:text-lg font-semibold pb-1 pt-2";
   const paragraphClasses: string = "text-left lg:text-justify text-sm lg:text-base mb-4";
   const orderedListClasses: string = "list-decimal list-outside text-sm lg:text-base mb-4 ms-8";
   const listClasses: string = "mb-4";
@@ -17,7 +13,7 @@ export default function FAQPage(): ReactElement {
     <main className={BODY_CLASSES}>
       <h1 className={H_1}>{pageTitle}</h1>
       <section aria-labelledby="faq-heading">
-        <h2 className={FAQH_2}>
+        <h2 id="faq-heading" className={FAQH_2}>
             How are alleles named within KIARVA
         </h2>
         <h3 className={FAQH_3}>
@@ -51,7 +47,7 @@ export default function FAQPage(): ReactElement {
             collapsed set. For example, IGHV1-69*01 and IGHV1-69*12, IGHV1-69*13 and IGHV1-69*13_S7425 
             all encode the same AA sequence that is hence designated as IGHV1-69*01.
         </p>
-        <h2 className={FAQH_2}>
+        <h2 id="faq-heading" className={FAQH_2}>
             What does &rsquo;DEL&rsquo; in the allele dropdown menu mean?
         </h2>
         <p className={paragraphClasses}>
@@ -62,7 +58,7 @@ export default function FAQPage(): ReactElement {
             chosen to represent homozygous deletions as &rsquo;DEL&rsquo; in the frequency plots for IGHV7-4-1, IGH4-30-2, 
             IGHV4-30-4, IGHV4-31, IGHV3-30-3, IGHV3-33, IGHV3-64D, IGHV5-10-1, IGHV1-69-2, IGHV3-9 and IGHV1-8.
         </p>
-        <h2 className={FAQH_2}>
+        <h2 id="faq-heading" className={FAQH_2}>
             What about duplicated genes?
         </h2>
         <p className={paragraphClasses}>
@@ -73,7 +69,7 @@ export default function FAQPage(): ReactElement {
             IGHV3-23 and IGHV3-30 associated with genomic duplications. For KIARVA and the 1KGP dataset, we have chosen 
             to use a single designation to represent allelic sequences that belong to such groups. 
         </p>
-        <h2 className={FAQH_2}>
+        <h2 id="faq-heading" className={FAQH_2}>
             Can we identify all IG genes from lymphoblastoid cell line (LCL) samples?
         </h2>
         <p className={paragraphClasses}>
@@ -89,7 +85,7 @@ export default function FAQPage(): ReactElement {
             we therefore made the decision not to calculate IGHJ and IGHD allele frequencies from the 1KGP genotyping 
             results.
         </p>
-        <h2 className={FAQH_2}>
+        <h2 id="faq-heading" className={FAQH_2}>
             Is potential SHM present in lymphoblastoid cell lines an issue?
         </h2>
         <p className={paragraphClasses}>
@@ -120,7 +116,7 @@ export default function FAQPage(): ReactElement {
             The issue of localized SHM spreading to unrearranged genes is specific to LCL samples and is 
             not an issue when using ImmuneDiscover for IG genotype using other genomic DNA templates.
         </p>
-        <h2 className={FAQH_2}>
+        <h2 id="faq-heading" className={FAQH_2}>
             How do we know that the alleles are accurate?
         </h2>
         <p className={paragraphClasses}>
@@ -145,7 +141,7 @@ export default function FAQPage(): ReactElement {
                 respectively. 
             </li>
         </ol>
-        <h2 className={FAQH_2}>
+        <h2 id="faq-heading" className={FAQH_2}>
             How many IGHV alleles are there yet to identify?
         </h2>
         <p className={paragraphClasses}>

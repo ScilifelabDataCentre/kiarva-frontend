@@ -100,7 +100,7 @@ export default function HomePage(): ReactElement {
 
             <b>When using this database, please cite Corcoran et al. Immunity 2026.
             The resource should not be used for commercial purposes.
-            For question, please contact the authors.
+            For questions, please contact the authors.
             </b>
           </p>
         </FadeAlert>
