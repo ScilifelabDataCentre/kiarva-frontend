@@ -9,7 +9,7 @@ import { useState, useRef, useEffect } from "react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 
-const downloadHeroBackground = "images/heroFastaImage.png";
+const downloadHeroBackground = "images/heroFASTAImage.png";
 const plotHeroBackground = "images/heroPlotImage.png";
 const alignmentHeroBackground = "images/heroAlignmentImage.png";
 const searchHeroBackground = "images/heroSearchImage.png";
