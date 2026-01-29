@@ -41,6 +41,7 @@ export default function HeaderComponent() {
     l6: { text: "Change log", classes: LINK_CLASSES, link: "/changelog" },
     l7: { text: "Publications", classes: LINK_CLASSES, link: "/publications" },
     l8: { text: "About", classes: LINK_CLASSES, link: "/about" },
+    l9: { text: "FAQ", classes: LINK_CLASSES, link: "/faq" },
   };
 
   // const mainLinks = Object.fromEntries(Object.entries(links).slice(0, 4));

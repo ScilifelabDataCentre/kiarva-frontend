@@ -4,7 +4,7 @@
 
 'use client';
 
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import PlotPageParent from '@/components/PlotPageParent';
 import { BODY_CLASSES, H_1 } from '@/constants';
 import { hasCookie } from 'cookies-next';

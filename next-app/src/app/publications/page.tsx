@@ -46,7 +46,7 @@ export default function PublicationsPage(): ReactElement {
           <li>
             <PublicationComponent
               linkUrl=""
-              title="Ultra-high throughput IGH genotyping reveals individual and population level diversity and provides a comprehensive resource for future adaptive immune analysis"
+              title="Ultra-high throughput IGH genotyping of 25 global populations reveals population-biased allelic diversity and homozygous IGHV and IGHD gene deletions"
               authors="Martin Corcoran, Sanjana Narang*, Mateusz Kaduk*, Mark Chernyshev*, Christopher Sundling, Anna Färnert, and Gunilla B. Karlsson Hedestam"
               journal="Pre-print August 2024"
               bgColor="bg-neutral"
