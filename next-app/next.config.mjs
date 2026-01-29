@@ -4,8 +4,8 @@ const nextConfig = {
     async redirects() {
         return [
           {
-            source: '/plot',
-            destination: '/plot/genomic',
+            source: '/plot/:slug',
+            destination: '/plot',
             permanent: true,
           },
         ]
