@@ -67,12 +67,9 @@ export default function AlelleSelectionComponent(prop: {
 
   useEffect(() => {
     if (!hasCookie("password")) {
-      if (prop.plotType == "genomicFreqPlot") {
+      if (prop.plotType == "genomicFreqPlot" || prop.plotType == "translatedFreqPlot") {
         setSubtypeDropDownItemsArray(["1-2"]);
-        setAlleleDropDownItemsArray(["*02_S4953", "*04", "*06"]);
-      } else if (prop.plotType == "aminoAcidFreqPlot") {
-        setSubtypeDropDownItemsArray(["1-18"]);
-        setAlleleDropDownItemsArray(["*01_AA"]);
+        setAlleleDropDownItemsArray(["*02"]);
       } else if (prop.plotType == "aminoAcidMSA") {
         setSubtypeDropDownItemsArray(["1-18"]);
         setAlleleDropDownItemsArray(["*01_AA"]);
@@ -291,7 +288,7 @@ export default function AlelleSelectionComponent(prop: {
                   fullGene={true}
                 ></DownloadPlotData>
               </div>
-              {prop.plotType == "aminoAcidFreqPlot" ?
+              {prop.plotType == "translatedFreqPlot" ?
                 <p className="text-neutral-content text-xl font-semibold p-2 text-center">
                   Combined frequency for {currentPicks.geneDropdown}
                   {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown} and alleles with the same translated sequence

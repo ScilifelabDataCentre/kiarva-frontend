@@ -26,7 +26,7 @@ export default function AboutPage(): ReactElement {
         <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
           To create KIARVA, we applied a high throughput genomic technique
           designed for adaptive immune receptor germline gene sequencing,
-          ImmuneDiscover (Corcoran et al. BioRXiv), to 2486 cases from the 1000
+          ImmuneDiscover (Corcoran et al. Immunity 2026), to 2486 cases from the 1000
           Genomes Project (1KGP),{" "}
           <a
             href="https://www.internationalgenome.org/"
