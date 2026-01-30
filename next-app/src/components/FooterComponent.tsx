@@ -26,7 +26,7 @@ const externalLinks: Array<FooterLink & { external?: boolean }> = [
   },
   {
     label: "Citation and license",
-    href: "https://precision-medicine-portal.scilifelab.se/citation-and-license",
+    href: "/citation-and-license",
     external: true,
   },
 ];
