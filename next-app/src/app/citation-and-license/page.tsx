@@ -17,7 +17,7 @@ export default function CitationAndLicensePage(): ReactElement {
         <p role="doc-abstract">
           In line with the principles of FAIR and Open Science, we encourage the
           reuse and recognition of material made available on KIARVA for non-commercial purposes. This page 
-          provides guidance on how to cite the portal and outlines the licensing 
+          provides guidance on how to cite the website and outlines the licensing 
           conditions for using its content and code.
         </p>
         <Title level={2} aria-label="Information about citing the website">
@@ -204,7 +204,7 @@ export default function CitationAndLicensePage(): ReactElement {
             MIT License
           </a>
           .<br />
-          For the rest of the code, © 2025 SciLifeLab Data Centre.
+          For the rest of the code, © 2026 SciLifeLab Data Centre.
         </p>
         <Title level={4}>MIT License</Title>
         <p role="doc-notice">
@@ -231,7 +231,7 @@ export default function CitationAndLicensePage(): ReactElement {
         </p>
       </div>
       <div className="mt-8">
-        <LastUpdated date="30-01-2026" />
+        <LastUpdated date="02-02-2026" />
       </div>
     </div>
   );

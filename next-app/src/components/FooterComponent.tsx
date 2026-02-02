@@ -18,7 +18,7 @@ const projectLinks: FooterLink[] = [
   { label: "FAQ", href: "/faq" },
 ];
 
-const externalLinks: Array<FooterLink & { external?: boolean }> = [
+const policyLinks: Array<FooterLink & { external?: boolean }> = [
   {
     label: "Privacy policy",
     href: "https://precision-medicine-portal.scilifelab.se/privacy",
@@ -27,7 +27,6 @@ const externalLinks: Array<FooterLink & { external?: boolean }> = [
   {
     label: "Citation and license",
     href: "/citation-and-license",
-    external: true,
   },
 ];
 
@@ -91,7 +90,7 @@ export default function FooterComponent() {
                 Policies
               </h3>
               <ul className="mt-4 space-y-3">
-                {externalLinks.map((l) => (
+                {policyLinks.map((l) => (
                   <li key={l.href}>
                     <a
                       href={l.href}
