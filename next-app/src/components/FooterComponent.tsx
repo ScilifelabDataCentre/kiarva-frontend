@@ -18,7 +18,7 @@ const projectLinks: FooterLink[] = [
   { label: "FAQ", href: "/faq" },
 ];
 
-const externalLinks: Array<FooterLink & { external?: boolean }> = [
+const policyLinks: Array<FooterLink & { external?: boolean }> = [
   {
     label: "Privacy policy",
     href: "https://precision-medicine-portal.scilifelab.se/privacy",
@@ -26,8 +26,7 @@ const externalLinks: Array<FooterLink & { external?: boolean }> = [
   },
   {
     label: "Citation and license",
-    href: "https://precision-medicine-portal.scilifelab.se/citation-and-license",
-    external: true,
+    href: "/citation-and-license",
   },
 ];
 
@@ -36,7 +35,7 @@ function FooterLinkList({
   links,
 }: {
   title: string;
-  links: FooterLink[];
+  links: Array<FooterLink & { external?: boolean }>;
 }) {
   return (
     <div>
@@ -45,14 +44,27 @@ function FooterLinkList({
       </h3>
       <ul className="mt-4 space-y-3">
         {links.map((l) => (
-          <li key={l.href}>
+          l.external ?
+          (<li key={l.href}>
+            <a
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+            >
+              {l.label}
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>)
+          :
+          (<li key={l.href}>
             <Link
               href={l.href}
               className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
             >
               {l.label}
             </Link>
-          </li>
+          </li>)
         ))}
       </ul>
     </div>
@@ -86,26 +98,7 @@ export default function FooterComponent() {
           >
             <FooterLinkList title="Tools" links={toolsLinks} />
             <FooterLinkList title="Project" links={projectLinks} />
-            <div>
-              <h3 className="text-sm font-semibold tracking-wide text-primary-foreground">
-                Policies
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {externalLinks.map((l) => (
-                  <li key={l.href}>
-                    <a
-                      href={l.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
-                    >
-                      {l.label}
-                      <span className="sr-only"> (opens in a new tab)</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <FooterLinkList title="Policies" links={policyLinks} />
           </nav>
         </div>
 

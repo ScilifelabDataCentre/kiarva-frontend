@@ -103,7 +103,7 @@ export default function HeaderComponent() {
             id="main-navigation"
             className={`${
               isMenuOpen ? "block" : "hidden"
-            } lg:block mt-4 lg:mt-0`}
+            } lg:block mt-4 px-6 lg:mt-0`}
             aria-label="Main navigation"
           >
             <ul className="flex flex-col lg:flex-row lg:flex-wrap lg:items-center lg:space-x-6 space-y-2 lg:space-y-0 text-lg">
