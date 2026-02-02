@@ -14,7 +14,7 @@ const plotHeroBackground = "images/heroPlotImage.png";
 const alignmentHeroBackground = "images/heroAlignmentImage.png";
 const searchHeroBackground = "images/heroSearchImage.png";
 
-const newsDate = new Date("2025-06-25");
+const newsDate = new Date("2026-02-01");
 
 interface FadeAlertProps {
   children: ReactNode;
@@ -108,24 +108,18 @@ export default function HomePage(): ReactElement {
         <FadeAlert title="News" icon={Rss}>
           <time
             dateTime={newsDate.toISOString()}
-            className="block italic mb-2 text-muted-foreground"
+            className="block italic mb-2"
           >
             {newsDate.toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
-              day: "numeric",
+              // day: "numeric",
             })}
           </time>
           <p>
-            We are excited to introduce the <b>demo version</b> of our new
-            research tool, designed to provide an early glimpse into the
-            DSN&apos;s first dashboard. This preliminary release includes a few
-            example plots to showcase the tool&apos;s analytical capabilities,
-            while the full functionality is being finalized. In this demo
-            version, users can explore data features but won&apos;t have access
-            to all data or access to download FASTA files at this stage. The
-            complete tool, including all data and download options, will be
-            available once the research team has published their findings.
+            We are happy to release the first public version of our new research tool, KIARVA. 
+            Please visit our introduction and instruction videos and note that you can find 
+            Frequently Asked Questions (FAQs) under “Additional information” in the top menu.
           </p>
         </FadeAlert>
       </section>

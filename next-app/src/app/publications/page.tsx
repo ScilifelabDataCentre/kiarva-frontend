@@ -47,8 +47,8 @@ export default function PublicationsPage(): ReactElement {
             <PublicationComponent
               linkUrl=""
               title="Ultra-high throughput IGH genotyping of 25 global populations reveals population-biased allelic diversity and homozygous IGHV and IGHD gene deletions"
-              authors="Martin Corcoran, Sanjana Narang*, Mateusz Kaduk*, Mark Chernyshev*, Christopher Sundling, Anna Färnert, and Gunilla B. Karlsson Hedestam"
-              journal="Pre-print August 2024"
+              authors="Martin Corcoran, Sanjana Narang, Mateusz Kaduk, Mark Chernyshev, Anna Färnert, Christopher Sundling and Gunilla B. Karlsson Hedestam"
+              journal="Corcoran et al. Immunity 2026"
               bgColor="bg-neutral"
             />
           </li>
