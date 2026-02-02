@@ -91,7 +91,8 @@ export default function CitationAndLicensePage(): ReactElement {
         </Title>
         <p>
           Journalists are welcome to reuse text, images, and other content from
-          KIARVA for non-commercial purposes. Please acknowledge the source as{" "}
+          KIARVA in articles, blog posts, and social media for non-commercial purposes. 
+          Please acknowledge the source as{" "}
           <strong>KIARVA</strong>, include a link to{" "}
           <a
             href="https://kiarva.scilifelab.se"
