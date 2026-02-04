@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import Title from "@/components/common/title";
+import { H_1 } from "@/constants";
 import {
   Accordion,
   AccordionItem,
@@ -13,9 +13,7 @@ import { BODY_CLASSES } from "@/constants";
 export default function FAQPage(): ReactElement {
   return (
     <main className={BODY_CLASSES}>
-      <Title level={1} className="mb-10">
-        Frequently Asked Questions
-      </Title>
+      <h1 className={H_1}>Frequently Asked Questions</h1>
 
       <section aria-labelledby="faq-heading" className="mb-8">
         <h2 id="faq-heading" className="sr-only">
@@ -33,7 +31,9 @@ export default function FAQPage(): ReactElement {
               How are alleles named within KIARVA?
             </AccordionTrigger>
             <AccordionContent>
-              <Title level={4}>Nucleotide names</Title>
+              <h4 className="mb-1 text-base font-medium leading-6">
+                Nucleotide names
+              </h4>
               <p>
                 The IGHV alleles are provided in two formats within the KIARVA
                 resource, nucleotide and collapsed amino acid sequences.
@@ -53,9 +53,9 @@ export default function FAQPage(): ReactElement {
                 integers provided by the ImmuneDiscover software discovery
                 setting.
               </p>
-              <Title level={4} className="mt-2">
+              <h4 className="mt-4 mb-1 text-base font-medium leading-6">
                 Amino acid-collapsed names
-              </Title>
+              </h4>
               <p>
                 Amino acid (AA) collapsing of IGHV sequences enables allelic
                 variants containing synonymous nucleotide variants to be
@@ -73,7 +73,7 @@ export default function FAQPage(): ReactElement {
           </AccordionItem>
           <AccordionItem value="item-2">
             <AccordionTrigger>
-              What does "DEL" in the allele dropdown menu mean?
+              What does &quot;DEL&quot; in the allele dropdown menu mean?
             </AccordionTrigger>
             <AccordionContent>
               <p>
@@ -83,8 +83,8 @@ export default function FAQPage(): ReactElement {
                 individuals will be homozygous for such deletions, with the
                 result that the genes located within these segments will not be
                 present in the genotypic output for these cases. We have chosen
-                to represent homozygous deletions as "DEL" in the frequency
-                plots for:
+                to represent homozygous deletions as &quot;DEL&quot; in the
+                frequency plots for:
               </p>
               <ul className="mt-2 list-disc pl-6 space-y-1">
                 <li>IGHV7-4-1</li>
