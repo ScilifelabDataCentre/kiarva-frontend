@@ -85,31 +85,30 @@ export default function HomePage(): ReactElement {
         </h2>
         <FadeAlert title="Welcome to KIARVA" icon={BadgeInfo}>
           <p>
-            Variation between individuals and populations within the 
-            immunoglobulin (IG) locus involves both structural and allelic 
-            diversity. The Karolinska Institutet Adaptive Immune Receptor Gene 
-            Variant Atlas (<b>KIARVA</b>) hosts germline-encoded IG heavy chain 
-            (IGH) alleles identified in 2486 individuals from the 1000 Genomes 
-            Project (1KGP) collection, in total 561 IGHV, 51 IGHD and 12 IGHJ 
-            alleles. <b>KIARVA</b> is open source and provides downloadable 
-            FASTA files with all sequences, as well as information about the 
-            frequency of each IGHV allele in 5 continental superpopulations and 25 
-            subpopulations. As soon as possible, <b>KIARVA</b> will be extended to also 
-            contain population-based information about IG kappa and lambda 
-            genes, as well as T cell receptor genes.<br /><br />
-
-            <b>When using this database, please cite Corcoran et al. Immunity 2026.
-            The resource should not be used for commercial purposes.
-            For questions, please contact the authors.
+            Variation between individuals and populations within the
+            immunoglobulin (IG) locus involves both structural and allelic
+            diversity. The Karolinska Institutet Adaptive Immune Receptor Gene
+            Variant Atlas (<b>KIARVA</b>) hosts germline-encoded IG heavy chain
+            (IGH) alleles identified in 2486 individuals from the 1000 Genomes
+            Project (1KGP) collection, in total 561 IGHV, 51 IGHD and 12 IGHJ
+            alleles. <b>KIARVA</b> is open source and provides downloadable
+            FASTA files with all sequences, as well as information about the
+            frequency of each IGHV allele in 5 continental superpopulations and
+            25 subpopulations. As soon as possible, <b>KIARVA</b> will be
+            extended to also contain population-based information about IG kappa
+            and lambda genes, as well as T cell receptor genes.
+            <br />
+            <br />
+            <b>
+              When using this database, please cite Corcoran et al. Immunity
+              2026. The resource should not be used for commercial purposes. For
+              questions, please contact the authors.
             </b>
           </p>
         </FadeAlert>
 
         <FadeAlert title="News" icon={Rss}>
-          <time
-            dateTime={newsDate.toISOString()}
-            className="block italic mb-2"
-          >
+          <time dateTime={newsDate.toISOString()} className="block italic mb-2">
             {newsDate.toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
@@ -117,9 +116,10 @@ export default function HomePage(): ReactElement {
             })}
           </time>
           <p>
-            We are happy to release the first public version of our new research tool, KIARVA. 
-            Please visit our introduction and instruction videos and note that you can find 
-            Frequently Asked Questions (FAQs) under “Additional information” in the top menu.
+            We are happy to release the first version of our new research tool,
+            KIARVA. Please visit our introduction and instruction videos and
+            note that you can find Frequently Asked Questions (FAQs) under
+            “Additional information” in the top menu.
           </p>
         </FadeAlert>
       </section>
@@ -237,7 +237,19 @@ export default function HomePage(): ReactElement {
         </article>
       </section>
       <p className="pt-10 text-lg">
-        For more information about KIARVA, see the pages <Link href="/methodology" className={textLinkClasses}>Methodology</Link>, <Link href="/faq" className={textLinkClasses}>FAQ</Link> and <Link href="/about" className={textLinkClasses}>About</Link>.
+        For more information about KIARVA, see the pages{" "}
+        <Link href="/methodology" className={textLinkClasses}>
+          Methodology
+        </Link>
+        ,{" "}
+        <Link href="/faq" className={textLinkClasses}>
+          FAQ
+        </Link>{" "}
+        and{" "}
+        <Link href="/about" className={textLinkClasses}>
+          About
+        </Link>
+        .
       </p>
     </main>
   );
