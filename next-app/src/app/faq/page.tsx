@@ -48,9 +48,10 @@ export default function FAQPage(): ReactElement {
                 2023, release version 9, downloaded on 10/12/2024). Alleles that
                 are identical to the AIRR-C sequences have the same names in
                 KIARVA. Variant sequences that differ from AIRR-C reference
-                sequences were given names with a suffix of the form _SXXXX,
-                where the ’X’s are integers provided by the ImmuneDiscover
-                software discovery setting.
+                sequences were given names with a suffix of the form{" "}
+                <code className="font-mono">_SXXXX</code>, where the Xs are
+                integers provided by the ImmuneDiscover software discovery
+                setting.
               </p>
               <Title level={4} className="mt-2">
                 Amino acid-collapsed names
@@ -72,7 +73,7 @@ export default function FAQPage(): ReactElement {
           </AccordionItem>
           <AccordionItem value="item-2">
             <AccordionTrigger>
-              What does ’DEL’ in the allele dropdown menu mean?
+              What does "DEL" in the allele dropdown menu mean?
             </AccordionTrigger>
             <AccordionContent>
               <p>
@@ -82,11 +83,22 @@ export default function FAQPage(): ReactElement {
                 individuals will be homozygous for such deletions, with the
                 result that the genes located within these segments will not be
                 present in the genotypic output for these cases. We have chosen
-                to represent homozygous deletions as ’DEL’ in the frequency
-                plots for IGHV7-4-1, IGH4-30-2, IGHV4-30-4, IGHV4-31,
-                IGHV3-30-3, IGHV3-33, IGHV3-64D, IGHV5-10-1, IGHV1-69-2, IGHV3-9
-                and IGHV1-8.
+                to represent homozygous deletions as "DEL" in the frequency
+                plots for:
               </p>
+              <ul className="mt-2 list-disc pl-6 space-y-1">
+                <li>IGHV7-4-1</li>
+                <li>IGHV4-30-2</li>
+                <li>IGHV4-30-4</li>
+                <li>IGHV4-31</li>
+                <li>IGHV3-30-3</li>
+                <li>IGHV3-33</li>
+                <li>IGHV3-64D</li>
+                <li>IGHV5-10-1</li>
+                <li>IGHV1-69-2</li>
+                <li>IGHV3-9</li>
+                <li>IGHV1-8</li>
+              </ul>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
@@ -145,26 +157,37 @@ export default function FAQPage(): ReactElement {
                 in the analysis process to handle this. ImmuneDiscover
                 genotyping has two independent approaches to avoid including
                 false-positive, mutated sequences in its genotyping output.
-                ImmuneDiscover libraries are produced using primers that target
-                unrearranged V, D and J genes, while rearranged sequences are
-                not targeted and therefore not amplified. This approach excludes
-                the vast majority of SHM associated variation. SHM of
-                unrearranged genes is largely limited to when a V or J gene is
-                positioned in the immediate physical vicinity of a rearranged
-                gene. This is particularly the case for J genes if downstream
-                unrearranged genes are present within approximately 3 kb of a
-                rearranged neighboring J gene. In the case of V genes, the
-                distance between the genes is sufficient in most cases to avoid
-                SHM ’spreading’ to unrearranged neighbors. One exception is
-                IGHV2-70/IGHV2-70D, which is located within 9 kb of the
-                frequently rearranged IGHV1-69/IGH1-69D gene. In the KIARVA
-                analysis of the 1KGP dataset, we therefore required that all
-                IGHV allelic sequences were present in at least 2 cases, with a
-                higher stringency applied for IGHV1-69 (4 cases required) and
-                IGHV2-70/2-70D (10 cases required). The issue of localized SHM
-                spreading to unrearranged genes is specific to LCL samples and
-                is not an issue when using ImmuneDiscover for IG genotype using
-                other genomic DNA templates.
+              </p>
+              <ol className="mt-2 list-decimal pl-6 space-y-2">
+                <li>
+                  ImmuneDiscover libraries are produced using primers that
+                  target unrearranged V, D and J genes, while rearranged
+                  sequences are not targeted and therefore not amplified. This
+                  approach excludes the vast majority of SHM-associated
+                  variation.
+                </li>
+                <li>
+                  SHM of unrearranged genes is largely limited to when a V or J
+                  gene is positioned in the immediate physical vicinity of a
+                  rearranged gene. This is particularly the case for J genes if
+                  downstream unrearranged genes are present within approximately
+                  3 kb of a rearranged neighboring J gene. In the case of V
+                  genes, the distance between the genes is sufficient in most
+                  cases to avoid SHM spreading to unrearranged neighbors. One
+                  exception is IGHV2-70/IGHV2-70D, which is located within 9 kb
+                  of the frequently rearranged IGHV1-69/IGH1-69D gene. In the
+                  KIARVA analysis of the 1KGP dataset, we therefore required
+                  that all IGHV allelic sequences were present in at least 2
+                  cases, with a higher stringency applied for IGHV1-69 (4 cases
+                  required) and IGHV2-70/2-70D (10 cases required).
+                </li>
+              </ol>
+
+              <p className="mt-2">
+                The issue of localized SHM spreading to unrearranged genes is
+                specific to LCL samples and is not an issue when using
+                ImmuneDiscover for IG genotype using other genomic DNA
+                templates.
               </p>
             </AccordionContent>
           </AccordionItem>
@@ -176,20 +199,30 @@ export default function FAQPage(): ReactElement {
               <p>
                 Care has been taken to ensure the accuracy of the alleles
                 present within KIARVA, with several steps of cross-validation.
-                The accuracy of the ImmuneDiscover procedure was confirmed using
-                a validation cohort of 90 cases, the KI cohort. These 90 samples
-                were genotyped using two independent methods, IgDiscover (using
-                two independent IgM libraries for each case) and ImmuneDiscover,
-                resulting in highly concordant results (Corcoran et al. Immunity
-                2026, Figure 1E and G). We further used the IgSNPer program to
-                screen all alleles identified to confirm the presence of allele
-                specific SNP variants in an amalgamated cohort of over 1.2
-                million individuals. All IGHV allele variants present in the
-                KIARVA database were confirmed to be present in at least two
-                individuals, with the IGHV1-69 and IGHV2-70 variants (those most
-                susceptible to SHM spreading from neighbouring rearranged genes)
-                requiring presence in four and ten individuals, respectively.
               </p>
+              <ol className="mt-2 list-decimal pl-6 space-y-2">
+                <li>
+                  The accuracy of the ImmuneDiscover procedure was confirmed
+                  using a validation cohort of 90 cases, the KI cohort. These 90
+                  samples were genotyped using two independent methods,
+                  IgDiscover (using two independent IgM libraries for each case)
+                  and ImmuneDiscover, resulting in highly concordant results
+                  (Corcoran et al. Immunity 2026, Figure 1E and G).
+                </li>
+                <li>
+                  We further used the IgSNPer program to screen all alleles
+                  identified to confirm the presence of allele-specific SNP
+                  variants in an amalgamated cohort of over 1.2 million
+                  individuals.
+                </li>
+                <li>
+                  All IGHV allele variants present in the KIARVA database were
+                  confirmed to be present in at least two individuals, with the
+                  IGHV1-69 and IGHV2-70 variants (those most susceptible to SHM
+                  spreading from neighbouring rearranged genes) requiring
+                  presence in four and ten individuals, respectively.
+                </li>
+              </ol>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-7">
