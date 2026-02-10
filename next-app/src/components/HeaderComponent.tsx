@@ -278,6 +278,7 @@ export default function HeaderComponent() {
   const mobileNavRef = useRef<HTMLElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
+  const toggleMenu = useCallback(() => setIsMenuOpen((prev) => !prev), []);
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
   // Close mobile menu on route change
@@ -300,7 +301,7 @@ export default function HeaderComponent() {
               className="font-bold text-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
             >
               <div className="flex items-center justify-center gap-2">
-                <h1 className="text-2xl">KIARVA</h1>
+                <span className="text-2xl">KIARVA</span>
                 {showDemoBadge && <Badge variant="accent">Demo</Badge>}
               </div>
               <p className="13inch:whitespace-nowrap text-xl">
@@ -312,7 +313,7 @@ export default function HeaderComponent() {
               ref={hamburgerRef}
               type="button"
               className="xl:hidden text-white/70 hover:text-white rounded-md p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
-              onClick={() => setIsMenuOpen((prev) => !prev)}
+              onClick={toggleMenu}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-navigation"
               aria-label={
@@ -343,18 +344,16 @@ export default function HeaderComponent() {
                         : "text-white/70 hover:text-white",
                     )}
                     aria-current={pathname === link.href ? "page" : undefined}
-                    aria-describedby={`tooltip-${link.href}`}
                   >
                     <span aria-hidden="true">{link.icon}</span>
                     {link.text}
-                    {/* Screen-reader-only description */}
+                    {/* Screen-reader-only description (sole source for AT) */}
                     <span className="sr-only">, {link.description}</span>
                   </Link>
 
-                  {/* Visual tooltip (hidden from assistive tech) */}
+                  {/* Visual tooltip (decorative – AT gets description via sr-only span above) */}
                   <div
-                    id={`tooltip-${link.href}`}
-                    role="tooltip"
+                    aria-hidden="true"
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-1.5 px-2.5 py-1.5
                       bg-foreground text-background text-xs rounded-md whitespace-nowrap
                       opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150
@@ -397,7 +396,7 @@ export default function HeaderComponent() {
                   aria-current={pathname === "/citation" ? "page" : undefined}
                 >
                   <FileBadge className="h-3.5 w-3.5" aria-hidden="true" />
-                  Citation &amp; License
+                  Citation & License
                 </Link>
               </li>
             </ul>
@@ -493,7 +492,7 @@ export default function HeaderComponent() {
                     aria-current={pathname === "/citation" ? "page" : undefined}
                   >
                     <FileBadge className="h-4 w-4" aria-hidden="true" />
-                    Citation &amp; License
+                    Citation & License
                   </Link>
                 </li>
               </ul>
