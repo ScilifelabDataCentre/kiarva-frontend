@@ -10,12 +10,12 @@ const toolsLinks: FooterLink[] = [
   { label: "Sequence search", href: "/sequencesearch" },
 ];
 
-const projectLinks: FooterLink[] = [
+const resourceLinks: FooterLink[] = [
   { label: "About", href: "/about" },
   { label: "Methodology", href: "/methodology" },
   { label: "Publications", href: "/publications" },
-  { label: "Change log", href: "/changelog" },
   { label: "FAQ", href: "/faq" },
+  { label: "Change log", href: "/changelog" },
 ];
 
 const policyLinks: Array<FooterLink & { external?: boolean }> = [
@@ -43,29 +43,30 @@ function FooterLinkList({
         {title}
       </h3>
       <ul className="mt-4 space-y-3">
-        {links.map((l) => (
-          l.external ?
-          (<li key={l.href}>
-            <a
-              href={l.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
-            >
-              {l.label}
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
-          </li>)
-          :
-          (<li key={l.href}>
-            <Link
-              href={l.href}
-              className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
-            >
-              {l.label}
-            </Link>
-          </li>)
-        ))}
+        {links.map((l) =>
+          l.external ? (
+            <li key={l.href}>
+              <a
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+              >
+                {l.label}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </li>
+          ) : (
+            <li key={l.href}>
+              <Link
+                href={l.href}
+                className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+              >
+                {l.label}
+              </Link>
+            </li>
+          ),
+        )}
       </ul>
     </div>
   );
@@ -97,7 +98,7 @@ export default function FooterComponent() {
             aria-labelledby="footer-navigation-heading"
           >
             <FooterLinkList title="Tools" links={toolsLinks} />
-            <FooterLinkList title="Project" links={projectLinks} />
+            <FooterLinkList title="Resources" links={resourceLinks} />
             <FooterLinkList title="Policies" links={policyLinks} />
           </nav>
         </div>
