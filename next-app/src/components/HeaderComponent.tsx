@@ -100,6 +100,13 @@ const additionalInformationLinks: NavLink[] = [
 ];
 
 // ---------------------------------------------------------------------------
+// Shared desktop nav-link base styles (text, padding, ring, transitions)
+// ---------------------------------------------------------------------------
+
+const DESKTOP_NAV_BASE =
+  "flex items-center text-sm 13inch:text-base font-medium px-2 13inch:px-3 py-1.5 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30";
+
+// ---------------------------------------------------------------------------
 // NavDropdown – accessible Radix dropdown for grouped links
 // ---------------------------------------------------------------------------
 
@@ -118,9 +125,8 @@ function NavDropdown({
     <DropdownMenu>
       <DropdownMenuTrigger
         className={clsx(
-          "flex items-center gap-1 text-base font-medium transition-colors rounded-md px-3 py-1.5",
-          "text-white/70 hover:text-white",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30",
+          DESKTOP_NAV_BASE,
+          "gap-1 text-white/70 hover:text-white",
         )}
       >
         {label}
@@ -295,9 +301,9 @@ export default function HeaderComponent() {
   return (
     <header className="bg-primary">
       <div className="text-white 2xl:max-w-screen-2xl 2xl:mx-auto">
-        <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between py-4 px-6">
+        <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between xl:gap-8 py-4 px-6">
           {/* ── Logo & mobile toggle row ─────────────────────────────── */}
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center xl:shrink-0">
             <Link
               href="/#top"
               className="font-bold text-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
@@ -332,15 +338,15 @@ export default function HeaderComponent() {
 
           {/* ── Desktop navigation ───────────────────────────────────── */}
           <nav className="hidden xl:block" aria-label="Main navigation">
-            <ul className="flex items-center gap-1" role="list">
+            <ul className="flex items-center gap-0.5 13inch:gap-1" role="list">
               {/* Inline tool links */}
               {toolLinks.map((link) => (
                 <li key={link.href} className="relative group">
                   <Link
                     href={link.href}
                     className={clsx(
-                      "flex items-center gap-1.5 text-base font-medium px-3 py-1.5 rounded-md transition-colors",
-                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30",
+                      DESKTOP_NAV_BASE,
+                      "gap-1.5 whitespace-nowrap",
                       pathname === link.href
                         ? "text-white"
                         : "text-white/70 hover:text-white",
@@ -389,8 +395,8 @@ export default function HeaderComponent() {
                 <Link
                   href="/citation-and-license"
                   className={clsx(
-                    "flex items-center gap-1.5 text-base font-medium px-3 py-1.5 rounded-md transition-colors",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30",
+                    DESKTOP_NAV_BASE,
+                    "gap-1.5",
                     pathname === "/citation-and-license"
                       ? "text-white"
                       : "text-white/70 hover:text-white",
@@ -399,8 +405,11 @@ export default function HeaderComponent() {
                     pathname === "/citation-and-license" ? "page" : undefined
                   }
                 >
-                  <FileBadge className="h-3.5 w-3.5" aria-hidden="true" />
-                  Citation & license
+                  <FileBadge className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                  <span className="inline-flex flex-col leading-tight">
+                    <span>Citation</span>
+                    <span className="whitespace-nowrap">& license</span>
+                  </span>
                 </Link>
               </li>
             </ul>
