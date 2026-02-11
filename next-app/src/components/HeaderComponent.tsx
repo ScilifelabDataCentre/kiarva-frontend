@@ -133,19 +133,19 @@ function NavDropdown({
               href={link.href}
               onClick={onLinkClick}
               className={clsx(
-                "flex items-start gap-3 rounded-md px-3 py-2.5 w-full cursor-pointer transition-colors",
-                "focus:bg-accent/50 focus:text-accent-foreground",
-                pathname === link.href ? "bg-primary/10" : "hover:bg-accent/50",
+                "group flex items-start gap-3 rounded-md px-3 py-2.5 w-full cursor-pointer transition-colors",
+                "hover:bg-primary/10 focus:bg-primary/10",
+                pathname === link.href && "bg-primary/10",
               )}
               aria-current={pathname === link.href ? "page" : undefined}
             >
               <span
                 aria-hidden="true"
                 className={clsx(
-                  "mt-0.5 shrink-0",
+                  "mt-0.5 shrink-0 transition-colors",
                   pathname === link.href
                     ? "text-primary"
-                    : "text-muted-foreground",
+                    : "text-muted-foreground group-hover:text-primary group-focus:text-primary",
                 )}
               >
                 {link.icon}
@@ -153,8 +153,10 @@ function NavDropdown({
               <div className="flex flex-col gap-0.5">
                 <span
                   className={clsx(
-                    "text-sm font-medium leading-tight",
-                    pathname === link.href ? "text-primary" : "text-foreground",
+                    "text-sm font-medium leading-tight transition-colors",
+                    pathname === link.href
+                      ? "text-primary"
+                      : "text-foreground group-hover:text-primary group-focus:text-primary",
                   )}
                 >
                   {link.text}
