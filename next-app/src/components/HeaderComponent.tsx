@@ -107,6 +107,16 @@ const DESKTOP_NAV_BASE =
   "flex items-center text-sm 13inch:text-base font-medium px-2 13inch:px-3 py-1.5 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30";
 
 // ---------------------------------------------------------------------------
+// Shared mobile nav-link base styles
+// ---------------------------------------------------------------------------
+
+const MOBILE_NAV_LINK =
+  "flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors";
+
+const MOBILE_SECTION_HEADING =
+  "text-[11px] font-semibold uppercase tracking-widest text-white/40 mb-2 px-3";
+
+// ---------------------------------------------------------------------------
 // NavDropdown – accessible Radix dropdown for grouped links
 // ---------------------------------------------------------------------------
 
@@ -114,12 +124,10 @@ function NavDropdown({
   label,
   links,
   pathname,
-  onLinkClick,
 }: {
   label: string;
   links: NavLink[];
   pathname: string;
-  onLinkClick?: () => void;
 }) {
   return (
     <DropdownMenu>
@@ -137,7 +145,6 @@ function NavDropdown({
           <DropdownMenuItem key={link.href} asChild className="p-0">
             <Link
               href={link.href}
-              onClick={onLinkClick}
               className={clsx(
                 "group flex items-start gap-3 rounded-md px-3 py-2.5 w-full cursor-pointer transition-colors",
                 "hover:bg-primary/10 focus:bg-primary/10",
@@ -433,7 +440,7 @@ export default function HeaderComponent() {
             <div role="group" aria-labelledby="mobile-tool-heading">
               <h3
                 id="mobile-tool-heading"
-                className="text-[11px] font-semibold uppercase tracking-widest text-white/40 mb-2 px-3"
+                className={MOBILE_SECTION_HEADING}
               >
                 Tools
               </h3>
@@ -444,7 +451,7 @@ export default function HeaderComponent() {
                       href={link.href}
                       onClick={closeMenu}
                       className={clsx(
-                        "flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors",
+                        MOBILE_NAV_LINK,
                         pathname === link.href
                           ? "text-white bg-white/10"
                           : "text-white/60 hover:text-white hover:bg-white/5",
@@ -466,7 +473,7 @@ export default function HeaderComponent() {
             >
               <h3
                 id="mobile-additional-information-heading"
-                className="text-[11px] font-semibold uppercase tracking-widest text-white/40 mb-2 px-3"
+                className={MOBILE_SECTION_HEADING}
               >
                 Additional information
               </h3>
@@ -477,7 +484,7 @@ export default function HeaderComponent() {
                       href={link.href}
                       onClick={closeMenu}
                       className={clsx(
-                        "flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors",
+                        MOBILE_NAV_LINK,
                         pathname === link.href
                           ? "text-white bg-white/10"
                           : "text-white/60 hover:text-white hover:bg-white/5",
@@ -500,7 +507,7 @@ export default function HeaderComponent() {
                     href="/citation-and-license"
                     onClick={closeMenu}
                     className={clsx(
-                      "flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors",
+                      MOBILE_NAV_LINK,
                       pathname === "/citation-and-license"
                         ? "text-white bg-white/10"
                         : "text-white/60 hover:text-white hover:bg-white/5",
