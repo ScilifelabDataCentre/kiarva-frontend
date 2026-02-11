@@ -114,7 +114,11 @@ export default function FAQPage(): ReactElement {
                 alleles and gene ’groups’, namely IGHV1-69, IGHV3-23 and
                 IGHV3-30 associated with genomic duplications. For KIARVA and
                 the 1KGP dataset, we have chosen to use a single designation to
-                represent allelic sequences that belong to such groups.
+                represent allelic sequences that belong to such groups. The
+                IGHV2-70/2-70D genes are also difficult to disambiguate based on
+                sequence alone and we have chosen to assign IGHV2-70/2-70D
+                alleles that are predominantly associated with IGHV1-69-2
+                containing genotypes as IGHV2-70D.
               </p>
             </AccordionContent>
           </AccordionItem>
