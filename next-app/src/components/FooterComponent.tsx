@@ -10,7 +10,7 @@ const toolsLinks: FooterLink[] = [
   { label: "Sequence search", href: "/sequencesearch" },
 ];
 
-const resourceLinks: FooterLink[] = [
+const additionalInformationLinks: FooterLink[] = [
   { label: "About", href: "/about" },
   { label: "Methodology", href: "/methodology" },
   { label: "Publications", href: "/publications" },
@@ -98,7 +98,10 @@ export default function FooterComponent() {
             aria-labelledby="footer-navigation-heading"
           >
             <FooterLinkList title="Tools" links={toolsLinks} />
-            <FooterLinkList title="Resources" links={resourceLinks} />
+            <FooterLinkList
+              title="Additional information"
+              links={additionalInformationLinks}
+            />
             <FooterLinkList title="Policies" links={policyLinks} />
           </nav>
         </div>

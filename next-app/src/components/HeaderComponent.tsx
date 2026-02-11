@@ -66,7 +66,7 @@ const toolLinks: NavLink[] = [
   },
 ];
 
-const resourceLinks: NavLink[] = [
+const additionalInformationLinks: NavLink[] = [
   {
     text: "About",
     href: "/about",
@@ -373,11 +373,11 @@ export default function HeaderComponent() {
                 <div className="h-4 w-px bg-white/20 mx-1" />
               </li>
 
-              {/* Resources dropdown */}
+              {/* Additional information dropdown */}
               <li>
                 <NavDropdown
-                  label="Resources"
-                  links={resourceLinks}
+                  label="Additional information"
+                  links={additionalInformationLinks}
                   pathname={pathname}
                 />
               </li>
@@ -385,18 +385,20 @@ export default function HeaderComponent() {
               {/* Citation & License direct link */}
               <li>
                 <Link
-                  href="/citation"
+                  href="/citation-and-license"
                   className={clsx(
                     "flex items-center gap-1.5 text-base font-medium px-3 py-1.5 rounded-md transition-colors",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30",
-                    pathname === "/citation"
+                    pathname === "/citation-and-license"
                       ? "text-white"
                       : "text-white/70 hover:text-white",
                   )}
-                  aria-current={pathname === "/citation" ? "page" : undefined}
+                  aria-current={
+                    pathname === "/citation-and-license" ? "page" : undefined
+                  }
                 >
                   <FileBadge className="h-3.5 w-3.5" aria-hidden="true" />
-                  Citation & License
+                  Citation & license
                 </Link>
               </li>
             </ul>
@@ -446,16 +448,19 @@ export default function HeaderComponent() {
               </ul>
             </div>
 
-            {/* Resources section */}
-            <div role="group" aria-labelledby="mobile-resources-heading">
+            {/* Additional information section */}
+            <div
+              role="group"
+              aria-labelledby="mobile-additional-information-heading"
+            >
               <h3
-                id="mobile-resources-heading"
+                id="mobile-additional-information-heading"
                 className="text-[11px] font-semibold uppercase tracking-widest text-white/40 mb-2 px-3"
               >
-                Resources
+                Additional information
               </h3>
               <ul className="space-y-0.5" role="list">
-                {resourceLinks.map((link) => (
+                {additionalInformationLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
@@ -476,23 +481,25 @@ export default function HeaderComponent() {
               </ul>
             </div>
 
-            {/* Citation & License */}
+            {/* Citation & license */}
             <div className="border-t border-white/10 pt-3">
               <ul className="space-y-0.5" role="list">
                 <li>
                   <Link
-                    href="/citation"
+                    href="/citation-and-license"
                     onClick={closeMenu}
                     className={clsx(
                       "flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors",
-                      pathname === "/citation"
+                      pathname === "/citation-and-license"
                         ? "text-white bg-white/10"
                         : "text-white/60 hover:text-white hover:bg-white/5",
                     )}
-                    aria-current={pathname === "/citation" ? "page" : undefined}
+                    aria-current={
+                      pathname === "/citation-and-license" ? "page" : undefined
+                    }
                   >
                     <FileBadge className="h-4 w-4" aria-hidden="true" />
-                    Citation & License
+                    Citation & license
                   </Link>
                 </li>
               </ul>
