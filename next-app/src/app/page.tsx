@@ -1,71 +1,64 @@
 "use client";
 
-import { ReactElement, ReactNode } from "react";
-import { BODY_CLASSES } from "@/constants";
+import { ReactElement } from "react";
+import { BODY_CLASSES, H_2, YouTubeVideos } from "@/constants";
 import Link from "next/link";
-import { BadgeInfo, Rss, type LucideIcon } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
-
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import VideoIframe from "@/components/YoutubeIframe";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
-const downloadHeroBackground = "images/heroFASTAImage.png";
-const plotHeroBackground = "images/heroPlotImage.png";
-const alignmentHeroBackground = "images/heroAlignmentImage.png";
-const searchHeroBackground = "images/heroSearchImage.png";
+const newsImage1 = "/images/KIARVANewsThumbnail.jpeg";
 
 const newsDate = new Date("2026-02-01");
 
-interface FadeAlertProps {
-  children: ReactNode;
-  title: string;
-  icon: LucideIcon;
+function DisplayService(props: {video: string, title: string, url: string}) {
+  return (
+    <div className="relative w-full rounded-lg border p-4 gap-6 flex flex-col bg-muted">
+      <h3 className="text-xl lg:text-2xl font-bold">
+        {props.title}
+      </h3>
+      <Accordion
+          type="single"
+          collapsible
+          className="w-full rounded-lg hover:bg-primary/20"
+          role="region"
+        >
+        <AccordionItem value="item-1">
+          <AccordionTrigger className="pl-2">
+            Watch example video
+          </AccordionTrigger>
+          <AccordionContent>
+              <VideoIframe className="max-w-full max-h-full w-[36em] h-[20em] lg:w-[32em] lg:h-[18em] xl:w-[36em] xl:h-[20em] pl-2" 
+                videoId={YouTubeVideos[props.video].adress} 
+                videoTitle={YouTubeVideos[props.video].title} 
+              />
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+      <Button
+        variant="default"
+        size="default"
+        className="w-1/3"
+        asChild
+        >
+        <Link href={"/" + props.url}>Go to page</Link>
+      </Button>
+    </div>
+  )
 }
 
-function FadeAlert({ children, title, icon: Icon }: FadeAlertProps) {
-  const [showFade, setShowFade] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const checkOverflow = () => {
-      if (contentRef.current) {
-        const { scrollHeight, clientHeight, scrollTop } = contentRef.current;
-        setShowFade(
-          scrollHeight > clientHeight &&
-            scrollHeight - clientHeight - scrollTop > 1
-        );
-      }
-    };
-
-    checkOverflow();
-    window.addEventListener("resize", checkOverflow);
-    const currentRef = contentRef.current;
-    if (currentRef) {
-      currentRef.addEventListener("scroll", checkOverflow);
-    }
-
-    return () => {
-      window.removeEventListener("resize", checkOverflow);
-      if (currentRef) {
-        currentRef.removeEventListener("scroll", checkOverflow);
-      }
-    };
-  }, []);
-
+function DisplayNews(props: {imageName: string, imageAlt: string, children: React.ReactNode}) {
   return (
-    <Alert className="flex-grow lg:basis-1/2 lg:my-5">
-      <Icon className="h-6 w-6" />
-      <AlertTitle className="text-sm lg:text-base mb-4">{title}</AlertTitle>
-      <AlertDescription className="text-sm lg:text-base relative">
-        <div ref={contentRef} className="max-h-60 overflow-y-auto pr-2">
-          {children}
-        </div>
-        {showFade && (
-          <div className="absolute bottom-0 left-0 right-2 h-8 bg-gradient-to-t from-background to-transparent pointer-events-none" />
-        )}
-      </AlertDescription>
-    </Alert>
-  );
+    <div className="flex flex-row gap-x-4">
+      <img className="max-h-64 max-w-64" src={props.imageName} alt={props.imageAlt} aria-hidden="true" />
+      {props.children}
+    </div>
+  )
 }
 
 export default function HomePage(): ReactElement {
@@ -75,16 +68,12 @@ export default function HomePage(): ReactElement {
       <h1 className="sr-only">
         KIARVA - Adaptive Immune Receptor Gene Variant Atlas
       </h1>
-
       <section
         aria-labelledby="welcome-news-heading"
-        className="flex flex-col lg:flex-row items-stretch place-items-center gap-6 mb-6"
       >
-        <h2 id="welcome-news-heading" className="sr-only">
-          Welcome and News
-        </h2>
-        <FadeAlert title="Welcome to KIARVA" icon={BadgeInfo}>
-          <p>
+        <h2 id="welcome-heading" className="text-lg font-semibold mb-2">Welcome to KIARVA</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-stretch gap-x-6 gap-y-6 lg:gap-y-0 mb-6">
+          <p className="lg:pr-8">
             Variation between individuals and populations within the 
             immunoglobulin (IG) locus involves both structural and allelic 
             diversity. The Karolinska Institutet Adaptive Immune Receptor Gene 
@@ -103,138 +92,52 @@ export default function HomePage(): ReactElement {
             For questions, please contact the authors.
             </b>
           </p>
-        </FadeAlert>
-
-        <FadeAlert title="News" icon={Rss}>
-          <time
-            dateTime={newsDate.toISOString()}
-            className="block italic mb-2"
-          >
-            {newsDate.toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              // day: "numeric",
-            })}
-          </time>
-          <p>
-            We are happy to release the first public version of our new research tool, KIARVA. 
-            Please visit our introduction and instruction videos and note that you can find 
-            Frequently Asked Questions (FAQs) under “Additional information” in the top menu.
-          </p>
-        </FadeAlert>
+          <VideoIframe className="max-w-full max-h-full w-[36em] h-[20em] lg:w-[36em] lg:h-[20.25em] xl:w-[40em] xl:h-[22.5em]" 
+            videoId={YouTubeVideos["intro"].adress} 
+            videoTitle={YouTubeVideos["intro"].title}
+          />
+        </div>
       </section>
-
+      <h2 className="divider pt-4"/>
+      <section
+        aria-labelledby="news-heading"
+      >
+        <h2 id="news-heading" className="text-lg mb-4 lg:mb-2 font-semibold">News</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-stretch gap-y-6 gap-x-6 lg:gap-y-0 mb-6">
+          <DisplayNews imageName={newsImage1} imageAlt="DNA-strand">
+            <div>
+              <time
+                dateTime={newsDate.toISOString()}
+                className="block italic mb-2"
+                >
+                {newsDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  // day: "numeric",
+                })}
+              </time>
+              <p className="lg:pr-8">
+                We are happy to release the first public version of our new research tool, KIARVA. 
+                Please visit our introduction and instruction videos and note that you can find 
+                Frequently Asked Questions (FAQs) under “Additional information” in the top menu.
+              </p>
+            </div>
+          </DisplayNews>
+        </div>
+      </section>
+      <h2 className="divider pt-4"/>
       <section
         aria-labelledby="features-heading"
-        className="flex flex-col max-w-xs md:max-w-sm lg:max-w-full lg:flex-row m-auto gap-6 mb-6"
       >
-        <h2 id="features-heading" className="sr-only">
-          Main Features
+        <h2 id="features-heading" className={H_2}>
+          Resources
         </h2>
-        <article className="relative hero min-h-80 bg-neutral">
-          <img
-            className="object-cover size-full"
-            src={downloadHeroBackground}
-            alt="Download FASTA files"
-          />
-          <div
-            className="absolute inset-0 bg-gray-700 opacity-85"
-            aria-hidden="true"
-          ></div>
-          <div className="hero-content text-secondary-content text-center">
-            <div className="max-w-md flex flex-col items-center">
-              <h3 className="mb-5 text-2xl lg:text-3xl font-bold">
-                Download FASTA files
-              </h3>
-              <Button
-                variant="default"
-                size="default"
-                asChild
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                <Link href="/download">Go to page</Link>
-              </Button>
-            </div>
-          </div>
-        </article>
-        <article className="relative hero min-h-80 bg-neutral">
-          <img
-            className="object-cover size-full"
-            src={plotHeroBackground}
-            alt="View population frequencies"
-          />
-          <div
-            className="absolute inset-0 bg-gray-700 opacity-85"
-            aria-hidden="true"
-          ></div>
-          <div className="hero-content text-secondary-content text-center">
-            <div className="max-w-md flex flex-col items-center">
-              <h3 className="mb-5 text-2xl lg:text-3xl font-bold">
-                View population frequencies
-              </h3>
-              <Button
-                variant="default"
-                size="default"
-                asChild
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                <Link href="/plot">Go to page</Link>
-              </Button>
-            </div>
-          </div>
-        </article>
-        <article className="relative hero min-h-80 bg-neutral">
-          <img
-            className="object-cover size-full"
-            src={alignmentHeroBackground}
-            alt="View sequence alignments"
-          />
-          <div
-            className="absolute inset-0 bg-gray-700 opacity-85"
-            aria-hidden="true"
-          ></div>
-          <div className="hero-content text-secondary-content text-center">
-            <div className="max-w-md flex flex-col items-center">
-              <h3 className="mb-5 text-2xl lg:text-3xl font-bold">
-                View sequence alignments
-              </h3>
-              <Button
-                variant="default"
-                size="default"
-                asChild
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                <Link href="/msa">Go to page</Link>
-              </Button>
-            </div>
-          </div>
-        </article>
-        <article className="relative hero min-h-80 bg-neutral">
-          <img
-            className="object-cover size-full"
-            src={searchHeroBackground}
-            alt="Search for sequences"
-          />
-          <div
-            className="absolute inset-0 bg-gray-700 opacity-85"
-            aria-hidden="true"
-          ></div>
-          <div className="hero-content text-secondary-content text-center">
-            <div className="max-w-md flex flex-col items-center">
-              <h3 className="mb-5 text-2xl lg:text-3xl font-bold">
-                Search for sequences
-              </h3>
-              <Button
-                variant="default"
-                size="default"
-                asChild
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                <Link href="/sequencesearch">Go to page</Link>
-              </Button>
-            </div>
-          </div>
-        </article>
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-stretch gap-6 mb-6 mt-6">
+          <DisplayService video="download" title="Download FASTA files" url="download" />
+          <DisplayService video="frequencies" title="View population frequencies" url="plot" />
+          <DisplayService video="alignments" title="View sequence alignments" url="msa" />
+          <DisplayService video="search" title="Search for sequences" url="sequencesearch" />
+        </div>
       </section>
       <p className="pt-10 text-lg">
         For more information about KIARVA, see the pages <Link href="/methodology" className={textLinkClasses}>Methodology</Link>, <Link href="/faq" className={textLinkClasses}>FAQ</Link> and <Link href="/about" className={textLinkClasses}>About</Link>.
