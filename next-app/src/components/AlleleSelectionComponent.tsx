@@ -9,6 +9,7 @@ import DropdownComponent from "@/components/DropdownComponent";
 import { getCookie, hasCookie } from "cookies-next";
 import { IAlleleDropDownConfig } from "@/interfaces/types";
 import DownloadPlotData from "./DownloadPlotData";
+import { getDbName } from "@/lib/APIcalls";
 
 // Main function to render the PlotPage component
 export default function AlelleSelectionComponent(prop: {
@@ -29,6 +30,8 @@ export default function AlelleSelectionComponent(prop: {
     subtypeDropdown: "",
     alleleDropdown: "",
   });
+
+  const [dbName, setDbName] = useState<string>("");
 
   // ------------------------
   // temporary data, used until backend with live data is allowed to be published
@@ -122,6 +125,18 @@ export default function AlelleSelectionComponent(prop: {
     }
   }, []);
 
+  async function awaitDbName() {
+    const dbName: string = await getDbName(
+      currentPicks.geneDropdown +
+      currentPicks.subtypeDropdown +
+      "," +
+      currentPicks.alleleDropdown, 
+      axiosConfig)
+    
+    prop.handleSetSelection(dbName);
+    setDbName(dbName);
+  }
+
   useEffect(() => {
     if (!(prop.plotType == "aminoAcidMSA")) {
       // Treat placeholder values as "not selected"
@@ -130,13 +145,9 @@ export default function AlelleSelectionComponent(prop: {
         currentPicks.alleleDropdown === "..."
       ) {
         prop.handleSetSelection("");
+        setDbName("");
       } else {
-        prop.handleSetSelection(
-          currentPicks.geneDropdown +
-            currentPicks.subtypeDropdown +
-            "*" +
-            currentPicks.alleleDropdown
-        );
+        awaitDbName();
       }
     } else {
       // Treat placeholder values as "not selected"
@@ -145,10 +156,12 @@ export default function AlelleSelectionComponent(prop: {
         currentPicks.subtypeDropdown === "..."
       ) {
         prop.handleSetSelection("");
+        setDbName("");
       } else {
         prop.handleSetSelection(
           currentPicks.geneDropdown + currentPicks.subtypeDropdown
         );
+        setDbName(currentPicks.geneDropdown + currentPicks.subtypeDropdown + '*');
       }
     }
   }, [
@@ -272,10 +285,7 @@ export default function AlelleSelectionComponent(prop: {
               <div className="flex flex-row">
                 <DownloadPlotData
                   alleleOrGene={
-                    currentPicks.geneDropdown +
-                    currentPicks.subtypeDropdown +
-                    "*" +
-                    currentPicks.alleleDropdown
+                    dbName
                   }
                   tableType={prop.plotType}
                   fullGene={false}
@@ -290,13 +300,11 @@ export default function AlelleSelectionComponent(prop: {
               </div>
               {prop.plotType == "translatedFreqPlot" ?
                 <p className="text-neutral-content text-xl font-semibold p-2 text-center">
-                  Combined frequency for {currentPicks.geneDropdown}
-                  {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown} and alleles with the same translated sequence
+                  Combined frequency for {dbName} and alleles with the same translated sequence
                 </p>
                 :
                 <p className="text-neutral-content text-xl font-semibold p-2">
-                  Plot for {currentPicks.geneDropdown}
-                  {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
+                  Plot for {dbName}
                 </p>
               }
             </div>
