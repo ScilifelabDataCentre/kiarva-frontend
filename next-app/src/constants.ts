@@ -1,3 +1,5 @@
+import { IYouTubeVideo } from "./interfaces/types";
+
 // reused tailwind classes
 export const H_1: string =
   "text-left text-black text-2xl lg:text-3xl font-semibold";
@@ -33,7 +35,7 @@ export const currentVersionFormatted: string = `${
   currentVersion.split(".")[0]
 }_${currentVersion.split(".")[1]}`;
 
-export const YouTubeVideos: { [id: string]: {[id: string]: string} } = {
+export const YouTubeVideos: { [id: string]: IYouTubeVideo } = {
   "intro": {"address": "S51-19cyK48", "title": "Introduction video"},
   "download": {"address": "5ymJotmdQZw", "title": "Download FASTA files"},
   "frequencies": {"address": "rzJI-cq2DHs", "title": "View population frequencies"},
