@@ -97,7 +97,7 @@ export default async function HomePage() {
           />
         </div>
       </section>
-      <h2 className="divider pt-4"/>
+      <div className="divider pt-4" aria-hidden="true" />
       <section
         aria-labelledby="news-heading"
       >
@@ -124,7 +124,7 @@ export default async function HomePage() {
           </DisplayNews>
         </div>
       </section>
-      <h2 className="divider pt-4"/>
+      <div className="divider pt-4" aria-hidden="true" />
       <section
         aria-labelledby="features-heading"
       >
