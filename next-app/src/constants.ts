@@ -34,9 +34,9 @@ export const currentVersionFormatted: string = `${
 }_${currentVersion.split(".")[1]}`;
 
 export const YouTubeVideos: { [id: string]: {[id: string]: string} } = {
-  "intro": {"adress": "S51-19cyK48", "title": "Introduction video"},
-  "download": {"adress": "5ymJotmdQZw", "title": "Download FASTA files"},
-  "frequencies": {"adress": "rzJI-cq2DHs", "title": "View population frequencies"},
-  "alignments": {"adress": "4jj5IuO8C1U", "title": "View sequence alignments"},
-  "search": {"adress": "WDaeGC6ZGy0", "title": "Search for sequences"}
+  "intro": {"address": "S51-19cyK48", "title": "Introduction video"},
+  "download": {"address": "5ymJotmdQZw", "title": "Download FASTA files"},
+  "frequencies": {"address": "rzJI-cq2DHs", "title": "View population frequencies"},
+  "alignments": {"address": "4jj5IuO8C1U", "title": "View sequence alignments"},
+  "search": {"address": "WDaeGC6ZGy0", "title": "Search for sequences"}
 }
