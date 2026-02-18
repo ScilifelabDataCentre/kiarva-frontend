@@ -51,10 +51,10 @@ function DisplayService(props: {video: string, title: string, url: string}) {
   )
 }
 
-function DisplayNews(props: {imageName: string, imageAlt: string, children: React.ReactNode}) {
+function DisplayNews(props: {imageName: string, children: React.ReactNode}) {
   return (
     <div className="flex flex-row gap-x-4">
-      <img className="max-h-64 max-w-64" src={props.imageName} alt={props.imageAlt} aria-hidden="true" />
+      <img className="max-h-64 max-w-64" src={props.imageName} aria-hidden="true" />
       {props.children}
     </div>
   )
@@ -103,7 +103,7 @@ export default async function HomePage() {
       >
         <h2 id="news-heading" className="text-lg mb-4 lg:mb-2 font-semibold">News</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-stretch gap-y-6 gap-x-6 lg:gap-y-0 mb-6">
-          <DisplayNews imageName={newsImage1} imageAlt="DNA-strand">
+          <DisplayNews imageName={newsImage1}>
             <div>
               <time
                 dateTime={newsDate.toISOString()}
