@@ -32,7 +32,7 @@ function DisplayService(props: {video: string, title: string, url: string}) {
             Watch example video
           </AccordionTrigger>
           <AccordionContent>
-              <VideoIframe className="max-w-full max-h-full w-[36em] h-[20em] lg:w-[32em] lg:h-[18em] xl:w-[36em] xl:h-[20em] pl-2" 
+              <VideoIframe className="w-full aspect-video max-w-[36em] pl-2" 
                 videoId={YouTubeVideos[props.video].address} 
                 videoTitle={YouTubeVideos[props.video].title} 
               />
@@ -91,7 +91,7 @@ export default async function HomePage() {
             For questions, please contact the authors.
             </b>
           </p>
-          <VideoIframe className="max-w-full max-h-full w-[36em] h-[20em] lg:w-[36em] lg:h-[20.25em] xl:w-[40em] xl:h-[22.5em]" 
+          <VideoIframe className="max-w-full aspect-video w-[36em]" 
             videoId={YouTubeVideos["intro"].address} 
             videoTitle={YouTubeVideos["intro"].title}
           />
