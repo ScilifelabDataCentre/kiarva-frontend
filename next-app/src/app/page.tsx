@@ -1,6 +1,5 @@
-"use client";
+"use server";
 
-import { ReactElement } from "react";
 import { BODY_CLASSES, H_2, YouTubeVideos } from "@/constants";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -61,7 +60,7 @@ function DisplayNews(props: {imageName: string, imageAlt: string, children: Reac
   )
 }
 
-export default function HomePage(): ReactElement {
+export default async function HomePage() {
   const textLinkClasses: string = "font-medium text-fg-brand hover:underline";
   return (
     <main className={BODY_CLASSES}>
