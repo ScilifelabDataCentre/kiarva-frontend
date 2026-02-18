@@ -6,7 +6,7 @@ interface IProps {
 
 const VideoIframe: React.FC<IProps> = (props) => {
   const { videoId, videoTitle, className } = props;
-  const videoURL = `https://www.youtube.com/embed/${videoId}?rel=0&amp;showinfo=0?ecver=2`;
+  const videoURL = `https://www.youtube.com/embed/${videoId}?rel=0`;
 
   return (
     <iframe

@@ -40,5 +40,3 @@ export const YouTubeVideos: { [id: string]: {[id: string]: string} } = {
   "alignments": {"adress": "4jj5IuO8C1U", "title": "View sequence alignments"},
   "search": {"adress": "WDaeGC6ZGy0", "title": "Search for sequences"}
 }
-
-export const hideRelatedYoutubeVideos: string = "?rel=0&amp;showinfo=0?ecver=2";
