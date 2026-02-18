@@ -68,7 +68,7 @@ export default async function HomePage() {
         KIARVA - Adaptive Immune Receptor Gene Variant Atlas
       </h1>
       <section
-        aria-labelledby="welcome-news-heading"
+        aria-labelledby="welcome-heading"
       >
         <h2 id="welcome-heading" className="text-lg font-semibold mb-2">Welcome to KIARVA</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-stretch gap-x-6 gap-y-6 lg:gap-y-0 mb-6">
