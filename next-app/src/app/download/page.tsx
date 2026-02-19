@@ -292,7 +292,7 @@ export default function DownloadPage(): ReactElement {
                   fastaTypeSelected === "genomic_fl",
               },
               { name: "IGHJ", isAvailable: fastaTypeSelected === "genomic" },
-              { name: "IGH constant", isAvailable: false },
+              // { name: "IGH constant", isAvailable: false },
             ]}
             setPropsSelectionArray={setIghSelectionArray}
             radialSelected={fastaTypeSelected}

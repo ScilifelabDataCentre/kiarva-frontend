@@ -135,10 +135,10 @@ export default function SequenceSearchInputForm() {
           ></path>
         </svg>
         <p className="text-sm lg:text-base">
-          This page allows users to search for subsets or exact matches of
-          genomic sequences in the KI Adaptive Immune Receptor Gene Variant
-          Atlas. Enter a sequence of at least 10 nucleotides and receive matches
-          from the KIARVA database.
+          This page allows users to search for exact matches of full-length IGHV 
+          sequences in the KI Adaptive Immune Receptor Gene Variant Atlas. This enables 
+          users to quickly screen novel variants identified in their own work for exact 
+          identity to alleles within the KIARVA database.
         </p>
       </aside>
 

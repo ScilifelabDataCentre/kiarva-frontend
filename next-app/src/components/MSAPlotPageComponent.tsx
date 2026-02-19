@@ -125,26 +125,26 @@ export default function MSAPlotPageComponent(): ReactElement {
         plotType={"aminoAcidMSA"}
       />
       <div
-        className="divider pt-4 lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
+        className="divider pt-4 lg:-mx-8 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
         aria-hidden="true"
       ></div>
       <section aria-labelledby="nucleotide-alignment">
         <h2
           id="nucleotide-alignment-heading"
-          className="text-black lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
+          className="text-black lg:-mx-8 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
         >
           Nucleotide sequence alignment
         </h2>
         <MSAViewer sequenceData={sequenceData} />
       </section>
       <div
-        className="divider pt-4 lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
+        className="divider pt-4 lg:-mx-8 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
         aria-hidden="true"
       ></div>
       <section aria-labelledby="translated-alignment">
         <h2
           id="translated-alignment-heading"
-          className="text-black lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
+          className="text-black lg:-mx-8 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
         >
           Translated sequence alignment
         </h2>

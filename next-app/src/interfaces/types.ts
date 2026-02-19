@@ -111,3 +111,8 @@ export type IPlotDimensions = {
   height: number;
   width: number;
 };
+
+export type IYouTubeVideo = {
+  address: string;
+  title: string;
+}

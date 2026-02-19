@@ -129,7 +129,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
 
   return (
     <figure
-      className="flex flex-col pt-4 pb-1 text-[0.58rem] xl:text-sm items-start overflow-x-auto lg:-mx-20 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
+      className="flex flex-col pt-4 pb-1 text-[0.58rem] lg:text-[0.7rem] xl:text-sm items-start overflow-x-auto lg:-mx-8 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
       aria-label="Multiple sequence alignment visualization"
     >
       {sequenceData[0].sequence != "SEQUENCE" && (

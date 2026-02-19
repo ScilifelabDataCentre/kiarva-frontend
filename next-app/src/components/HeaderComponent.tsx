@@ -41,6 +41,7 @@ export default function HeaderComponent() {
     l6: { text: "Change log", classes: LINK_CLASSES, link: "/changelog" },
     l7: { text: "Publications", classes: LINK_CLASSES, link: "/publications" },
     l8: { text: "About", classes: LINK_CLASSES, link: "/about" },
+    l9: { text: "FAQ", classes: LINK_CLASSES, link: "/faq" },
   };
 
   // const mainLinks = Object.fromEntries(Object.entries(links).slice(0, 4));
@@ -52,7 +53,7 @@ export default function HeaderComponent() {
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between py-4 px-6">
           <div className="flex justify-between items-center">
             <Link
-              href="/#top"
+              href="/"
               className="font-bold text-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
             >
               <div className="flex items-center justify-center gap-2">
@@ -102,7 +103,7 @@ export default function HeaderComponent() {
             id="main-navigation"
             className={`${
               isMenuOpen ? "block" : "hidden"
-            } lg:block mt-4 lg:mt-0`}
+            } lg:block mt-4 px-6 lg:mt-0`}
             aria-label="Main navigation"
           >
             <ul className="flex flex-col lg:flex-row lg:flex-wrap lg:items-center lg:space-x-6 space-y-2 lg:space-y-0 text-lg">
