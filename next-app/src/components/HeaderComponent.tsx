@@ -53,7 +53,7 @@ export default function HeaderComponent() {
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between py-4 px-6">
           <div className="flex justify-between items-center">
             <Link
-              href="/#top"
+              href="/"
               className="font-bold text-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
             >
               <div className="flex items-center justify-center gap-2">

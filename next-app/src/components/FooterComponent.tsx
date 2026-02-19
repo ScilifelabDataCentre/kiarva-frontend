@@ -81,7 +81,7 @@ export default function FooterComponent() {
         <div className="grid gap-10 md:grid-cols-12">
           <section className="md:col-span-4">
             <Link
-              href="/#top"
+              href="/"
               className="inline-flex items-center gap-2 font-bold text-lg hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
               aria-label="KIARVA home"
             >
