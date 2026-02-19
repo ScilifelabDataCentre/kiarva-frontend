@@ -312,7 +312,7 @@ export default function HeaderComponent() {
           {/* ── Logo & mobile toggle row ─────────────────────────────── */}
           <div className="flex justify-between items-center xl:shrink-0">
             <Link
-              href="/#top"
+              href="/"
               className="font-bold text-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
             >
               <div className="flex items-center justify-center gap-2">
