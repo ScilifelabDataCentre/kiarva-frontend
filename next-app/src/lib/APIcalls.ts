@@ -5,7 +5,7 @@ import axios from "axios";
 export async function getDbName(selection: string, axiosConfig: { headers: { "X-api-key": string; }; }): Promise<string> {
     const encodedSelection = encodeURIComponent(selection);
     const dbNameEndpoint =
-      backendAPI + "/data/db_name" + "?selection=" + encodedSelection;
+      backendAPI + "data/db_name" + "?selection=" + encodedSelection;
 
     let dbName: string = "";
     await axios
