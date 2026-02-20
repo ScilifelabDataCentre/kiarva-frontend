@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: >
+  If you use KIARVA in your research, please cite the KIARVA portal
+  (RRID: SCR_026682) and, when relevant, also cite this software.
+type: software
+authors:
+  - name: SciLifeLab Data Centre
+    affiliation: SciLifeLab, Sweden
+  - name: Karolinska Institutet
+title: "KIARVA Frontend"
+version: 1.0.0
+date-released: 2026-02-19
+url: "https://kiarva.scilifelab.se"
+repository-code: "https://github.com/ScilifelabDataCentre/kiarva-frontend"
+license: MIT
+keywords:
+  - KIARVA
+  - FAIR
+  - research infrastructure
+  - frontend

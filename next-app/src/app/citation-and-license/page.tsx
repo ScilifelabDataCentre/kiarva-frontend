@@ -24,15 +24,15 @@ export default function CitationAndLicensePage(): ReactElement {
           Citing the website
         </Title>
         <p>
-          The information on KIARVA is continuously updated. Therefore, it
-          is important to refer to specific versions (or to provide access
-          dates) when citing.
+          When information in KIARVA is updated, this will be documented under News and in the Changelog. Therefore, it
+          is important to cite specific versions (or to provide access
+          dates) when citing the resource.
         </p>
         <Title level={3} aria-label="Citation guidance for research community">
           Research Community
         </Title>
         <p>
-          Researchers are encouraged to cite KIARVA and
+          Researchers are requested to cite Corcoran et al. Immunity 2026 and KIARVA with
           its underlying code in scientific publications.
         </p>
         <Title level={4}>Citing website content</Title>
@@ -92,7 +92,7 @@ export default function CitationAndLicensePage(): ReactElement {
         <p>
           Journalists are welcome to reuse text, images, and other content from
           KIARVA in articles, blog posts, and social media for non-commercial purposes. 
-          Please acknowledge the source as{" "}
+          Please cite Corcoran et al. Immunity 2026 and acknowledge the source as{" "}
           <strong>KIARVA</strong>, include a link to{" "}
           <a
             href="https://kiarva.scilifelab.se"
@@ -103,7 +103,7 @@ export default function CitationAndLicensePage(): ReactElement {
           >
             https://kiarva.scilifelab.se
           </a>
-          , and optionally cite the RRID as described above.
+          , and cite the RRID as described above.
         </p>
         <Title level={2} aria-label="License information section">
           License Information
