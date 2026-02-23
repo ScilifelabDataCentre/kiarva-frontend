@@ -86,6 +86,12 @@ const additionalInformationLinks: NavLink[] = [
     description: "Related academic publications",
   },
   {
+    text: "Citation & License",
+    href: "/citation-and-license",
+    icon: <FileBadge className="h-4 w-4" />,
+    description: "Cite KIARVA and license information",
+  },
+  {
     text: "FAQ",
     href: "/faq",
     icon: <HelpCircle className="h-4 w-4" />,
@@ -134,7 +140,7 @@ function NavDropdown({
       <DropdownMenuTrigger
         className={clsx(
           DESKTOP_NAV_BASE,
-          "gap-1 text-white/70 hover:text-white",
+          "gap-1 whitespace-nowrap text-white/70 hover:text-white",
         )}
       >
         {label}
@@ -396,29 +402,6 @@ export default function HeaderComponent() {
                   pathname={pathname}
                 />
               </li>
-
-              {/* Citation & License direct link */}
-              <li>
-                <Link
-                  href="/citation-and-license"
-                  className={clsx(
-                    DESKTOP_NAV_BASE,
-                    "gap-1.5",
-                    pathname === "/citation-and-license"
-                      ? "text-white"
-                      : "text-white/70 hover:text-white",
-                  )}
-                  aria-current={
-                    pathname === "/citation-and-license" ? "page" : undefined
-                  }
-                >
-                  <FileBadge className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                  <span className="inline-flex flex-col leading-tight">
-                    <span>Citation</span>
-                    <span className="whitespace-nowrap">& license</span>
-                  </span>
-                </Link>
-              </li>
             </ul>
           </nav>
         </div>
@@ -438,10 +421,7 @@ export default function HeaderComponent() {
           <div className="px-6 py-4 space-y-4">
             {/* Tool section */}
             <div role="group" aria-labelledby="mobile-tool-heading">
-              <h3
-                id="mobile-tool-heading"
-                className={MOBILE_SECTION_HEADING}
-              >
+              <h3 id="mobile-tool-heading" className={MOBILE_SECTION_HEADING}>
                 Tools
               </h3>
               <ul className="space-y-0.5" role="list">
@@ -496,30 +476,6 @@ export default function HeaderComponent() {
                     </Link>
                   </li>
                 ))}
-              </ul>
-            </div>
-
-            {/* Citation & license */}
-            <div className="border-t border-white/10 pt-3">
-              <ul className="space-y-0.5" role="list">
-                <li>
-                  <Link
-                    href="/citation-and-license"
-                    onClick={closeMenu}
-                    className={clsx(
-                      MOBILE_NAV_LINK,
-                      pathname === "/citation-and-license"
-                        ? "text-white bg-white/10"
-                        : "text-white/60 hover:text-white hover:bg-white/5",
-                    )}
-                    aria-current={
-                      pathname === "/citation-and-license" ? "page" : undefined
-                    }
-                  >
-                    <FileBadge className="h-4 w-4" aria-hidden="true" />
-                    Citation & license
-                  </Link>
-                </li>
               </ul>
             </div>
           </div>
