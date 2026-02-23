@@ -109,7 +109,7 @@ const additionalInformationLinks: NavLink[] = [
 // ---------------------------------------------------------------------------
 
 const DESKTOP_NAV_BASE =
-  "flex items-center text-sm 13inch:text-base font-medium px-2 13inch:px-3 py-1.5 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30";
+  "flex items-center text-base font-medium px-3 py-1.5 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30";
 
 // ---------------------------------------------------------------------------
 // Shared mobile nav-link base styles
@@ -311,9 +311,9 @@ export default function HeaderComponent() {
   return (
     <header className="bg-primary">
       <div className="text-white 2xl:max-w-screen-2xl 2xl:mx-auto">
-        <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between xl:gap-8 py-3 px-6">
+        <div className="flex flex-col header-desktop:flex-row header-desktop:items-center header-desktop:justify-between header-desktop:gap-8 py-3 px-6">
           {/* ── Logo & mobile toggle row ─────────────────────────────── */}
-          <div className="flex justify-between items-center xl:shrink-0">
+          <div className="flex justify-between items-center header-desktop:shrink-0">
             <Link
               href="/"
               className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
@@ -332,7 +332,7 @@ export default function HeaderComponent() {
             <button
               ref={hamburgerRef}
               type="button"
-              className="xl:hidden text-white/70 hover:text-white rounded-md p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+              className="header-desktop:hidden text-white/70 hover:text-white rounded-md p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
               onClick={toggleMenu}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-navigation"
@@ -349,8 +349,8 @@ export default function HeaderComponent() {
           </div>
 
           {/* ── Desktop navigation ───────────────────────────────────── */}
-          <nav className="hidden xl:block" aria-label="Main navigation">
-            <ul className="flex items-center gap-0.5 13inch:gap-1" role="list">
+          <nav className="hidden header-desktop:block" aria-label="Main navigation">
+            <ul className="flex items-center gap-1" role="list">
               {/* Inline tool links */}
               {toolLinks.map((link) => (
                 <li key={link.href} className="relative group">
@@ -410,7 +410,7 @@ export default function HeaderComponent() {
           ref={mobileNavRef}
           id="mobile-navigation"
           className={clsx(
-            "xl:hidden overflow-hidden transition-all duration-200 ease-in-out",
+            "header-desktop:hidden overflow-hidden transition-all duration-200 ease-in-out",
             isMenuOpen
               ? "max-h-[700px] opacity-100 border-t border-white/10"
               : "max-h-0 opacity-0",
