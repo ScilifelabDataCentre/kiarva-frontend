@@ -35,23 +35,31 @@ export default function FAQPage(): ReactElement {
                 Nucleotide names
               </h4>
               <p>
-                The IGHV alleles are provided in two formats within the KIARVA
-                resource, nucleotide and collapsed amino acid sequences.
-                Nucleotide differences within the IGHV alleles can result in
-                synonymous or non-synonymous changes in the coding sequence and
-                are useful for population and genotyping purposes, even if the
-                variation results in functionally equivalent allelic sequences.
-                The names of the alleles are based on the nucleotide variation
-                from the closest alleles present within the initial reference
-                database used for the ImmuneDiscover process used in Corcoran et
-                al. Immunity 2026, namely the AIRR-C database (Collins et al.
-                2023, release version 9, downloaded on 10/12/2024). Alleles that
-                are identical to the AIRR-C sequences have the same names in
-                KIARVA. Variant sequences that differ from AIRR-C reference
-                sequences were given names with a suffix of the form{" "}
-                <code className="font-mono">_SXXXX</code>, where the Xs are
-                integers provided by the ImmuneDiscover software discovery
-                setting.
+                The naming of IG and TCR alleles will likely change over the 
+                coming years, as further alleles are identified and the IUIS 
+                determines a suitable nomenclature system. The purpose of KIARVA 
+                is to provide sequences and population frequencies for the 
+                alleles identified within the 1KGP sample set. At such a point 
+                a future version of KIARVA will enable users to identify population 
+                frequencies for the updated alleles plus the original names used 
+                in Version 1. 
+                <br/>
+                <br/>
+                IGHV alleles are provided in two formats within the KIARVA resource, 
+                nucleotide level and collapsed amino acid sequences. Nucleotide 
+                differences within the IGHV alleles can result in synonymous or 
+                non-synonymous changes in the coding sequence and are useful for 
+                population and genotyping purposes, even if the variation results 
+                in functionally equivalent allelic sequences. The names of the 
+                alleles are based on the nucleotide variation from the closest 
+                alleles present within the initial reference database used for 
+                the ImmuneDiscover process used in Corcoran et al. Immunity 2026, 
+                namely the AIRR-C database (Collins et al. 2023, release version 9, 
+                downloaded on 10/12/2024). Alleles that are identical to the AIRR-C 
+                sequences have the same names in KIARVA. Variant sequences that 
+                differ from AIRR-C reference sequences were given names with a 
+                suffix of the form _SXXXX, where the &quot;X&quot;s are integers provided 
+                by the ImmuneDiscover software discovery setting.
               </p>
               <h4 className="mt-4 mb-1 text-base font-medium leading-6">
                 Amino acid-collapsed names
@@ -111,7 +119,7 @@ export default function FAQPage(): ReactElement {
                 that it does not distinguish variants of different genes that
                 are identical in sequence (i.e. IGHV3-23*01/IGHV3-23D*01 or
                 IGHV1-69*01/IGHV1-69D*01). This issue is limited to very few
-                alleles and gene ’groups’, namely IGHV1-69, IGHV3-23 and
+                alleles and gene &quot;groups&quot;, namely IGHV1-69, IGHV3-23 and
                 IGHV3-30 associated with genomic duplications. For KIARVA and
                 the 1KGP dataset, we have chosen to use a single designation to
                 represent allelic sequences that belong to such groups. The
@@ -244,6 +252,32 @@ export default function FAQPage(): ReactElement {
                 represented in the 1KGP set, for example individuals from
                 South-East Asia, the Middle East and Oceania, contain variants
                 that are local and even frequent within their own populations.
+              </p>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-8">
+            <AccordionTrigger>
+              Can I submit additional alleles to KIARVA?
+            </AccordionTrigger>
+            <AccordionContent>
+              <p>
+                At present we do not intend to add additional alleles to KIARVA 
+                as this resource is restricted to alleles identified within the 
+                1KGP sample set by ImmuneDiscover and validated with IgSNPer. 
+              </p>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-9">
+            <AccordionTrigger>
+              Will KIARVA host immunoglobulin light chain (kappa and lambda) alleles 
+              from the 1KGP sample set?
+            </AccordionTrigger>
+            <AccordionContent>
+              <p>
+                Yes, IGKV, IGKJ, IGLV and IGLJ alleles and their respective population 
+                frequencies within the 1KGP sample set will be added to KIARVA, as 
+                well as TCR alleles. Work is ongoing to produce and annotate this data 
+                and these additional variants will be included in future versions of KIARVA.
               </p>
             </AccordionContent>
           </AccordionItem>
