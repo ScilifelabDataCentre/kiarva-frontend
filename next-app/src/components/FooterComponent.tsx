@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import DisplayAppVersion from "@/components/DisplayAppVersion";
 
@@ -91,6 +92,29 @@ export default function FooterComponent() {
             <p className="mt-3 text-sm text-primary-foreground/80">
               KI Adaptive Immune Receptor Gene Variant Atlas.
             </p>
+            <div className="mt-5 flex max-w-80 items-center gap-3">
+              <Image
+                src="/images/KInegativVert.png"
+                alt="Karolinska Institutet logo"
+                width={140}
+                height={140}
+                className="min-w-0 flex-1 h-auto"
+              />
+              <Image
+                src="/images/SciLifeLab.png"
+                alt="SciLifeLab logo"
+                width={140}
+                height={140}
+                className="min-w-0 flex-1 h-auto"
+              />
+              <Image
+                src="/images/KAWLogo.png"
+                alt="Knut and Alice Wallenberg Foundation logo"
+                width={200}
+                height={100}
+                className="min-w-0 flex-1 h-auto"
+              />
+            </div>
           </section>
 
           <nav
