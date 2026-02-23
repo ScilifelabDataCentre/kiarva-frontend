@@ -1,11 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef, useCallback } from "react";
 import clsx from "clsx";
-import { hasCookie } from "cookies-next";
-import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -293,7 +292,6 @@ function useMobileMenuTrap(
 
 export default function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showDemoBadge, setShowDemoBadge] = useState(false);
   const pathname = usePathname();
 
   const mobileNavRef = useRef<HTMLElement>(null);
@@ -305,7 +303,6 @@ export default function HeaderComponent() {
   // Close mobile menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
-    setShowDemoBadge(!hasCookie("password"));
   }, [pathname]);
 
   // Focus-trap hook
@@ -314,20 +311,22 @@ export default function HeaderComponent() {
   return (
     <header className="bg-primary">
       <div className="text-white 2xl:max-w-screen-2xl 2xl:mx-auto">
-        <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between xl:gap-8 py-4 px-6">
+        <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between xl:gap-8 py-3 px-6">
           {/* ── Logo & mobile toggle row ─────────────────────────────── */}
           <div className="flex justify-between items-center xl:shrink-0">
             <Link
               href="/"
-              className="font-bold text-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+              className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+              aria-label="KIARVA — KI Adaptive Immune Receptor Gene Variant Atlas — Home"
             >
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-2xl">KIARVA</span>
-                {showDemoBadge && <Badge variant="accent">Demo</Badge>}
-              </div>
-              <p className="13inch:whitespace-nowrap text-xl">
-                KI Adaptive Immune Receptor Gene Variant Atlas
-              </p>
+              <Image
+                src="/images/KIARVALogoWhite.png"
+                alt="KI Adaptive Immune Receptor Gene Variant Atlas Logo"
+                width={800}
+                height={238}
+                className="h-20 w-auto"
+                priority
+              />
             </Link>
 
             <button
