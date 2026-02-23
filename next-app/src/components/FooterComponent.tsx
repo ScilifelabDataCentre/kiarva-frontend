@@ -3,7 +3,7 @@ import DisplayAppVersion from "@/components/DisplayAppVersion";
 
 type FooterLink = { label: string; href: string };
 
-const toolsLinks: FooterLink[] = [
+const resourcesLinks: FooterLink[] = [
   { label: "Download", href: "/download" },
   { label: "Population frequencies", href: "/plot" },
   { label: "Alignments", href: "/msa" },
@@ -97,7 +97,7 @@ export default function FooterComponent() {
             className="md:col-span-8 grid grid-cols-2 gap-8 sm:grid-cols-3"
             aria-labelledby="footer-navigation-heading"
           >
-            <FooterLinkList title="Tools" links={toolsLinks} />
+            <FooterLinkList title="Resources" links={resourcesLinks} />
             <FooterLinkList
               title="Additional information"
               links={additionalInformationLinks}
