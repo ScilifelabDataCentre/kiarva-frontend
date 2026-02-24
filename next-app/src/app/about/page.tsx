@@ -1,6 +1,16 @@
+// Should be server component, has no user interactivity that I can see.
+
+"use client";
+
 import { ReactElement } from "react";
+import ProfileComponent from "@/components/ProfileComponent";
 import { BODY_CLASSES, H_1, LINK_CLASSES } from "@/constants";
-import { ExternalLink } from "lucide-react";
+
+const martinCorcoran = "/images/martinCorcoran.png";
+const sanjanaNarang = "/images/sanjanaNarang.png";
+const mateuszKaduk = "/images/mateuszKaduk.png";
+const markChernyshev = "/images/markChernyshev.png";
+const gunillaKarlssonHedestam = "/images/gunillaKarlssonHedestam.png";
 
 export default function AboutPage(): ReactElement {
   const pageTitle: string = "About Us";
@@ -16,8 +26,8 @@ export default function AboutPage(): ReactElement {
         <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
           To create KIARVA, we applied a high throughput genomic technique
           designed for adaptive immune receptor germline gene sequencing,
-          ImmuneDiscover (Corcoran et al. Immunity 2026), to 2486 cases from the
-          1000 Genomes Project (1KGP),{" "}
+          ImmuneDiscover (Corcoran et al. Immunity 2026), to 2486 cases from the 1000
+          Genomes Project (1KGP),{" "}
           <a
             href="https://www.internationalgenome.org/"
             target="_blank"
@@ -105,46 +115,53 @@ export default function AboutPage(): ReactElement {
         <h2 id="team-heading" className="divider pt-4">
           Team
         </h2>
-
-        {/* Group summary card */}
-        <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
-          {/* Header band */}
-          <div className="bg-gradient-to-r from-primary to-primary/80 px-6 py-5 sm:px-8 sm:py-6">
-            <p className="text-xs sm:text-sm font-medium tracking-wide uppercase text-white/70">
-              Karolinska Institutet &middot; Dept. of Microbiology, Tumor and
-              Cell Biology
-            </p>
-            <h3 className="mt-1 text-lg sm:text-xl lg:text-2xl font-semibold text-white leading-snug">
-              Genetic Basis for B and T Cell Recognition and Function
-            </h3>
-            <p className="mt-1 text-sm sm:text-base text-white/90">
-              Gunilla Karlsson Hedestam Group
-            </p>
-          </div>
-
-          {/* Body */}
-          <div className="px-6 py-6 sm:px-8 sm:py-8 space-y-8">
-            {/* Introductory overview */}
-            <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-              Our research focuses on adaptive immune responses and qualitative
-              properties of B- and T-cell repertoires. A specific interest is to
-              understand individual variation in germline V, D and J genes and
-              how this influences antigen-specific responses in the context of
-              infection, vaccination and autoimmunity.
-            </p>
-
-            {/* Team link */}
-            <a
-              href="https://ki.se/en/research/research-areas-centres-and-networks/research-groups/genetic-basis-for-b-and-t-cell-recognition-and-function-gunilla-karlsson-hedestam-group"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${LINK_CLASSES} inline-flex items-center gap-1.5 text-sm font-medium text-primary`}
-            >
-              Visit the group page at Karolinska Institutet
-              <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </div>
-        </div>
+        <ul className="list-none">
+          <li>
+            <ProfileComponent
+              imageUrl={martinCorcoran}
+              linkUrl="https://ki.se/personer/martin-corcoran"
+              name="Martin Corcoran"
+              title="Head of Immunogenetics"
+              bgColor="bg-neutral"
+            />
+          </li>
+          <li>
+            <ProfileComponent
+              imageUrl={sanjanaNarang}
+              linkUrl="https://ki.se/en/people/sanjana-narang"
+              name="Sanjana Narang"
+              title="Post-doctoral Scientist"
+              bgColor="bg-white"
+            />
+          </li>
+          <li>
+            <ProfileComponent
+              imageUrl={mateuszKaduk}
+              linkUrl="https://ki.se/en/people/mateusz-kaduk"
+              name="Mateusz Kaduk"
+              title="Bioinformatician"
+              bgColor="bg-neutral"
+            />
+          </li>
+          <li>
+            <ProfileComponent
+              imageUrl={markChernyshev}
+              linkUrl="https://ki.se/en/people/mark-chernyshev"
+              name="Mark Chernyshev"
+              title="PhD student / Bioinformatician"
+              bgColor="bg-white"
+            />
+          </li>
+          <li>
+            <ProfileComponent
+              imageUrl={gunillaKarlssonHedestam}
+              linkUrl="https://ki.se/en/research/research-areas-centres-and-networks/research-groups/genetic-basis-for-b-and-t-cell-recognition-and-function-gunilla-karlsson-hedestam-group#tab-start"
+              name="Gunilla Karlsson Hedestam"
+              title="Professor / Group leader"
+              bgColor="bg-neutral"
+            />
+          </li>
+        </ul>
       </section>
     </main>
   );
