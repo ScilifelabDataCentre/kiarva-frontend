@@ -1,6 +1,6 @@
 "use server";
 
-import { BODY_CLASSES, H_2, YouTubeVideos } from "@/constants";
+import { H_2, YouTubeVideos } from "@/constants";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import VideoIframe from "@/components/YoutubeIframe";
@@ -63,7 +63,7 @@ function DisplayNews(props: {imageName: string, children: React.ReactNode}) {
 export default async function HomePage() {
   const textLinkClasses: string = "font-medium text-fg-brand hover:underline";
   return (
-    <main className={BODY_CLASSES}>
+    <main className="bg-base-100 space-y-4 lg:space-y-6 p-4 lg:px-12 lg:pb-18 xl:px-24 xl:pb-28 2xl:max-w-screen-2xl 2xl:mx-auto">
       <h1 className="sr-only">
         KIARVA - Adaptive Immune Receptor Gene Variant Atlas
       </h1>
@@ -89,7 +89,20 @@ export default async function HomePage() {
             <b>When using this database, please cite Corcoran et al. Immunity 2026.
             The resource should not be used for commercial purposes.
             For questions, please contact the authors.
-            </b>
+            </b><br /><br />
+            For more information about KIARVA, see the pages{" "}
+            <Link href="/methodology" className={textLinkClasses}>
+              Methodology
+            </Link>
+            ,{" "}
+            <Link href="/faq" className={textLinkClasses}>
+              FAQ
+            </Link>{" "}
+            and{" "}
+            <Link href="/about" className={textLinkClasses}>
+              About
+            </Link>
+            .
           </p>
           <VideoIframe className="max-w-full aspect-video w-[36em]" 
             videoId={YouTubeVideos["intro"].address} 
@@ -138,9 +151,6 @@ export default async function HomePage() {
           <DisplayService video="search" title="Search for sequences" url="sequencesearch" />
         </div>
       </section>
-      <p className="pt-10 text-lg">
-        For more information about KIARVA, see the pages <Link href="/methodology" className={textLinkClasses}>Methodology</Link>, <Link href="/faq" className={textLinkClasses}>FAQ</Link> and <Link href="/about" className={textLinkClasses}>About</Link>.
-      </p>
     </main>
   );
 }
