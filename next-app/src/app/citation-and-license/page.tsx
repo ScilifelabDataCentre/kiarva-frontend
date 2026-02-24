@@ -16,24 +16,25 @@ export default function CitationAndLicensePage(): ReactElement {
         <Title level={1}>Citation and license</Title>
         <p role="doc-abstract">
           In line with the principles of FAIR and Open Science, we encourage the
-          reuse and recognition of material made available on KIARVA for non-commercial purposes. This page 
-          provides guidance on how to cite the website and outlines the licensing 
-          conditions for using its content and code.
+          reuse and recognition of material made available in KIARVA for
+          non-commercial purposes. This page provides guidance on how to cite
+          the website and outlines the licensing conditions for using its
+          content and code.
         </p>
         <Title level={2} aria-label="Information about citing the website">
           Citing the website
         </Title>
         <p>
-          When information in KIARVA is updated, this will be documented under News and in the Changelog. Therefore, it
-          is important to cite specific versions (or to provide access
-          dates) when citing the resource.
+          When information in KIARVA is updated, this will be documented under
+          News and in the Changelog. Therefore, it is important to cite specific
+          versions (or to provide access dates) when citing the resource.
         </p>
         <Title level={3} aria-label="Citation guidance for research community">
           Research Community
         </Title>
         <p>
-          Researchers are requested to cite Corcoran et al. Immunity 2026 and KIARVA with
-          its underlying code in scientific publications.
+          Researchers are requested to cite Corcoran et al. Immunity 2026 and
+          KIARVA with its underlying code in scientific publications.
         </p>
         <Title level={4}>Citing website content</Title>
         <p>
@@ -52,9 +53,9 @@ export default function CitationAndLicensePage(): ReactElement {
           . Using this identifier helps track reuse and ensures proper
           attribution.
           <br />
-          Moreover, the <strong>version numbers</strong> for the backend and frontend are available at the
-          bottom of any page on KIARVA. Two examples of how to cite the portal are
-          provided below.
+          Moreover, the <strong>version numbers</strong> for the backend and
+          frontend are available at the bottom of any page in KIARVA. Two
+          examples of how to cite the portal are provided below.
         </p>
         <ul
           className="list-disc pl-4"
@@ -62,14 +63,13 @@ export default function CitationAndLicensePage(): ReactElement {
           aria-label="Citation examples"
         >
           <li role="listitem">
-            In-text citation example (APA style): KIARVA,
-            Karolinska Institutet and SciLifeLab Data Centre, <i>version number</i>, RRID: SCR_026682.
+            In-text citation example (APA style): KIARVA, Karolinska Institutet
+            and SciLifeLab Data Centre, <i>version number</i>, RRID: SCR_026682.
             (Access date: date of access).
           </li>
           <li role="listitem">
-            Reference list example: KIARVA (
-            <i>access date</i>), Karolinska Institutet and SciLifeLab Data Centre, version (version
-            number) from{" "}
+            Reference list example: KIARVA (<i>access date</i>), Karolinska
+            Institutet and SciLifeLab Data Centre, version (version number) from{" "}
             <a
               href="https://kiarva.scilifelab.se"
               target="_blank"
@@ -91,9 +91,9 @@ export default function CitationAndLicensePage(): ReactElement {
         </Title>
         <p>
           Journalists are welcome to reuse text, images, and other content from
-          KIARVA in articles, blog posts, and social media for non-commercial purposes. 
-          Please cite Corcoran et al. Immunity 2026 and acknowledge the source as{" "}
-          <strong>KIARVA</strong>, include a link to{" "}
+          KIARVA in articles, blog posts, and social media for non-commercial
+          purposes. Please cite Corcoran et al. Immunity 2026 and acknowledge
+          the source as <strong>KIARVA</strong>, include a link to{" "}
           <a
             href="https://kiarva.scilifelab.se"
             target="_blank"
@@ -120,7 +120,8 @@ export default function CitationAndLicensePage(): ReactElement {
             className="text-primary underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
             aria-label="Creative Commons Attribution-NonCommercial 4.0 International License (opens in new tab)"
           >
-            Creative Commons Attribution-NonCommercial 4.0 International License (CC BY NC 4.0)
+            Creative Commons Attribution-NonCommercial 4.0 International License
+            (CC BY NC 4.0)
           </a>
           . This is a human-readable summary of (and not a substitute for){" "}
           <a
@@ -140,16 +141,20 @@ export default function CitationAndLicensePage(): ReactElement {
           aria-label="License freedoms"
         >
           <li role="listitem">
-            <strong>Share</strong> – copy and redistribute the material in any medium or format for academic purposes
+            <strong>Share</strong> – copy and redistribute the material in any
+            medium or format for academic purposes
           </li>
           <li role="listitem">
-            <strong>Adapt</strong> – remix, transform, and build upon the material for academic purposes
+            <strong>Adapt</strong> – remix, transform, and build upon the
+            material for academic purposes
           </li>
         </ul>
         <p>
-            The data content should not be used for commercial purposes.<br/><br/>
-            These freedoms cannot be revoked as long as you follow the license
-            terms.
+          The data content should not be used for commercial purposes.
+          <br />
+          <br />
+          These freedoms cannot be revoked as long as you follow the license
+          terms.
         </p>
         <Title level={4}>Under the following terms</Title>
         <ul
