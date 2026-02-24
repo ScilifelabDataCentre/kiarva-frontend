@@ -1,6 +1,6 @@
 "use server";
 
-import { BODY_CLASSES, H_2, YouTubeVideos } from "@/constants";
+import { H_2, YouTubeVideos } from "@/constants";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import VideoIframe from "@/components/YoutubeIframe";
