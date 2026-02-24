@@ -1,22 +1,21 @@
-import Image from "next/image";
 import Link from "next/link";
 import DisplayAppVersion from "@/components/DisplayAppVersion";
 
 type FooterLink = { label: string; href: string };
 
-const resourcesLinks: FooterLink[] = [
+const toolsLinks: FooterLink[] = [
   { label: "Download", href: "/download" },
   { label: "Population frequencies", href: "/plot" },
   { label: "Alignments", href: "/msa" },
   { label: "Sequence search", href: "/sequencesearch" },
 ];
 
-const additionalInformationLinks: FooterLink[] = [
+const projectLinks: FooterLink[] = [
   { label: "About", href: "/about" },
   { label: "Methodology", href: "/methodology" },
   { label: "Publications", href: "/publications" },
-  { label: "FAQ", href: "/faq" },
   { label: "Change log", href: "/changelog" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 const policyLinks: Array<FooterLink & { external?: boolean }> = [
@@ -44,30 +43,29 @@ function FooterLinkList({
         {title}
       </h3>
       <ul className="mt-4 space-y-3">
-        {links.map((l) =>
-          l.external ? (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
-              >
-                {l.label}
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
-            </li>
-          ) : (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
-              >
-                {l.label}
-              </Link>
-            </li>
-          ),
-        )}
+        {links.map((l) => (
+          l.external ?
+          (<li key={l.href}>
+            <a
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+            >
+              {l.label}
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>)
+          :
+          (<li key={l.href}>
+            <Link
+              href={l.href}
+              className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+            >
+              {l.label}
+            </Link>
+          </li>)
+        ))}
       </ul>
     </div>
   );
@@ -92,40 +90,14 @@ export default function FooterComponent() {
             <p className="mt-3 text-sm text-primary-foreground/80">
               KI Adaptive Immune Receptor Gene Variant Atlas.
             </p>
-            <div className="mt-5 flex max-w-80 items-center gap-3">
-              <Image
-                src="/images/KInegativVert.png"
-                alt="Karolinska Institutet logo"
-                width={140}
-                height={140}
-                className="min-w-0 flex-1 h-auto"
-              />
-              <Image
-                src="/images/SciLifeLab.png"
-                alt="SciLifeLab logo"
-                width={140}
-                height={140}
-                className="min-w-0 flex-1 h-auto"
-              />
-              <Image
-                src="/images/KAWLogo.png"
-                alt="Knut and Alice Wallenberg Foundation logo"
-                width={200}
-                height={100}
-                className="min-w-0 flex-1 h-auto"
-              />
-            </div>
           </section>
 
           <nav
             className="md:col-span-8 grid grid-cols-2 gap-8 sm:grid-cols-3"
             aria-labelledby="footer-navigation-heading"
           >
-            <FooterLinkList title="Resources" links={resourcesLinks} />
-            <FooterLinkList
-              title="Additional information"
-              links={additionalInformationLinks}
-            />
+            <FooterLinkList title="Tools" links={toolsLinks} />
+            <FooterLinkList title="Project" links={projectLinks} />
             <FooterLinkList title="Policies" links={policyLinks} />
           </nav>
         </div>
