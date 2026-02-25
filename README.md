@@ -22,7 +22,16 @@ KIARVA catalogs germline-encoded IG heavy chain (IGH) alleles identified using t
 
 ## Cite this portal
 
-(TBD)
+If you use **KIARVA** in research, please cite the portal using  
+**RRID: SCR_026682**, including the version number and access date  
+(https://kiarva.scilifelab.se).
+
+If you reuse the code, please also cite this repository using the
+metadata provided in `CITATION.cff` (see the “Cite this repository” button).
+
+Website content and data are available for non-commercial reuse under
+**CC BY-NC 4.0**. The source code in this repository is released under
+the **MIT License**.
 
 
 ## Contributing
@@ -205,3 +214,4 @@ git push origin my_feature_branch
 Open a pull request from your fork's branch to the upstream `main` branch. Add a clear description, link to related issues (if applicable), and request reviewers. By default, the repository owners are always requested and notified.
 
 The team will review the PR before merging. Follow-up changes may be requested.
+
