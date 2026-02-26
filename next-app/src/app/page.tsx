@@ -10,8 +10,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 const newsImage1 = "/images/KIARVANewsThumbnail.jpeg";
+const newsImage2 = "/images/Corcoran_etal_Immunity2026.jpg";
+const newsImage3 = "/images/GA_Fischer_Corcoran_Immunity2026.jpg";
 
 const newsDate = new Date("2026-02-01");
 
@@ -53,10 +62,10 @@ function DisplayService(props: {video: string, title: string, url: string}) {
 
 function DisplayNews(props: {imageName: string, children: React.ReactNode}) {
   return (
-    <div className="flex flex-row gap-x-4">
-      <img className="max-h-64 max-w-64" src={props.imageName} aria-hidden="true" />
+    <article className="pt-4 pb-4">
+      <img className="float-left max-h-80 max-w-80 pr-4 pb-2" src={props.imageName} aria-hidden="true" />
       {props.children}
-    </div>
+    </article>
   )
 }
 
@@ -70,9 +79,9 @@ export default async function HomePage() {
       <section
         aria-labelledby="welcome-heading"
       >
-        <h2 id="welcome-heading" className="text-lg font-semibold mb-2">Welcome to KIARVA</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-stretch gap-x-6 gap-y-6 lg:gap-y-0 mb-6">
-          <p className="lg:pr-8">
+        <h2 id="welcome-heading" className={H_2}>Welcome to KIARVA</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-stretch gap-x-6 gap-y-6 lg:gap-y-0 mb-6 mt-6">
+          <p className="pr-2 lg:pr-8">
             Variation between individuals and populations within the 
             immunoglobulin (IG) locus involves both structural and allelic 
             diversity. The Karolinska Institutet Adaptive Immune Receptor Gene 
@@ -114,28 +123,91 @@ export default async function HomePage() {
       <section
         aria-labelledby="news-heading"
       >
-        <h2 id="news-heading" className="text-lg mb-4 lg:mb-2 font-semibold">News</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-stretch gap-y-6 gap-x-6 lg:gap-y-0 mb-6">
-          <DisplayNews imageName={newsImage1}>
-            <div>
-              <time
-                dateTime={newsDate.toISOString()}
-                className="block italic mb-2"
-                >
-                {newsDate.toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  // day: "numeric",
-                })}
-              </time>
-              <p className="lg:pr-8">
-                We are happy to release the first public version of our new research tool, KIARVA. 
-                Please visit our introduction and instruction videos and note that you can find 
-                Frequently Asked Questions (FAQs) under “Additional information” in the top menu.
-              </p>
-            </div>
-          </DisplayNews>
-        </div>
+        <h2 id="news-heading" className={H_2}>News</h2>
+          <Carousel
+            opts={{
+              align: "start",
+            }}
+            className="md:mx-12 xl:mx-0"
+          >
+            <CarouselContent className="flex mt-6">
+              <CarouselItem className="lg:basis-1/2 max-w-full">
+                <DisplayNews imageName={newsImage1}>
+                  <div>
+                    <time
+                      dateTime={newsDate.toISOString()}
+                      className="block italic mb-2"
+                      >
+                      {newsDate.toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        // day: "numeric",
+                      })}
+                    </time>
+                    <p className="max-w-full pr-2 lg:pr-8 pb-2">
+                      We are happy to release the first public version of our new 
+                      research tool, KIARVA, described in detail in Corcoran et al. 
+                      Immunity 2026. Please visit our introduction and instruction 
+                      videos and note that you can find Frequently Asked Questions 
+                      (FAQs) under “Additional information” in the top menu.
+                    </p>
+                  </div>
+                </DisplayNews>
+              </CarouselItem>
+              <CarouselItem className="lg:basis-1/2 max-w-full">
+                <DisplayNews imageName={newsImage2}>
+                  <div>
+                    <time
+                      dateTime={newsDate.toISOString()}
+                      className="block italic mb-2"
+                      >
+                      {newsDate.toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        // day: "numeric",
+                      })}
+                    </time>
+                    <p className="max-w-full pr-2 lg:pr-8 pb-2">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                      Praesent gravida, ipsum ac faucibus ultricies, tellus odio 
+                      malesuada elit, vel tincidunt massa dui eu sem. Aenean 
+                      luctus ipsum in enim pretium tempus. Proin a est neque. 
+                      Donec lorem massa, lobortis a orci vitae, consequat vestibulum 
+                      velit. Quisque tempor elit vel urna suscipit, vel laoreet neque 
+                      venenatis. Sed leo quam, fringilla non accumsan sed, mollis 
+                      ultricies libero. Ut posuere sit amet eros a mollis. Sed 
+                      viverra interdum est et finibus. Mauris sit amet tellus 
+                      non nisi sodales laoreet. Duis consequat ante a sagittis aliquam.
+                    </p>
+                  </div>
+                </DisplayNews>
+              </CarouselItem>
+              <CarouselItem className="lg:basis-1/2 max-w-full">
+                <DisplayNews imageName={newsImage3}>
+                  <div>
+                    <time
+                      dateTime={newsDate.toISOString()}
+                      className="block italic mb-2"
+                      >
+                      {newsDate.toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        // day: "numeric",
+                      })}
+                    </time>
+                    <p className="max-w-full pr-2 lg:pr-8 pb-2">
+                      In Fischer, Corcoran, et al., we investigated how inherited variation 
+                      in antibody genes influences antibody responses to influenza HA to 
+                      highlight population vulnerabilities that could be mitigated in the 
+                      design of globally protective vaccines.
+                    </p>
+                  </div>
+                </DisplayNews>
+              </CarouselItem>
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
       </section>
       <div className="divider pt-4" aria-hidden="true" />
       <section
