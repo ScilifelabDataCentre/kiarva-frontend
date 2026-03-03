@@ -17,12 +17,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import ModalImage from "@/components/ui/modal-image";
 
 const newsImage1 = "/images/KIARVANewsThumbnail.jpeg";
 const newsImage2 = "/images/Corcoran_etal_Immunity2026.jpg";
 const newsImage3 = "/images/GA_Fischer_Corcoran_Immunity2026.jpg";
 
 const newsDate = new Date("2026-02-01");
+
+// Source - https://stackoverflow.com/a/76142547
+// Posted by ADasGH
+// Retrieved 2026-03-03, License - CC BY-SA 4.0
 
 function DisplayService(props: {video: string, title: string, url: string}) {
   return (
@@ -60,10 +65,17 @@ function DisplayService(props: {video: string, title: string, url: string}) {
   )
 }
 
-function DisplayNews(props: {imageName: string, children: React.ReactNode}) {
+function DisplayNews(props: {imageName: string, children: React.ReactNode, canEnlarge: boolean}) {
   return (
     <article className="pt-4 pb-4">
-      <img className="float-left max-h-80 max-w-80 pr-4 pb-2" src={props.imageName} aria-hidden="true" />
+      {!props.canEnlarge ? 
+        <img className="float-left max-h-80 max-w-80 pr-4 pb-2" src={props.imageName} aria-hidden="true" />
+        :
+        <ModalImage 
+          imgSrc={props.imageName} 
+          imgClassesSmall="max-h-80 max-w-80 pr-4 pb-2" 
+        />
+      }
       {props.children}
     </article>
   )
@@ -132,7 +144,7 @@ export default async function HomePage() {
           >
             <CarouselContent className="flex mt-6">
               <CarouselItem className="lg:basis-1/2 max-w-full">
-                <DisplayNews imageName={newsImage1}>
+                <DisplayNews imageName={newsImage1} canEnlarge={false}>
                   <div>
                     <time
                       dateTime={newsDate.toISOString()}
@@ -155,7 +167,7 @@ export default async function HomePage() {
                 </DisplayNews>
               </CarouselItem>
               <CarouselItem className="lg:basis-1/2 max-w-full">
-                <DisplayNews imageName={newsImage2}>
+                <DisplayNews imageName={newsImage2} canEnlarge={true}>
                   <div>
                     <time
                       dateTime={newsDate.toISOString()}
@@ -183,7 +195,7 @@ export default async function HomePage() {
                 </DisplayNews>
               </CarouselItem>
               <CarouselItem className="lg:basis-1/2 max-w-full">
-                <DisplayNews imageName={newsImage3}>
+                <DisplayNews imageName={newsImage3} canEnlarge={true}>
                   <div>
                     <time
                       dateTime={newsDate.toISOString()}
