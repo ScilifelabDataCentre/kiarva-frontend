@@ -10,20 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-import ModalImage from "@/components/ui/modal-image";
-
-const newsImage1 = "/images/KIARVANewsThumbnail.jpeg";
-const newsImage2 = "/images/Corcoran_etal_Immunity2026.jpg";
-const newsImage3 = "/images/GA_Fischer_Corcoran_Immunity2026.jpg";
-
-const newsDate = new Date("2026-02-01");
+import NewsCarousel from "@/components/NewsCarousel";
 
 function DisplayService(props: {video: string, title: string, url: string}) {
   return (
@@ -58,22 +45,6 @@ function DisplayService(props: {video: string, title: string, url: string}) {
         <Link href={"/" + props.url}>Go to page</Link>
       </Button>
     </div>
-  )
-}
-
-function DisplayNews(props: {imageName: string, children: React.ReactNode, canEnlarge: boolean}) {
-  return (
-    <article className="pt-4 pb-4">
-      {!props.canEnlarge ? 
-        <img className="float-left max-h-80 max-w-80 pr-4 pb-2" src={props.imageName} aria-hidden="true" />
-        :
-        <ModalImage 
-          imgSrc={props.imageName} 
-          imgClassesSmall="max-h-80 max-w-80 pr-4 pb-2" 
-        />
-      }
-      {props.children}
-    </article>
   )
 }
 
@@ -132,90 +103,7 @@ export default async function HomePage() {
         aria-labelledby="news-heading"
       >
         <h2 id="news-heading" className={H_2}>News</h2>
-          <Carousel
-            opts={{
-              align: "start",
-            }}
-            className="md:mx-12 xl:mx-0"
-          >
-            <CarouselContent className="flex mt-6">
-              <CarouselItem className="lg:basis-1/2 max-w-full">
-                <DisplayNews imageName={newsImage1} canEnlarge={false}>
-                  <div>
-                    <time
-                      dateTime={newsDate.toISOString()}
-                      className="block italic mb-2"
-                      >
-                      {newsDate.toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        // day: "numeric",
-                      })}
-                    </time>
-                    <p className="max-w-full pr-2 lg:pr-8 pb-2">
-                      We are happy to release the first public version of our new 
-                      research tool, KIARVA, described in detail in Corcoran et al. 
-                      Immunity 2026. Please visit our introduction and instruction 
-                      videos and note that you can find Frequently Asked Questions 
-                      (FAQs) under “Additional information” in the top menu.
-                    </p>
-                  </div>
-                </DisplayNews>
-              </CarouselItem>
-              <CarouselItem className="lg:basis-1/2 max-w-full">
-                <DisplayNews imageName={newsImage2} canEnlarge={true}>
-                  <div>
-                    <time
-                      dateTime={newsDate.toISOString()}
-                      className="block italic mb-2"
-                      >
-                      {newsDate.toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        // day: "numeric",
-                      })}
-                    </time>
-                    <p className="max-w-full pr-2 lg:pr-8 pb-2">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                      Praesent gravida, ipsum ac faucibus ultricies, tellus odio 
-                      malesuada elit, vel tincidunt massa dui eu sem. Aenean 
-                      luctus ipsum in enim pretium tempus. Proin a est neque. 
-                      Donec lorem massa, lobortis a orci vitae, consequat vestibulum 
-                      velit. Quisque tempor elit vel urna suscipit, vel laoreet neque 
-                      venenatis. Sed leo quam, fringilla non accumsan sed, mollis 
-                      ultricies libero. Ut posuere sit amet eros a mollis. Sed 
-                      viverra interdum est et finibus. Mauris sit amet tellus 
-                      non nisi sodales laoreet. Duis consequat ante a sagittis aliquam.
-                    </p>
-                  </div>
-                </DisplayNews>
-              </CarouselItem>
-              <CarouselItem className="lg:basis-1/2 max-w-full">
-                <DisplayNews imageName={newsImage3} canEnlarge={true}>
-                  <div>
-                    <time
-                      dateTime={newsDate.toISOString()}
-                      className="block italic mb-2"
-                      >
-                      {newsDate.toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        // day: "numeric",
-                      })}
-                    </time>
-                    <p className="max-w-full pr-2 lg:pr-8 pb-2">
-                      In Fischer, Corcoran, et al., we investigated how inherited variation 
-                      in antibody genes influences antibody responses to influenza HA to 
-                      highlight population vulnerabilities that could be mitigated in the 
-                      design of globally protective vaccines.
-                    </p>
-                  </div>
-                </DisplayNews>
-              </CarouselItem>
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+          <NewsCarousel />
       </section>
       <div className="divider pt-4" aria-hidden="true" />
       <section
