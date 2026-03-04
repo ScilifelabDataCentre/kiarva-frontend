@@ -25,10 +25,6 @@ const newsImage3 = "/images/GA_Fischer_Corcoran_Immunity2026.jpg";
 
 const newsDate = new Date("2026-02-01");
 
-// Source - https://stackoverflow.com/a/76142547
-// Posted by ADasGH
-// Retrieved 2026-03-03, License - CC BY-SA 4.0
-
 function DisplayService(props: {video: string, title: string, url: string}) {
   return (
     <div className="relative w-full rounded-lg border p-4 gap-6 flex flex-col bg-muted">
