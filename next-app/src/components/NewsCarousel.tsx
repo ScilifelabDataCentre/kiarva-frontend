@@ -15,7 +15,7 @@ function DisplayNews(props: {imageName: string, children: React.ReactNode}) {
     <article className="pt-4 pb-4">
       <ModalImage 
         imgSrc={props.imageName} 
-        imgClassesSmall="max-h-80 max-w-80 pr-4 pb-2" 
+        imgClassesSmall="max-h-60 max-w-60 pr-4 pb-2" 
       />
       {props.children}
     </article>
