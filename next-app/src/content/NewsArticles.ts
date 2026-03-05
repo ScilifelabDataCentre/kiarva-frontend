@@ -1,5 +1,6 @@
 type Article = Readonly<{
     imageName: string,
+    imageAlt: string,
     date: string,
     showDay: boolean,
     textBody: string,
@@ -42,6 +43,7 @@ For a longer explanation on how it works, see bottom of the page.
 export const Articles: Article[] = [
     {
         imageName: "KIARVANewsThumbnail2.jpeg",
+        imageAlt: "KIARVA news thumbnail",
         date:"2026-03-01",
         showDay: false,
         textBody:
@@ -55,6 +57,7 @@ export const Articles: Article[] = [
     },
     // {
     //     imageName: "CorcoranEtAlImmunity2026.jpg",
+    //     imageAlt: "Corcoran et al. Immunity 2026 visual abstract",
     //     date:"2026-03-04",
     //     showDay: true,
     //     textBody: 
@@ -69,6 +72,7 @@ export const Articles: Article[] = [
     // },
     // {
     //     imageName: "GAFischerCorcoranImmunity2026.jpg",
+    //     imageAlt: "GA Fischer, Corcoran Immunity 2026 visual abstract",
     //     date:"2026-03-04",
     //     showDay: false,
     //     textBody:

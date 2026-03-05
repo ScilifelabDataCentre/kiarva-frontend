@@ -10,11 +10,12 @@ import { Articles } from "@/content/NewsArticles";
 
 
 
-function DisplayNews(props: {imageName: string, children: React.ReactNode}) {
+function DisplayNews(props: {imageName: string, imageAlt: string, children: React.ReactNode}) {
   return (
-    <article className="pt-4 pb-4">
+    <article className="py-4">
       <ModalImage 
-        imgSrc={props.imageName} 
+        imageSrc={props.imageName} 
+        imageAlt={props.imageAlt}
         imgClassesSmall="max-h-60 max-w-60 pr-4 pb-2" 
       />
       {props.children}
@@ -33,7 +34,7 @@ export default function NewsCarousel() {
         <CarouselContent className="flex mt-6">
           {Articles.map((article, index) => (
             <CarouselItem key={index} className="lg:basis-1/2 max-w-full">
-              <DisplayNews imageName={"images/"+article.imageName}>
+              <DisplayNews imageName={"/images/"+article.imageName} imageAlt={article.imageAlt}>
                 <div>
                   <time
                     dateTime={(new Date(article.date)).toISOString()}
@@ -49,7 +50,6 @@ export default function NewsCarousel() {
                       (new Date(article.date)).toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "long",
-                        // day: "numeric",
                       })
                     }
                   </time>
