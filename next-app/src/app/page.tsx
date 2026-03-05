@@ -10,10 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
-const newsImage1 = "/images/KIARVANewsThumbnail.jpeg";
-
-const newsDate = new Date("2026-02-01");
+import NewsCarousel from "@/components/NewsCarousel";
 
 function DisplayService(props: {video: string, title: string, url: string}) {
   return (
@@ -51,15 +48,6 @@ function DisplayService(props: {video: string, title: string, url: string}) {
   )
 }
 
-function DisplayNews(props: {imageName: string, children: React.ReactNode}) {
-  return (
-    <div className="flex flex-row gap-x-4">
-      <img className="max-h-64 max-w-64" src={props.imageName} aria-hidden="true" />
-      {props.children}
-    </div>
-  )
-}
-
 export default async function HomePage() {
   const textLinkClasses: string = "font-medium text-fg-brand hover:underline";
   return (
@@ -70,9 +58,9 @@ export default async function HomePage() {
       <section
         aria-labelledby="welcome-heading"
       >
-        <h2 id="welcome-heading" className="text-lg font-semibold mb-2">Welcome to KIARVA</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-stretch gap-x-6 gap-y-6 lg:gap-y-0 mb-6">
-          <p className="lg:pr-8">
+        <h2 id="welcome-heading" className={H_2}>Welcome to KIARVA</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-stretch gap-x-6 gap-y-6 lg:gap-y-0 mb-6 mt-6">
+          <p className="pr-2 lg:pr-8">
             Variation between individuals and populations within the 
             immunoglobulin (IG) locus involves both structural and allelic 
             diversity. The Karolinska Institutet Adaptive Immune Receptor Gene 
@@ -114,28 +102,8 @@ export default async function HomePage() {
       <section
         aria-labelledby="news-heading"
       >
-        <h2 id="news-heading" className="text-lg mb-4 lg:mb-2 font-semibold">News</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-stretch gap-y-6 gap-x-6 lg:gap-y-0 mb-6">
-          <DisplayNews imageName={newsImage1}>
-            <div>
-              <time
-                dateTime={newsDate.toISOString()}
-                className="block italic mb-2"
-                >
-                {newsDate.toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  // day: "numeric",
-                })}
-              </time>
-              <p className="lg:pr-8">
-                We are happy to release the first public version of our new research tool, KIARVA. 
-                Please visit our introduction and instruction videos and note that you can find 
-                Frequently Asked Questions (FAQs) under “Additional information” in the top menu.
-              </p>
-            </div>
-          </DisplayNews>
-        </div>
+        <h2 id="news-heading" className={H_2}>News</h2>
+          <NewsCarousel />
       </section>
       <div className="divider pt-4" aria-hidden="true" />
       <section
