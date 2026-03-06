@@ -54,7 +54,12 @@ export default function NewsCarousel() {
                     }
                   </time>
                   <p className="max-w-full pr-2 lg:pr-8 pb-2">
-                    {article.textBody}
+                    {article.textBody.map((paragraph, index) => (
+                      (<p key={index}>
+                        {paragraph}
+                        <br/><br/>
+                      </p>)
+                    ))}
                   </p>
                 </div>
               </DisplayNews>
