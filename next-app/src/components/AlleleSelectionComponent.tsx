@@ -8,6 +8,8 @@ import axios from "axios";
 import DropdownComponent from "@/components/DropdownComponent";
 import { IAlleleDropDownConfig } from "@/interfaces/types";
 import DownloadPlotData from "./DownloadPlotData";
+import { getDbName } from "@/lib/APIcalls";
+import { axiosConfig } from "@/constants";
 
 // Main function to render the PlotPage component
 export default function AlelleSelectionComponent(prop: {
@@ -15,7 +17,6 @@ export default function AlelleSelectionComponent(prop: {
   handleSetSelection: (allele: string) => void;
   plotType: string;
 }): ReactElement {
-  const { handleSetSelection, plotType } = prop;
 
   // Initialize state for dropdown selections
   const [currentPicks, setCurrentPicks] = useState({
@@ -24,6 +25,8 @@ export default function AlelleSelectionComponent(prop: {
     subtypeDropdown: "",
     alleleDropdown: "",
   });
+
+  const [dbName, setDbName] = useState<string>("");
 
   // ------------------------
   // temporary data, used until backend with live data is allowed to be published
@@ -61,12 +64,6 @@ export default function AlelleSelectionComponent(prop: {
   };
 
   useEffect(() => {
-    if (!currentPicks.geneDropdown) {
-      setSubtypeDropDownItemsArray(["..."]);
-      setAlleleDropDownItemsArray(["..."]);
-      return;
-    }
-
     if (!currentPicks.subtypeDropdown) {
       setAlleleDropDownItemsArray(["..."]);
       const currentSelection = currentPicks.geneDropdown;
@@ -74,9 +71,10 @@ export default function AlelleSelectionComponent(prop: {
       const encodedCurrentSelection = encodeURIComponent(currentSelection);
 
       axios
-        .get(geneSelectionEndpoint + encodedCurrentSelection)
+        .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
         .then((response) => {
           const responseData = response.data;
+          //  responseData.push("...");
           setSubtypeDropDownItemsArray(responseData);
         })
         .catch((response) => console.log(response.error));
@@ -88,42 +86,59 @@ export default function AlelleSelectionComponent(prop: {
 
       setAlleleDropDownItemsArray([]);
       axios
-        .get(geneSelectionEndpoint + encodedCurrentSelection)
+        .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
         .then((response) => {
           const responseData = response.data;
+          // responseData.push("...");
           setAlleleDropDownItemsArray(responseData);
         })
         .catch((response) => console.log(response.error));
     }
-  }, [currentPicks.geneDropdown, currentPicks.subtypeDropdown, geneSelectionEndpoint]);
+  }, [currentPicks.geneDropdown, currentPicks.subtypeDropdown]);
+
+
+  async function awaitDbName() {
+    const dbName: string = await getDbName(
+      currentPicks.geneDropdown +
+      currentPicks.subtypeDropdown +
+      "," +
+      currentPicks.alleleDropdown)
+    
+    prop.handleSetSelection(dbName);
+    setDbName(dbName);
+  }
 
   useEffect(() => {
-    if (!(plotType == "aminoAcidMSA")) {
-      if (!currentPicks.alleleDropdown) {
-        handleSetSelection("");
+    if (!(prop.plotType == "aminoAcidMSA")) {
+      // Treat placeholder values as "not selected"
+      if (
+        !currentPicks.alleleDropdown ||
+        currentPicks.alleleDropdown === "..."
+      ) {
+        prop.handleSetSelection("");
+        setDbName("");
       } else {
-        handleSetSelection(
-          currentPicks.geneDropdown +
-            currentPicks.subtypeDropdown +
-            "*" +
-            currentPicks.alleleDropdown
-        );
+        awaitDbName();
       }
     } else {
-      if (!currentPicks.subtypeDropdown) {
-        handleSetSelection("");
+      // Treat placeholder values as "not selected"
+      if (
+        !currentPicks.subtypeDropdown ||
+        currentPicks.subtypeDropdown === "..."
+      ) {
+        prop.handleSetSelection("");
+        setDbName("");
       } else {
-        handleSetSelection(
+        prop.handleSetSelection(
           currentPicks.geneDropdown + currentPicks.subtypeDropdown
         );
+        setDbName(currentPicks.geneDropdown + currentPicks.subtypeDropdown + '*');
       }
     }
   }, [
     currentPicks.geneDropdown,
     currentPicks.subtypeDropdown,
     currentPicks.alleleDropdown,
-    handleSetSelection,
-    plotType,
   ]);
 
   // Render the component
@@ -208,45 +223,64 @@ export default function AlelleSelectionComponent(prop: {
         aria-live="polite"
       >
         <div className="w-1/2">
-          {(!currentPicks.alleleDropdown || currentPicks.alleleDropdown == "...") &&
+          {(!currentPicks.alleleDropdown ||
+            currentPicks.alleleDropdown == "...") &&
           currentPicks.geneDropdown &&
-          currentPicks.subtypeDropdown ? 
-            (prop.plotType == "aminoAcidMSA" ?
-              (<p className="text-neutral-content text-xl font-semibold">
+          currentPicks.subtypeDropdown &&
+          currentPicks.subtypeDropdown !== "..." ? (
+            prop.plotType == "aminoAcidMSA" ? (
+              <p className="text-neutral-content text-xl font-semibold">
                 Sequence alignments for {currentPicks.geneDropdown}
                 {currentPicks.subtypeDropdown}
-              </p>) :
-              (<DownloadPlotData 
-                alleleOrGene={currentPicks.geneDropdown+currentPicks.subtypeDropdown}
-                tableType={prop.plotType}
-                fullGene={true}
-              >
-              </DownloadPlotData>)
+              </p>
+            ) : (
+              <div className="flex items-center flex-col">
+                <p className="text-neutral-content text-xl font-semibold p-2 text-center">
+                  Please select the allele above
+                </p>
+                <DownloadPlotData
+                  alleleOrGene={
+                    currentPicks.geneDropdown + currentPicks.subtypeDropdown
+                  }
+                  tableType={prop.plotType}
+                  fullGene={true}
+                ></DownloadPlotData>
+              </div>
+            )
           ) : currentPicks.geneDropdown &&
             currentPicks.subtypeDropdown &&
-            currentPicks.alleleDropdown ? (
+            currentPicks.alleleDropdown &&
+            currentPicks.subtypeDropdown !== "..." &&
+            currentPicks.alleleDropdown !== "..." ? (
             <div className="flex items-center flex-col">
-              <p className="text-neutral-content text-xl font-semibold p-2">
-                Plot for {currentPicks.geneDropdown}
-                {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
-              </p>
               <div className="flex flex-row">
-              <DownloadPlotData 
-                alleleOrGene={currentPicks.geneDropdown+currentPicks.subtypeDropdown+"*"+currentPicks.alleleDropdown}
-                tableType={prop.plotType}
-                fullGene={false}
-              >
-              </DownloadPlotData>
-              <DownloadPlotData 
-                alleleOrGene={currentPicks.geneDropdown+currentPicks.subtypeDropdown}
-                tableType={prop.plotType}
-                fullGene={true}
-              >
-              </DownloadPlotData>
+                <DownloadPlotData
+                  alleleOrGene={
+                    dbName
+                  }
+                  tableType={prop.plotType}
+                  fullGene={false}
+                ></DownloadPlotData>
+                <DownloadPlotData
+                  alleleOrGene={
+                    currentPicks.geneDropdown + currentPicks.subtypeDropdown
+                  }
+                  tableType={prop.plotType}
+                  fullGene={true}
+                ></DownloadPlotData>
               </div>
+              {prop.plotType == "translatedFreqPlot" ?
+                <p className="text-neutral-content text-xl font-semibold p-2 text-center">
+                  Combined frequency for {dbName} and alleles with the same translated sequence
+                </p>
+                :
+                <p className="text-neutral-content text-xl font-semibold p-2">
+                  Plot for {dbName}
+                </p>
+              }
             </div>
           ) : (
-            <p className="text-neutral-content text-xl font-semibold">
+            <p className="text-neutral-content text-xl font-semibold text-center">
               Please select the gene type, gene and allele above
             </p>
           )}

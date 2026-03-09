@@ -26,7 +26,7 @@ export function HeaderDropdown({ links }: HeaderDropdownProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="text-lg hover:text-gray-300 transition-colors">
-        More <ChevronDown className="ml-1 h-4 w-4 inline" />
+        Additional information <ChevronDown className="ml-1 h-4 w-4 inline" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {Object.entries(links).map(([key, link]) => (

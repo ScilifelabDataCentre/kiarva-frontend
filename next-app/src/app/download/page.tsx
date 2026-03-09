@@ -32,6 +32,7 @@ export default function DownloadPage(): ReactElement {
 
   const axiosConfig = {
     headers: {
+      "X-api-key": "kiarvafrontend",
       "Content-Type": "attachment",
     },
   };
@@ -218,7 +219,7 @@ export default function DownloadPage(): ReactElement {
                   fastaTypeSelected === "genomic_fl",
               },
               { name: "IGHJ", isAvailable: fastaTypeSelected === "genomic" },
-              { name: "IGH constant", isAvailable: false },
+              // { name: "IGH constant", isAvailable: false },
             ]}
             setPropsSelectionArray={setIghSelectionArray}
             radialSelected={fastaTypeSelected}

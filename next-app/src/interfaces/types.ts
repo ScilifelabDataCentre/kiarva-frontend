@@ -33,14 +33,6 @@ export type ChangeLogComponentProps = {
   isCurrent: boolean;
 };
 
-export type ProfileComponentProps = {
-  imageUrl: string;
-  linkUrl: string;
-  name: string;
-  title: string;
-  bgColor: string;
-};
-
 export type PublicationComponentProps = {
   linkUrl: string;
   title: string;
@@ -108,3 +100,8 @@ export type IPlotDimensions = {
   height: number;
   width: number;
 };
+
+export type IYouTubeVideo = {
+  address: string;
+  title: string;
+}

@@ -1,10 +1,10 @@
 'use client';
 
-import { backendAPI } from '@/constants';
+import { axiosConfig, backendAPI } from '@/constants';
 import { Button } from "@/components/ui/button";
 import axios from 'axios';
 import fileDownload from 'js-file-download';
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useState } from 'react';
 
 // Component that fetches frequency plot data from API and allows user to download it
 export default function DownloadPlotData(prop: {
@@ -12,12 +12,6 @@ export default function DownloadPlotData(prop: {
         tableType: string;
         fullGene: boolean;
     }): ReactElement {
-    const [axiosConfig, setAxiosConfig] = useState({
-        headers: {
-        //   "X-api-key": "",
-          "Content-Type": "attachment",
-        },
-    });
 
     async function handleDownload() {
         const encodedAlleleName = encodeURIComponent(prop.alleleOrGene);

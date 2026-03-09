@@ -22,7 +22,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import axios from "axios";
-import { backendAPI, BODY_CLASSES, H_1 } from "@/constants";
+import { axiosConfig, backendAPI, BODY_CLASSES, H_1 } from "@/constants";
 import { ISequenceSearchData } from "@/interfaces/types";
 import SequenceSearchComponent from "@/components/SequenceSearchComponent";
 
@@ -55,7 +55,7 @@ export default function SequenceSearchInputForm() {
     });
     const encodedURI = encodeURI(sequenceSearchEndpoint + data.sequence);
     await axios
-      .get(encodedURI)
+      .get(encodedURI, axiosConfig)
       .then((response) => {
         setSearchTermLength(data.sequence.length);
         setSequenceData(response.data);
@@ -87,10 +87,10 @@ export default function SequenceSearchInputForm() {
           ></path>
         </svg>
         <p className="text-sm lg:text-base">
-          This page allows users to search for subsets or exact matches of
-          genomic sequences in the KI Adaptive Immune Receptor Gene Variant
-          Atlas. Enter a sequence of at least 10 nucleotides and receive matches
-          from the KIARVA database.
+          This page allows users to search for exact matches of full-length IGHV 
+          sequences in the KI Adaptive Immune Receptor Gene Variant Atlas. This enables 
+          users to quickly screen novel variants identified in their own work for exact 
+          identity to alleles within the KIARVA database.
         </p>
       </aside>
 

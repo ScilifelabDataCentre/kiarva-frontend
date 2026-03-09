@@ -1,77 +1,140 @@
-// Should be server component, has no user interactivity.
-
-"use client";
-
-import { ReactElement } from "react";
-import { ILink } from "@/interfaces/types";
-import { LINK_CLASSES } from "@/constants";
+import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import DisplayAppVersion from "@/components/DisplayAppVersion";
-import { Button } from "@/components/ui/button";
 
-const footerBackground = "images/hedestamFooterImage.png";
+type FooterLink = { label: string; href: string };
 
-export default function FooterComponent(): ReactElement {
-  const links: { [id: string]: ILink } = {
-    l1: {
-      text: "Download FASTA files",
-      classes: LINK_CLASSES,
-      link: "/download",
-    },
-    l2: {
-      text: "Population frequencies",
-      classes: LINK_CLASSES,
-      link: "/plot",
-    },
-    l3: { text: "Methodology", classes: LINK_CLASSES, link: "/methodology" },
-    l4: { text: "Change log", classes: LINK_CLASSES, link: "/changelog" },
-    l5: { text: "Publications", classes: LINK_CLASSES, link: "/publications" },
-    l6: { text: "About", classes: LINK_CLASSES, link: "/about" },
-  };
+const resourcesLinks: FooterLink[] = [
+  { label: "Download", href: "/download" },
+  { label: "Population frequencies", href: "/plot" },
+  { label: "Alignments", href: "/msa" },
+  { label: "Sequence search", href: "/sequencesearch" },
+];
 
-  const currentPath = usePathname();
+const additionalInformationLinks: FooterLink[] = [
+  { label: "About", href: "/about" },
+  { label: "Methodology", href: "/methodology" },
+  { label: "Publications", href: "/publications" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Change log", href: "/changelog" },
+];
 
+const policyLinks: Array<FooterLink & { external?: boolean }> = [
+  {
+    label: "Privacy policy",
+    href: "https://precision-medicine-portal.scilifelab.se/privacy",
+    external: true,
+  },
+  {
+    label: "Citation and license",
+    href: "/citation-and-license",
+  },
+];
+
+function FooterLinkList({
+  title,
+  links,
+}: {
+  title: string;
+  links: Array<FooterLink & { external?: boolean }>;
+}) {
   return (
-    <footer className="relative bg-primary">
-      <img
-        className="h-64 w-full object-cover"
-        src={footerBackground}
-        alt=""
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 bg-gray-700 opacity-85"
-        aria-hidden="true"
-      ></div>
-      <div className="absolute inset-0 footer footer-center pt-4 lg:pt-10 px-4 lg:px-36 2xl:max-w-screen-2xl 2xl:mx-auto">
-        <section className="flex flex-col items-center justify-center space-y-4 z-10">
-          <h2 className="sr-only">Footer navigation</h2>
-          <p className="text-primary-content text-base lg:text-lg font-semibold">
-            Please visit the other pages of KIARVA
-          </p>
+    <div>
+      <h3 className="text-sm font-semibold tracking-wide text-primary-foreground">
+        {title}
+      </h3>
+      <ul className="mt-4 space-y-3">
+        {links.map((l) =>
+          l.external ? (
+            <li key={l.href}>
+              <a
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+              >
+                {l.label}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </li>
+          ) : (
+            <li key={l.href}>
+              <Link
+                href={l.href}
+                className="text-sm text-primary-foreground/80 hover:text-primary-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+              >
+                {l.label}
+              </Link>
+            </li>
+          ),
+        )}
+      </ul>
+    </div>
+  );
+}
+
+export default function FooterComponent() {
+  return (
+    <footer className="border-t border-primary/30 bg-primary text-primary-foreground">
+      <div className="mx-auto max-w-screen-2xl px-6 py-12">
+        <h2 id="footer-navigation-heading" className="sr-only">
+          Footer navigation
+        </h2>
+        <div className="grid gap-10 md:grid-cols-12">
+          <section className="md:col-span-4">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 font-bold text-lg hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+              aria-label="KIARVA home"
+            >
+              KIARVA
+            </Link>
+            <p className="mt-3 text-sm text-primary-foreground/80">
+              KI Adaptive Immune Receptor Gene Variant Atlas.
+            </p>
+            <div className="mt-5 flex max-w-80 items-center gap-3">
+              <Image
+                src="/images/KInegativVert.png"
+                alt="Karolinska Institutet logo"
+                width={140}
+                height={140}
+                className="min-w-0 flex-1 h-auto"
+              />
+              <Image
+                src="/images/SciLifeLab.png"
+                alt="SciLifeLab logo"
+                width={140}
+                height={140}
+                className="min-w-0 flex-1 h-auto"
+              />
+              <Image
+                src="/images/KAWLogo.png"
+                alt="Knut and Alice Wallenberg Foundation logo"
+                width={200}
+                height={100}
+                className="min-w-0 flex-1 h-auto"
+              />
+            </div>
+          </section>
+
           <nav
-            className="grid grid-flow-row grid-cols-2 lg:grid-flow-col gap-2 lg:gap-4"
-            aria-label="Footer navigation"
+            className="md:col-span-8 grid grid-cols-2 gap-8 sm:grid-cols-3"
+            aria-labelledby="footer-navigation-heading"
           >
-            {Object.keys(links)
-              .filter((key) => links[key].link !== currentPath) // Filter out the current page link
-              .map((key) => (
-                <Button
-                  key={key}
-                  variant="default"
-                  size="sm"
-                  asChild
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  <Link href={links[key].link} rel="noopener noreferrer">
-                    {links[key].text}
-                  </Link>
-                </Button>
-              ))}
+            <FooterLinkList title="Resources" links={resourcesLinks} />
+            <FooterLinkList
+              title="Additional information"
+              links={additionalInformationLinks}
+            />
+            <FooterLinkList title="Policies" links={policyLinks} />
           </nav>
-          <DisplayAppVersion />
-        </section>
+        </div>
+
+        <div className="mt-10 border-t border-primary-foreground/20 pt-6 flex justify-start lg:justify-end">
+          <div className="text-xs text-primary-foreground/70">
+            <DisplayAppVersion />
+          </div>
+        </div>
       </div>
     </footer>
   );
