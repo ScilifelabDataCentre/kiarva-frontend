@@ -33,7 +33,8 @@ export default function CitationAndLicensePage(): ReactElement {
           Research Community
         </Title>
         <p>
-          Researchers are requested to cite Corcoran et al. (
+          Researchers are requested to cite Corcoran et al
+          {/* (
           <a
             href="https://doi.org/10.1016/j.immuni.2026.01.026"
             target="_blank"
@@ -43,7 +44,8 @@ export default function CitationAndLicensePage(): ReactElement {
           >
             10.1016/j.immuni.2026.01.026
           </a>
-          ) and KIARVA with its underlying code in scientific publications.
+          )  */}
+          . and KIARVA with its underlying code in scientific publications.
         </p>
         <Title level={4}>Citing website content</Title>
         <p>
@@ -97,7 +99,8 @@ export default function CitationAndLicensePage(): ReactElement {
         <p>
           Journalists are welcome to reuse text, images, and other content from
           KIARVA in articles, blog posts, and social media for non-commercial
-          purposes. Please cite Corcoran et al. (
+          purposes. Please cite Corcoran et al
+          {/* (
           <a
             href="https://doi.org/10.1016/j.immuni.2026.01.026"
             target="_blank"
@@ -107,7 +110,8 @@ export default function CitationAndLicensePage(): ReactElement {
           >
             10.1016/j.immuni.2026.01.026
           </a>
-          ) and acknowledge the source as <strong>KIARVA</strong>, include a link to{" "}
+          )  */}
+          . and acknowledge the source as <strong>KIARVA</strong>, include a link to{" "}
           <a
             href="https://kiarva.scilifelab.se"
             target="_blank"
