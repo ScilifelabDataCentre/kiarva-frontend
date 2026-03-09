@@ -43,17 +43,7 @@ export default function CitationAndLicensePage(): ReactElement {
           >
             10.1016/j.immuni.2026.01.026
           </a>
-          ) and Fischer, Corcoran et al. (
-          <a
-            href="https://doi.org/10.1016/j.immuni.2026.03.002"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
-            aria-label="Fischer, Corcoran et al. DOI (opens in new tab)"
-          >
-            10.1016/j.immuni.2026.03.002
-          </a>
-          ), and KIARVA with its underlying code in scientific publications.
+          ) and KIARVA with its underlying code in scientific publications.
         </p>
         <Title level={4}>Citing website content</Title>
         <p>
@@ -117,17 +107,7 @@ export default function CitationAndLicensePage(): ReactElement {
           >
             10.1016/j.immuni.2026.01.026
           </a>
-          ) and Fischer, Corcoran et al. (
-          <a
-            href="https://doi.org/10.1016/j.immuni.2026.03.002"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
-            aria-label="Fischer, Corcoran et al. DOI (opens in new tab)"
-          >
-            10.1016/j.immuni.2026.03.002
-          </a>
-          ), and acknowledge the source as <strong>KIARVA</strong>, include a link to{" "}
+          ) and acknowledge the source as <strong>KIARVA</strong>, include a link to{" "}
           <a
             href="https://kiarva.scilifelab.se"
             target="_blank"
