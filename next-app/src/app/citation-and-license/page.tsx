@@ -33,8 +33,19 @@ export default function CitationAndLicensePage(): ReactElement {
           Research Community
         </Title>
         <p>
-          Researchers are requested to cite Corcoran et al. Immunity 2026 and
-          KIARVA with its underlying code in scientific publications.
+          Researchers are requested to cite Corcoran et al
+          {/* (
+          <a
+            href="https://doi.org/10.1016/j.immuni.2026.01.026"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
+            aria-label="Corcoran et al. DOI (opens in new tab)"
+          >
+            10.1016/j.immuni.2026.01.026
+          </a>
+          )  */}
+          . and KIARVA with its underlying code in scientific publications.
         </p>
         <Title level={4}>Citing website content</Title>
         <p>
@@ -82,18 +93,25 @@ export default function CitationAndLicensePage(): ReactElement {
             , RRID: SCR_026682.
           </li>
         </ul>
-        <p>
-          When citing a specific page with a listed author, date or DOI, include
-          that information along with the RRID.
-        </p>
         <Title level={3} aria-label="Citation guidance for journalists">
           Journalists
         </Title>
         <p>
           Journalists are welcome to reuse text, images, and other content from
           KIARVA in articles, blog posts, and social media for non-commercial
-          purposes. Please cite Corcoran et al. Immunity 2026 and acknowledge
-          the source as <strong>KIARVA</strong>, include a link to{" "}
+          purposes. Please cite Corcoran et al
+          {/* (
+          <a
+            href="https://doi.org/10.1016/j.immuni.2026.01.026"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
+            aria-label="Corcoran et al. DOI (opens in new tab)"
+          >
+            10.1016/j.immuni.2026.01.026
+          </a>
+          )  */}
+          . and acknowledge the source as <strong>KIARVA</strong>, include a link to{" "}
           <a
             href="https://kiarva.scilifelab.se"
             target="_blank"
