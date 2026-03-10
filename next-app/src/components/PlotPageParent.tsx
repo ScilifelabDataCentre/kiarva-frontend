@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactElement, useState } from "react";
-import { axiosConfig, backendAPI } from "@/constants";
+import { backendAPI } from "@/constants";
 import {
   IAlleleDropDownConfig,
 } from "@/interfaces/types";
