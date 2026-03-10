@@ -4,7 +4,7 @@ import { axiosConfig, backendAPI } from '@/constants';
 import { Button } from "@/components/ui/button";
 import axios from 'axios';
 import fileDownload from 'js-file-download';
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 
 // Component that fetches frequency plot data from API and allows user to download it
 export default function DownloadPlotData(prop: {
