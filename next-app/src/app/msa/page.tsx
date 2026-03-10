@@ -1,6 +1,3 @@
-// Could be server component except for the use of hasCookie, don't know if that's useable on server.
-// Also has child client component, but that should not be a problem.
-
 import MSAPlotPageComponent from "@/components/MSAPlotPageComponent";
 import { BODY_CLASSES, H_1 } from "@/constants";
 
