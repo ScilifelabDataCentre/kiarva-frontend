@@ -16,7 +16,8 @@ function DisplayNews(props: {imageName: string, imageAlt: string, children: Reac
       <ModalImage 
         imageSrc={props.imageName} 
         imageAlt={props.imageAlt}
-        imgClassesSmall="max-h-60 max-w-60 pr-4 pb-2" 
+        imgClassesSmall="max-h-60 max-w-60"
+        imgClassesButton="mr-4 mb-2"
       />
       {props.children}
     </article>
