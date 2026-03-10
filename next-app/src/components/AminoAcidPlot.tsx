@@ -56,7 +56,7 @@ export default function AminoAcidPlot(prop: { selectedAllele: string }): ReactEl
   async function getTopLevelAlleleAA(allele: string) {
     const encodedAllele = encodeURIComponent(allele);
     const topAlleleAAEndpoint: string =
-      backendAPI + "/data/aminoacidalleles?aa_allele_name=" + encodedAllele;
+      backendAPI + "data/aminoacidalleles?aa_allele_name=" + encodedAllele;
 
     await axios
       .get(topAlleleAAEndpoint, axiosConfig)
