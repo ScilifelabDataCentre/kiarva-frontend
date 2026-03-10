@@ -36,7 +36,7 @@ export default function MSAPlotPageComponent(): ReactElement {
     const encodedGene = encodeURIComponent(gene);
     const alignedSequenceDataEndpoint: string =
       backendAPI + "data/sequences/alignedsequences?gene_name=" + encodedGene;
-
+    console.log(axiosConfig);
     await axios
       .get(alignedSequenceDataEndpoint, axiosConfig)
       .then((response) => {

@@ -9,6 +9,7 @@ import {
   BODY_CLASSES,
   H_1,
   currentVersionFormatted,
+  axiosConfig,
 } from "@/constants";
 import DownloadBoxComponent from "@/components/DownloadBoxComponent";
 import axios from "axios";
@@ -30,19 +31,19 @@ export default function DownloadPage(): ReactElement {
   // const [trgSelectionArray, setTrgSelectionArray] = useState<string[]>([]);
   // const [trdSelectionArray, setTrdSelectionArray] = useState<string[]>([]);
 
-  const axiosConfig = {
-    headers: {
-      "X-api-key": "kiarvafrontend",
-      "Content-Type": "attachment",
-    },
-  };
+  // Deep clone axiosConfig, otherwise the original constant gets modified (for the entire app)
+  const axiosConfigDownload = JSON.parse(JSON.stringify(axiosConfig));
+  axiosConfigDownload.headers["Content-Type"] = "attachment"
 
   async function downloadGeneFasta(gene: string) {
     const encodedGene = encodeURIComponent(gene);
     const fastaEndpoint =
       backendAPI + "fasta/" + fastaTypeSelected + "?file_name=" + encodedGene;
+    
+    console.log(axiosConfig);
+    console.log(axiosConfigDownload)
     await axios
-      .get(fastaEndpoint, axiosConfig)
+      .get(fastaEndpoint, axiosConfigDownload)
       .then((response) => {
         const responseData: Blob = response.data;
         fileDownload(
@@ -67,7 +68,7 @@ export default function DownloadPage(): ReactElement {
       const fastaEndpoint =
         backendAPI + "fasta/" + fastaTypeSelected + "?file_name=" + encodedGene;
       await axios
-        .get(fastaEndpoint, axiosConfig)
+        .get(fastaEndpoint, axiosConfigDownload)
         .then((response) => {
           const responseData: Blob = response.data;
           zip.file(

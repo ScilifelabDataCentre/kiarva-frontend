@@ -1,4 +1,4 @@
-import { IYouTubeVideo } from "./interfaces/types";
+import { IAxiosConfig, IYouTubeVideo } from "./interfaces/types";
 
 // reused tailwind classes
 export const H_1: string =
@@ -43,7 +43,7 @@ export const YouTubeVideos: { [id: string]: IYouTubeVideo } = {
   "search": {"address": "WDaeGC6ZGy0", "title": "Search for sequences"}
 }
 
-export const axiosConfig = {
+export const axiosConfig: IAxiosConfig = {
   headers: {
     "X-api-key": "kiarvafrontend"
   }
