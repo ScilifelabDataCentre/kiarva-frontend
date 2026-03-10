@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/carousel"
 import ModalImage from "@/components/ui/modal-image";
 import { Articles } from "@/content/NewsArticles";
+import ExpandableText from "@/components/ExpandableText";
 
 
 
@@ -53,14 +54,20 @@ export default function NewsCarousel() {
                       })
                     }
                   </time>
-                  <p className="max-w-full pr-2 lg:pr-8 pb-2">
-                    {article.textBody.map((paragraph, index) => (
-                      (<p key={index}>
-                        {paragraph}
-                        <br/><br/>
-                      </p>)
-                    ))}
-                  </p>
+                  {article.textBody.length > 1 ? (
+                    <ExpandableText
+                      className="max-w-full pr-2 lg:pr-8 pb-2"
+                      preview={<p>{article.textBody[0]}</p>}
+                    >
+                      {article.textBody.slice(1).map((paragraph, pIdx) => (
+                        <p key={pIdx} className="pt-4">{paragraph}</p>
+                      ))}
+                    </ExpandableText>
+                  ) : (
+                    <div className="max-w-full pr-2 lg:pr-8 pb-2">
+                      <p>{article.textBody[0]}</p>
+                    </div>
+                  )}
                 </div>
               </DisplayNews>
             </CarouselItem>
