@@ -60,7 +60,7 @@ export default async function HomePage() {
         aria-labelledby="welcome-heading"
       >
         <h2 id="welcome-heading" className={H_2}>Welcome to KIARVA</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-stretch gap-x-6 gap-y-6 lg:gap-y-0 mb-6 mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-full items-start gap-x-6 gap-y-6 lg:gap-y-0 mb-6 mt-6">
           <ExpandableText
             className="pr-2 lg:pr-8"
             preview={
@@ -116,10 +116,15 @@ export default async function HomePage() {
               .
             </p>
           </ExpandableText>
-          <VideoIframe className="max-w-full aspect-video w-[36em]" 
-            videoId={YouTubeVideos["intro"].address} 
-            videoTitle={YouTubeVideos["intro"].title}
-          />
+          <figure
+            role="group"
+            aria-label={YouTubeVideos["intro"].title}
+          >
+            <VideoIframe className="max-w-full aspect-video w-[36em]" 
+              videoId={YouTubeVideos["intro"].address} 
+              videoTitle={YouTubeVideos["intro"].title}
+            />
+          </figure>
         </div>
       </section>
       <div className="divider pt-4" aria-hidden="true" />
