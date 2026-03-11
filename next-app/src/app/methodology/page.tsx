@@ -16,17 +16,28 @@ export default function MethodologyPage(): ReactElement {
           ImmuneDiscover
         </h2>
         <p className="text-left lg:text-justify text-sm lg:text-base mb-4">
+          The ImmuneDiscover method is a novel NGS-based technique designed to sequence 
+          genes in complex regions from large numbers of subjects in a multiplexed 
+          manner. The technique has been developed to require only nanogram quantities 
+          of genomic DNA as template and utilizes a unique indexing procedure that 
+          enables the combinatorial sequencing of samples from over 1000 individuals 
+          in a single analysis. The number of cases that can be simultaneously analyzed 
+          means that ImmuneDiscover is highly suitable for the genotypic analysis of 
+          cohorts containing hundreds or thousands of individuals, for example population 
+          or disease-based collections.  
+          <br /><br />
           IGHV genotyping each of the 1KGP samples was performed through a process of 
-          re-sequencing the genomic DNA encompassing the functional V genes of each case 
+          sequencing the genomic DNA encompassing the functional V genes of each case 
           using the ImmuneDiscover technique. This involves the targeted amplification of 
-          a multiplex of genomic segments that cover all functional V genes using a specially 
-          designed primer mix. The forward and reverse primers contain index-specific F and R 
-          tails, respectively, enabling the indexing of each amplicon library in a 96-well plate 
-          format. The indexing procedure additionally enables the use of plate specific indices, 
-          thereby allowing for individual case specific libraries in each well of a 96 well plate 
-          to be combined with the libraries from multiple plates and sequenced simultaneously. The 
-          ImmuneDiscover software demultiplexes each well and plate specific library, identifies 
-          known and novel variants, thereby enabling IG genotyping of each case.
+          a multiplex of genomic segments that cover all functional V genes using a 
+          specially designed primer mix. The forward and reverse primers contain 
+          index-specific F and R tails, respectively, enabling the indexing of each 
+          amplicon library in a 96-well plate format. The indexing procedure additionally 
+          enables the use of both well- and plate-specific indices, thereby allowing for 
+          individual case specific libraries in each well of a 96-well plate to be combined 
+          with the libraries from multiple plates and sequenced simultaneously. The ImmuneDiscover 
+          software demultiplexes each well and plate specific library, identifying known and 
+          novel variants from all cases, thereby enabling individualized genotyping of all samples.
         </p>
       </section>
       <section aria-labelledby="igsnper-heading">

@@ -13,6 +13,7 @@ const VideoIframe: React.FC<IProps> = (props) => {
       title={videoTitle}
       className={className}
       src={videoURL}
+      loading="lazy"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
     />

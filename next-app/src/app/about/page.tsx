@@ -126,7 +126,7 @@ export default function AboutPage(): ReactElement {
           <div className="px-6 py-6 sm:px-8 sm:py-8 space-y-8">
             {/* Introductory overview */}
             <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-              Our research focuses on adaptive immune responses and qualitative
+              The group focuses on adaptive immune responses and qualitative
               properties of B- and T-cell repertoires. A specific interest is to
               understand individual variation in germline V, D and J genes and
               how this influences antigen-specific responses in the context of
@@ -141,6 +141,45 @@ export default function AboutPage(): ReactElement {
               className={`${LINK_CLASSES} inline-flex items-center gap-1.5 text-sm font-medium text-primary`}
             >
               Visit the group page at Karolinska Institutet
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+
+        {/* Group summary card */}
+        <div className="mt-6 rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
+          {/* Header band */}
+          <div className="bg-gradient-to-r from-primary to-primary/80 px-6 py-5 sm:px-8 sm:py-6">
+            <p className="text-xs sm:text-sm font-medium tracking-wide uppercase text-white/70">
+              SciLifeLab Data Centre &middot; Precision Medicine & Diagnostics
+            </p>
+            <h3 className="mt-1 text-lg sm:text-xl lg:text-2xl font-semibold text-white leading-snug">
+              DDLS Data Science Node in Precision Medicine & Diagnostics
+            </h3>
+            <p className="mt-1 text-sm sm:text-base text-white/90">
+              SciLifeLab Data Centre
+            </p>
+          </div>
+
+          {/* Body */}
+          <div className="px-6 py-6 sm:px-8 sm:py-8 space-y-8">
+            <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+              SciLifeLab Data Centre provides infrastructure, data management and
+              data science support for Swedish life science research. KIARVA was
+              developed and is maintained by the SciLifeLab Data Centre as part of the Data
+              Science Node in Precision Medicine & Diagnostics (hosted by
+              Karolinska Institutet). The work is funded by the Knut and Alice
+              Wallenberg Foundation through the SciLifeLab & Wallenberg National
+              Program for Data-Driven Life Science.
+            </p>
+
+            <a
+              href="https://data.scilifelab.se/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${LINK_CLASSES} inline-flex items-center gap-1.5 text-sm font-medium text-primary`}
+            >
+              SciLifeLab Data Centre services
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
