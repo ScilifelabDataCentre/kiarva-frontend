@@ -52,16 +52,16 @@ export default function ExpandableText({
       </CollapsibleContent>
       <CollapsibleTrigger
         className={cn(
-          "inline-flex items-center gap-1 font-medium text-fg-brand hover:underline",
-          "cursor-pointer text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          "mt-1"
+          "inline-flex items-center gap-1 font-medium text-primary hover:underline",
+          "cursor-pointer text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "mt-1",
         )}
       >
         {open ? labelCollapse : labelExpand}
         <ChevronDown
           className={cn(
             "h-4 w-4 shrink-0 transition-transform duration-200",
-            open && "rotate-180"
+            open && "rotate-180",
           )}
           aria-hidden="true"
         />
