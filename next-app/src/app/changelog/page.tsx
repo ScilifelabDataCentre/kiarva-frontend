@@ -50,7 +50,7 @@ export default function ChangeLogPage(): ReactElement {
           <ChangeLogComponent
             title={`Version ${currentVersion}`}
             databaseUpdates={[
-              "Initial release of the demo version with example data points only",
+              "Initial release containing IGH data.",
             ]}
             designAndBugFixes={["Initial release"]}
             isCurrent={true}
