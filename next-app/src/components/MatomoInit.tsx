@@ -10,7 +10,6 @@ export default function MatomoInit() {
         url: "https://matomo.dc.scilifelab.se/",
         siteId: "12",
         disableCookies: true,
-        excludeUrlsPatterns: [/^\/password/],
       });
     }
   }, []);

@@ -67,7 +67,7 @@ export default function ChangeLogPage(): ReactElement {
             <ChangeLogComponent
               title="Version 0.1.0"
               databaseUpdates={[
-                "Initial release with IGHV data only",
+                "TBD",
               ]}
               designAndBugFixes={[
                 "Initial release",

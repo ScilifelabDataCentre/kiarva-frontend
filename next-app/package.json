@@ -25,7 +25,6 @@
     "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "cookies-next": "^4.2.1",
     "daisyui": "^4.12.11",
     "dotenv": "^16.4.5",
     "embla-carousel-react": "^8.6.0",
