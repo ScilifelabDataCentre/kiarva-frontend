@@ -1,17 +1,15 @@
 "use client";
 
 import { ReactElement, useEffect, useState } from "react";
-import { backendAPI } from "@/constants";
+import { axiosConfig, backendAPI } from "@/constants";
 import FrequencyPlotComponent from "@/components/FrequencyPlotComponent";
 import {
   IGeneFrequencyData,
   IPopulationRegion,
 } from "@/interfaces/types";
 import axios from "axios";
-import { hasCookie } from "cookies-next";
 import {
   populationSubsets,
-  sampleAlleleDataGenomicPlot,
   subPopulations,
   superPopulationColorsDict,
   superPopulations,
@@ -19,7 +17,7 @@ import {
 
 
 // Main function to render the PlotPage component
-export default function GenomicPlot(prop: { selectedAllele: string, axiosConfig: object }): ReactElement {
+export default function GenomicPlot(prop: { selectedAllele: string }): ReactElement {
   // Initialize superpopulation frequency data with zero values
   const superpopFreqDataNoSelection: IGeneFrequencyData[] = [];
   for (let i = 0; i < superPopulations.length; i++) {
@@ -61,7 +59,7 @@ export default function GenomicPlot(prop: { selectedAllele: string, axiosConfig:
       encodedAllele;
 
     await axios
-      .get(superpopulationsEndpoint, prop.axiosConfig)
+      .get(superpopulationsEndpoint, axiosConfig)
       .then((response) => {
         setSuperpopFreqAPIData(response.data);
       })
@@ -71,7 +69,7 @@ export default function GenomicPlot(prop: { selectedAllele: string, axiosConfig:
       alleleFrequenciesEndpoint + "populations?allele_name=" + encodedAllele;
 
     await axios
-      .get(populationsEndpoint, prop.axiosConfig)
+      .get(populationsEndpoint, axiosConfig)
       .then((response) => {
         setPopFreqAPIData(response.data);
       })
@@ -82,17 +80,7 @@ export default function GenomicPlot(prop: { selectedAllele: string, axiosConfig:
   useEffect(() => {
     if (prop.selectedAllele) {
       const selectedAllele = prop.selectedAllele;
-      if (!hasCookie("password")) {
-        const selectedAlleleTmp = selectedAllele.replace("*", "");
-        const strToKey =
-          selectedAlleleTmp as keyof typeof sampleAlleleDataGenomicPlot;
-        setSuperpopFreqAPIData(
-          sampleAlleleDataGenomicPlot[strToKey].superpopulation
-        );
-        setPopFreqAPIData(sampleAlleleDataGenomicPlot[strToKey].population);
-      } else {
-        getGeneFreqData(selectedAllele);
-      }
+      getGeneFreqData(selectedAllele);
     } else {
       setSuperpopFreqAPIData([]);
       setPopFreqAPIData([]);

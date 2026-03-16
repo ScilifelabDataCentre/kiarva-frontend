@@ -1,13 +1,11 @@
-import { backendAPI } from "@/constants";
+import { axiosConfig, backendAPI } from "@/constants";
 import axios from "axios";
 import { ReactElement, useEffect, useState } from "react";
 import {
   IgSNPerData,
 } from "@/interfaces/types";
-import { hasCookie } from "cookies-next";
-import { sampleAlleleDataGenomicPlot } from "@/content/localPlotData";
 
-export default function IgSNPerDisplay(prop: { selectedAllele: string, axiosConfig: object }): ReactElement {
+export default function IgSNPerDisplay(prop: { selectedAllele: string }): ReactElement {
     const [igSNPerScore, setIgSNPerScore] = useState<string>("");
     const [igSNPerSNPs, setIgSNPerSNPs] = useState<string[]>([]);
 
@@ -18,7 +16,7 @@ export default function IgSNPerDisplay(prop: { selectedAllele: string, axiosConf
         backendAPI + "data/igsnperdata?allele_name=" + encodedAllele;
 
         await axios
-        .get(alleleIgSNPerDataEndpoint, prop.axiosConfig)
+        .get(alleleIgSNPerDataEndpoint, axiosConfig)
         .then((response) => {
             const responseData: IgSNPerData = response.data;
             if (responseData.igSNPer_score || responseData.igSNPer_score === 0) {
@@ -39,19 +37,11 @@ export default function IgSNPerDisplay(prop: { selectedAllele: string, axiosConf
     // Fetch gene frequency data when allele dropdown changes
     useEffect(() => {
         if (prop.selectedAllele) {
-        const selectedAllele = prop.selectedAllele;
-        if (!hasCookie("password")) {
-            const selectedAlleleTmp = selectedAllele.replace("*", "");
-            const strToKey =
-            selectedAlleleTmp as keyof typeof sampleAlleleDataGenomicPlot;
-            setIgSNPerScore(sampleAlleleDataGenomicPlot[strToKey].SNPscore);
-            setIgSNPerSNPs(sampleAlleleDataGenomicPlot[strToKey].SNPsnips);
-        } else {
+            const selectedAllele = prop.selectedAllele;
             getGeneIgSNPerData(selectedAllele);
-        }
         } else {
-        setIgSNPerScore("");
-        setIgSNPerSNPs([]);
+            setIgSNPerScore("");
+            setIgSNPerSNPs([]);
         }
     }, [prop.selectedAllele]);
 

@@ -105,3 +105,12 @@ export type IYouTubeVideo = {
   address: string;
   title: string;
 }
+
+export type IAxiosConfig = {
+  headers: IAxiosConfigHeaders;
+}
+
+export type IAxiosConfigHeaders = {
+  "X-api-key": string;
+  "Content-Type"?: string;
+}

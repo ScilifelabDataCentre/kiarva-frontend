@@ -6,10 +6,10 @@
 import { ReactElement, useEffect, useState } from "react";
 import axios from "axios";
 import DropdownComponent from "@/components/DropdownComponent";
-import { getCookie, hasCookie } from "cookies-next";
 import { IAlleleDropDownConfig } from "@/interfaces/types";
 import DownloadPlotData from "./DownloadPlotData";
 import { getDbName } from "@/lib/APIcalls";
+import { axiosConfig } from "@/constants";
 
 // Main function to render the PlotPage component
 export default function AlelleSelectionComponent(prop: {
@@ -17,11 +17,6 @@ export default function AlelleSelectionComponent(prop: {
   handleSetSelection: (allele: string) => void;
   plotType: string;
 }): ReactElement {
-  const [axiosConfig, setAxiosConfig] = useState({
-    headers: {
-      "X-api-key": "",
-    },
-  });
 
   // Initialize state for dropdown selections
   const [currentPicks, setCurrentPicks] = useState({
@@ -69,69 +64,45 @@ export default function AlelleSelectionComponent(prop: {
   };
 
   useEffect(() => {
-    if (!hasCookie("password")) {
-      if (prop.plotType == "genomicFreqPlot" || prop.plotType == "translatedFreqPlot") {
-        setSubtypeDropDownItemsArray(["1-2"]);
-        setAlleleDropDownItemsArray(["*02"]);
-      } else if (prop.plotType == "aminoAcidMSA") {
-        setSubtypeDropDownItemsArray(["1-18"]);
-        setAlleleDropDownItemsArray(["*01_AA"]);
-      } else {
-        setSubtypeDropDownItemsArray(["..."]);
-        setAlleleDropDownItemsArray(["..."]);
-      }
+    if (!currentPicks.subtypeDropdown) {
+      setAlleleDropDownItemsArray(["..."]);
+      const currentSelection = currentPicks.geneDropdown;
+
+      const encodedCurrentSelection = encodeURIComponent(currentSelection);
+
+      axios
+        .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
+        .then((response) => {
+          const responseData = response.data;
+          //  responseData.push("...");
+          setSubtypeDropDownItemsArray(responseData);
+        })
+        .catch((response) => console.log(response.error));
     } else {
-      if (!currentPicks.subtypeDropdown) {
-        setAlleleDropDownItemsArray(["..."]);
-        const currentSelection = currentPicks.geneDropdown;
+      const currentSelection =
+        currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
 
-        const encodedCurrentSelection = encodeURIComponent(currentSelection);
+      const encodedCurrentSelection = encodeURIComponent(currentSelection);
 
-        axios
-          .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
-          .then((response) => {
-            const responseData = response.data;
-            //  responseData.push("...");
-            setSubtypeDropDownItemsArray(responseData);
-          })
-          .catch((response) => console.log(response.error));
-      } else {
-        const currentSelection =
-          currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
-
-        const encodedCurrentSelection = encodeURIComponent(currentSelection);
-
-        setAlleleDropDownItemsArray([]);
-        axios
-          .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
-          .then((response) => {
-            const responseData = response.data;
-            // responseData.push("...");
-            setAlleleDropDownItemsArray(responseData);
-          })
-          .catch((response) => console.log(response.error));
-      }
+      setAlleleDropDownItemsArray([]);
+      axios
+        .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
+        .then((response) => {
+          const responseData = response.data;
+          // responseData.push("...");
+          setAlleleDropDownItemsArray(responseData);
+        })
+        .catch((response) => console.log(response.error));
     }
   }, [currentPicks.geneDropdown, currentPicks.subtypeDropdown]);
 
-  // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
-  useEffect(() => {
-    if (hasCookie("password")) {
-      setAxiosConfig({
-        headers: {
-          "X-api-key": getCookie("password") as string,
-        },
-      });
-    }
-  }, []);
 
   async function awaitDbName() {
     const dbName: string = await getDbName(
       currentPicks.geneDropdown +
       currentPicks.subtypeDropdown +
       "," +
-      currentPicks.alleleDropdown, 
-      axiosConfig)
+      currentPicks.alleleDropdown)
     
     prop.handleSetSelection(dbName);
     setDbName(dbName);

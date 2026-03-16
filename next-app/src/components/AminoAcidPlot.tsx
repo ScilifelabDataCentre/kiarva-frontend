@@ -4,24 +4,22 @@
 "use client";
 
 import { ReactElement, useEffect, useState } from "react";
-import { backendAPI } from "@/constants";
+import { axiosConfig, backendAPI } from "@/constants";
 import FrequencyPlotComponent from "@/components/FrequencyPlotComponent";
 import {
   IGeneFrequencyData,
   IPopulationRegion,
 } from "@/interfaces/types";
 import axios from "axios";
-import { hasCookie } from "cookies-next";
 import {
   populationSubsets,
-  sampleAlleleDataAminoAcidPlot,
   subPopulations,
   superPopulationColorsDict,
   superPopulations,
 } from "@/content/localPlotData";
 
 // Main function to render the PlotPage component
-export default function AminoAcidPlot(prop: { selectedAllele: string, axiosConfig: object }): ReactElement {
+export default function AminoAcidPlot(prop: { selectedAllele: string }): ReactElement {
   // Initialize superpopulation frequency data with zero values
   const superpopFreqDataNoSelection: IGeneFrequencyData[] = [];
   for (let i = 0; i < superPopulations.length; i++) {
@@ -58,10 +56,10 @@ export default function AminoAcidPlot(prop: { selectedAllele: string, axiosConfi
   async function getTopLevelAlleleAA(allele: string) {
     const encodedAllele = encodeURIComponent(allele);
     const topAlleleAAEndpoint: string =
-      backendAPI + "/data/aminoacidalleles?aa_allele_name=" + encodedAllele;
+      backendAPI + "data/aminoacidalleles?aa_allele_name=" + encodedAllele;
 
     await axios
-      .get(topAlleleAAEndpoint, prop.axiosConfig)
+      .get(topAlleleAAEndpoint, axiosConfig)
       .then((response) => {
         setTopAlleleAA(response.data.allele_aa);
       })
@@ -79,7 +77,7 @@ export default function AminoAcidPlot(prop: { selectedAllele: string, axiosConfi
       encodedAllele;
 
     await axios
-      .get(superpopulationsEndpoint, prop.axiosConfig)
+      .get(superpopulationsEndpoint, axiosConfig)
       .then((response) => {
         setSuperpopFreqAPIData(response.data);
       })
@@ -89,7 +87,7 @@ export default function AminoAcidPlot(prop: { selectedAllele: string, axiosConfi
       alleleFrequenciesEndpoint + "populations?aa_allele_name=" + encodedAllele;
 
     await axios
-      .get(populationsEndpoint, prop.axiosConfig)
+      .get(populationsEndpoint, axiosConfig)
       .then((response) => {
         setPopFreqAPIData(response.data);
       })
@@ -100,12 +98,7 @@ export default function AminoAcidPlot(prop: { selectedAllele: string, axiosConfi
   useEffect(() => {
     if (prop.selectedAllele) {
       const selectedAllele = prop.selectedAllele;
-      if (!hasCookie("password")) {
-        setTopAlleleAA(selectedAllele);
-      } else {
-        getTopLevelAlleleAA(selectedAllele);
-        // getGeneFreqData(selectedAllele);
-      }
+      getTopLevelAlleleAA(selectedAllele);
     } else {
       setSuperpopFreqAPIData([]);
       setPopFreqAPIData([]);
@@ -115,17 +108,7 @@ export default function AminoAcidPlot(prop: { selectedAllele: string, axiosConfi
   // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
     if (topAlleleAA) {
-      if (hasCookie("password")) {
-        getGeneFreqData(topAlleleAA);
-      } else {
-        const selectedAlleleTmp = topAlleleAA.replace("*", "");
-        const strToKey =
-          selectedAlleleTmp as keyof typeof sampleAlleleDataAminoAcidPlot;
-        setSuperpopFreqAPIData(
-          sampleAlleleDataAminoAcidPlot[strToKey].superpopulation
-        );
-        setPopFreqAPIData(sampleAlleleDataAminoAcidPlot[strToKey].population);        
-      }
+      getGeneFreqData(topAlleleAA);
     } else {
       setSuperpopFreqAPIData([]);
       setPopFreqAPIData([]);

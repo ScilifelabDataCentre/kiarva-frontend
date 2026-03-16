@@ -72,15 +72,14 @@ export default async function HomePage() {
               }
             >
               <p className="pt-4">
-                We chose to use the 1KGP collection as these are often used by
-                population geneticists to examine global human genetic variation.
-                The results provided in <b>KIARVA</b> can therefore be integrated
-                into a larger body of research involving the same populations and
-                individual donor cases and provides a means to test, compare and
-                benchmark future genotyping protocols. As additional alleles are
-                discovered in populations and individuals that are not represented
-                in the 1KGP set they will be presented as part of separate
-                publications.
+                We used DNA samples from the 1KGP collection to generate <b>KIARVA</b> as 
+                this set is often used by population geneticists to examine global 
+                human genetic variation. The results provided in <b>KIARVA</b> can therefore 
+                be integrated into a larger body of research involving the same populations 
+                and individual donor cases and provides a means to test, compare and 
+                benchmark future genotyping protocols. As additional alleles are 
+                discovered in populations and individuals that are not represented in 
+                the 1KGP set they will be presented as part of separate publications.
               </p>
               <p className="pt-4">
                 <b>KIARVA</b> is open source and provides downloadable FASTA files
@@ -93,9 +92,16 @@ export default async function HomePage() {
             </ExpandableText>
             <p className="pt-4">
               <b>
-                When using this database, please cite Corcoran et al. Immunity
-                2026. The resource should not be used for commercial purposes.
-                For questions, please contact the authors.
+                <a
+                  href="https://doi.org/10.1016/j.immuni.2026.01.026"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-neutral-content/80 hover:text-neutral-content hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-content/50"
+                >
+                  When using this database, please cite Corcoran et al. Immunity
+                  2026. The resource should not be used for commercial purposes.
+                  For questions, please contact the authors.
+                </a>
               </b>
             </p>
             <p className="pt-4">

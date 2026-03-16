@@ -1,21 +1,19 @@
-import { backendAPI } from "@/constants";
-import { sampleAlleleDataAminoAcidPlot } from "@/content/localPlotData";
+import { axiosConfig, backendAPI } from "@/constants";
 import { AlleleListAA } from "@/interfaces/types";
 import axios from "axios";
-import { hasCookie } from "cookies-next";
 import { ReactElement, useEffect, useState } from "react";
 
-export default function IgSNPerDisplay(prop: { selectedAllele: string, axiosConfig: object }): ReactElement {
+export default function IgSNPerDisplay(prop: { selectedAllele: string }): ReactElement {
     const [alleleListAA, setAlleleListAA] = useState<string[]>([]);
     const [topAlleleAA, setTopAlleleAA] = useState<string>("");
 
     async function getTopLevelAlleleAA(allele: string) {
         const encodedAllele = encodeURIComponent(allele);
         const topAlleleAAEndpoint: string =
-        backendAPI + "/data/aminoacidalleles?aa_allele_name=" + encodedAllele;
+        backendAPI + "data/aminoacidalleles?aa_allele_name=" + encodedAllele;
 
         await axios
-        .get(topAlleleAAEndpoint, prop.axiosConfig)
+        .get(topAlleleAAEndpoint, axiosConfig)
         .then((response) => {
             setTopAlleleAA(response.data.allele_aa);
         })
@@ -28,7 +26,7 @@ export default function IgSNPerDisplay(prop: { selectedAllele: string, axiosConf
         backendAPI + "data/aminoacidlist?aa_allele_name=" + encodedAllele;
 
         await axios
-        .get(alleleListAADataEndpoint, prop.axiosConfig)
+        .get(alleleListAADataEndpoint, axiosConfig)
         .then((response) => {
             const responseData: AlleleListAA = response.data;
             if (responseData.aa_allele_list) {
@@ -41,25 +39,14 @@ export default function IgSNPerDisplay(prop: { selectedAllele: string, axiosConf
     useEffect(() => {
         if (prop.selectedAllele) {
             const selectedAllele = prop.selectedAllele;
-            if (hasCookie("password")) {
-                getTopLevelAlleleAA(selectedAllele);
-            } else {
-                setTopAlleleAA(selectedAllele);
-            }
+            getTopLevelAlleleAA(selectedAllele);
         }
     }, [prop.selectedAllele]);
 
     // Fetch gene frequency data when allele dropdown changes
     useEffect(() => {
         if (topAlleleAA) {
-            if (hasCookie("password")) {
-                getAlleleListAA(topAlleleAA);
-            } else {
-                const selectedAlleleTmp = topAlleleAA.replace("*", "");
-                const strToKey =
-                selectedAlleleTmp as keyof typeof sampleAlleleDataAminoAcidPlot;
-                setAlleleListAA(sampleAlleleDataAminoAcidPlot[strToKey].alleleListAA);                
-            }
+            getAlleleListAA(topAlleleAA);
         } else {
             setAlleleListAA([]);
         }
