@@ -110,20 +110,20 @@ export const Articles: Article[] = [
             `,
     ],
   },
-//   {
-//     imageName: "GAFischerCorcoranImmunity2026.jpg",
-//     imageAlt: "GA Fischer, Corcoran Immunity 2026 visual abstract",
-//     date: "2026-03-26",
-//     showDay: true,
-//     textBody: [
-//       `
-//                 In Fischer, Corcoran, et al., we investigated how inherited variation \
-//                 in antibody genes influences antibody responses to influenza HA to \
-//                 highlight population vulnerabilities that could be mitigated in the \
-//                 design of globally protective vaccines.
-//             `,
-//     ],
-//   },
+  {
+    imageName: "GAFischerCorcoranImmunity2026.jpg",
+    imageAlt: "GA Fischer, Corcoran Immunity 2026 visual abstract",
+    date: "2026-03-26",
+    showDay: true,
+    textBody: [
+      `
+                In Fischer, Corcoran, et al., we investigated how inherited variation \
+                in antibody genes influences antibody responses to influenza HA to \
+                highlight population vulnerabilities that could be mitigated in the \
+                design of globally protective vaccines.
+            `,
+    ],
+  },
 ];
 
 /*
