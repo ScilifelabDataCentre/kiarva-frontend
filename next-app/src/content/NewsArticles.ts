@@ -1,10 +1,10 @@
 type Article = Readonly<{
-    imageName: string,
-    imageAlt: string,
-    date: string,
-    showDay: boolean,
-    textBody: string[],
-}>
+  imageName: string;
+  imageAlt: string;
+  date: string;
+  showDay: boolean;
+  textBody: string[];
+}>;
 
 /* 
 A list of article objects. How to use it:
@@ -45,32 +45,29 @@ Add the following article:
 For a longer explanation on how it works, see bottom of the page.
 */
 
-
 export const Articles: Article[] = [
-    {
-        imageName: "KIARVANewsThumbnail2.jpeg",
-        imageAlt: "KIARVA news thumbnail",
-        date:"2026-03-01",
-        showDay: false,
-        textBody:
-        [
-            `
+  {
+    imageName: "KIARVANewsThumbnail2.jpeg",
+    imageAlt: "KIARVA news thumbnail",
+    date: "2026-03-01",
+    showDay: false,
+    textBody: [
+      `
                 We are happy to release the first public version of our new \
                 research tool, KIARVA, described in detail in Corcoran et al. \
                 Immunity 2026. Please visit our introduction and instruction \
                 videos and note that you can find Frequently Asked Questions \
                 (FAQs) under “Additional information” in the top menu.
             `,
-        ]
-    },
-    {
-        imageName: "CorcoranEtAlImmunity2026.jpg",
-        imageAlt: "Corcoran et al. Immunity 2026 visual abstract",
-        date:"2026-03-04",
-        showDay: true,
-        textBody: 
-        [
-            `
+    ],
+  },
+  {
+    imageName: "CorcoranEtAlImmunity2026.jpg",
+    imageAlt: "Corcoran et al. Immunity 2026 visual abstract",
+    date: "2026-03-16",
+    showDay: true,
+    textBody: [
+      `
                 The genes of the immunoglobulin heavy chain (IGH) locus are \
                 critical for the formation of antibodies. Previous studies using \
                 limited numbers of individuals have indicated that IG germline \
@@ -78,8 +75,10 @@ export const Articles: Article[] = [
                 present a novel method for high-throughput sequencing of the \
                 functional adaptive immune genes located in complex genomic \
                 regions, and we utilize this technique to genotype 2486 individuals \
-                from the 1KGP population set, comprising 25 sub-populations. The \
-                study reveals high allelic coding variation and frequent genomic \
+                from the 1KGP population set, comprising 25 sub-populations.
+                            `,
+      `
+                The study reveals high allelic coding variation and frequent genomic \
                 structural variation, including gene deletions and duplications \
                 that vary in frequency between the global population groups, indicative \
                 of local adaptation in response to endemic and pandemic associated \
@@ -89,7 +88,7 @@ export const Articles: Article[] = [
                 common ancestor of humans and archaic hominins, approximately 600,000 \
                 before the present. 
             `,
-            `
+      `
                 The most surprising finding was the frequency of a structural deletion \
                 resulting in the loss of 6 contiguous genes within the diversity (D) gene \
                 locus that was present in all populations, but with especially high \
@@ -100,7 +99,7 @@ export const Articles: Article[] = [
                 deletion suggests population level differences in antibody responses that \
                 merit further investigation. 
             `,
-            `
+      `
                 The study resulted in the identification of over three hundred additional \
                 gene variants in the global population, facilitating future identification \
                 of functional differences associated with localized immune gene adaptation \
@@ -108,26 +107,24 @@ export const Articles: Article[] = [
                 an important new methodology for analysis of complex immune genes and \
                 provides a comprehensive resource for ongoing study of the human immune \
                 system at an individual and population level.
-            `
-        ]
-
-    },
-    {
-        imageName: "GAFischerCorcoranImmunity2026.jpg",
-        imageAlt: "GA Fischer, Corcoran Immunity 2026 visual abstract",
-        date:"2026-03-04",
-        showDay: true,
-        textBody:
-        [
-            `
-                In Fischer, Corcoran, et al., we investigated how inherited variation \
-                in antibody genes influences antibody responses to influenza HA to \
-                highlight population vulnerabilities that could be mitigated in the \
-                design of globally protective vaccines.
             `,
-        ]
-    },
-]
+    ],
+  },
+//   {
+//     imageName: "GAFischerCorcoranImmunity2026.jpg",
+//     imageAlt: "GA Fischer, Corcoran Immunity 2026 visual abstract",
+//     date: "2026-03-26",
+//     showDay: true,
+//     textBody: [
+//       `
+//                 In Fischer, Corcoran, et al., we investigated how inherited variation \
+//                 in antibody genes influences antibody responses to influenza HA to \
+//                 highlight population vulnerabilities that could be mitigated in the \
+//                 design of globally protective vaccines.
+//             `,
+//     ],
+//   },
+];
 
 /*
 How it works:
