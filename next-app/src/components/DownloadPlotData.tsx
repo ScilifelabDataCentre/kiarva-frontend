@@ -38,13 +38,9 @@ export default function DownloadPlotData(prop: {
         <>
             <section aria-label="Download actions">
                 <div className="flex justify-center m-1">
-                {/* Delete the button disabled and className when officially launching */}
                 <Button
                     variant="default"
                     onClick={handleDownload}
-                    className={
-                    "opacity-50"
-                    }
                 >
                     {prop.fullGene ? "Download gene frequency table" : "Download allele frequency table"}
                 </Button>
