@@ -16,7 +16,7 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
   isCurrent,
 }) => {
   // Conditional variable assignments
-  const bgColor = isCurrent ? "bg-accent opacity-60" : "bg-neutral opacity-60";
+  const bgColor = isCurrent ? "bg-accent" : "bg-neutral";
   const borderColor = isCurrent ? "border-accent" : "border-neutral";
 
   // Ensure databaseUpdates & designAndBugFixes is an array

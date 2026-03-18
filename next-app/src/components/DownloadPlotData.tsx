@@ -4,6 +4,7 @@ import { axiosConfig, backendAPI } from '@/constants';
 import { Button } from "@/components/ui/button";
 import axios from 'axios';
 import fileDownload from 'js-file-download';
+import { Download } from 'lucide-react';
 import { ReactElement } from 'react';
 
 // Component that fetches frequency plot data from API and allows user to download it
@@ -38,14 +39,11 @@ export default function DownloadPlotData(prop: {
         <>
             <section aria-label="Download actions">
                 <div className="flex justify-center m-1">
-                {/* Delete the button disabled and className when officially launching */}
                 <Button
                     variant="default"
                     onClick={handleDownload}
-                    className={
-                    "opacity-50"
-                    }
                 >
+                    <Download />
                     {prop.fullGene ? "Download gene frequency table" : "Download allele frequency table"}
                 </Button>
                 </div>
