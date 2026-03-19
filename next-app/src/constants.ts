@@ -1,4 +1,4 @@
-import { IYouTubeVideo } from "./interfaces/types";
+import { IAxiosConfig, IYouTubeVideo } from "./interfaces/types";
 
 // reused tailwind classes
 export const H_1: string =
@@ -30,7 +30,7 @@ export const backendAPI = backendAPI_tmp;
 // 2. To label the changelog page with the current version when creating a new changelog
 // Currently, currentVersion is a placeholder and not used correctly. The version number is
 // not automatic or controlled by any entity. TBD
-export const currentVersion: string = "0.1.0";
+export const currentVersion: string = "1.0.0";
 export const currentVersionFormatted: string = `${
   currentVersion.split(".")[0]
 }_${currentVersion.split(".")[1]}`;
@@ -41,4 +41,10 @@ export const YouTubeVideos: { [id: string]: IYouTubeVideo } = {
   "frequencies": {"address": "rzJI-cq2DHs", "title": "View population frequencies"},
   "alignments": {"address": "4jj5IuO8C1U", "title": "View sequence alignments"},
   "search": {"address": "WDaeGC6ZGy0", "title": "Search for sequences"}
+}
+
+export const axiosConfig: IAxiosConfig = {
+  headers: {
+    "X-api-key": "kiarvafrontend"
+  }
 }

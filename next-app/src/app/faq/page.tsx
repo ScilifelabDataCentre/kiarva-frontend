@@ -281,6 +281,24 @@ export default function FAQPage(): ReactElement {
               </p>
             </AccordionContent>
           </AccordionItem>
+          <AccordionItem value="item-10">
+            <AccordionTrigger>
+              Why does KIARVA only include data from the 1KGP collection?
+            </AccordionTrigger>
+            <AccordionContent>
+              <p>
+                The KIARVA resource utilizes the 1KGP collection of samples as this is the 
+                primary human resource used by population geneticists to examine global 
+                human genetic variation. The results compiled through our analysis can 
+                therefore be integrated into a larger body of research involving the same 
+                populations and individual donor cases, providing a means to test, compare 
+                and benchmark future genotyping protocols. Furthermore, the 1KGP samples are 
+                fully anonymous and thus their use is not restricted by GDPR. The ImmuneDiscover 
+                methodology will be utilized in future studies involving additional human 
+                population collections, the results of which will be presented in separate publications. 
+              </p>
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
       </section>
 

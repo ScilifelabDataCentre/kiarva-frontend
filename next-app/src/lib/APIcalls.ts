@@ -1,8 +1,8 @@
-import { backendAPI } from "@/constants";
+import { axiosConfig, backendAPI } from "@/constants";
 import axios from "axios";
 
 // geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
-export async function getDbName(selection: string, axiosConfig: { headers: { "X-api-key": string; }; }): Promise<string> {
+export async function getDbName(selection: string): Promise<string> {
     const encodedSelection = encodeURIComponent(selection);
     const dbNameEndpoint =
       backendAPI + "data/db_name" + "?selection=" + encodedSelection;
