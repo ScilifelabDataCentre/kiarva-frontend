@@ -117,10 +117,43 @@ export const Articles: Article[] = [
     showDay: true,
     textBody: [
       `
-                In Fischer, Corcoran, et al., we investigated how inherited variation \
-                in antibody genes influences antibody responses to influenza HA to \
-                highlight population vulnerabilities that could be mitigated in the \
-                design of globally protective vaccines.
+                Variation in immunoglobulin (IG) genetics between individuals, as \
+                illustrated in the accompanying paper by Corcoran et al., adds \
+                complexity to our understanding of B cell responses to pathogens \
+                and self-proteins. At the population level, this variation is \
+                extensive and comprises both allelic and structural (deletions or \
+                duplications) variants. High variation in human IG genes also \
+                presents a challenge to the development of population-wide \
+                protective vaccines as variants differ in frequency between \
+                population groups.
+            `,
+      `
+                In Fischer, Corcoran et al., we investigated influenza-specific \
+                memory B cell repertoires and antibody responses to obtain a \
+                deeper understanding of how IG germline gene variation influences \
+                responses to the influenza hemagglutinin (HA) glycoprotein. To \
+                achieve this, we developed ISCAPE (Individualized Single Cell \
+                Analysis of Paired Expressed antigen receptors), a technique that \
+                couples personalized IG genotyping and high-throughput sequencing \
+                of indexed and paired heavy and light chains (HC, LC) from \
+                antigen-binding single B cells for computational analyses and mAb \
+                production.
+            `,
+      `
+                We applied ISCAPE to HA-sorted single B cells and characterized \
+                over 800 individual B cell receptors (BCRs). We uncovered high \
+                inter-individual differences in the influenza HA-specific Ab \
+                response, including allele-dependent functionality, exemplified \
+                by a common polymorphism in IGHV2-70 that dictated elicitation of \
+                a class of neutralizing antibodies. Furthermore, we expressed \
+                selected mAbs for functional and structural analyses and describe \
+                a panel of broadly neutralizing antibodies (bNAbs) that target the \
+                stem region of HA, many of which use IG genes that are highly \
+                variable between persons.
+            `,
+      `
+                Our results highlight population vulnerabilities that could be \
+                mitigated in the design of globally protective vaccines.
             `,
     ],
   },
