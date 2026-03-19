@@ -3,13 +3,14 @@
 
 "use client";
 
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import {
   backendAPI,
   BODY_CLASSES,
   H_1,
   currentVersionFormatted,
   axiosConfig,
+  prepubEnv,
 } from "@/constants";
 import DownloadBoxComponent from "@/components/DownloadBoxComponent";
 import axios from "axios";
@@ -30,6 +31,9 @@ export default function DownloadPage(): ReactElement {
   // const [trbSelectionArray, setTrbSelectionArray] = useState<string[]>([]);
   const [trgSelectionArray, setTrgSelectionArray] = useState<string[]>([]);
   // const [trdSelectionArray, setTrdSelectionArray] = useState<string[]>([]);
+
+  // all selections combined
+  const [selectionArr, setSelectionArr] = useState<string[]>([]);
 
   // Deep clone axiosConfig, otherwise the original constant gets modified (for the entire app)
   const axiosConfigDownload = JSON.parse(JSON.stringify(axiosConfig));
@@ -133,21 +137,28 @@ export default function DownloadPage(): ReactElement {
   }
 
   function handleDownload() {
-    const selectionArr = ighSelectionArray.concat(
-      //   igkSelectionArray,
-      //   iglSelectionArray,
-      //   traSelectionArray,
-      //   trbSelectionArray,
-      trgSelectionArray
-      //   trdSelectionArray
-    );
-
     if (selectionArr.length === 1) {
       downloadGeneFasta(selectionArr[0]);
     } else if (selectionArr.length > 1) {
       downloadGeneFastaZip(selectionArr);
     }
   }
+
+  useEffect(() => {
+    if (!prepubEnv) {
+      setSelectionArr(ighSelectionArray);
+    }
+    else if (prepubEnv) {
+      setSelectionArr(ighSelectionArray.concat(
+          //   igkSelectionArray,
+          //   iglSelectionArray,
+          //   traSelectionArray,
+          //   trbSelectionArray,
+          trgSelectionArray,
+          //   trdSelectionArray
+      ))
+    }
+  }, [ighSelectionArray, trgSelectionArray]); 
 
   return (
     <main className={BODY_CLASSES}>
@@ -276,6 +287,7 @@ export default function DownloadPage(): ReactElement {
         </div>
       </section>
 
+      {prepubEnv &&
       <section aria-labelledby="tcr-heading">
         <h2 id="tcr-heading" className={H_1}>
           TCR
@@ -304,7 +316,10 @@ export default function DownloadPage(): ReactElement {
           <DownloadBoxComponent
             geneSegment="TRG"
             geneObjectArray={[
-              { name: "TRGV", isAvailable: true },
+              { name: "TRGV", isAvailable:
+                  fastaTypeSelected === "genomic" ||
+                  fastaTypeSelected === "translated"
+                },
               { name: "TRGJ", isAvailable: false },
               { name: "TRG constant", isAvailable: false },
             ]}
@@ -318,11 +333,12 @@ export default function DownloadPage(): ReactElement {
             { name: "TRDD", isAvailable: false },
             { name: "TRDJ", isAvailable: false },
             { name: "TRD constant", isAvailable: false },
-          ]}
-          setPropsSelectionArray={setTrdSelectionArray}
-        ></DownloadBoxComponent> */}
+            ]}
+            setPropsSelectionArray={setTrdSelectionArray}
+            ></DownloadBoxComponent> */}
         </div>
       </section>
+      }
 
       <section aria-label="Download actions">
         <div className="flex justify-center py-8 lg:py-0">
@@ -331,9 +347,9 @@ export default function DownloadPage(): ReactElement {
             variant="default"
             size="xl"
             onClick={handleDownload}
-            disabled={ighSelectionArray.length === 0}
+            disabled={selectionArr.length === 0}
             className={
-              ighSelectionArray.length === 0
+              selectionArr.length === 0
                 ? "opacity-50 cursor-not-allowed"
                 : ""
             }

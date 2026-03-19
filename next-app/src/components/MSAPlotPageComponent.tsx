@@ -4,11 +4,13 @@
 "use client";
 
 import { ReactElement, useCallback, useEffect, useState } from "react";
-import { axiosConfig, backendAPI, LINK_CLASSES } from "@/constants";
+import { axiosConfig, backendAPI, LINK_CLASSES, prepubEnv } from "@/constants";
 import {
   ISequenceData,
   IAlleleDropDownConfig,
   IMSAData,
+  GeneType,
+  Locus,
 } from "@/interfaces/types";
 import AlelleSelectionComponent from "@/components/AlleleSelectionComponent";
 import axios from "axios";
@@ -17,12 +19,24 @@ import MSAViewer from "@/components/MSAViewer";
 // Main function to render the PlotPage component
 export default function MSAPlotPageComponent(): ReactElement {
   // config for AlleleSelectionComponent which sets up the allele segment dropdown menu
+  interface IGeneTypesByLocus {
+    IGH:GeneType[];
+    TRG?:GeneType[];
+  }
+
+  let loci: Locus[] = ["IGH"];
+  let geneTypeByLocus: IGeneTypesByLocus = {
+    IGH: ["IGHV"]
+  };
+
+  if (prepubEnv) {
+    loci.push("TRG");
+    geneTypeByLocus.TRG = ["TRGV"];
+  }
+
   const alleleDropdownConfig: IAlleleDropDownConfig = {
-    loci: ["IGH", "TRG"],
-    geneTypesByLocus: {
-      IGH: ["IGHV"],
-      TRG: ["TRGV"],
-    },
+    loci: loci,
+    geneTypesByLocus: geneTypeByLocus,
     geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
   };
 

@@ -1,9 +1,11 @@
 "use client";
 
 import { ReactElement, useState } from "react";
-import { backendAPI } from "@/constants";
+import { backendAPI, prepubEnv } from "@/constants";
 import {
+  GeneType,
   IAlleleDropDownConfig,
+  Locus,
 } from "@/interfaces/types";
 import AlelleSelectionComponent from "./AlleleSelectionComponent";
 import AbbreviationPopupComponent from "@/components/AbbreviationPopupComponent";
@@ -26,13 +28,24 @@ export default function PlotPageParent(prop: { plotType: string }): ReactElement
 //   };
 
   // config for AlleleSelectionComponent which sets up the allele segment dropdown menu
-  const alleleDropdownConfig: IAlleleDropDownConfig = {
-    loci: ["IGH", "TRG"],
-    geneTypesByLocus: {
-      IGH: ["IGHV"],
-      TRG: ["TRGV"],
-    },
+  interface IGeneTypesByLocus {
+    IGH:GeneType[];
+    TRG?:GeneType[];
+  }
 
+  let loci: Locus[] = ["IGH"];
+  let geneTypeByLocus: IGeneTypesByLocus = {
+    IGH: ["IGHV"]
+  };
+
+  if (prepubEnv) {
+    loci.push("TRG");
+    geneTypeByLocus.TRG = ["TRGV"];
+  }
+
+  const alleleDropdownConfig: IAlleleDropDownConfig = {
+    loci: loci,
+    geneTypesByLocus: geneTypeByLocus,
     geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
   };
 
