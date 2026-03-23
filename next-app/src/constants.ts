@@ -48,5 +48,3 @@ export const axiosConfig: IAxiosConfig = {
     "X-api-key": "kiarvafrontend"
   }
 }
-
-export const prepubEnv: boolean = (process.env.NEXT_PUBLIC_CLUSTER_ENV == "prepub" || false);

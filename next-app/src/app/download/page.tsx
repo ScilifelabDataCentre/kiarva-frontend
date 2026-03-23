@@ -10,7 +10,6 @@ import {
   H_1,
   currentVersionFormatted,
   axiosConfig,
-  prepubEnv,
 } from "@/constants";
 import DownloadBoxComponent from "@/components/DownloadBoxComponent";
 import axios from "axios";
@@ -20,6 +19,20 @@ import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
 export default function DownloadPage(): ReactElement {
+
+  // Fetch and set isPrepubEnv, a variable which is set to false by default, but changed to true if
+  // the app is fed the environmental variable NEXT_PUBLIC_CURRENT_ENV = "prepub".
+  const [isPrepubEnv, setIsPrepubEnv] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetch("/meta/version")
+      .then((res) => res.json())
+      .then((data) => {
+        const env = data.currentEnv;
+        setIsPrepubEnv(env === 'prepub');
+      });
+  }, []);
+
   // State to keep track of the selected type of fasta file
   const [fastaTypeSelected, setFastaTypeSelected] = useState("genomic");
 
@@ -145,10 +158,10 @@ export default function DownloadPage(): ReactElement {
   }
 
   useEffect(() => {
-    if (!prepubEnv) {
+    if (!isPrepubEnv) {
       setSelectionArr(ighSelectionArray);
     }
-    else if (prepubEnv) {
+    else if (isPrepubEnv) {
       setSelectionArr(ighSelectionArray.concat(
           //   igkSelectionArray,
           //   iglSelectionArray,
@@ -287,7 +300,7 @@ export default function DownloadPage(): ReactElement {
         </div>
       </section>
 
-      {prepubEnv &&
+      {isPrepubEnv &&
       <section aria-labelledby="tcr-heading">
         <h2 id="tcr-heading" className={H_1}>
           TCR

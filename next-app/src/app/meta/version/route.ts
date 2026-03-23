@@ -7,5 +7,6 @@ export function GET() {
   return NextResponse.json({
     frontendImage: process.env.NEXT_PUBLIC_FRONTEND_IMAGE || '',
     backendImage: process.env.NEXT_PUBLIC_BACKEND_IMAGE || '',
+    currentEnv: process.env.NEXT_PUBLIC_CURRENT_ENV || '',
   })
 }

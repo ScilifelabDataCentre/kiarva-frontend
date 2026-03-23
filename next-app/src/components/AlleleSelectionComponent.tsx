@@ -6,7 +6,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import axios from "axios";
 import DropdownComponent from "@/components/DropdownComponent";
-import { IAlleleDropDownConfig } from "@/interfaces/types";
+import { GeneType, IAlleleDropDownConfig, Locus } from "@/interfaces/types";
 import DownloadPlotData from "./DownloadPlotData";
 import { getDbName } from "@/lib/APIcalls";
 import { axiosConfig } from "@/constants";

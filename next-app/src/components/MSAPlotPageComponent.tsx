@@ -4,7 +4,7 @@
 "use client";
 
 import { ReactElement, useCallback, useEffect, useState } from "react";
-import { axiosConfig, backendAPI, LINK_CLASSES, prepubEnv } from "@/constants";
+import { axiosConfig, backendAPI, LINK_CLASSES } from "@/constants";
 import {
   ISequenceData,
   IAlleleDropDownConfig,
@@ -24,12 +24,25 @@ export default function MSAPlotPageComponent(): ReactElement {
     TRG?:GeneType[];
   }
 
-  let loci: Locus[] = ["IGH"];
-  let geneTypeByLocus: IGeneTypesByLocus = {
+  // Fetch and set isPrepubEnv, a variable which is set to false by default, but changed to true if
+  // the app is fed the environmental variable NEXT_PUBLIC_CURRENT_ENV = "prepub".
+  const [isPrepubEnv, setIsPrepubEnv] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetch("/meta/version")
+      .then((res) => res.json())
+      .then((data) => {
+        const env = data.currentEnv;
+        setIsPrepubEnv(env === 'prepub');
+      });
+  }, []);
+
+  const loci: Locus[] = ["IGH"];
+  const geneTypeByLocus: IGeneTypesByLocus = {
     IGH: ["IGHV"]
   };
 
-  if (prepubEnv) {
+  if (isPrepubEnv) {
     loci.push("TRG");
     geneTypeByLocus.TRG = ["TRGV"];
   }
