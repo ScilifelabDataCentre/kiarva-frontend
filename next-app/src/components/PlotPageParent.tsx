@@ -1,9 +1,11 @@
 "use client";
 
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { backendAPI } from "@/constants";
 import {
+  GeneType,
   IAlleleDropDownConfig,
+  Locus,
 } from "@/interfaces/types";
 import AlelleSelectionComponent from "./AlleleSelectionComponent";
 import AbbreviationPopupComponent from "@/components/AbbreviationPopupComponent";
@@ -18,10 +20,45 @@ import AminoAcidAllelesDisplay from "./AminoAcidAllelesDisplay";
 // Main function to render the PlotPage component
 export default function PlotPageParent(prop: { plotType: string }): ReactElement {
 
+//   // config for AlleleSelectionComponent which sets up the allele segment dropdown menu
+//   const alleleDropdownConfig: IAlleleDropDownConfig = {
+//     geneSegmentItemsArray: ["IGH"],
+//     geneDropDownItemsArray: ["IGHV"],
+//     geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
+//   };
+
   // config for AlleleSelectionComponent which sets up the allele segment dropdown menu
+  interface IGeneTypesByLocus {
+    IGH:GeneType[];
+    TRG?:GeneType[];
+  }
+
+  const loci: Locus[] = ["IGH"];
+  const geneTypeByLocus: IGeneTypesByLocus = {
+    IGH: ["IGHV"]
+  };
+
+  // Fetch and set isPrepubEnv, a variable which is set to false by default, but changed to true if
+  // the app is fed the environmental variable NEXT_PUBLIC_CURRENT_ENV = "prepub".
+  const [isPrepubEnv, setIsPrepubEnv] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetch("/meta/version")
+      .then((res) => res.json())
+      .then((data) => {
+        const env = data.currentEnv;
+        setIsPrepubEnv(env === 'prepub');
+      });
+  }, []);
+
+  if (isPrepubEnv) {
+    loci.push("TRG");
+    geneTypeByLocus.TRG = ["TRGV"];
+  }
+
   const alleleDropdownConfig: IAlleleDropDownConfig = {
-    geneSegmentItemsArray: ["IGH"],
-    geneDropDownItemsArray: ["IGHV"],
+    loci: loci,
+    geneTypesByLocus: geneTypeByLocus,
     geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
   };
 

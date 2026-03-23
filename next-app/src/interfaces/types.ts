@@ -73,9 +73,12 @@ export type AlleleListAA = {
   aa_allele_list: string[];
 };
 
+export type Locus = "IGH" | "TRG";
+export type GeneType = "IGHV" | "TRGV";
+
 export type IAlleleDropDownConfig = {
-  geneSegmentItemsArray: string[];
-  geneDropDownItemsArray: string[];
+  loci: readonly Locus[];
+  geneTypesByLocus: Readonly<Partial<Record<Locus, readonly GeneType[]>>>;
   geneSelectionEndpoint: string;
 };
 

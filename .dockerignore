@@ -5,4 +5,4 @@ build
 **/.git
 **/.DS_Store
 **/node_modules
-react-app/.env
+**/next-app/.env
