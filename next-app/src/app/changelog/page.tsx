@@ -26,8 +26,7 @@ export default function ChangeLogPage(): ReactElement {
 
     for (let i = 0; i < changeLogHistory.length; i++) {
       if (changeLogHistory[i].version < compareToVersion) {
-          const updateLength = changeLogHistory[i][updateTypeKey].length;
-          for (let j = 0; j < updateLength; j++) {
+          for (let j = 0; j < changeLogHistory[i][updateTypeKey].length; j++) {
             if (changeLogHistory[i][updateTypeKey][j]) {
               return changeLogHistory[i].version;
             }
