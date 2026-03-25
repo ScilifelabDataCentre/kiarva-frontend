@@ -9,6 +9,8 @@ import {
   ISequenceData,
   IAlleleDropDownConfig,
   IMSAData,
+  GeneType,
+  Locus,
 } from "@/interfaces/types";
 import AlelleSelectionComponent from "@/components/AlleleSelectionComponent";
 import axios from "axios";
@@ -17,9 +19,37 @@ import MSAViewer from "@/components/MSAViewer";
 // Main function to render the PlotPage component
 export default function MSAPlotPageComponent(): ReactElement {
   // config for AlleleSelectionComponent which sets up the allele segment dropdown menu
+  interface IGeneTypesByLocus {
+    IGH:GeneType[];
+    TRG?:GeneType[];
+  }
+
+  // Fetch and set isPrepubEnv, a variable which is set to false by default, but changed to true if
+  // the app is fed the environmental variable NEXT_PUBLIC_CURRENT_ENV = "prepub".
+  const [isPrepubEnv, setIsPrepubEnv] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetch("/meta/version")
+      .then((res) => res.json())
+      .then((data) => {
+        const env = data.currentEnv;
+        setIsPrepubEnv(env === 'prepub');
+      });
+  }, []);
+
+  const loci: Locus[] = ["IGH"];
+  const geneTypeByLocus: IGeneTypesByLocus = {
+    IGH: ["IGHV"]
+  };
+
+  if (isPrepubEnv) {
+    loci.push("TRG");
+    geneTypeByLocus.TRG = ["TRGV"];
+  }
+
   const alleleDropdownConfig: IAlleleDropDownConfig = {
-    geneSegmentItemsArray: ["IGH"],
-    geneDropDownItemsArray: ["IGHV"],
+    loci: loci,
+    geneTypesByLocus: geneTypeByLocus,
     geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
   };
 
@@ -121,8 +151,8 @@ export default function MSAPlotPageComponent(): ReactElement {
           >
             MAFFT v7.525
           </a>
-          . Translated sequence alignments are based off of the MAFFT output for the nucleotide sequences, 
-          but aligned with a{" "}
+          . Translated sequence alignments are based off of the MAFFT output for
+          the nucleotide sequences, but aligned with a{" "}
           <a
             className={`${LINK_CLASSES} italic`}
             href="https://github.com/ScilifelabDataCentre/kiarva-backend/blob/dev/services/alignment.py"

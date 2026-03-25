@@ -29,7 +29,9 @@ export type ChangeLogComponentProps = {
   databaseUpdates: string | Array<string>;
   designAndBugFixes: string | Array<string>;
   frontEndLink: string;
+  frontEndTag: string;
   backEndLink: string;
+  backEndTag: string;
   isCurrent: boolean;
 };
 
@@ -73,9 +75,12 @@ export type AlleleListAA = {
   aa_allele_list: string[];
 };
 
+export type Locus = "IGH" | "TRG";
+export type GeneType = "IGHV" | "TRGV";
+
 export type IAlleleDropDownConfig = {
-  geneSegmentItemsArray: string[];
-  geneDropDownItemsArray: string[];
+  loci: readonly Locus[];
+  geneTypesByLocus: Readonly<Partial<Record<Locus, readonly GeneType[]>>>;
   geneSelectionEndpoint: string;
 };
 
@@ -113,4 +118,12 @@ export type IAxiosConfig = {
 export type IAxiosConfigHeaders = {
   "X-api-key": string;
   "Content-Type"?: string;
+}
+
+export type changeLogData = {
+    version: string,
+    frontendReleaseTag: string,
+    backendReleaseTag: string,
+    databaseUpdates: string[],
+    designAndBugFixes: string[]
 }

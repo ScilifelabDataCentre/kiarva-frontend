@@ -6,7 +6,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import axios from "axios";
 import DropdownComponent from "@/components/DropdownComponent";
-import { IAlleleDropDownConfig } from "@/interfaces/types";
+import { GeneType, IAlleleDropDownConfig, Locus } from "@/interfaces/types";
 import DownloadPlotData from "./DownloadPlotData";
 import { getDbName } from "@/lib/APIcalls";
 import { axiosConfig } from "@/constants";
@@ -19,7 +19,12 @@ export default function AlelleSelectionComponent(prop: {
 }): ReactElement {
 
   // Initialize state for dropdown selections
-  const [currentPicks, setCurrentPicks] = useState({
+  const [currentPicks, setCurrentPicks] = useState<{
+    geneSegmentDropdown: Locus | "";
+    geneDropdown: GeneType | "";
+    subtypeDropdown: string;
+    alleleDropdown: string;
+  }>({
     geneSegmentDropdown: "",
     geneDropdown: "",
     subtypeDropdown: "",
@@ -31,10 +36,15 @@ export default function AlelleSelectionComponent(prop: {
   // ------------------------
   // temporary data, used until backend with live data is allowed to be published
   // Arrays for dropdown menu items
-  const geneSegmentItemsArray =
-    prop.alleleSelectionConfig.geneSegmentItemsArray;
+  const geneSegmentItemsArray = Array.from(prop.alleleSelectionConfig.loci);
   const geneDropDownItemsArray =
-    prop.alleleSelectionConfig.geneDropDownItemsArray;
+    currentPicks.geneSegmentDropdown === ""
+      ? []
+      : Array.from(
+          prop.alleleSelectionConfig.geneTypesByLocus[
+            currentPicks.geneSegmentDropdown
+          ] ?? []
+        );
 
   const [subtypeDropDownItemsArray, setSubtypeDropDownItemsArray] = useState<
     string[]
@@ -47,7 +57,7 @@ export default function AlelleSelectionComponent(prop: {
 
   // Function to update the current pick for dropdowns
   const handleSetCurrentPick = (dropdownName: string, value: string) => {
-    setCurrentPicks((prev: typeof currentPicks) => ({
+    setCurrentPicks((prev) => ({
       ...prev,
       [dropdownName]: value,
       ...(dropdownName === "subtypeDropdown" && { alleleDropdown: "" }), // Reset alleleDropdown if subtypeDropdown changes
