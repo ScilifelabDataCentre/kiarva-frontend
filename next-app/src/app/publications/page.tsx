@@ -25,8 +25,7 @@ export default function PublicationsPage(): ReactElement {
               bgColor="bg-neutral"
             />
             <PublicationComponent
-              // linkUrl="https://doi.org/10.1016/j.immuni.2026.03.002"
-              linkUrl=""
+              linkUrl="https://doi.org/10.1016/j.immuni.2026.03.002"
               title="Genetically diverse influenza antibodies highlight the role of IG germline gene variation and inform population-comprehensive vaccine strategies"
               authors="Alexandra A. Fischer#, Martin Corcoran#, Philip J. M. Brouwer, Mark Chernyshev, Rebecca A. Gillespie, Andrea Nicoletto, Johannes R. Loeffler, James A. Ferguson, Ioannis Zygouras, Pradeepa Pushparaj, Alesandra J. Rodriguez, Sanjana Narang, Marit J. van Gils, Xaquin Castro Dopico, Masaru Kanekiyo, Andrew B. Ward, Julianna Han, and Gunilla B. Karlsson Hedestam"
               journal="Fischer, Corcoran et al. Immunity 2026"
