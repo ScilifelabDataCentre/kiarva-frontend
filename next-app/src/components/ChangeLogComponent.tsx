@@ -94,7 +94,7 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
             Database Updates
           </h4>
           <ul className="text-sm lg:text-base">
-            {updatesDatabaseUpdatesArray.length > 5 ?
+            {updatesDatabaseUpdatesArray.length > 10 ?
               (<ExpandableText preview={
                 updatesDatabaseUpdatesArray.slice(0, 10).map((update, index) => (
                   <li key={index}>• {update}</li>
@@ -122,7 +122,7 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
             Design & Bug Fixes
           </h4>
           <ul className="text-sm lg:text-base">
-            {updatesDesignAndBugFixesArray.length > 5 ?
+            {updatesDesignAndBugFixesArray.length > 10 ?
               (<ExpandableText preview={
                 updatesDesignAndBugFixesArray.slice(0, 10).map((update, index) => (
                   <li key={index}>• {update}</li>
