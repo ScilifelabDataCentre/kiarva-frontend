@@ -6,13 +6,16 @@
 import React from "react";
 import { ChangeLogComponentProps } from "@/interfaces/types";
 import { Button } from "@/components/ui/button";
+import ExpandableText from "./ExpandableText";
 
 const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
   title,
   databaseUpdates,
   designAndBugFixes,
   frontEndLink,
+  frontEndTag,
   backEndLink,
+  backEndTag,
   isCurrent,
 }) => {
   // Conditional variable assignments
@@ -41,16 +44,42 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
           aria-label={`${title} repository links`}
           className="flex flex-row justify-self-end gap-2 lg:gap-x-2.5"
         >
-          <Button variant="default" size="sm" asChild>
-            <a href={frontEndLink} target="_blank" rel="noopener noreferrer">
-              Frontend Repository
-            </a>
-          </Button>
-          <Button variant="default" size="sm" asChild>
-            <a href={backEndLink} target="_blank" rel="noopener noreferrer">
-              Backend Repository
-            </a>
-          </Button>
+          {!(frontEndTag === "latest") ? 
+            (<div className="flex flex-col">
+            <Button variant="default" size="sm" asChild>
+              <a href={frontEndLink} target="_blank" rel="noopener noreferrer">
+                Frontend Repository
+              </a>
+            </Button>
+            <p className="text-neutral-content text-sm">
+              {frontEndTag}
+            </p>
+            </div>)
+            :
+            <Button variant="default" size="sm" asChild>
+              <a href={frontEndLink} target="_blank" rel="noopener noreferrer">
+                Frontend Repository
+              </a>
+            </Button>   
+          }
+          {!(backEndTag === "latest") ? 
+            (<div className="flex flex-col">
+            <Button variant="default" size="sm" asChild>
+              <a href={backEndLink} target="_blank" rel="noopener noreferrer">
+                Backend Repository
+              </a>
+            </Button>
+            <p className="text-neutral-content text-sm">
+              {backEndTag}
+            </p>
+            </div>)
+            :
+            <Button variant="default" size="sm" asChild>
+              <a href={backEndLink} target="_blank" rel="noopener noreferrer">
+                Backend Repository
+              </a>
+            </Button>   
+          }
         </nav>
       </header>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -65,9 +94,21 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
             Database Updates
           </h4>
           <ul className="text-sm lg:text-base">
-            {updatesDatabaseUpdatesArray.map((update, index) => (
-              <li key={index}>• {update}</li>
-            ))}
+            {updatesDatabaseUpdatesArray.length > 10 ?
+              (<ExpandableText preview={
+                updatesDatabaseUpdatesArray.slice(0, 10).map((update, index) => (
+                  <li key={index}>• {update}</li>
+                ))
+              }>
+              {updatesDatabaseUpdatesArray.slice(10).map((update, index) => (
+                <li key={index}>• {update}</li>
+              ))}
+              </ExpandableText>)
+              :
+              updatesDatabaseUpdatesArray.map((update, index) => (
+                  <li key={index}>• {update}</li>
+              ))
+            }
           </ul>
         </section>
         <section
@@ -81,9 +122,21 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
             Design & Bug Fixes
           </h4>
           <ul className="text-sm lg:text-base">
-            {updatesDesignAndBugFixesArray.map((update, index) => (
-              <li key={index}>• {update}</li>
-            ))}
+            {updatesDesignAndBugFixesArray.length > 10 ?
+              (<ExpandableText preview={
+                updatesDesignAndBugFixesArray.slice(0, 10).map((update, index) => (
+                  <li key={index}>• {update}</li>
+                ))
+              }>
+              {updatesDesignAndBugFixesArray.slice(10).map((update, index) => (
+                <li key={index}>• {update}</li>
+              ))}
+              </ExpandableText>)
+              :
+              updatesDesignAndBugFixesArray.map((update, index) => (
+                  <li key={index}>• {update}</li>
+              ))
+            }
           </ul>
         </section>
       </div>
