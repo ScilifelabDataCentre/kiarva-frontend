@@ -30,7 +30,7 @@ export const backendAPI = backendAPI_tmp;
 // 2. To label the changelog page with the current version when creating a new changelog
 // Currently, currentVersion is a placeholder and not used correctly. The version number is
 // not automatic or controlled by any entity. TBD
-export const currentVersion: string = "1.0.0";
+export const currentVersion: string = "1.0.1";
 export const currentVersionFormatted: string = `${
   currentVersion.split(".")[0]
 }_${currentVersion.split(".")[1]}`;
