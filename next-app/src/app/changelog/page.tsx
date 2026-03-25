@@ -22,10 +22,9 @@ export default function ChangeLogPage(): ReactElement {
   // This is then used on the website to display "No updates. Last updated in version 1.2.1." for version
   // 1.2.9.
   function findLatestUpdate(updateType: updateTypeEnum, compareToVersion: string): string {
-    const changeLogHistoryLength = changeLogHistory.length;
     const updateTypeKey = updateType as keyof typeof changeLogHistory[number];
 
-    for (let i = 0; i < changeLogHistoryLength; i++) {
+    for (let i = 0; i < changeLogHistory.length; i++) {
       if (changeLogHistory[i].version < compareToVersion) {
           const updateLength = changeLogHistory[i][updateTypeKey].length;
           for (let j = 0; j < updateLength; j++) {
