@@ -46,7 +46,135 @@ For a longer explanation on how it works, see bottom of the page.
 */
 
 export const Articles: Article[] = [
-  {
+    {
+      imageName: "BaderEtAlCellReports2026.jpg",
+      imageAlt: "Bader et al Cell Reports 2026 visual abstract",
+      date: "2026-04-16",
+      showDay: true,
+      textBody: [
+              `
+                  Elicitation of HIV broadly neutralizing antibodies through \
+                  vaccination has proven extremely challenging due to the extreme \
+                  variation in the pool of circulating variants. However, some \
+                  epitope regions on the virus envelope glycoprotein (Env) trimer \
+                  are relatively conserved between isolates, such as the primary \
+                  receptor binding site (the CD4bs), making this an attractive \
+                  target for vaccine-induced responses, including germline-targeting \
+                  vaccines. 
+              `,
+              `
+                  So far, infection-induced IGHV1-2-using broadly neutralizing \
+                  antibodies (bNAbs) have been used as primary templates for \
+                  CD4bs-targeting vaccine design. However, not all IGHV1-2 alleles are \
+                  permissive for this binding mode, including some alleles that are \
+                  frequent in some population groups. Here, Bader et al. perform a detailed \
+                  analysis of IGHV1-46-using bNAbs, highlighting their use in vaccine design. \
+              `,
+              `
+                  Using KIARVA, we show that from a population coverage point of view, \
+                  IGHV1-46 antibodies are highly suitable for germline-targeting strategies \
+                  as all known allelic versions of this gene are permissive for the desired \
+                  binding mode.
+              `,
+      ],
+    },
+    {
+        imageName: "GAFischerCorcoranImmunity2026.jpg",
+        imageAlt: "GA Fischer, Corcoran Immunity 2026 visual abstract",
+        date: "2026-03-26",
+        showDay: true,
+        textBody: [
+        `
+                    Variation in immunoglobulin (IG) genetics between individuals, as \
+                    illustrated in the accompanying paper by Corcoran et al., adds \
+                    complexity to our understanding of B cell responses to pathogens \
+                    and self-proteins. At the population level, this variation is \
+                    extensive and comprises both allelic and structural (deletions or \
+                    duplications) variants. High variation in human IG genes also \
+                    presents a challenge to the development of population-wide \
+                    protective vaccines as variants differ in frequency between \
+                    population groups.
+                `,
+        `
+                    In Fischer, Corcoran et al., we investigated influenza-specific \
+                    memory B cell repertoires and antibody responses to obtain a \
+                    deeper understanding of how IG germline gene variation influences \
+                    responses to the influenza hemagglutinin (HA) glycoprotein. To \
+                    achieve this, we developed ISCAPE (Individualized Single Cell \
+                    Analysis of Paired Expressed antigen receptors), a technique that \
+                    couples personalized IG genotyping and high-throughput sequencing \
+                    of indexed and paired heavy and light chains (HC, LC) from \
+                    antigen-binding single B cells for computational analyses and mAb \
+                    production.
+                `,
+        `
+                    We applied ISCAPE to HA-sorted single B cells and characterized \
+                    over 800 individual B cell receptors (BCRs). We uncovered high \
+                    inter-individual differences in the influenza HA-specific Ab \
+                    response, including allele-dependent functionality, exemplified \
+                    by a common polymorphism in IGHV2-70 that dictated elicitation of \
+                    a class of neutralizing antibodies. Furthermore, we expressed \
+                    selected mAbs for functional and structural analyses and describe \
+                    a panel of broadly neutralizing antibodies (bNAbs) that target the \
+                    stem region of HA, many of which use IG genes that are highly \
+                    variable between persons.
+                `,
+        `
+                    Our results highlight population vulnerabilities that could be \
+                    mitigated in the design of globally protective vaccines.
+                `,
+        ],
+    },
+    {
+        imageName: "CorcoranEtAlImmunity2026.jpg",
+        imageAlt: "Corcoran et al. Immunity 2026 visual abstract",
+        date: "2026-03-16",
+        showDay: true,
+        textBody: [
+        `
+                    The genes of the immunoglobulin heavy chain (IGH) locus are \
+                    critical for the formation of antibodies. Previous studies using \
+                    limited numbers of individuals have indicated that IG germline \
+                    genes are highly variable between persons. In Corcoran et al., we \
+                    present a novel method for high-throughput sequencing of the \
+                    functional adaptive immune genes located in complex genomic \
+                    regions, and we utilize this technique to genotype 2486 individuals \
+                    from the 1KGP population set, comprising 25 sub-populations.
+                                `,
+        `
+                    The study reveals high allelic coding variation and frequent genomic \
+                    structural variation, including gene deletions and duplications \
+                    that vary in frequency between the global population groups, indicative \
+                    of local adaptation in response to endemic and pandemic associated \
+                    pathogens encountered by these human populations. The study revealed \
+                    that many of these variants were present in archaic relatives of modern \
+                    humans, Neanderthal and Denisovans, indicating they existed in the \
+                    common ancestor of humans and archaic hominins, approximately 600,000 \
+                    before the present. 
+                `,
+        `
+                    The most surprising finding was the frequency of a structural deletion \
+                    resulting in the loss of 6 contiguous genes within the diversity (D) gene \
+                    locus that was present in all populations, but with especially high \
+                    frequency in individuals from East Asia populations (up to 30%) having \
+                    homozygous loss of these six genes. Since several of the affected D genes \
+                    are critical for the formation of broadly neutralizing antibodies against \
+                    common pathogens, including the influenza virus, the frequency of this \
+                    deletion suggests population level differences in antibody responses that \
+                    merit further investigation. 
+                `,
+        `
+                    The study resulted in the identification of over three hundred additional \
+                    gene variants in the global population, facilitating future identification \
+                    of functional differences associated with localized immune gene adaptation \
+                    in response to endemic pathogenic pressure. Overall, the study contributes \
+                    an important new methodology for analysis of complex immune genes and \
+                    provides a comprehensive resource for ongoing study of the human immune \
+                    system at an individual and population level.
+                `,
+        ],
+    },
+    {
     imageName: "KIARVANewsThumbnail2.jpeg",
     imageAlt: "KIARVA news thumbnail",
     date: "2026-03-01",
@@ -58,102 +186,6 @@ export const Articles: Article[] = [
                 Immunity 2026. Please visit our introduction and instruction \
                 videos and note that you can find Frequently Asked Questions \
                 (FAQs) under “Additional information” in the top menu.
-            `,
-    ],
-  },
-  {
-    imageName: "CorcoranEtAlImmunity2026.jpg",
-    imageAlt: "Corcoran et al. Immunity 2026 visual abstract",
-    date: "2026-03-16",
-    showDay: true,
-    textBody: [
-      `
-                The genes of the immunoglobulin heavy chain (IGH) locus are \
-                critical for the formation of antibodies. Previous studies using \
-                limited numbers of individuals have indicated that IG germline \
-                genes are highly variable between persons. In Corcoran et al., we \
-                present a novel method for high-throughput sequencing of the \
-                functional adaptive immune genes located in complex genomic \
-                regions, and we utilize this technique to genotype 2486 individuals \
-                from the 1KGP population set, comprising 25 sub-populations.
-                            `,
-      `
-                The study reveals high allelic coding variation and frequent genomic \
-                structural variation, including gene deletions and duplications \
-                that vary in frequency between the global population groups, indicative \
-                of local adaptation in response to endemic and pandemic associated \
-                pathogens encountered by these human populations. The study revealed \
-                that many of these variants were present in archaic relatives of modern \
-                humans, Neanderthal and Denisovans, indicating they existed in the \
-                common ancestor of humans and archaic hominins, approximately 600,000 \
-                before the present. 
-            `,
-      `
-                The most surprising finding was the frequency of a structural deletion \
-                resulting in the loss of 6 contiguous genes within the diversity (D) gene \
-                locus that was present in all populations, but with especially high \
-                frequency in individuals from East Asia populations (up to 30%) having \
-                homozygous loss of these six genes. Since several of the affected D genes \
-                are critical for the formation of broadly neutralizing antibodies against \
-                common pathogens, including the influenza virus, the frequency of this \
-                deletion suggests population level differences in antibody responses that \
-                merit further investigation. 
-            `,
-      `
-                The study resulted in the identification of over three hundred additional \
-                gene variants in the global population, facilitating future identification \
-                of functional differences associated with localized immune gene adaptation \
-                in response to endemic pathogenic pressure. Overall, the study contributes \
-                an important new methodology for analysis of complex immune genes and \
-                provides a comprehensive resource for ongoing study of the human immune \
-                system at an individual and population level.
-            `,
-    ],
-  },
-  {
-    imageName: "GAFischerCorcoranImmunity2026.jpg",
-    imageAlt: "GA Fischer, Corcoran Immunity 2026 visual abstract",
-    date: "2026-03-26",
-    showDay: true,
-    textBody: [
-      `
-                Variation in immunoglobulin (IG) genetics between individuals, as \
-                illustrated in the accompanying paper by Corcoran et al., adds \
-                complexity to our understanding of B cell responses to pathogens \
-                and self-proteins. At the population level, this variation is \
-                extensive and comprises both allelic and structural (deletions or \
-                duplications) variants. High variation in human IG genes also \
-                presents a challenge to the development of population-wide \
-                protective vaccines as variants differ in frequency between \
-                population groups.
-            `,
-      `
-                In Fischer, Corcoran et al., we investigated influenza-specific \
-                memory B cell repertoires and antibody responses to obtain a \
-                deeper understanding of how IG germline gene variation influences \
-                responses to the influenza hemagglutinin (HA) glycoprotein. To \
-                achieve this, we developed ISCAPE (Individualized Single Cell \
-                Analysis of Paired Expressed antigen receptors), a technique that \
-                couples personalized IG genotyping and high-throughput sequencing \
-                of indexed and paired heavy and light chains (HC, LC) from \
-                antigen-binding single B cells for computational analyses and mAb \
-                production.
-            `,
-      `
-                We applied ISCAPE to HA-sorted single B cells and characterized \
-                over 800 individual B cell receptors (BCRs). We uncovered high \
-                inter-individual differences in the influenza HA-specific Ab \
-                response, including allele-dependent functionality, exemplified \
-                by a common polymorphism in IGHV2-70 that dictated elicitation of \
-                a class of neutralizing antibodies. Furthermore, we expressed \
-                selected mAbs for functional and structural analyses and describe \
-                a panel of broadly neutralizing antibodies (bNAbs) that target the \
-                stem region of HA, many of which use IG genes that are highly \
-                variable between persons.
-            `,
-      `
-                Our results highlight population vulnerabilities that could be \
-                mitigated in the design of globally protective vaccines.
             `,
     ],
   },
