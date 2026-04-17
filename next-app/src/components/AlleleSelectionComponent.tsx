@@ -6,9 +6,10 @@
 import { ReactElement, useEffect, useState } from "react";
 import axios from "axios";
 import DropdownComponent from "@/components/DropdownComponent";
-import { getCookie, hasCookie } from "cookies-next";
-import { IAlleleDropDownConfig } from "@/interfaces/types";
+import { GeneType, IAlleleDropDownConfig, Locus } from "@/interfaces/types";
 import DownloadPlotData from "./DownloadPlotData";
+import { getDbName } from "@/lib/APIcalls";
+import { axiosConfig } from "@/constants";
 
 // Main function to render the PlotPage component
 export default function AlelleSelectionComponent(prop: {
@@ -16,27 +17,34 @@ export default function AlelleSelectionComponent(prop: {
   handleSetSelection: (allele: string) => void;
   plotType: string;
 }): ReactElement {
-  const [axiosConfig, setAxiosConfig] = useState({
-    headers: {
-      "X-api-key": "",
-    },
-  });
 
   // Initialize state for dropdown selections
-  const [currentPicks, setCurrentPicks] = useState({
+  const [currentPicks, setCurrentPicks] = useState<{
+    geneSegmentDropdown: Locus | "";
+    geneDropdown: GeneType | "";
+    subtypeDropdown: string;
+    alleleDropdown: string;
+  }>({
     geneSegmentDropdown: "",
     geneDropdown: "",
     subtypeDropdown: "",
     alleleDropdown: "",
   });
 
+  const [dbName, setDbName] = useState<string>("");
+
   // ------------------------
   // temporary data, used until backend with live data is allowed to be published
   // Arrays for dropdown menu items
-  const geneSegmentItemsArray =
-    prop.alleleSelectionConfig.geneSegmentItemsArray;
+  const geneSegmentItemsArray = Array.from(prop.alleleSelectionConfig.loci);
   const geneDropDownItemsArray =
-    prop.alleleSelectionConfig.geneDropDownItemsArray;
+    currentPicks.geneSegmentDropdown === ""
+      ? []
+      : Array.from(
+          prop.alleleSelectionConfig.geneTypesByLocus[
+            currentPicks.geneSegmentDropdown
+          ] ?? []
+        );
 
   const [subtypeDropDownItemsArray, setSubtypeDropDownItemsArray] = useState<
     string[]
@@ -49,7 +57,7 @@ export default function AlelleSelectionComponent(prop: {
 
   // Function to update the current pick for dropdowns
   const handleSetCurrentPick = (dropdownName: string, value: string) => {
-    setCurrentPicks((prev: typeof currentPicks) => ({
+    setCurrentPicks((prev) => ({
       ...prev,
       [dropdownName]: value,
       ...(dropdownName === "subtypeDropdown" && { alleleDropdown: "" }), // Reset alleleDropdown if subtypeDropdown changes
@@ -66,61 +74,49 @@ export default function AlelleSelectionComponent(prop: {
   };
 
   useEffect(() => {
-    if (!hasCookie("password")) {
-      if (prop.plotType == "genomicFreqPlot" || prop.plotType == "translatedFreqPlot") {
-        setSubtypeDropDownItemsArray(["1-2"]);
-        setAlleleDropDownItemsArray(["*02"]);
-      } else if (prop.plotType == "aminoAcidMSA") {
-        setSubtypeDropDownItemsArray(["1-18"]);
-        setAlleleDropDownItemsArray(["*01_AA"]);
-      } else {
-        setSubtypeDropDownItemsArray(["..."]);
-        setAlleleDropDownItemsArray(["..."]);
-      }
+    if (!currentPicks.subtypeDropdown) {
+      setAlleleDropDownItemsArray(["..."]);
+      const currentSelection = currentPicks.geneDropdown;
+
+      const encodedCurrentSelection = encodeURIComponent(currentSelection);
+
+      axios
+        .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
+        .then((response) => {
+          const responseData = response.data;
+          //  responseData.push("...");
+          setSubtypeDropDownItemsArray(responseData);
+        })
+        .catch((response) => console.log(response.error));
     } else {
-      if (!currentPicks.subtypeDropdown) {
-        setAlleleDropDownItemsArray(["..."]);
-        const currentSelection = currentPicks.geneDropdown;
+      const currentSelection =
+        currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
 
-        const encodedCurrentSelection = encodeURIComponent(currentSelection);
+      const encodedCurrentSelection = encodeURIComponent(currentSelection);
 
-        axios
-          .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
-          .then((response) => {
-            const responseData = response.data;
-            //  responseData.push("...");
-            setSubtypeDropDownItemsArray(responseData);
-          })
-          .catch((response) => console.log(response.error));
-      } else {
-        const currentSelection =
-          currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
-
-        const encodedCurrentSelection = encodeURIComponent(currentSelection);
-
-        setAlleleDropDownItemsArray([]);
-        axios
-          .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
-          .then((response) => {
-            const responseData = response.data;
-            // responseData.push("...");
-            setAlleleDropDownItemsArray(responseData);
-          })
-          .catch((response) => console.log(response.error));
-      }
+      setAlleleDropDownItemsArray([]);
+      axios
+        .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
+        .then((response) => {
+          const responseData = response.data;
+          // responseData.push("...");
+          setAlleleDropDownItemsArray(responseData);
+        })
+        .catch((response) => console.log(response.error));
     }
   }, [currentPicks.geneDropdown, currentPicks.subtypeDropdown]);
 
-  // check on page load if password cookie has been set yet, and if it has add to axios headers for all requests to backend
-  useEffect(() => {
-    if (hasCookie("password")) {
-      setAxiosConfig({
-        headers: {
-          "X-api-key": getCookie("password") as string,
-        },
-      });
-    }
-  }, []);
+
+  async function awaitDbName() {
+    const dbName: string = await getDbName(
+      currentPicks.geneDropdown +
+      currentPicks.subtypeDropdown +
+      "," +
+      currentPicks.alleleDropdown)
+    
+    prop.handleSetSelection(dbName);
+    setDbName(dbName);
+  }
 
   useEffect(() => {
     if (!(prop.plotType == "aminoAcidMSA")) {
@@ -130,13 +126,9 @@ export default function AlelleSelectionComponent(prop: {
         currentPicks.alleleDropdown === "..."
       ) {
         prop.handleSetSelection("");
+        setDbName("");
       } else {
-        prop.handleSetSelection(
-          currentPicks.geneDropdown +
-            currentPicks.subtypeDropdown +
-            "*" +
-            currentPicks.alleleDropdown
-        );
+        awaitDbName();
       }
     } else {
       // Treat placeholder values as "not selected"
@@ -145,10 +137,12 @@ export default function AlelleSelectionComponent(prop: {
         currentPicks.subtypeDropdown === "..."
       ) {
         prop.handleSetSelection("");
+        setDbName("");
       } else {
         prop.handleSetSelection(
           currentPicks.geneDropdown + currentPicks.subtypeDropdown
         );
+        setDbName(currentPicks.geneDropdown + currentPicks.subtypeDropdown + '*');
       }
     }
   }, [
@@ -272,10 +266,7 @@ export default function AlelleSelectionComponent(prop: {
               <div className="flex flex-row">
                 <DownloadPlotData
                   alleleOrGene={
-                    currentPicks.geneDropdown +
-                    currentPicks.subtypeDropdown +
-                    "*" +
-                    currentPicks.alleleDropdown
+                    dbName
                   }
                   tableType={prop.plotType}
                   fullGene={false}
@@ -290,13 +281,11 @@ export default function AlelleSelectionComponent(prop: {
               </div>
               {prop.plotType == "translatedFreqPlot" ?
                 <p className="text-neutral-content text-xl font-semibold p-2 text-center">
-                  Combined frequency for {currentPicks.geneDropdown}
-                  {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown} and alleles with the same translated sequence
+                  Combined frequency for {dbName} and alleles with the same translated sequence
                 </p>
                 :
                 <p className="text-neutral-content text-xl font-semibold p-2">
-                  Plot for {currentPicks.geneDropdown}
-                  {currentPicks.subtypeDropdown}*{currentPicks.alleleDropdown}
+                  Plot for {dbName}
                 </p>
               }
             </div>

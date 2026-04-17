@@ -1,5 +1,7 @@
 # KIARVA (frontend)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19106324.svg)](https://doi.org/10.5281/zenodo.19106324)
+
 The Karolinska Institutet Adaptive Immune Receptor Gene Variant Atlas (KIARVA) frontend provides the user interface for exploring and visualizing germline immunoglobulin (IG) heavy chain (IGH) allele data. It is a read-only web application built with Next.js and TypeScript and consumes the KIARVA backend API to render interactive plots, tables, and sequence views, as well as allowing users to download FASTA files of allele data.
 
 ## Table of Contents
@@ -22,7 +24,20 @@ KIARVA catalogs germline-encoded IG heavy chain (IGH) alleles identified using t
 
 ## Cite this portal
 
-(TBD)
+If you use **KIARVA** in research, please cite the portal using  
+**RRID: SCR_026682**, including the version number and access date  
+(https://kiarva.scilifelab.se).
+
+Website content and data are available for non-commercial reuse under **CC BY-NC 4.0**.
+
+## Cite this repository
+
+If you reuse or build upon the code, please cite this repository using the metadata provided in **`CITATION.cff`** and the Zenodo DOI: https://doi.org/10.5281/zenodo.19106324
+
+This DOI represents all versions of the software and always resolves to the latest release.  
+For the exact version used in your work, see the citation information under GitHub’s “Cite this repository”.
+
+The source code in this repository is released under the **MIT License**.
 
 
 ## Contributing
@@ -205,3 +220,4 @@ git push origin my_feature_branch
 Open a pull request from your fork's branch to the upstream `main` branch. Add a clear description, link to related issues (if applicable), and request reviewers. By default, the repository owners are always requested and notified.
 
 The team will review the PR before merging. Follow-up changes may be requested.
+

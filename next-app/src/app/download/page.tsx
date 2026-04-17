@@ -9,16 +9,30 @@ import {
   BODY_CLASSES,
   H_1,
   currentVersionFormatted,
+  axiosConfig,
 } from "@/constants";
 import DownloadBoxComponent from "@/components/DownloadBoxComponent";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import JSZip from "jszip";
-import { getCookie, hasCookie } from "cookies-next";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
 export default function DownloadPage(): ReactElement {
+
+  // Fetch and set isPrepubEnv, a variable which is set to false by default, but changed to true if
+  // the app is fed the environmental variable NEXT_PUBLIC_CURRENT_ENV = "prepub".
+  const [isPrepubEnv, setIsPrepubEnv] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetch("/meta/version")
+      .then((res) => res.json())
+      .then((data) => {
+        const env = data.currentEnv;
+        setIsPrepubEnv(env === 'prepub');
+      });
+  }, []);
+
   // State to keep track of the selected type of fasta file
   const [fastaTypeSelected, setFastaTypeSelected] = useState("genomic");
 
@@ -28,27 +42,52 @@ export default function DownloadPage(): ReactElement {
   // const [iglSelectionArray, setIglSelectionArray] = useState<string[]>([]);
   // const [traSelectionArray, setTraSelectionArray] = useState<string[]>([]);
   // const [trbSelectionArray, setTrbSelectionArray] = useState<string[]>([]);
-  // const [trgSelectionArray, setTrgSelectionArray] = useState<string[]>([]);
+  const [trgSelectionArray, setTrgSelectionArray] = useState<string[]>([]);
   // const [trdSelectionArray, setTrdSelectionArray] = useState<string[]>([]);
 
-  const [axiosConfig, setAxiosConfig] = useState({
-    headers: {
-      "X-api-key": "",
-      "Content-Type": "attachment",
-    },
-  });
+  // all selections combined
+  const [selectionArr, setSelectionArr] = useState<string[]>([]);
+
+  // Deep clone axiosConfig, otherwise the original constant gets modified (for the entire app)
+  const axiosConfigDownload = JSON.parse(JSON.stringify(axiosConfig));
+  axiosConfigDownload.headers["Content-Type"] = "attachment"
+
+  function getDownloadNamePartsFromGene(gene: string): {
+    filePrefix: string;
+    zipLocusTag: string;
+  } {
+    const normalizedGene = gene.trim().toUpperCase();
+
+    // TCR
+    if (normalizedGene.startsWith("TRG")) {
+      return { filePrefix: "Homo-sapiens_Trg_", zipLocusTag: "Trg" };
+    }
+
+    // IGH
+    if (normalizedGene.startsWith("IGH")) {
+      // Keep existing naming convention for individual FASTA files
+      return { filePrefix: "Homo-sapiens_Igh_", zipLocusTag: "Igh" };
+    }
+
+    // Unknown
+    return { filePrefix: "Homo-sapiens_", zipLocusTag: "Unknown" };
+  }
 
   async function downloadGeneFasta(gene: string) {
     const encodedGene = encodeURIComponent(gene);
     const fastaEndpoint =
       backendAPI + "fasta/" + fastaTypeSelected + "?file_name=" + encodedGene;
+    
+    console.log(axiosConfig);
+    console.log(axiosConfigDownload)
     await axios
-      .get(fastaEndpoint, axiosConfig)
+      .get(fastaEndpoint, axiosConfigDownload)
       .then((response) => {
         const responseData: Blob = response.data;
+        const { filePrefix } = getDownloadNamePartsFromGene(gene);
         fileDownload(
           responseData,
-          "Homo-sapiens_Ig_Heavy_" +
+          filePrefix +
             gene[gene.length - 1] +
             "_" +
             fastaTypeSelected +
@@ -68,11 +107,12 @@ export default function DownloadPage(): ReactElement {
       const fastaEndpoint =
         backendAPI + "fasta/" + fastaTypeSelected + "?file_name=" + encodedGene;
       await axios
-        .get(fastaEndpoint, axiosConfig)
+        .get(fastaEndpoint, axiosConfigDownload)
         .then((response) => {
           const responseData: Blob = response.data;
+          const { filePrefix } = getDownloadNamePartsFromGene(gene);
           zip.file(
-            "Homo-sapiens_Ig_Heavy_" +
+            filePrefix +
               gene[gene.length - 1] +
               "_" +
               fastaTypeSelected +
@@ -84,11 +124,19 @@ export default function DownloadPage(): ReactElement {
         })
         .catch((response) => console.log(response.error));
     }
+
+    const zipLoci = Array.from(
+      new Set(genes.map((g) => getDownloadNamePartsFromGene(g).zipLocusTag))
+    ).sort();
+    const zipLociPart = zipLoci.join("+");
+
     zip.generateAsync({ type: "blob" }).then(
       function (blob) {
         fileDownload(
           blob,
-          "Homo-sapiens_Ig_" +
+          "Homo-sapiens_" +
+            zipLociPart +
+            "_" +
             fastaTypeSelected +
             "_v" +
             currentVersionFormatted +
@@ -102,16 +150,6 @@ export default function DownloadPage(): ReactElement {
   }
 
   function handleDownload() {
-    const selectionArr = ighSelectionArray;
-    // const selectionArr = ighSelectionArray.concat(
-    //   igkSelectionArray,
-    //   iglSelectionArray,
-    //   traSelectionArray,
-    //   trbSelectionArray,
-    //   trgSelectionArray,
-    //   trdSelectionArray
-    // );
-
     if (selectionArr.length === 1) {
       downloadGeneFasta(selectionArr[0]);
     } else if (selectionArr.length > 1) {
@@ -120,50 +158,24 @@ export default function DownloadPage(): ReactElement {
   }
 
   useEffect(() => {
-    if (hasCookie("password")) {
-      setAxiosConfig({
-        headers: {
-          "X-api-key": getCookie("password") as string,
-          "Content-Type": "attachment",
-        },
-      });
+    if (!isPrepubEnv) {
+      setSelectionArr(ighSelectionArray);
     }
-  }, []);
+    else if (isPrepubEnv) {
+      setSelectionArr(ighSelectionArray.concat(
+          //   igkSelectionArray,
+          //   iglSelectionArray,
+          //   traSelectionArray,
+          //   trbSelectionArray,
+          trgSelectionArray,
+          //   trdSelectionArray
+      ))
+    }
+  }, [ighSelectionArray, trgSelectionArray]); 
 
   return (
     <main className={BODY_CLASSES}>
       <h1 className={H_1}>Download FASTA files</h1>
-
-      {!hasCookie("password") && (
-        <aside
-          className="alert alert-info bg-info text-info-content"
-          role="alert"
-          aria-label="Demo version notice"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            <path d="M12 7v2" />
-            <path d="M12 13h.01" />
-          </svg>
-          <p className="text-sm lg:text-base">
-            You are currently exploring the demo version of KIARVA. The full
-            version will be released once the underlying data has been
-            published. Until then, the pages are visible as a demonstration but
-            without full data access.
-          </p>
-        </aside>
-      )}
 
       <aside className="alert" role="note" aria-label="Download instructions">
         <svg
@@ -288,11 +300,14 @@ export default function DownloadPage(): ReactElement {
         </div>
       </section>
 
-      {/* <section aria-labelledby="tcr-heading">
-        <h2 id="tcr-heading" className={H_1}>TCR</h2>
+      {isPrepubEnv &&
+      <section aria-labelledby="tcr-heading">
+        <h2 id="tcr-heading" className={H_1}>
+          TCR
+        </h2>
         <div className="divider !my-0" aria-hidden="true"></div>
-        <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16"> */}
-      {/* <DownloadBoxComponent
+        <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16">
+          {/* <DownloadBoxComponent
           geneSegment="TRA"
           geneObjectArray={[
             { name: "TRAV", isAvailable: true },
@@ -301,7 +316,7 @@ export default function DownloadPage(): ReactElement {
           ]}
           setPropsSelectionArray={setTraSelectionArray}
         ></DownloadBoxComponent> */}
-      {/* <DownloadBoxComponent
+          {/* <DownloadBoxComponent
           geneSegment="TRB"
           geneObjectArray={[
             { name: "TRBV", isAvailable: true },
@@ -311,27 +326,32 @@ export default function DownloadPage(): ReactElement {
           ]}
           setPropsSelectionArray={setTrbSelectionArray}
         ></DownloadBoxComponent> */}
-      {/* <DownloadBoxComponent
-          geneSegment="TRG"
-          geneObjectArray={[
-            { name: "TRGV", isAvailable: true },
-            { name: "TRGJ", isAvailable: false },
-            { name: "TRG constant", isAvailable: false },
-          ]}
-          setPropsSelectionArray={setTrgSelectionArray}
-        ></DownloadBoxComponent> */}
-      {/* <DownloadBoxComponent
+          <DownloadBoxComponent
+            geneSegment="TRG"
+            geneObjectArray={[
+              { name: "TRGV", isAvailable:
+                  fastaTypeSelected === "genomic" ||
+                  fastaTypeSelected === "translated"
+                },
+              { name: "TRGJ", isAvailable: false },
+              { name: "TRG constant", isAvailable: false },
+            ]}
+            setPropsSelectionArray={setTrgSelectionArray}
+            radialSelected={fastaTypeSelected}
+          ></DownloadBoxComponent>
+          {/* <DownloadBoxComponent
           geneSegment="TRD"
           geneObjectArray={[
             { name: "TRDV", isAvailable: true },
             { name: "TRDD", isAvailable: false },
             { name: "TRDJ", isAvailable: false },
             { name: "TRD constant", isAvailable: false },
-          ]}
-          setPropsSelectionArray={setTrdSelectionArray}
-        ></DownloadBoxComponent> */}
-      {/* </div>
-      </section> */}
+            ]}
+            setPropsSelectionArray={setTrdSelectionArray}
+            ></DownloadBoxComponent> */}
+        </div>
+      </section>
+      }
 
       <section aria-label="Download actions">
         <div className="flex justify-center py-8 lg:py-0">
@@ -340,9 +360,11 @@ export default function DownloadPage(): ReactElement {
             variant="default"
             size="xl"
             onClick={handleDownload}
-            disabled={!hasCookie("password")}
+            disabled={selectionArr.length === 0}
             className={
-              "opacity-50" + (!hasCookie("password") && " cursor-not-allowed")
+              selectionArr.length === 0
+                ? "opacity-50 cursor-not-allowed"
+                : ""
             }
           >
             <Download />

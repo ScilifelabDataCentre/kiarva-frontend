@@ -7,7 +7,6 @@
 import { ReactElement, useState } from 'react';
 import PlotPageParent from '@/components/PlotPageParent';
 import { BODY_CLASSES, H_1 } from '@/constants';
-import { hasCookie } from 'cookies-next';
 import { Button } from '@/components/ui/button';
 
 // Main function to render the plot components
@@ -23,37 +22,6 @@ export default function PlotPage(): ReactElement {
     return (
     <main className={BODY_CLASSES}>
         <h1 className={H_1}>Allele frequency in global populations</h1>
-            {!hasCookie("password") && (
-                <aside
-                className="alert alert-info bg-info text-info-content"
-                role="alert"
-                aria-label="Demo version notice"
-                >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                >
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                    <path d="M12 7v2" />
-                    <path d="M12 13h.01" />
-                </svg>
-                <p className="text-sm lg:text-base">
-                    You are currently exploring the demo version of KIARVA. The full
-                    version will be released once the underlying data has been
-                    published. Until then, the pages are visible as a demonstration but
-                    without full data access.
-                </p>
-                </aside>
-            )}
-
             <aside
                 className="bg-muted alert"
                 role="note"
