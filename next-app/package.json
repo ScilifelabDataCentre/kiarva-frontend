@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.10",
-    "@hookform/resolvers": "^3.10.0",
+    "@hookform/resolvers": "^5.0.0",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -52,7 +52,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/react-plotly.js": "^2.6.4",
-    "css-loader": "^6.7.1",
+    "css-loader": "^7.0.0",
     "eslint": "^8",
     "eslint-config-next": "^15.3.2",
     "postcss": "^8",
