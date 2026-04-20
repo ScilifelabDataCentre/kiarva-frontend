@@ -33,7 +33,7 @@
     "lato-font": "^3.0.0",
     "lucide-react": "^1.0.0",
     "nanoid": "^5.1.7",
-    "next": "^15.5.15",
+    "next": "^16.0.0",
     "plotly.js": "^2.35.3",
     "raw-loader": "^4.0.2",
     "react": "^19.1.2",
