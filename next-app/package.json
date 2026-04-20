@@ -54,7 +54,7 @@
     "@types/react-plotly.js": "^2.6.4",
     "css-loader": "^7.0.0",
     "eslint": "^10.0.0",
-    "eslint-config-next": "^15.3.2",
+    "eslint-config-next": "^16.0.0",
     "postcss": "^8",
     "sass": "^1.80.6",
     "sass-loader": "^13.0.2",
