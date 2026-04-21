@@ -130,7 +130,15 @@ export default function FrequencyPlotComponent(prop: {
     },
     paper_bgcolor: "#f8fafc",
     plot_bgcolor: "#f8fafc",
-    yaxis: { side: "left", title: "Allele Frequency", titlefont: { size: 16 } },
+    yaxis: { 
+      side: "left", 
+      title: {
+      text: 'Allele Frequency',
+        font: {
+          size: 16,
+        }
+      }
+    },
     showlegend: true,
     legend: {
       x: 0.08,
