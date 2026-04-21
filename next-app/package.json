@@ -20,6 +20,7 @@
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-toast": "^1.2.15",
     "@socialgouv/matomo-next": "^1.13.1",
+    "@tailwindcss/postcss": "^4.2.4",
     "@tanstack/react-table": "^8.20.5",
     "axios": "^1.9.0",
     "buffer": "^6.0.3",
