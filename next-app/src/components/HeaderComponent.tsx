@@ -310,7 +310,7 @@ export default function HeaderComponent() {
 
   return (
     <header className="bg-primary">
-      <div className="text-white 2xl:max-w-screen-2xl 2xl:mx-auto">
+      <div className="text-white 2xl:max-w-(--breakpoint-2xl) 2xl:mx-auto">
         <div className="flex flex-col header-desktop:flex-row header-desktop:items-center header-desktop:justify-between header-desktop:gap-8 py-3 px-6">
           {/* ── Logo & mobile toggle row ─────────────────────────────── */}
           <div className="flex justify-between items-center header-desktop:shrink-0">

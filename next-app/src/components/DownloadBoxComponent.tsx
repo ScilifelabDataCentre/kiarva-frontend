@@ -64,7 +64,7 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
           {geneSegment}
         </span>
       </label>
-      <div className="divider !my-0 mx-8" aria-hidden="true"></div>
+      <div className="divider my-0! mx-8" aria-hidden="true"></div>
 
       {/* Map through the geneObjectArray and create a clickable item for each gene */}
       {geneObjectArray.map((gene, index) => (

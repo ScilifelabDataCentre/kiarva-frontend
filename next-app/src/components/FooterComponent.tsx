@@ -76,7 +76,7 @@ function FooterLinkList({
 export default function FooterComponent() {
   return (
     <footer className="border-t border-primary/30 bg-primary text-primary-foreground">
-      <div className="mx-auto max-w-screen-2xl px-6 py-12">
+      <div className="mx-auto max-w-(--breakpoint-2xl) px-6 py-12">
         <h2 id="footer-navigation-heading" className="sr-only">
           Footer navigation
         </h2>
