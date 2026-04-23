@@ -1,3 +1,5 @@
+tailwind.config.ts as it was before any changes were made
+
 /** @type {import('tailwindcss').Config} */
 declare var require: any;
 export default {
