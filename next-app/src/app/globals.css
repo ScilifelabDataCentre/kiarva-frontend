@@ -30,6 +30,8 @@
   --color-error: oklch(0.6793 0.2125 36.25);
   --color-error-content: oklch(1 0 0);
 
+  /* Except for --border, the settings below are copy pasted from an example online,
+  so not set to match our desired specs yet */
   /* border radius */
   --radius-selector: 1rem;
   --radius-field: 1rem;
