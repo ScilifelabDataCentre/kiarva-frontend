@@ -1,20 +1,93 @@
 @import 'tailwindcss';
+@plugin 'tailwindcss-animate';
+@plugin "daisyui" {
+  themes: "kiarva" --default;
+}
+@plugin "daisyui/theme" {
+  name: "kiarva";
+  default: true; /* set as default */
+  color-scheme: light; /* color of browser-provided UI */
 
-@layer base {
+  --color-base-100: oklch(0.9842 0.0034 247.86);
+  --color-base-200: oklch(91.6146% 0 0);
+  --color-base-300: oklch(84.7189% 0 0);
+  --color-base-content: oklch(0 0 0);
+  --color-primary: oklch(0.4188 0.0711 209.74);
+  --color-primary-content: oklch(1 0 0);
+  --color-secondary: oklch(0.5596 0.0058 17.33);
+  --color-secondary-content: oklch(1 0 0);
+  --color-accent: oklch(92.78% 0.264 122.962951);
+  --color-accent-content: oklch(1 0 0);
+  --color-neutral: oklch(0.9219 0 0);
+  --color-neutral-content: oklch(0 0 0);
+  --color-info: oklch(0.419 0.0711 209.8);
+  --color-info-content: oklch(1 0 0);
+  --color-success: oklch(0.419 0.0711 209.8);
+  --color-success-content: oklch(1 0 0);
+  --color-warning: oklch(0.772 0.1738 64.55);
+  --color-warning-content: oklch(1 0 0);
+  --color-error: oklch(0.6793 0.2125 36.25);
+  --color-error-content: oklch(1 0 0);
+
+  /* border radius */
+  --radius-selector: 1rem;
+  --radius-field: 1rem;
+  --radius-box: 1.25rem;
+
+  /* base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* border size */
+  --border: 0.5rem;
+
+  /* effects */
+  --depth: 0;
+  --noise: 0;
+
+/*-------*/
+/* 
+  --background: 210 40% 98%;
+  --foreground: 222.2 84% 4.9%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+
+  --primary: 187 92% 20%;
+  --primary-foreground: 210 40% 98%;
+
+  --secondary: 0 2% 46%;
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+
+  --accent: 187 30% 93%;
+  --accent-foreground: 222.2 84% 4.9%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
+
+  --radius: 0.5rem; */
+}
+/* @plugin {function ({ addBase, theme }) {
+            addBase({
+              body: {
+                backgroundColor: theme("colors.base-100"),
+              },
+            });
+          }
+        } */
+
+/* @layer base {
   :root {
-    /*
-     * DARK MODE PREVENTION
-     * ====================
-     * color-scheme: light only - Forces the browser to render all native UI elements
-     * (form controls, scrollbars, etc.) in light mode only, ignoring the user's
-     * system dark mode preference. This prevents the browser from automatically
-     * applying dark mode styles to elements that don't have explicit colors set.
-     *
-     * Without this, browsers like Chrome/Brave in dark mode would render:
-     * - Input fields with dark backgrounds
-     * - Scrollbars in dark colors
-     * - Select dropdowns with inverted colors
-     */
     color-scheme: light only;
 
     --background: 210 40% 98%;
@@ -47,18 +120,4 @@
 
     --radius: 0.5rem;
   }
-
-  /*
-   * REMOVED: .dark class CSS variables
-   * ==================================
-   * Previously, this file contained a .dark class with dark mode CSS variables.
-   * Since this application does not support dark mode, those variables were
-   * removed to:
-   * 1. Prevent accidental dark mode activation if any library/extension adds .dark class
-   * 2. Reduce CSS bundle size
-   * 3. Make the codebase intent clear: light mode only
-   *
-   * If dark mode support is needed in the future, re-add the .dark class variables
-   * and update tailwind.config.ts darkMode settings accordingly.
-   */
-}
+} */

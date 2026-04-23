@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:css": "postcss ./src/app/globals.css -o public/output.css"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.10",
@@ -56,7 +57,8 @@
     "css-loader": "^7.0.0",
     "eslint": "^10.0.0",
     "eslint-config-next": "^16.0.0",
-    "postcss": "^8",
+    "postcss": "^8.5.10",
+    "postcss-cli": "^11.0.1",
     "sass": "^1.80.6",
     "sass-loader": "^16.0.0",
     "tailwindcss": "^4.2.4",
