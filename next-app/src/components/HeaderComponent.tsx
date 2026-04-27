@@ -119,7 +119,7 @@ const MOBILE_NAV_LINK =
   "flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors";
 
 const MOBILE_SECTION_HEADING =
-  "text-[11px] font-semibold uppercase tracking-widest text-white/40 mb-2 px-3";
+  "text-[11px] font-semibold uppercase tracking-widest text-white mb-2 px-3";
 
 // ---------------------------------------------------------------------------
 // NavDropdown – accessible Radix dropdown for grouped links
@@ -433,7 +433,7 @@ export default function HeaderComponent() {
                         MOBILE_NAV_LINK,
                         pathname === link.href
                           ? "text-white bg-white/10"
-                          : "text-white/60 hover:text-white hover:bg-white/5",
+                          : "text-white hover:text-white hover:bg-white/8 hover:underline",
                       )}
                       aria-current={pathname === link.href ? "page" : undefined}
                     >
@@ -466,7 +466,7 @@ export default function HeaderComponent() {
                         MOBILE_NAV_LINK,
                         pathname === link.href
                           ? "text-white bg-white/10"
-                          : "text-white/60 hover:text-white hover:bg-white/5",
+                          : "text-white hover:text-white hover:bg-white/8 hover:underline",
                       )}
                       aria-current={pathname === link.href ? "page" : undefined}
                     >
