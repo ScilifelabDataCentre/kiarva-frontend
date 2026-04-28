@@ -139,7 +139,7 @@ function NavDropdown({
       <DropdownMenuTrigger
         className={clsx(
           DESKTOP_NAV_BASE,
-          "gap-1 whitespace-nowrap text-white/70 hover:text-white",
+          "gap-1 whitespace-nowrap text-white hover:underline",
         )}
       >
         {label}
@@ -361,7 +361,7 @@ export default function HeaderComponent() {
                       "gap-1.5 whitespace-nowrap",
                       pathname === link.href
                         ? "text-white"
-                        : "text-white/70 hover:text-white",
+                        : "text-white hover:underline",
                     )}
                     aria-current={pathname === link.href ? "page" : undefined}
                   >
