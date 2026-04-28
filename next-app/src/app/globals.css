@@ -27,7 +27,8 @@
   --color-error: oklch(0.6793 0.2125 36.25);
   --color-error-content: oklch(1 0 0);
 
-  /* Except for --border, the settings below are copy pasted from an example online,
+  /* Spacing settings.
+  Except for --border, the settings below are copy pasted from an example online,
   so not set to match our desired specs yet */
   /* border radius */
   --radius-selector: 1rem;
@@ -44,12 +45,42 @@
   /* effects */
   --depth: 0;
   --noise: 0;
+}
 
+@theme {
+    /* Non-daisyUI colors previously kept in globals.css. Translated them to oklch but unsure where to put
+  them/how to use them for now  */
+  --color-foreground: oklch(0.1371 0.036 258.53);
+  --color-background: oklch(0.9838 0.0035 247.86);
+
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.1371 0.036 258.53);
+
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.1371 0.036 258.53);
+
+  --color-primary-foreground: oklch(0.9838 0.0035 247.86);
+  --color-secondary-foreground: oklch(0.9838 0.0035 247.86);
+
+  --color-muted: oklch(0.9684 0.0068 247.9);
+  --color-muted-foreground: oklch(0.5547 0.0407 257.44);
+
+  --color-accent-foreground: oklch(0.1371 0.036 258.53);
+
+  --color-destructive: oklch(0.6368 0.2078 25.33);
+  --color-destructive-foreground: oklch(0.9838 0.0035 247.86);
+  --color-border: oklch(0.929 0.0126 255.53);
+  --color-input: oklch(0.929 0.0126 255.53);
+  --color-ring: oklch(0.1371 0.036 258.53);
+
+  --breakpoint-header-desktop: 1200px;
+  --breakpoint-13inch: 1440px;
+}
 /*old settings-------*/
 /* 
   --background: 210 40% 98%;
   --foreground: 222.2 84% 4.9%;
-
+  
   --card: 0 0% 100%;
   --card-foreground: 222.2 84% 4.9%;
 
@@ -76,7 +107,6 @@
   --ring: 222.2 84% 4.9%;
 
   --radius: 0.5rem; */
-}
 /* @plugin {function ({ addBase, theme }) {
             addBase({
               body: {
@@ -85,39 +115,3 @@
             });
           }
         } */
-
-/* @layer base {
-  :root {
-    color-scheme: light only;
-
-    --background: 210 40% 98%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 187 92% 20%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 0 2% 46%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 187 30% 93%;
-    --accent-foreground: 222.2 84% 4.9%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-  }
-} */

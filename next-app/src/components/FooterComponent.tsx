@@ -51,7 +51,7 @@ function FooterLinkList({
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-primary-content hover:text-primary-content hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+                className="text-sm text-primary-content hover:text-primary-content hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-content/50 rounded-sm"
               >
                 {l.label}
                 <span className="sr-only"> (opens in a new tab)</span>
@@ -61,7 +61,7 @@ function FooterLinkList({
             <li key={l.href}>
               <Link
                 href={l.href}
-                className="text-sm text-primary-content hover:text-primary-content hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+                className="text-sm text-primary-content hover:text-primary-content hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-content/50 rounded-sm"
               >
                 {l.label}
               </Link>
@@ -84,7 +84,7 @@ export default function FooterComponent() {
           <section className="md:col-span-4">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 font-bold text-lg hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+              className="inline-flex items-center gap-2 font-bold text-lg hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-content/50 rounded-sm"
               aria-label="KIARVA home"
             >
               KIARVA
