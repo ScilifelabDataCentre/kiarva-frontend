@@ -217,7 +217,7 @@ export default function DownloadPage(): ReactElement {
             <div className="flex items-center gap-3">
               <RadioGroupItem value="genomic" id="genomic" />
               <Label 
-                className="flex rounded-md my-3 transition-all duration-300 hover:bg-neutral cursor-pointer text-md"
+                className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-md"
                 htmlFor="genomic"
                 onClick={() => setFastaTypeSelected("genomic")}
                 >
@@ -227,7 +227,7 @@ export default function DownloadPage(): ReactElement {
             <div className="flex items-center gap-3">
               <RadioGroupItem value="genomic_fl" id="genomic_fl" />
               <Label 
-                className="flex rounded-md my-3 transition-all duration-300 hover:bg-neutral cursor-pointer text-md"
+                className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-md"
                 htmlFor="genomic_fl"
                 onClick={() => setFastaTypeSelected("genomic_fl")}
                 >
@@ -237,7 +237,7 @@ export default function DownloadPage(): ReactElement {
             <div className="flex items-center gap-3">
               <RadioGroupItem value="translated" id="translated" />
               <Label 
-                className="flex rounded-md my-3 transition-all duration-300 hover:bg-neutral cursor-pointer text-md"
+                className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-md"
                 htmlFor="translated"
                 onClick={() => setFastaTypeSelected("translated")}
                 >
@@ -245,49 +245,6 @@ export default function DownloadPage(): ReactElement {
               </Label>
             </div>
           </RadioGroup>
-          {/* <div>
-            <label
-              className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
-              onClick={() => setFastaTypeSelected("genomic")}
-            >
-              <input
-                type="radio"
-                name="fastaRadio"
-                className="radio"
-                defaultChecked
-                value="genomic"
-              />
-              <span className="pl-2">Genomic coding sequence</span>
-            </label>
-
-            <label
-              className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
-              onClick={() => setFastaTypeSelected("genomic_fl")}
-            >
-              <input
-                type="radio"
-                name="fastaRadio"
-                className="radio"
-                value="genomic_fl"
-              />
-              <span className="pl-2">
-                Genomic coding sequence with flanking regions
-              </span>
-            </label>
-
-            <label
-              className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
-              onClick={() => setFastaTypeSelected("translated")}
-            >
-              <input
-                type="radio"
-                name="fastaRadio"
-                className="radio"
-                value="translated"
-              />
-              <span className="pl-2">Translated V gene sequences</span>
-            </label>
-          </div> */}
         </fieldset>
       </section>
 
