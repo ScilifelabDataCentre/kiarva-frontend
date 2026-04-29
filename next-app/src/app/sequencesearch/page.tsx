@@ -68,7 +68,7 @@ export default function SequenceSearchInputForm() {
       <h1 className={H_1}>Sequence search</h1>
 
       <aside
-        className="bg-muted alert"
+        className="bg-neutral alert border-none"
         role="note"
         aria-label="Sequence search instructions"
       >

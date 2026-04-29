@@ -175,7 +175,7 @@ export default function FrequencyPlotComponent(prop: {
   } else {
     return (
       <aside
-        role="alert"
+        role="alert bg-neutral border-none"
         className="alert alert-error bg-info text-info-content"
         aria-label="Screen size requirement"
       >

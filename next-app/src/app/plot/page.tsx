@@ -23,7 +23,7 @@ export default function PlotPage(): ReactElement {
     <main className={BODY_CLASSES}>
         <h1 className={H_1}>Allele frequency in global populations</h1>
             <aside
-                className="bg-muted alert"
+                className="bg-neutral alert border-none"
                 role="note"
                 aria-label="Plot page instructions"
             >

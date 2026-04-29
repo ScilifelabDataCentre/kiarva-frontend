@@ -140,7 +140,7 @@ export default function MSAPlotPageComponent(): ReactElement {
         </h2>
         <MSAViewer sequenceData={aminoAcidSequence} />
       </section>
-      <aside className="pt-24" aria-label="Alignment method information">
+      <aside className="pt-24 bg-neutral border-none" aria-label="Alignment method information">
         <p className="text-sm lg:text-base">
           Nucleotide sequences are aligned using{" "}
           <a
