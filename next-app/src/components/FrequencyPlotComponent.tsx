@@ -152,15 +152,20 @@ export default function FrequencyPlotComponent(prop: {
   if (isLargeScreen) {
     return (
       <figure
-        className="relative bg-base-100 -mx-24 overflow-hidden"
+        className="relative bg-base-100 -mx-24 pb-20 overflow-hidden"
         aria-label="Population frequency plot"
       >
         <div className="flex flex-row items-center justify-center relative">
           <Plot data={data} layout={layout} />
-          <div className="absolute -bottom-6">
-            <div className="flex flex-row text-neutral-content justify-between pl-8">
+          <div className="absolute -bottom-4 grid grid-cols-3 md:gap-10 lg:gap-24 xl:gap-36 text-black pl-8 justify-between">
+            <div>
               <h2 className="text-xl font-bold">Superpopulation</h2>
-              <h2 className="pl-[440px] text-xl font-bold">Population</h2>
+            </div>
+            <div>
+              {/* empty div to format grid-cols-3 */}
+            </div>
+            <div>
+              <h2 className="text-xl font-bold">Population</h2>
             </div>
           </div>
         </div>
