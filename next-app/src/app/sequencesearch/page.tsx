@@ -48,7 +48,7 @@ export default function SequenceSearchInputForm() {
     toast({
       title: "You submitted the following sequence:",
       description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+        <pre className="mt-2 w-85 rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
