@@ -1,32 +1,5 @@
 @import 'tailwindcss';
 @plugin 'tailwindcss-animate';
-@plugin "daisyui" {
-  themes: "kiarva" --default;
-}
-@plugin "daisyui/theme" {
-  name: "kiarva";
-  default: true;
-  color-scheme: light;
-
-  --color-base-100: oklch(0.9842 0.0034 247.86);
-  --color-base-content: oklch(0 0 0);
-  --color-primary: oklch(0.4188 0.0711 209.74);
-  --color-primary-content: oklch(1 0 0);
-  --color-secondary: oklch(0.5596 0.0058 17.33);
-  --color-secondary-content: oklch(1 0 0);
-  --color-accent: oklch(92.78% 0.264 122.962951);
-  --color-accent-content: oklch(1 0 0);
-  --color-neutral: oklch(0.9219 0 0);
-  --color-neutral-content: oklch(0 0 0);
-  --color-info: oklch(0.419 0.0711 209.8);
-  --color-info-content: oklch(1 0 0);
-  --color-success: oklch(0.419 0.0711 209.8);
-  --color-success-content: oklch(1 0 0);
-  --color-warning: oklch(0.772 0.1738 64.55);
-  --color-warning-content: oklch(1 0 0);
-  --color-error: oklch(0.6793 0.2125 36.25);
-  --color-error-content: oklch(1 0 0);
-}
 
 :root {
   --background: oklch(0.9838 0.0035 247.86);
@@ -55,7 +28,6 @@
 @theme {
   --breakpoint-header-desktop: 1200px;
   --breakpoint-13inch: 1440px;
-
 }
 
 @theme inline {
@@ -79,6 +51,14 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
+  /* Translated from old tailwind config, but seems to not be used and have no effect? */
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --radius: var(--radius);
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);  
@@ -140,6 +120,43 @@
 
 @utility animate-collapsible-up {
   animation: collapsible-up 0.2s ease-out;
+}
+
+@plugin "daisyui" {
+  themes: "kiarva" --default;
+}
+@plugin "daisyui/theme" {
+  name: "kiarva";
+  default: true;
+  color-scheme: light;
+
+  --color-base-100: oklch(0.9842 0.0034 247.86);
+  --color-base-content: oklch(0 0 0);
+  --color-primary: oklch(0.4188 0.0711 209.74);
+  --color-primary-content: oklch(1 0 0);
+  --color-secondary: oklch(0.5596 0.0058 17.33);
+  --color-secondary-content: oklch(1 0 0);
+  --color-accent: oklch(92.78% 0.264 122.962951);
+  --color-accent-content: oklch(1 0 0);
+  --color-neutral: oklch(0.9219 0 0);
+  --color-neutral-content: oklch(0 0 0);
+  --color-info: oklch(0.419 0.0711 209.8);
+  --color-info-content: oklch(1 0 0);
+  --color-success: oklch(0.419 0.0711 209.8);
+  --color-success-content: oklch(1 0 0);
+  --color-warning: oklch(0.772 0.1738 64.55);
+  --color-warning-content: oklch(1 0 0);
+  --color-error: oklch(0.6793 0.2125 36.25);
+  --color-error-content: oklch(1 0 0);
+
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 2px;
+  --depth: 1;
+  --noise: 1;
 }
 /*old settings-------*/
 /* 

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { DownloadBoxComponentProps } from "@/interfaces/types";
+import { Checkbox } from "@/components/ui/checkbox"
 
 // Define the DownloadBoxComponent as a functional component that takes DownloadBoxComponentProps as props
 const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
@@ -47,10 +48,20 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
   return (
     <fieldset className="form-control basis-1/6 rounded-box mt-4 lg:mt-6 bg-white transition-all duration-300 shadow-lg hover:shadow-2xl">
       <legend className="sr-only">{geneSegment} gene selection</legend>
-      <label className="label justify-start gap-2 cursor-pointer rounded-md mx-4 px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral">
-        <input
+      <label className="label text-black justify-start gap-2 cursor-pointer rounded-md mx-4 px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral">
+        <Checkbox 
+          checked={wholeGeneSegmentSelected} 
+          onCheckedChange={() => {
+            setWholeGeneSegmentSelected(!wholeGeneSegmentSelected);
+            if (wholeGeneSegmentSelected) {
+              setGenesSelectedArray([]);
+            }
+          }}
+          aria-label={`Select all ${geneSegment} genes`}
+           />
+        {/* <input
           type="checkbox"
-          className="checkbox"
+          className="checkbox checkbox-neutral"
           checked={wholeGeneSegmentSelected}
           onChange={() => {
             setWholeGeneSegmentSelected(!wholeGeneSegmentSelected);
@@ -59,7 +70,7 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
             }
           }}
           aria-label={`Select all ${geneSegment} genes`}
-        />
+        /> */}
         <span className="label-text font-bold tracking-wide">
           {geneSegment}
         </span>
@@ -70,13 +81,31 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
       {geneObjectArray.map((gene, index) => (
         <label
           key={index}
-          className={`label justify-start gap-2 cursor-pointer rounded-md mx-4 px-2 py-2 my-2 transition-all duration-300 hover:bg-neutral ${
+          className={`label text-black justify-start gap-2 cursor-pointer rounded-md mx-4 px-2 py-2 my-2 transition-all duration-300 hover:bg-neutral ${
             gene.isAvailable
               ? ""
-              : "cursor-not-allowed pointer-events-none opacity-50"
+              : "cursor-not-allowed pointer-events-none opacity-30"
           }`}
         >
-          <input
+          <Checkbox 
+            checked={genesSelectedArray.includes(gene.name)} 
+            disabled={!gene.isAvailable}
+            aria-disabled={!gene.isAvailable}
+            onCheckedChange={() => {
+              setGenesSelectedArray((prevGenesSelectedArray) => {
+                if (!prevGenesSelectedArray.includes(gene.name)) {
+                  // If the gene is not already selected, add it to the array
+                  return [...prevGenesSelectedArray, gene.name];
+                } else {
+                  // If the gene is already selected, remove it from the array
+                  return prevGenesSelectedArray.filter(
+                    (selectedGene) => selectedGene !== gene.name
+                  );
+                }
+              });
+            }}
+          />
+          {/* <input
             type="checkbox"
             className="checkbox"
             checked={genesSelectedArray.includes(gene.name)}
@@ -95,7 +124,7 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
                 }
               });
             }}
-          />
+          /> */}
           <span className="label-text">{gene.name}</span>
         </label>
       ))}

@@ -17,6 +17,8 @@ import fileDownload from "js-file-download";
 import JSZip from "jszip";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 export default function DownloadPage(): ReactElement {
 
@@ -211,7 +213,39 @@ export default function DownloadPage(): ReactElement {
 
         <fieldset className="w-full my-0!">
           <legend className="sr-only">Select FASTA file type</legend>
-          <div>
+          <RadioGroup defaultValue="genomic">
+            <div className="flex items-center gap-3">
+              <RadioGroupItem value="genomic" id="genomic" />
+              <Label 
+                className="flex rounded-md my-3 transition-all duration-300 hover:bg-neutral cursor-pointer text-md"
+                htmlFor="genomic"
+                onClick={() => setFastaTypeSelected("genomic")}
+                >
+                  Genomic coding sequence
+              </Label>
+            </div>
+            <div className="flex items-center gap-3">
+              <RadioGroupItem value="genomic_fl" id="genomic_fl" />
+              <Label 
+                className="flex rounded-md my-3 transition-all duration-300 hover:bg-neutral cursor-pointer text-md"
+                htmlFor="genomic_fl"
+                onClick={() => setFastaTypeSelected("genomic_fl")}
+                >
+                  Genomic coding sequence with flanking regions
+              </Label>
+            </div>
+            <div className="flex items-center gap-3">
+              <RadioGroupItem value="translated" id="translated" />
+              <Label 
+                className="flex rounded-md my-3 transition-all duration-300 hover:bg-neutral cursor-pointer text-md"
+                htmlFor="translated"
+                onClick={() => setFastaTypeSelected("translated")}
+                >
+                  Translated V gene sequences
+              </Label>
+            </div>
+          </RadioGroup>
+          {/* <div>
             <label
               className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
               onClick={() => setFastaTypeSelected("genomic")}
@@ -253,7 +287,7 @@ export default function DownloadPage(): ReactElement {
               />
               <span className="pl-2">Translated V gene sequences</span>
             </label>
-          </div>
+          </div> */}
         </fieldset>
       </section>
 
