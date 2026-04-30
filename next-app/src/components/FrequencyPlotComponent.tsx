@@ -180,8 +180,8 @@ export default function FrequencyPlotComponent(prop: {
   } else {
     return (
       <aside
-        role="alert bg-neutral border-none"
-        className="alert alert-error bg-info text-info-content"
+        role="alert"
+        className="alert alert-error bg-neutral border-none text-info-content"
         aria-label="Screen size requirement"
       >
         <svg

@@ -216,7 +216,7 @@ export default function DownloadPage(): ReactElement {
             <div className="flex items-center gap-3">
               <RadioGroupItem value="genomic" id="genomic" />
               <Label 
-                className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-md"
+                className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-base"
                 htmlFor="genomic"
                 onClick={() => setFastaTypeSelected("genomic")}
                 >
@@ -226,7 +226,7 @@ export default function DownloadPage(): ReactElement {
             <div className="flex items-center gap-3">
               <RadioGroupItem value="genomic_fl" id="genomic_fl" />
               <Label 
-                className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-md"
+                className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-base"
                 htmlFor="genomic_fl"
                 onClick={() => setFastaTypeSelected("genomic_fl")}
                 >
@@ -236,7 +236,7 @@ export default function DownloadPage(): ReactElement {
             <div className="flex items-center gap-3">
               <RadioGroupItem value="translated" id="translated" />
               <Label 
-                className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-md"
+                className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-base"
                 htmlFor="translated"
                 onClick={() => setFastaTypeSelected("translated")}
                 >
