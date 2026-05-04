@@ -42,7 +42,7 @@ export default function ChangeLogPage(): ReactElement {
     <main className={BODY_CLASSES}>
       <h1 className={H_1}>{pageTitle}</h1>
 
-      <aside className="alert" role="note" aria-label="Change log information">
+      <aside className="alert bg-neutral border-none" role="note" aria-label="Change log information">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
