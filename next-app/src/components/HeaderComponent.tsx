@@ -119,7 +119,7 @@ const MOBILE_NAV_LINK =
   "flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors";
 
 const MOBILE_SECTION_HEADING =
-  "text-[11px] font-semibold uppercase tracking-widest text-white/40 mb-2 px-3";
+  "text-[11px] font-semibold uppercase tracking-widest text-white mb-2 px-3";
 
 // ---------------------------------------------------------------------------
 // NavDropdown – accessible Radix dropdown for grouped links
@@ -139,7 +139,7 @@ function NavDropdown({
       <DropdownMenuTrigger
         className={clsx(
           DESKTOP_NAV_BASE,
-          "gap-1 whitespace-nowrap text-white/70 hover:text-white",
+          "gap-1 whitespace-nowrap text-white hover:underline",
         )}
       >
         {label}
@@ -310,7 +310,7 @@ export default function HeaderComponent() {
 
   return (
     <header className="bg-primary">
-      <div className="text-white 2xl:max-w-screen-2xl 2xl:mx-auto">
+      <div className="text-white 2xl:max-w-(--breakpoint-2xl) 2xl:mx-auto">
         <div className="flex flex-col header-desktop:flex-row header-desktop:items-center header-desktop:justify-between header-desktop:gap-8 py-3 px-6">
           {/* ── Logo & mobile toggle row ─────────────────────────────── */}
           <div className="flex justify-between items-center header-desktop:shrink-0">
@@ -361,7 +361,7 @@ export default function HeaderComponent() {
                       "gap-1.5 whitespace-nowrap",
                       pathname === link.href
                         ? "text-white"
-                        : "text-white/70 hover:text-white",
+                        : "text-white hover:underline",
                     )}
                     aria-current={pathname === link.href ? "page" : undefined}
                   >
@@ -433,7 +433,7 @@ export default function HeaderComponent() {
                         MOBILE_NAV_LINK,
                         pathname === link.href
                           ? "text-white bg-white/10"
-                          : "text-white/60 hover:text-white hover:bg-white/5",
+                          : "text-white hover:text-white hover:bg-white/8 hover:underline",
                       )}
                       aria-current={pathname === link.href ? "page" : undefined}
                     >
@@ -466,7 +466,7 @@ export default function HeaderComponent() {
                         MOBILE_NAV_LINK,
                         pathname === link.href
                           ? "text-white bg-white/10"
-                          : "text-white/60 hover:text-white hover:bg-white/5",
+                          : "text-white hover:text-white hover:bg-white/8 hover:underline",
                       )}
                       aria-current={pathname === link.href ? "page" : undefined}
                     >

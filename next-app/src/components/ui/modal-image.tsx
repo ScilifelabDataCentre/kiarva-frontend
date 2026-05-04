@@ -31,10 +31,10 @@ export default function ModalImage(props: {imageSrc: string, imageAlt: string, i
                 </span>
             </button>
         </DialogTrigger>
-        <DialogContent className="md:max-h-screen-md md:max-w-screen-md">
+        <DialogContent className="md:max-h-screen-md md:max-w-(--breakpoint-md)">
           <DialogHeader>
             <DialogTitle className="sr-only">{props.imageAlt}</DialogTitle>
-              <img className="md:max-w-screen-sm md:max-h-screen-sm" src={props.imageSrc} alt={props.imageAlt} />
+              <img className="md:max-w-(--breakpoint-sm) md:max-h-screen-sm" src={props.imageSrc} alt={props.imageAlt} />
           </DialogHeader>
         </DialogContent>
     </Dialog>
