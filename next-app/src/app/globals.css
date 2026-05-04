@@ -1,66 +1,161 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin 'tailwindcss-animate';
+
+:root {
+  --background: oklch(0.9838 0.0035 247.86);
+  --foreground: oklch(0.1371 0.036 258.53);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.1371 0.036 258.53);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.1371 0.036 258.53);
+  --primary: oklch(12.368% 0.00724 196.363);
+  --primary-foreground: oklch(0.9838 0.0035 247.86);
+  --secondary: oklch(0.5596 0.0058 17.33);
+  --secondary-foreground: oklch(0.9838 0.0035 247.86);
+  --muted: oklch(0.9684 0.0068 247.9);
+  --muted-foreground: oklch(0.5547 0.0407 257.44);
+  --accent: oklch(0.9278 0.264 122.962951);
+  --accent-foreground: oklch(0.1371 0.036 258.53);
+  --destructive: oklch(0.6368 0.2078 25.33);
+  --destructive-foreground: oklch(0.9838 0.0035 247.86);
+  --border: oklch(0.929 0.0126 255.53);
+  --input: oklch(0.929 0.0126 255.53);
+  --ring: oklch(0.1371 0.036 258.53);
+
+  --radius: 0.5rem;
+}
+
+@theme {
+  --breakpoint-header-desktop: 1200px;
+  --breakpoint-13inch: 1440px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Translated from old tailwind config, but seems to not be used and have no effect?
+  Leave them commented out for now, as  */
+  /* --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5)); */
+
+  --radius: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);  
+}
 
 @layer base {
-  :root {
-    /*
-     * DARK MODE PREVENTION
-     * ====================
-     * color-scheme: light only - Forces the browser to render all native UI elements
-     * (form controls, scrollbars, etc.) in light mode only, ignoring the user's
-     * system dark mode preference. This prevents the browser from automatically
-     * applying dark mode styles to elements that don't have explicit colors set.
-     *
-     * Without this, browsers like Chrome/Brave in dark mode would render:
-     * - Input fields with dark backgrounds
-     * - Scrollbars in dark colors
-     * - Select dropdowns with inverted colors
-     */
-    color-scheme: light only;
-
-    --background: 210 40% 98%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 187 92% 20%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 0 2% 46%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 187 30% 93%;
-    --accent-foreground: 222.2 84% 4.9%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+  *{
+    border-color: oklch(0.929 0.0126 255.53);
   }
 
-  /*
-   * REMOVED: .dark class CSS variables
-   * ==================================
-   * Previously, this file contained a .dark class with dark mode CSS variables.
-   * Since this application does not support dark mode, those variables were
-   * removed to:
-   * 1. Prevent accidental dark mode activation if any library/extension adds .dark class
-   * 2. Reduce CSS bundle size
-   * 3. Make the codebase intent clear: light mode only
-   *
-   * If dark mode support is needed in the future, re-add the .dark class variables
-   * and update tailwind.config.ts darkMode settings accordingly.
-   */
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+  
+  @keyframes collapsible-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+    }
+  }
+
+  @keyframes collapsible-up {
+    from {
+      height: var(--radix-collapsible-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+}
+@utility animate-accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+
+@utility animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
+}
+
+@utility animate-collapsible-down {
+  animation: collapsible-down 0.2s ease-out;
+}
+
+@utility animate-collapsible-up {
+  animation: collapsible-up 0.2s ease-out;
+}
+
+@plugin "daisyui" {
+  themes: "kiarva" --default;
+}
+@plugin "daisyui/theme" {
+  name: "kiarva";
+  default: true;
+  color-scheme: light;
+
+  --color-base-100: oklch(0.9842 0.0034 247.86);
+  --color-base-content: oklch(0 0 0);
+  --color-primary: oklch(0.4188 0.0711 209.74);
+  --color-primary-content: oklch(1 0 0);
+  --color-secondary: oklch(0.5596 0.0058 17.33);
+  --color-secondary-content: oklch(1 0 0);
+  --color-accent: oklch(92.78% 0.264 122.962951);
+  --color-accent-content: oklch(1 0 0);
+  --color-neutral: oklch(0.9219 0 0);
+  --color-neutral-content: oklch(0 0 0);
+  --color-info: oklch(0.419 0.0711 209.8);
+  --color-info-content: oklch(1 0 0);
+  --color-success: oklch(0.419 0.0711 209.8);
+  --color-success-content: oklch(1 0 0);
+  --color-warning: oklch(0.772 0.1738 64.55);
+  --color-warning-content: oklch(1 0 0);
+  --color-error: oklch(0.6793 0.2125 36.25);
+  --color-error-content: oklch(1 0 0);
+
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 2px;
+  --depth: 1;
+  --noise: 0;
 }
