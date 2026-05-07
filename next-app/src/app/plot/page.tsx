@@ -23,7 +23,7 @@ export default function PlotPage(): ReactElement {
     <main className={BODY_CLASSES}>
         <h1 className={H_1}>Allele frequency in global populations</h1>
             <aside
-                className="bg-muted alert"
+                className="bg-neutral alert border-none"
                 role="note"
                 aria-label="Plot page instructions"
             >
@@ -51,16 +51,16 @@ export default function PlotPage(): ReactElement {
                 </p>
             </aside>
             <nav aria-label="Plot type navigation">
-                <div role="tablist" className="tabs tabs-lifted pb-4">
+                <div role="tablist" className="tabs tabs-lifted pb-4 justify-center">
                 {paths.map((path) => (
                     <Button
                     key={path}
                     role="tab"
                     aria-selected={currentRoute == path}
                     onClick={handleTabClick}
-                    className={`tab ${
+                    className={`tab grow ${
                         currentRoute == path
-                        ? "tab-active text-white !bg-info"
+                        ? "tab-active text-white bg-info!"
                         : "text-black bg-white shadow"
                     }`}
                     >

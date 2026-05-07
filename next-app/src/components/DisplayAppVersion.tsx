@@ -32,7 +32,7 @@ export default function FooterVersion() {
           href={toHref(frontendImage)}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+          className="hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-content/50 rounded-sm"
           aria-label={`Frontend version ${frontendImage.split(":")[1] || ""}`}
         >
           Frontend version: {frontendImage.split(":")[1] || "n/a"}
@@ -47,7 +47,7 @@ export default function FooterVersion() {
           href={toHref(backendImage)}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50 rounded-sm"
+          className="hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-content/50 rounded-sm"
           aria-label={`Backend version ${backendImage.split(":")[1] || ""}`}
         >
           Backend version: {backendImage.split(":")[1] || "n/a"}

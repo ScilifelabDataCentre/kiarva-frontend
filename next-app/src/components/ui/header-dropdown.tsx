@@ -37,8 +37,8 @@ export function HeaderDropdown({ links }: HeaderDropdownProps) {
                 link.classes,
                 LINK_CLASSES,
                 "w-full",
-                "hover:bg-primary hover:text-primary-foreground",
-                pathname === link.link && "bg-primary text-primary-foreground"
+                "hover:bg-primary hover:text-primary-content",
+                pathname === link.link && "bg-primary text-primary-content"
               )}
             >
               {link.text}

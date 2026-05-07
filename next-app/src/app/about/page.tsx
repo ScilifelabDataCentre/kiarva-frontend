@@ -109,7 +109,7 @@ export default function AboutPage(): ReactElement {
         {/* Group summary card */}
         <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
           {/* Header band */}
-          <div className="bg-gradient-to-r from-primary to-primary/80 px-6 py-5 sm:px-8 sm:py-6">
+          <div className="bg-linear-to-r from-primary to-primary/80 px-6 py-5 sm:px-8 sm:py-6">
             <p className="text-xs sm:text-sm font-medium tracking-wide uppercase text-white/70">
               Karolinska Institutet &middot; Dept. of Microbiology, Tumor and
               Cell Biology
@@ -149,7 +149,7 @@ export default function AboutPage(): ReactElement {
         {/* Group summary card */}
         <div className="mt-6 rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
           {/* Header band */}
-          <div className="bg-gradient-to-r from-primary to-primary/80 px-6 py-5 sm:px-8 sm:py-6">
+          <div className="bg-linear-to-r from-primary to-primary/80 px-6 py-5 sm:px-8 sm:py-6">
             <p className="text-xs sm:text-sm font-medium tracking-wide uppercase text-white/70">
               SciLifeLab Data Centre &middot; Precision Medicine & Diagnostics
             </p>

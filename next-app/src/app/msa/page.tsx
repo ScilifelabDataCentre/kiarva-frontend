@@ -8,7 +8,7 @@ export default function AminoAcidPlotPage() {
       <h1 className={H_1}>Multiple sequence alignments</h1>
 
       <aside
-        className="bg-muted alert"
+        className="bg-neutral alert border-none"
         role="note"
         aria-label="MSA page instructions"
       >

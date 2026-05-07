@@ -46,7 +46,7 @@ function DisplayService(props: { video: string; title: string; url: string }) {
 export default async function HomePage() {
   const textLinkClasses: string = "font-medium text-primary hover:underline";
   return (
-    <main className="bg-base-100 space-y-4 lg:space-y-6 p-4 lg:px-12 lg:pb-18 xl:px-24 xl:pb-28 2xl:max-w-screen-2xl 2xl:mx-auto">
+    <main className="bg-base-100 space-y-4 lg:space-y-6 p-4 lg:px-12 lg:pb-18 xl:px-24 xl:pb-28 2xl:max-w-(--breakpoint-2xl) 2xl:mx-auto">
       <h1 className="sr-only">
         KIARVA - Adaptive Immune Receptor Gene Variant Atlas
       </h1>
