@@ -60,7 +60,7 @@ export default function PlotPage(): ReactElement {
                     role="tab"
                     aria-selected={currentRoute == path}
                     onClick={handleTabClick}
-                    className={`tab grow ${
+                    className={`tab grow w-1/2 ${
                         currentRoute == path
                         ? "tab-active text-white bg-info!"
                         : "text-black bg-white shadow"
