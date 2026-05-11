@@ -114,10 +114,7 @@ export default function MSAPlotPageComponent(): ReactElement {
         handleSetSelection={handleSetSelection}
         plotType={"aminoAcidMSA"}
       />
-      <div
-        className="divider pt-4 lg:-mx-8 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
-        aria-hidden="true"
-      ></div>
+      <div className="grow border-t border-secondary/30 pt-4 lg:-mx-8 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"></div>
       <section aria-labelledby="nucleotide-alignment">
         <h2
           id="nucleotide-alignment-heading"
@@ -127,10 +124,7 @@ export default function MSAPlotPageComponent(): ReactElement {
         </h2>
         <MSAViewer sequenceData={sequenceData} />
       </section>
-      <div
-        className="divider pt-4 lg:-mx-8 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"
-        aria-hidden="true"
-      ></div>
+      <div className="grow border-t border-secondary/30 pt-4 lg:-mx-8 xl:-mx-28 2xl:-mx-36 min-[1920px]:-mx-80 min-[2200px]:-mx-96"></div>
       <section aria-labelledby="translated-alignment">
         <h2
           id="translated-alignment-heading"
