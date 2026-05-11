@@ -4,7 +4,7 @@
 "use client";
 
 import { ReactElement, useCallback, useEffect, useState } from "react";
-import { axiosConfig, backendAPI, LINK_CLASSES } from "@/constants";
+import { axiosConfig, backendAPI } from "@/constants";
 import {
   ISequenceData,
   IAlleleDropDownConfig,
@@ -138,7 +138,7 @@ export default function MSAPlotPageComponent(): ReactElement {
         <p className="text-sm lg:text-base">
           Nucleotide sequences are aligned using{" "}
           <a
-            className={`${LINK_CLASSES} italic`}
+            className="italic"
             href="https://mafft.cbrc.jp/alignment/software/source.html"
             target="_blank"
             rel="noopener noreferrer"
@@ -148,7 +148,7 @@ export default function MSAPlotPageComponent(): ReactElement {
           . Translated sequence alignments are based off of the MAFFT output for
           the nucleotide sequences, but aligned with a{" "}
           <a
-            className={`${LINK_CLASSES} italic`}
+            className="italic"
             href="https://github.com/ScilifelabDataCentre/kiarva-backend/blob/main/services/alignment.py"
             target="_blank"
             rel="noopener noreferrer"

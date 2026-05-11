@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { BODY_CLASSES, H_1, LINK_CLASSES } from "@/constants";
+import { BODY_CLASSES, H_1 } from "@/constants";
 import { ExternalLink } from "lucide-react";
 
 export default function AboutPage(): ReactElement {
@@ -24,7 +24,7 @@ export default function AboutPage(): ReactElement {
             href="https://www.internationalgenome.org/"
             target="_blank"
             rel="noopener noreferrer"
-            className={`${LINK_CLASSES} italic`}
+            className="italic"
           >
             https://www.internationalgenome.org/
           </a>
@@ -76,7 +76,7 @@ export default function AboutPage(): ReactElement {
             {" — "}
             <a
               href="mailto:precisionmedicine@scilifelab.se"
-              className={`${LINK_CLASSES} italic`}
+              className="italic"
             >
               precisionmedicine@scilifelab.se
             </a>
@@ -89,7 +89,7 @@ export default function AboutPage(): ReactElement {
             {" — "}
             <a
               href="mailto:Martin.Corcoran@ki.se"
-              className={`${LINK_CLASSES} italic`}
+              className="italic"
             >
               Martin.Corcoran@ki.se
             </a>
@@ -99,7 +99,7 @@ export default function AboutPage(): ReactElement {
             {" — "}
             <a
               href="mailto:Gunilla.Karlsson.Hedestam@ki.se"
-              className={`${LINK_CLASSES} italic`}
+              className="italic"
             >
               Gunilla.Karlsson.Hedestam@ki.se
             </a>
@@ -145,7 +145,7 @@ export default function AboutPage(): ReactElement {
               href="https://ki.se/en/research/research-areas-centres-and-networks/research-groups/genetic-basis-for-b-and-t-cell-recognition-and-function-gunilla-karlsson-hedestam-group"
               target="_blank"
               rel="noopener noreferrer"
-              className={`${LINK_CLASSES} inline-flex items-center gap-1.5 text-sm font-medium text-primary`}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary"
             >
               Visit the group page at Karolinska Institutet
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
@@ -184,7 +184,7 @@ export default function AboutPage(): ReactElement {
               href="https://data.scilifelab.se/"
               target="_blank"
               rel="noopener noreferrer"
-              className={`${LINK_CLASSES} inline-flex items-center gap-1.5 text-sm font-medium text-primary`}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary"
             >
               SciLifeLab Data Centre services
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
