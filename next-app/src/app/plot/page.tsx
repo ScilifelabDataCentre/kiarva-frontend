@@ -53,7 +53,7 @@ export default function PlotPage(): ReactElement {
                 </div>
             </aside>
             <nav aria-label="Plot type navigation">
-                <div role="tablist" className="tabs tabs-lifted pb-4 justify-center">
+                <div role="tablist" className="pb-4 justify-center">
                 {paths.map((path) => (
                     <Button
                     key={path}
