@@ -7,14 +7,12 @@ export const H_2: string =
   "text-left text-black text-xl lg:text-2xl font-semibold";
 
 export const BUTTON_TYPE_ONE: string =
-  "btn bg-primary text-primary-foreground hover:bg-primary/80 active:bg-primary/90 focus:outline-none focus:ring focus:ring-primary/20";
+  "bg-primary text-primary-foreground hover:bg-primary/80 active:bg-primary/90 focus:outline-none focus:ring focus:ring-primary/20";
 export const BUTTON_TYPE_TWO: string =
-  "btn bg-secondary text-secondary-foreground hover:bg-secondary/80 active:bg-secondary/90 focus:outline-none focus:ring focus:ring-secondary/20";
+  "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:bg-secondary/90 focus:outline-none focus:ring focus:ring-secondary/20";
 
 export const BODY_CLASSES: string =
   "bg-background space-y-4 lg:space-y-6 p-4 lg:px-12 lg:pb-18 xl:px-36 xl:pb-28 2xl:max-w-(--breakpoint-2xl) 2xl:mx-auto";
-
-export const LINK_CLASSES: string = "link link-hover";
 
 
 // Script that sets up where to send requests to the backend. When developing locally, that will typically be
