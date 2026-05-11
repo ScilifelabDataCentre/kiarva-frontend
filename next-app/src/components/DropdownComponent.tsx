@@ -11,7 +11,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
   setCurrentPick,
 }) => {
   // Define classes for the selected dropdown item
-  const selectedRowClasses: string = "text-secondary-content bg-info";
+  const selectedRowClasses: string = "text-secondary-foreground bg-info";
 
   return (
     <div className="group relative cursor-pointer">
@@ -27,7 +27,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
         tabIndex={0}
       >
         <span
-          className="my-2 py-2 text-base lg:text-lg font-medium text-neutral-content lg:mx-4"
+          className="my-2 py-2 text-base lg:text-lg font-medium text-neutral-foreground lg:mx-4"
           aria-live="polite"
         >
           {/* Display the current pick or prompt to pick an item if none is selected */}
@@ -79,7 +79,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
           <li key={index} role="option" aria-selected={currentPick === item}>
             <button
               type="button"
-              className={`block w-full text-left py-3 font-semibold transition-all duration-300 hover:text-secondary-content hover:bg-info px-2 
+              className={`block w-full text-left py-3 font-semibold transition-all duration-300 hover:text-secondary-foreground hover:bg-info px-2 
                 ${
                   currentPick === item ? selectedRowClasses : "text-secondary"
                 } `}

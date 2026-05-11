@@ -128,7 +128,7 @@ const AbbreviationPopupComponent: React.FC<AbbreviationPopupComponentProps> = ({
                   </svg>
                 </div>
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                  <DialogTitle className="text-xl font-semibold leading-6 text-base-content">
+                  <DialogTitle className="text-xl font-semibold leading-6 text-foreground">
                     Abbreviations
                   </DialogTitle>
                   <div className="mt-6">

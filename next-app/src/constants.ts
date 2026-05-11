@@ -7,15 +7,19 @@ export const H_2: string =
   "text-left text-black text-xl lg:text-2xl font-semibold";
 
 export const BUTTON_TYPE_ONE: string =
-  "btn bg-fuchsia-950 text-white hover:bg-fuchsia-800 active:bg-fuchsia-900 focus:outline-none focus:ring focus:ring-fuchsia-300";
+  "btn bg-primary text-primary-foreground hover:bg-primary/80 active:bg-primary/90 focus:outline-none focus:ring focus:ring-primary/20";
 export const BUTTON_TYPE_TWO: string =
-  "btn bg-gray-950 text-white hover:bg-gray-800 active:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-300";
+  "btn bg-secondary text-secondary-foreground hover:bg-secondary/80 active:bg-secondary/90 focus:outline-none focus:ring focus:ring-secondary/20";
 
 export const BODY_CLASSES: string =
-  "bg-base-100 space-y-4 lg:space-y-6 p-4 lg:px-12 lg:pb-18 xl:px-36 xl:pb-28 2xl:max-w-(--breakpoint-2xl) 2xl:mx-auto";
+  "bg-background space-y-4 lg:space-y-6 p-4 lg:px-12 lg:pb-18 xl:px-36 xl:pb-28 2xl:max-w-(--breakpoint-2xl) 2xl:mx-auto";
 
 export const LINK_CLASSES: string = "link link-hover";
 
+
+// Script that sets up where to send requests to the backend. When developing locally, that will typically be
+// localhost:3000 (default flask dev server). Otherwise, when set up on our cluster, it is configured to be something like
+// kiarva.scilifelab.se/api/.
 let backendAPI_tmp = "";
 if (typeof window !== "undefined") {
   backendAPI_tmp =
@@ -25,6 +29,26 @@ if (typeof window !== "undefined") {
 }
 export const backendAPI = backendAPI_tmp;
 
+
+// Common settings for Axios API calls
+export const axiosConfig: IAxiosConfig = {
+  headers: {
+    "X-api-key": "kiarvafrontend"
+  }
+}
+
+// Youtube video data, used for showing embedded videos on index page
+export const YouTubeVideos: { [id: string]: IYouTubeVideo } = {
+  "intro": {"address": "S51-19cyK48", "title": "Introduction video"},
+  "download": {"address": "5ymJotmdQZw", "title": "Download FASTA files"},
+  "frequencies": {"address": "rzJI-cq2DHs", "title": "View population frequencies"},
+  "alignments": {"address": "4jj5IuO8C1U", "title": "View sequence alignments"},
+  "search": {"address": "WDaeGC6ZGy0", "title": "Search for sequences"}
+}
+
+// currentVersion, the current publicly used version number displayed on the website. Intended to be used
+// for tracking notable changes to data or UI, to be transparent to users and allow them to find previous versions.
+//
 // currentVersion is used in two ways: 
 // 1. To add a suffix to downloaded Fasta data indicating the current version
 // 2. To label the changelog page with the current version when creating a new changelog
@@ -34,17 +58,3 @@ export const currentVersion: string = "1.0.1";
 export const currentVersionFormatted: string = `${
   currentVersion.split(".")[0]
 }_${currentVersion.split(".")[1]}`;
-
-export const YouTubeVideos: { [id: string]: IYouTubeVideo } = {
-  "intro": {"address": "S51-19cyK48", "title": "Introduction video"},
-  "download": {"address": "5ymJotmdQZw", "title": "Download FASTA files"},
-  "frequencies": {"address": "rzJI-cq2DHs", "title": "View population frequencies"},
-  "alignments": {"address": "4jj5IuO8C1U", "title": "View sequence alignments"},
-  "search": {"address": "WDaeGC6ZGy0", "title": "Search for sequences"}
-}
-
-export const axiosConfig: IAxiosConfig = {
-  headers: {
-    "X-api-key": "kiarvafrontend"
-  }
-}

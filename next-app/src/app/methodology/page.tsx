@@ -12,9 +12,11 @@ export default function MethodologyPage(): ReactElement {
     <main className={BODY_CLASSES}>
       <h1 className={H_1}>{pageTitle}</h1>
       <section aria-labelledby="immunediscover-heading">
-        <h2 id="immunediscover-heading" className="divider pt-4 pb-2">
-          ImmuneDiscover
-        </h2>
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id="immunediscover-heading" className="shrink mx-4 text-foreground">ImmuneDiscover</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div>
         <p className="text-left lg:text-justify text-sm lg:text-base mb-4">
           The ImmuneDiscover method is a novel NGS-based technique designed to sequence 
           genes in complex regions from large numbers of subjects in a multiplexed 
@@ -41,9 +43,11 @@ export default function MethodologyPage(): ReactElement {
         </p>
       </section>
       <section aria-labelledby="igsnper-heading">
-        <h2 id="igsnper-heading" className="divider pt-4">
-          IgSNPer
-        </h2>
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id="igsnper-heading" className="shrink mx-4 text-foreground">IgSNPer</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div>
         <p className="text-left lg:text-justify text-sm lg:text-base mb-4">
           Multiple research projects have accumulated data on the frequency of 
           single nucleotide polymorphisms (SNPs) in collected cohorts of individuals. These 
@@ -124,7 +128,11 @@ export default function MethodologyPage(): ReactElement {
       </section>
 
       {/* <section aria-labelledby="populations-heading">
-        <h2 id="populations-heading" className="divider pt-4">Populations</h2>
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id=""populations-heading"" className="shrink mx-4 text-foreground">Populations</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div>
         <p className="pb-4 text-left lg:text-justify text-sm lg:text-base">
           Currenly under construction, this section will be provided later.
         </p>

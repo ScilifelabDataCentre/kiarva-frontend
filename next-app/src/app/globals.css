@@ -3,7 +3,7 @@
 
 :root {
   --background: oklch(0.9838 0.0035 247.86);
-  --foreground: oklch(0.1371 0.036 258.53);
+  --foreground: oklch(0 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0 0 0);
   --popover: oklch(1 0 0);
@@ -12,7 +12,7 @@
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.5596 0.0058 17.33);
   --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.9684 0.0068 247.9);
+  --muted: oklch(0.9652 0.0082 214.34);
   --muted-foreground: oklch(0.5547 0.0407 257.44);
   --accent: oklch(0.9278 0.264 122.962951);
   --accent-foreground: oklch(0.1371 0.036 258.53);
@@ -21,6 +21,11 @@
   --border: oklch(0.929 0.0126 255.53);
   --input: oklch(0.929 0.0126 255.53);
   --ring: oklch(0.1371 0.036 258.53);
+
+  --neutral: oklch(0.9219 0 0);
+  --neutral-foreground: oklch(0 0 0);
+  --info: oklch(0.419 0.0711 209.8);
+  --info-foreground: oklch(1 0 0);
 
   --radius: 0.5rem;
 }
@@ -51,13 +56,10 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Translated from old tailwind config, but seems to not be used and have no effect?
-  Leave them commented out for now, as  */
-  /* --color-chart-1: hsl(var(--chart-1));
-  --color-chart-2: hsl(var(--chart-2));
-  --color-chart-3: hsl(var(--chart-3));
-  --color-chart-4: hsl(var(--chart-4));
-  --color-chart-5: hsl(var(--chart-5)); */
+  --color-neutral: var(--neutral);
+  --color-neutral-foreground: var(--neutral-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
 
   --radius: var(--radius);
   --radius-lg: var(--radius);
@@ -123,7 +125,7 @@
   animation: collapsible-up 0.2s ease-out;
 }
 
-@plugin "daisyui" {
+/* @plugin "daisyui" {
   themes: "kiarva" --default;
 }
 @plugin "daisyui/theme" {
@@ -158,4 +160,4 @@
   --border: 2px;
   --depth: 1;
   --noise: 0;
-}
+} */

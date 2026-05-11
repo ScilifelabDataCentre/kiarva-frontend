@@ -10,9 +10,11 @@ export default function AboutPage(): ReactElement {
       <h1 className={H_1}>{pageTitle}</h1>
 
       <section aria-labelledby="kiarva-dashboard-heading">
-        <h2 id="kiarva-dashboard-heading" className="divider pt-4">
-          KIARVA dashboard
-        </h2>
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id="kiarva-dashboard-heading" className="shrink mx-4 text-foreground">KIARVA dashboard</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div>
         <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
           To create KIARVA, we applied a high throughput genomic technique
           designed for adaptive immune receptor germline gene sequencing,
@@ -44,9 +46,11 @@ export default function AboutPage(): ReactElement {
       </section>
 
       <section aria-labelledby="funding-heading">
-        <h2 id="funding-heading" className="divider pt-4">
-          Funding
-        </h2>
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id="funding-heading" className="shrink mx-4 text-foreground">Funding</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div> 
         <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
           Funding for this project was generously provided by a Distinguished
           Professor grant from the Swedish Research Council (2017-00968) and a
@@ -56,9 +60,11 @@ export default function AboutPage(): ReactElement {
       </section>
 
       <section aria-labelledby="contact-heading">
-        <h2 id="contact-heading" className="divider pt-4">
-          Contact
-        </h2>
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id="contact-heading" className="shrink mx-4 text-foreground">Contact</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div>
         <address className="not-italic pb-8">
           <p className="text-left lg:text-justify text-sm lg:text-base mb-4">
             For technical questions related to the website, please contact:
@@ -102,10 +108,11 @@ export default function AboutPage(): ReactElement {
       </section>
 
       <section aria-labelledby="team-heading">
-        <h2 id="team-heading" className="divider pt-4">
-          Team
-        </h2>
-
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id="team-heading" className="shrink mx-4 text-foreground">Team</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div>
         {/* Group summary card */}
         <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
           {/* Header band */}

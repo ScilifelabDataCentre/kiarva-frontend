@@ -178,30 +178,32 @@ export default function DownloadPage(): ReactElement {
   return (
     <main className={BODY_CLASSES}>
       <h1 className={H_1}>Download FASTA files</h1>
-      <aside className="alert bg-neutral border-none" role="note" aria-label="Download instructions">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          className="h-6 w-6 shrink-0 stroke-current"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          ></path>
-        </svg>
-        <p className="text-sm lg:text-base">
-          Start by choosing the type of fasta file you want. Then, select the
-          gene segment and/or individual genes you want to download by ticking
-          the appropriate boxes—ticking a gene segment will automatically select
-          all individual genes within that chain. After making your selections,
-          click the &quot;Download&quot; button. This will start a download of
-          your chosen FASTA file(s). If you have selected more than one file,
-          they will be downloaded in a .zip.
-        </p>
+      <aside className="alert bg-neutral border-none rounded-2xl" role="note" aria-label="Download instructions">
+        <div className="flex flex-row items-center p-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            className="h-6 w-6 shrink-0 stroke-current"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          <p className="text-sm lg:text-base pl-4">
+            Start by choosing the type of fasta file you want. Then, select the
+            gene segment and/or individual genes you want to download by ticking
+            the appropriate boxes—ticking a gene segment will automatically select
+            all individual genes within that chain. After making your selections,
+            click the &quot;Download&quot; button. This will start a download of
+            your chosen FASTA file(s). If you have selected more than one file,
+            they will be downloaded in a .zip.
+          </p>
+        </div>
       </aside>
 
       <section aria-labelledby="fasta-type-heading">
