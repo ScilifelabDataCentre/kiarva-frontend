@@ -46,7 +46,7 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
   }, [genesSelectedArray]);
 
   return (
-    <fieldset className="form-control basis-1/6 rounded-2xl mt-4 lg:mt-6 bg-white shadow-lg hover:shadow-2xl">
+    <fieldset className="basis-1/6 rounded-2xl mt-4 lg:mt-6 bg-white shadow-lg hover:shadow-2xl">
       <legend className="sr-only">{geneSegment} gene selection</legend>
       <label className="flex flex-row label text-black justify-start gap-2 cursor-pointer rounded-md mx-4 px-2 py-2 my-3 hover:bg-neutral">
         <Checkbox 
