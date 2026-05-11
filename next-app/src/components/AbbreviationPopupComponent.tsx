@@ -181,7 +181,7 @@ const AbbreviationPopupComponent: React.FC<AbbreviationPopupComponentProps> = ({
               type="button"
               data-autofocus
               onClick={handleClose}
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              className="absolute right-2 top-2"
               aria-label="Close abbreviations dialog"
             >
               <span aria-hidden="true">✕</span>
