@@ -210,7 +210,7 @@ export default function DownloadPage(): ReactElement {
         <h2 id="fasta-type-heading" className={H_1}>
           Fasta type
         </h2>
-        <div className="divider my-0!" aria-hidden="true"></div>
+        <div className="grow my-2 border-t border-secondary/30"></div>
 
         <fieldset className="w-full my-0!">
           <legend className="sr-only">Select FASTA file type</legend>
@@ -253,7 +253,7 @@ export default function DownloadPage(): ReactElement {
         <h2 id="bcr-heading" className={H_1}>
           BCR
         </h2>
-        <div className="divider my-0!" aria-hidden="true"></div>
+        <div className="grow my-2 border-t border-secondary/30"></div>
         <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16">
           <DownloadBoxComponent
             geneSegment="IGH"
@@ -297,7 +297,7 @@ export default function DownloadPage(): ReactElement {
         <h2 id="tcr-heading" className={H_1}>
           TCR
         </h2>
-        <div className="divider my-0!" aria-hidden="true"></div>
+        <div className="grow my-2 border-t border-secondary/30"></div>
         <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16">
           {/* <DownloadBoxComponent
           geneSegment="TRA"
