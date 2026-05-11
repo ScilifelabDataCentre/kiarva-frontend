@@ -181,7 +181,7 @@ export default function FrequencyPlotComponent(prop: {
     return (
       <aside
         role="alert"
-        className="alert alert-error bg-neutral border-none text-info-foreground rounded-2xl"
+        className="bg-neutral border-none text-info-foreground rounded-2xl"
         aria-label="Screen size requirement"
       >
         <div className="flex flex-row items-center p-4">

@@ -178,7 +178,7 @@ export default function DownloadPage(): ReactElement {
   return (
     <main className={BODY_CLASSES}>
       <h1 className={H_1}>Download FASTA files</h1>
-      <aside className="alert bg-neutral border-none rounded-2xl" role="note" aria-label="Download instructions">
+      <aside className="bg-neutral border-none rounded-2xl" role="note" aria-label="Download instructions">
         <div className="flex flex-row items-center p-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
