@@ -50,13 +50,13 @@ export default function IgSNPerDisplay(prop: { selectedAllele: string }): ReactE
             <h2 id="igsnper-data-heading" className="sr-only">
                 IgSNPer score and associated SNPs
             </h2>
-            <p className="text-neutral-content text-lg lg:text-xl font-semibold lg:w-1/8 pt-2">
+            <p className="text-neutral-foreground text-lg lg:text-xl font-semibold lg:w-1/8 pt-2">
                 IgSNPer SCORE: {igSNPerScore}
             </p>
             <div className="overflow-x-auto lg:w-2/4">
                 <div className="min-w-full inline-block align-middle">
                 <div className="border rounded-lg overflow-hidden">
-                    <table className="min-w-full divide-y divide-neutral text-base-content">
+                    <table className="min-w-full divide-y divide-neutral text-foreground">
                     <caption className="sr-only">
                         List of associated SNPs for the selected allele
                     </caption>
