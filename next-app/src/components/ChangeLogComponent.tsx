@@ -37,7 +37,7 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
       <header
         className={`flex flex-col lg:flex-row ${bgColor} p-3 items-center justify-between`}
       >
-        <h3 className="justify-self-start mb-2 lg:mb-0 text-neutral-content/80 font-semibold text-lg lg:text-xl">
+        <h3 className="justify-self-start mb-2 lg:mb-0 text-neutral-foreground/80 font-semibold text-lg lg:text-xl">
           {title}
         </h3>
         <nav
@@ -51,7 +51,7 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
                 Frontend Repository
               </a>
             </Button>
-            <p className="text-neutral-content text-sm">
+            <p className="text-neutral-foreground text-sm">
               {frontEndTag}
             </p>
             </div>)
@@ -69,7 +69,7 @@ const ChangeLogComponent: React.FC<ChangeLogComponentProps> = ({
                 Backend Repository
               </a>
             </Button>
-            <p className="text-neutral-content text-sm">
+            <p className="text-neutral-foreground text-sm">
               {backEndTag}
             </p>
             </div>)

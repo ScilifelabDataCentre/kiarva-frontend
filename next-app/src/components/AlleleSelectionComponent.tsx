@@ -239,13 +239,13 @@ export default function AlelleSelectionComponent(prop: {
           currentPicks.subtypeDropdown &&
           currentPicks.subtypeDropdown !== "..." ? (
             prop.plotType == "aminoAcidMSA" ? (
-              <p className="text-neutral-content text-xl font-semibold">
+              <p className="text-neutral-foreground text-xl font-semibold">
                 Sequence alignments for {currentPicks.geneDropdown}
                 {currentPicks.subtypeDropdown}
               </p>
             ) : (
               <div className="flex items-center flex-col">
-                <p className="text-neutral-content text-xl font-semibold p-2 text-center">
+                <p className="text-neutral-foreground text-xl font-semibold p-2 text-center">
                   Please select the allele above
                 </p>
                 <DownloadPlotData
@@ -280,17 +280,17 @@ export default function AlelleSelectionComponent(prop: {
                 ></DownloadPlotData>
               </div>
               {prop.plotType == "translatedFreqPlot" ?
-                <p className="text-neutral-content text-xl font-semibold p-2 text-center">
+                <p className="text-neutral-foreground text-xl font-semibold p-2 text-center">
                   Combined frequency for {dbName} and alleles with the same translated sequence
                 </p>
                 :
-                <p className="text-neutral-content text-xl font-semibold p-2">
+                <p className="text-neutral-foreground text-xl font-semibold p-2">
                   Plot for {dbName}
                 </p>
               }
             </div>
           ) : (
-            <p className="text-neutral-content text-xl font-semibold text-center">
+            <p className="text-neutral-foreground text-xl font-semibold text-center">
               Please select the gene type, gene and allele above
             </p>
           )}

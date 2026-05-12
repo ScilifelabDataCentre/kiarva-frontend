@@ -56,15 +56,15 @@ const SequenceSearchComponent: React.FC<SequenceSearchProps> = ({
       className="flex flex-col items-start max-w-full overflow-x-auto"
       aria-label="Sequence search results"
     >
-      <div className="flex flex-row w-full">
-        <h2 className="w-[250px] font-bold">Allele</h2>
+      <div className="flex flex-row w-full pb-8 sticky left-0">
+        <h2 className="w-62.5 font-bold">Allele</h2>
         <h2 className="font-bold">Sequence</h2>
       </div>
-      <div className="divider pt-4"></div>
+      <div className="grow w-full border-t border-secondary/30 pb-4 sticky left-0"></div>
       {sequenceData.map((seq) => (
         <div key={seq.allele} className="flex flex-row" role="row">
           {/* Allele name on the left */}
-          <div className="w-[250px] text-left text-black py-1 font-bold sticky left-0 bg-base-100">
+          <div className="w-62.5 text-left text-black py-1 font-bold sticky left-0 bg-background">
             {seq.allele}
           </div>
 

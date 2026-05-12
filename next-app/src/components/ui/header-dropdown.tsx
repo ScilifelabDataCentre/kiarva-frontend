@@ -14,7 +14,6 @@ import {
 import { ILink } from "@/interfaces/types";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { LINK_CLASSES } from "@/constants";
 
 interface HeaderDropdownProps {
   links: { [id: string]: ILink };
@@ -35,10 +34,9 @@ export function HeaderDropdown({ links }: HeaderDropdownProps) {
               href={link.link}
               className={clsx(
                 link.classes,
-                LINK_CLASSES,
                 "w-full",
-                "hover:bg-primary hover:text-primary-content",
-                pathname === link.link && "bg-primary text-primary-content"
+                "hover:bg-primary hover:text-primary-foreground",
+                pathname === link.link && "bg-primary text-primary-foreground"
               )}
             >
               {link.text}
