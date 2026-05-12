@@ -60,7 +60,7 @@ export default function IgSNPerDisplay(prop: { selectedAllele: string }): ReactE
             <div className="overflow-x-auto lg:w-2/4">
             <div className="min-w-full inline-block align-middle">
                 <div className="border rounded-lg overflow-hidden">
-                <table className="min-w-full divide-y divide-neutral text-base-content">
+                <table className="min-w-full divide-y divide-neutral text-foreground">
                     <caption className="sr-only">
                     List of alleles that translate to the same amino acid sequence
                     </caption>

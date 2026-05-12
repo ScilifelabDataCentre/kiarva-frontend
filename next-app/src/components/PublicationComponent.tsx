@@ -14,7 +14,7 @@ const PublicationComponent: React.FC<PublicationComponentProps> = ({
 }) => {
   return (
     <article
-      className={`flex flex-row p-4 transition-all duration-500 hover:bg-base-100 hover:shadow-lg ${bgColor}`}
+      className={`flex flex-row p-4 transition-all duration-500 hover:bg-background hover:shadow-lg ${bgColor}`}
     >
       <a
         href={linkUrl}
@@ -23,13 +23,13 @@ const PublicationComponent: React.FC<PublicationComponentProps> = ({
         className="flex flex-col items-start text-pretty space-y-2 w-full"
         aria-label={`View publication: ${title} by ${authors}`}
       >
-        <h3 className="text-lg lg:text-xl font-semibold underline underline-offset-auto text-neutral-content">
+        <h3 className="text-lg lg:text-xl font-semibold underline underline-offset-auto text-neutral-foreground">
           {title}
         </h3>
-        <p className="text-base lg:text-lg pt-2 text-neutral-content">
+        <p className="text-base lg:text-lg pt-2 text-neutral-foreground">
           {authors}
         </p>
-        <p className="text-base lg:text-lg pt-1 text-neutral-content">
+        <p className="text-base lg:text-lg pt-1 text-neutral-foreground">
           {journal}
         </p>
       </a>
