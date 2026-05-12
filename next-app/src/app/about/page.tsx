@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { BODY_CLASSES, H_1, LINK_CLASSES } from "@/constants";
+import { BODY_CLASSES, H_1 } from "@/constants";
 import { ExternalLink } from "lucide-react";
 
 export default function AboutPage(): ReactElement {
@@ -10,9 +10,11 @@ export default function AboutPage(): ReactElement {
       <h1 className={H_1}>{pageTitle}</h1>
 
       <section aria-labelledby="kiarva-dashboard-heading">
-        <h2 id="kiarva-dashboard-heading" className="divider pt-4">
-          KIARVA dashboard
-        </h2>
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id="kiarva-dashboard-heading" className="shrink mx-4 text-foreground">KIARVA dashboard</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div>
         <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
           To create KIARVA, we applied a high throughput genomic technique
           designed for adaptive immune receptor germline gene sequencing,
@@ -22,7 +24,7 @@ export default function AboutPage(): ReactElement {
             href="https://www.internationalgenome.org/"
             target="_blank"
             rel="noopener noreferrer"
-            className={`${LINK_CLASSES} italic`}
+            className="italic"
           >
             https://www.internationalgenome.org/
           </a>
@@ -44,9 +46,11 @@ export default function AboutPage(): ReactElement {
       </section>
 
       <section aria-labelledby="funding-heading">
-        <h2 id="funding-heading" className="divider pt-4">
-          Funding
-        </h2>
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id="funding-heading" className="shrink mx-4 text-foreground">Funding</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div> 
         <p className="pb-8 text-left lg:text-justify text-sm lg:text-base">
           Funding for this project was generously provided by a Distinguished
           Professor grant from the Swedish Research Council (2017-00968) and a
@@ -56,9 +60,11 @@ export default function AboutPage(): ReactElement {
       </section>
 
       <section aria-labelledby="contact-heading">
-        <h2 id="contact-heading" className="divider pt-4">
-          Contact
-        </h2>
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id="contact-heading" className="shrink mx-4 text-foreground">Contact</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div>
         <address className="not-italic pb-8">
           <p className="text-left lg:text-justify text-sm lg:text-base mb-4">
             For technical questions related to the website, please contact:
@@ -70,7 +76,7 @@ export default function AboutPage(): ReactElement {
             {" — "}
             <a
               href="mailto:precisionmedicine@scilifelab.se"
-              className={`${LINK_CLASSES} italic`}
+              className="italic"
             >
               precisionmedicine@scilifelab.se
             </a>
@@ -83,7 +89,7 @@ export default function AboutPage(): ReactElement {
             {" — "}
             <a
               href="mailto:Martin.Corcoran@ki.se"
-              className={`${LINK_CLASSES} italic`}
+              className="italic"
             >
               Martin.Corcoran@ki.se
             </a>
@@ -93,7 +99,7 @@ export default function AboutPage(): ReactElement {
             {" — "}
             <a
               href="mailto:Gunilla.Karlsson.Hedestam@ki.se"
-              className={`${LINK_CLASSES} italic`}
+              className="italic"
             >
               Gunilla.Karlsson.Hedestam@ki.se
             </a>
@@ -102,10 +108,11 @@ export default function AboutPage(): ReactElement {
       </section>
 
       <section aria-labelledby="team-heading">
-        <h2 id="team-heading" className="divider pt-4">
-          Team
-        </h2>
-
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id="team-heading" className="shrink mx-4 text-foreground">Team</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div>
         {/* Group summary card */}
         <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
           {/* Header band */}
@@ -138,7 +145,7 @@ export default function AboutPage(): ReactElement {
               href="https://ki.se/en/research/research-areas-centres-and-networks/research-groups/genetic-basis-for-b-and-t-cell-recognition-and-function-gunilla-karlsson-hedestam-group"
               target="_blank"
               rel="noopener noreferrer"
-              className={`${LINK_CLASSES} inline-flex items-center gap-1.5 text-sm font-medium text-primary`}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary"
             >
               Visit the group page at Karolinska Institutet
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
@@ -177,7 +184,7 @@ export default function AboutPage(): ReactElement {
               href="https://data.scilifelab.se/"
               target="_blank"
               rel="noopener noreferrer"
-              className={`${LINK_CLASSES} inline-flex items-center gap-1.5 text-sm font-medium text-primary`}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary"
             >
               SciLifeLab Data Centre services
               <ExternalLink className="h-4 w-4" aria-hidden="true" />

@@ -412,7 +412,7 @@ export default function HeaderComponent() {
           className={clsx(
             "header-desktop:hidden overflow-hidden transition-all duration-200 ease-in-out",
             isMenuOpen
-              ? "max-h-[700px] opacity-100 border-t border-white/10"
+              ? "max-h-175 opacity-100 border-t border-white/10"
               : "max-h-0 opacity-0",
           )}
           aria-label="Mobile navigation"

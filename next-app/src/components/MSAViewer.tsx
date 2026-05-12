@@ -23,7 +23,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
     if (differingIndices.includes(index)) {
       return "bg-[#B8CCE0] text-black pb-2 pt-2 rounded-xs";
     } else {
-      return "bg-base-100 text-black";
+      return "bg-background text-black";
     }
   };
 
@@ -52,7 +52,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
 
   // tailwind classes for rendered sequences, and helping "counters"
   const renderedUnitClasses =
-    "w-auto grid lg:tracking-widest font-mono h-auto text-center text-nowrap bg-base-100 text-black items-center justify-center";
+    "w-auto grid lg:tracking-widest font-mono h-auto text-center text-nowrap bg-background text-black items-center justify-center";
 
   // Renders out a numerical counter, showing every tenth character
   const renderUnitCounter = () => {
@@ -136,7 +136,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
         <div className="flex flex-row" role="row" aria-label="Position numbers">
           {/* Empty area that lines up with numbers indicating index */}
           <div
-            className="w-40 xl:w-56 text-left text-black py-1 font-bold sticky left-0 bg-base-100"
+            className="w-40 xl:w-56 text-left text-black py-1 font-bold sticky left-0 bg-background"
             role="columnheader"
             aria-label="Position header"
           >
@@ -158,7 +158,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
         >
           {/* Empty area that lines up with helper dots and bars */}
           <div
-            className="w-40 xl:w-56 text-left text-black py-1 font-bold sticky left-0 bg-base-100"
+            className="w-40 xl:w-56 text-left text-black py-1 font-bold sticky left-0 bg-background"
             aria-hidden="true"
           >
             {""}
@@ -172,7 +172,7 @@ const MSAViewer: React.FC<MSAViewerProps> = ({ sequenceData }) => {
         <div key={seq.allele} className="flex flex-row" role="row">
           {/* Allele name on the left */}
           <div
-            className="w-40 xl:w-56 text-left text-black py-1 font-bold sticky left-0 bg-base-100"
+            className="w-40 xl:w-56 text-left text-black py-1 font-bold sticky left-0 bg-background"
             role="rowheader"
           >
             {seq.allele}
