@@ -71,7 +71,6 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
       {geneObjectArray.map((gene, index) => (
         <label
           key={index}
-          title={gene.name}
           className={`flex flex-row label text-black justify-start gap-2 cursor-pointer rounded-md mx-4 px-2 py-2 my-2 hover:bg-neutral ${
             gene.isAvailable
               ? ""

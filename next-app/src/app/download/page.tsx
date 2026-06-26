@@ -216,8 +216,7 @@ export default function DownloadPage(): ReactElement {
           <legend className="sr-only">Select FASTA file type</legend>
           <RadioGroup defaultValue="genomic">
             <div className="flex items-center gap-3">
-              <RadioGroupItem 
-                title="genomic"
+              <RadioGroupItem
                 value="genomic" 
                 id="genomic" 
                 aria-label="Select genomic sequences"/>
@@ -230,8 +229,7 @@ export default function DownloadPage(): ReactElement {
               </Label>
             </div>
             <div className="flex items-center gap-3">
-              <RadioGroupItem 
-                title="genomic_fl"
+              <RadioGroupItem
                 value="genomic_fl" 
                 id="genomic_fl"
                 aria-label="Select genomic sequences with flanking regions"/>
@@ -244,8 +242,7 @@ export default function DownloadPage(): ReactElement {
               </Label>
             </div>
             <div className="flex items-center gap-3">
-              <RadioGroupItem 
-                title="translated"
+              <RadioGroupItem
                 value="translated" 
                 id="translated"
                 aria-label="Select translated sequences"/>
