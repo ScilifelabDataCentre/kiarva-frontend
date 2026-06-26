@@ -48,7 +48,9 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
   return (
     <fieldset className="basis-1/6 rounded-2xl mt-4 lg:mt-6 bg-white shadow-lg hover:shadow-2xl">
       <legend className="sr-only">{geneSegment} gene selection</legend>
-      <label className="flex flex-row label text-black justify-start gap-2 cursor-pointer rounded-md mx-4 px-2 py-2 my-3 hover:bg-neutral">
+      <label 
+        className="flex flex-row label text-black justify-start gap-2 cursor-pointer rounded-md mx-4 px-2 py-2 my-3 hover:bg-neutral"
+      >
         <Checkbox 
           checked={wholeGeneSegmentSelected} 
           onCheckedChange={() => {
@@ -69,6 +71,7 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
       {geneObjectArray.map((gene, index) => (
         <label
           key={index}
+          title={gene.name}
           className={`flex flex-row label text-black justify-start gap-2 cursor-pointer rounded-md mx-4 px-2 py-2 my-2 hover:bg-neutral ${
             gene.isAvailable
               ? ""
@@ -78,6 +81,7 @@ const DownloadBoxComponent: React.FC<DownloadBoxComponentProps> = ({
           <Checkbox 
             checked={genesSelectedArray.includes(gene.name)} 
             disabled={!gene.isAvailable}
+            aria-label={`Select ${gene.name}`}
             aria-disabled={!gene.isAvailable}
             onCheckedChange={() => {
               setGenesSelectedArray((prevGenesSelectedArray) => {
