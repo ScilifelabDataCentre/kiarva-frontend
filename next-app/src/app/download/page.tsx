@@ -216,10 +216,12 @@ export default function DownloadPage(): ReactElement {
           <legend className="sr-only">Select FASTA file type</legend>
           <RadioGroup defaultValue="genomic">
             <div className="flex items-center gap-3">
-              <RadioGroupItem value="genomic" id="genomic" />
-              <Label 
+              <RadioGroupItem 
                 title="genomic"
-                aria-label="Select genomic sequences"
+                value="genomic" 
+                id="genomic" 
+                aria-label="Select genomic sequences"/>
+              <Label 
                 className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-base"
                 htmlFor="genomic"
                 onClick={() => setFastaTypeSelected("genomic")}
@@ -228,10 +230,12 @@ export default function DownloadPage(): ReactElement {
               </Label>
             </div>
             <div className="flex items-center gap-3">
-              <RadioGroupItem value="genomic_fl" id="genomic_fl" />
-              <Label 
+              <RadioGroupItem 
                 title="genomic_fl"
-                aria-label="Select genomic sequences with flanking regions"
+                value="genomic_fl" 
+                id="genomic_fl"
+                aria-label="Select genomic sequences with flanking regions"/>
+              <Label 
                 className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-base"
                 htmlFor="genomic_fl"
                 onClick={() => setFastaTypeSelected("genomic_fl")}
@@ -240,10 +244,12 @@ export default function DownloadPage(): ReactElement {
               </Label>
             </div>
             <div className="flex items-center gap-3">
-              <RadioGroupItem value="translated" id="translated" />
-              <Label 
+              <RadioGroupItem 
                 title="translated"
-                aria-label="Select translated sequences"
+                value="translated" 
+                id="translated"
+                aria-label="Select translated sequences"/>
+              <Label 
                 className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-base"
                 htmlFor="translated"
                 onClick={() => setFastaTypeSelected("translated")}
