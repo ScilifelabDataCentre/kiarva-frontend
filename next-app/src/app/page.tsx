@@ -46,7 +46,7 @@ function DisplayService(props: { video: string; title: string; url: string }) {
 export default async function HomePage() {
   const textLinkClasses: string = "font-medium text-primary hover:underline";
   return (
-    <main className="bg-base-100 space-y-4 lg:space-y-6 p-4 lg:px-12 lg:pb-18 xl:px-24 xl:pb-28 2xl:max-w-screen-2xl 2xl:mx-auto">
+    <main className="bg-background space-y-4 lg:space-y-6 p-4 lg:px-12 lg:pb-18 xl:px-24 xl:pb-28 2xl:max-w-(--breakpoint-2xl) 2xl:mx-auto">
       <h1 className="sr-only">
         KIARVA - Adaptive Immune Receptor Gene Variant Atlas
       </h1>
@@ -96,7 +96,7 @@ export default async function HomePage() {
                   href="https://doi.org/10.1016/j.immuni.2026.01.026"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-content/80 hover:text-neutral-content hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-content/50"
+                  className="text-neutral-foreground/80 hover:text-neutral-foreground hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-foreground/50"
                 >
                   When using this database, please cite Corcoran et al. Immunity
                   2026. The resource should not be used for commercial purposes.
@@ -129,14 +129,14 @@ export default async function HomePage() {
           </figure>
         </div>
       </section>
-      <div className="divider pt-4" aria-hidden="true" />
+      <div className="grow border-t border-secondary/30"></div>
       <section aria-labelledby="news-heading">
         <h2 id="news-heading" className={H_2}>
           News
         </h2>
         <NewsCarousel />
       </section>
-      <div className="divider pt-4" aria-hidden="true" />
+      <div className="grow border-t border-secondary/30"></div>
       <section aria-labelledby="features-heading">
         <h2 id="features-heading" className={H_2}>
           Resources

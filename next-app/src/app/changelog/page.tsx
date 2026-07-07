@@ -42,40 +42,44 @@ export default function ChangeLogPage(): ReactElement {
     <main className={BODY_CLASSES}>
       <h1 className={H_1}>{pageTitle}</h1>
 
-      <aside className="alert" role="note" aria-label="Change log information">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          className="h-6 w-6 shrink-0 stroke-current"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          ></path>
-        </svg>
-        <p className="text-sm lg:text-base">
-          The change log provides a comprehensive overview of all releases of
-          the KI Adaptive Immune Receptor Gene Variant Atlas. Each
-          version&apos;s card features two buttons: &apos;Frontend
-          Repository&apos; and &apos;Backend Repository&apos;. Clicking these buttons
-          will direct you to the relevant release for that version.
-          <br/><br/>
-          The version number works in the following way:
-          Increments of the first integer represents major data changes. Increments of 
-          the second integer indicates smaller fixes related to the data or how it 
-          is processed. Increments of the third integer indicates minor bug fixes or UI 
-          changes on the website.
-        </p>
+      <aside className="bg-neutral border-none rounded-2xl" role="note" aria-label="Change log information">
+        <div className="flex flex-row items-center p-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            className="h-6 w-6 shrink-0 stroke-current"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          <p className="text-sm lg:text-base pl-4">
+            The change log provides a comprehensive overview of all releases of
+            the KI Adaptive Immune Receptor Gene Variant Atlas. Each
+            version&apos;s card features two buttons: &apos;Frontend
+            Repository&apos; and &apos;Backend Repository&apos;. Clicking these buttons
+            will direct you to the relevant release for that version.
+            <br/><br/>
+            The version number works in the following way:
+            Increments of the first integer represents major data changes. Increments of 
+            the second integer indicates smaller fixes related to the data or how it 
+            is processed. Increments of the third integer indicates minor bug fixes or UI 
+            changes on the website.
+          </p>
+        </div>
       </aside>
 
       <section aria-labelledby="current-version-heading">
-        <h2 id="current-version-heading" className="divider pt-4">
-          Current version
-        </h2>
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id="current-version-heading" className="shrink mx-4 text-foreground">Current version</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div>
         <article className="pt-2 pb-4">
           <ChangeLogComponent
             title={`Version ${changeLogCurrent.version}`}
@@ -104,7 +108,11 @@ export default function ChangeLogPage(): ReactElement {
         </article>
       </section>
       <section aria-labelledby="previous-versions-heading">
-        <h2 id="previous-versions-heading" className="divider pt-4">Previous versions</h2>
+        <div className="relative flex pt-2 pb-1 items-center">
+          <div className="grow border-t border-secondary/30"></div>
+          <h2 id="previous-versions-heading" className="shrink mx-4 text-foreground">Previous versions</h2>
+          <div className="grow border-t border-secondary/30"></div>
+        </div>
         <div className="pt-2 pb-4">
           {changeLogHistory.map((item, index) => 
             <article key={index}>

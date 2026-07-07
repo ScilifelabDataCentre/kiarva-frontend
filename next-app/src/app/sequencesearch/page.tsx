@@ -48,7 +48,7 @@ export default function SequenceSearchInputForm() {
     toast({
       title: "You submitted the following sequence:",
       description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+        <pre className="mt-2 w-85 rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
@@ -68,30 +68,32 @@ export default function SequenceSearchInputForm() {
       <h1 className={H_1}>Sequence search</h1>
 
       <aside
-        className="bg-muted alert"
+        className="bg-neutral alert border-none rounded-2xl"
         role="note"
         aria-label="Sequence search instructions"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          className="h-6 w-6 shrink-0 stroke-current"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          ></path>
-        </svg>
-        <p className="text-sm lg:text-base">
-          This page allows users to search for exact matches of full-length IGHV 
-          sequences in the KI Adaptive Immune Receptor Gene Variant Atlas. This enables 
-          users to quickly screen novel variants identified in their own work for exact 
-          identity to alleles within the KIARVA database.
-        </p>
+        <div className="flex flex-row items-center p-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            className="h-6 w-6 shrink-0 stroke-current"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          <p className="text-sm lg:text-base pl-4">
+            This page allows users to search for exact matches of full-length IGHV 
+            sequences in the KI Adaptive Immune Receptor Gene Variant Atlas. This enables 
+            users to quickly screen novel variants identified in their own work for exact 
+            identity to alleles within the KIARVA database.
+          </p>
+        </div>
       </aside>
 
       <section aria-labelledby="search-form-heading">

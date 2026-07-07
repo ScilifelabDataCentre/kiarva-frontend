@@ -15,6 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="light">
+      <head>
+        <title>KIARVA</title>
+      </head>
       <body>
         <div id="top" aria-hidden="true" />
         <MatomoInit></MatomoInit>

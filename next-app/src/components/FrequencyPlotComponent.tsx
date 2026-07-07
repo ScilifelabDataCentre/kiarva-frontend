@@ -130,7 +130,15 @@ export default function FrequencyPlotComponent(prop: {
     },
     paper_bgcolor: "#f8fafc",
     plot_bgcolor: "#f8fafc",
-    yaxis: { side: "left", title: "Allele Frequency", titlefont: { size: 16 } },
+    yaxis: { 
+      side: "left", 
+      title: {
+      text: 'Allele Frequency',
+        font: {
+          size: 16,
+        }
+      }
+    },
     showlegend: true,
     legend: {
       x: 0.08,
@@ -144,15 +152,20 @@ export default function FrequencyPlotComponent(prop: {
   if (isLargeScreen) {
     return (
       <figure
-        className="relative bg-base-100 -mx-24 overflow-hidden"
+        className="relative bg-background -mx-24 pb-20 overflow-hidden"
         aria-label="Population frequency plot"
       >
         <div className="flex flex-row items-center justify-center relative">
           <Plot data={data} layout={layout} />
-          <div className="absolute -bottom-6">
-            <div className="flex flex-row text-neutral-content justify-between pl-8">
+          <div className="absolute -bottom-4 grid grid-cols-3 md:gap-10 lg:gap-24 xl:gap-36 text-black pl-8 justify-between">
+            <div>
               <h2 className="text-xl font-bold">Superpopulation</h2>
-              <h2 className="pl-[440px] text-xl font-bold">Population</h2>
+            </div>
+            <div>
+              {/* empty div to format grid-cols-3 */}
+            </div>
+            <div>
+              <h2 className="text-xl font-bold">Population</h2>
             </div>
           </div>
         </div>
@@ -168,27 +181,29 @@ export default function FrequencyPlotComponent(prop: {
     return (
       <aside
         role="alert"
-        className="alert alert-error bg-info text-info-content"
+        className="bg-neutral border-none text-info-foreground rounded-2xl"
         aria-label="Screen size requirement"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 shrink-0 stroke-current"
-          fill="none"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-          />
-        </svg>
-        <p>
-          Error: Plots can not be displayed on screens of this size.
-          Please resize your browser window to view the plots or use a device with a larger screen.
-        </p>
+        <div className="flex flex-row items-center p-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 shrink-0 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            />
+          </svg>
+          <p className="pl-4">
+            Error: Plots can not be displayed on screens of this size.
+            Please resize your browser window to view the plots or use a device with a larger screen.
+          </p>
+        </div>
       </aside>
     );
   }

@@ -17,6 +17,8 @@ import fileDownload from "js-file-download";
 import JSZip from "jszip";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 export default function DownloadPage(): ReactElement {
 
@@ -176,84 +178,83 @@ export default function DownloadPage(): ReactElement {
   return (
     <main className={BODY_CLASSES}>
       <h1 className={H_1}>Download FASTA files</h1>
-
-      <aside className="alert" role="note" aria-label="Download instructions">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          className="h-6 w-6 shrink-0 stroke-current"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          ></path>
-        </svg>
-        <p className="text-sm lg:text-base">
-          Start by choosing the type of fasta file you want. Then, select the
-          gene segment and/or individual genes you want to download by ticking
-          the appropriate boxes—ticking a gene segment will automatically select
-          all individual genes within that chain. After making your selections,
-          click the &quot;Download&quot; button. This will start a download of
-          your chosen FASTA file(s). If you have selected more than one file,
-          they will be downloaded in a .zip.
-        </p>
+      <aside className="bg-neutral border-none rounded-2xl" role="note" aria-label="Download instructions">
+        <div className="flex flex-row items-center p-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            className="h-6 w-6 shrink-0 stroke-current"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          <p className="text-sm lg:text-base pl-4">
+            Start by choosing the type of fasta file you want. Then, select the
+            gene segment and/or individual genes you want to download by ticking
+            the appropriate boxes—ticking a gene segment will automatically select
+            all individual genes within that chain. After making your selections,
+            click the &quot;Download&quot; button. This will start a download of
+            your chosen FASTA file(s). If you have selected more than one file,
+            they will be downloaded in a .zip.
+          </p>
+        </div>
       </aside>
 
       <section aria-labelledby="fasta-type-heading">
         <h2 id="fasta-type-heading" className={H_1}>
           Fasta type
         </h2>
-        <div className="divider !my-0" aria-hidden="true"></div>
+        <div className="grow my-2 border-t border-secondary/30"></div>
 
-        <fieldset className="w-full !my-0">
+        <fieldset className="w-full my-0!">
           <legend className="sr-only">Select FASTA file type</legend>
-          <div>
-            <label
-              className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
-              onClick={() => setFastaTypeSelected("genomic")}
-            >
-              <input
-                type="radio"
-                name="fastaRadio"
-                className="radio"
-                defaultChecked
-                value="genomic"
-              />
-              <span className="pl-2">Genomic coding sequence</span>
-            </label>
-
-            <label
-              className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
-              onClick={() => setFastaTypeSelected("genomic_fl")}
-            >
-              <input
-                type="radio"
-                name="fastaRadio"
-                className="radio"
-                value="genomic_fl"
-              />
-              <span className="pl-2">
-                Genomic coding sequence with flanking regions
-              </span>
-            </label>
-
-            <label
-              className="flex rounded-md px-2 py-2 my-3 transition-all duration-300 hover:bg-neutral cursor-pointer"
-              onClick={() => setFastaTypeSelected("translated")}
-            >
-              <input
-                type="radio"
-                name="fastaRadio"
-                className="radio"
-                value="translated"
-              />
-              <span className="pl-2">Translated V gene sequences</span>
-            </label>
-          </div>
+          <RadioGroup defaultValue="genomic">
+            <div className="flex items-center gap-3">
+              <RadioGroupItem
+                value="genomic" 
+                id="genomic" 
+                aria-label="Select genomic sequences"/>
+              <Label 
+                className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-base"
+                htmlFor="genomic"
+                onClick={() => setFastaTypeSelected("genomic")}
+                >
+                  Genomic coding sequence
+              </Label>
+            </div>
+            <div className="flex items-center gap-3">
+              <RadioGroupItem
+                value="genomic_fl" 
+                id="genomic_fl"
+                aria-label="Select genomic sequences with flanking regions"/>
+              <Label 
+                className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-base"
+                htmlFor="genomic_fl"
+                onClick={() => setFastaTypeSelected("genomic_fl")}
+                >
+                  Genomic coding sequence with flanking regions
+              </Label>
+            </div>
+            <div className="flex items-center gap-3">
+              <RadioGroupItem
+                value="translated" 
+                id="translated"
+                aria-label="Select translated sequences"/>
+              <Label 
+                className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-base"
+                htmlFor="translated"
+                onClick={() => setFastaTypeSelected("translated")}
+                >
+                  Translated V gene sequences
+              </Label>
+            </div>
+          </RadioGroup>
         </fieldset>
       </section>
 
@@ -261,7 +262,7 @@ export default function DownloadPage(): ReactElement {
         <h2 id="bcr-heading" className={H_1}>
           BCR
         </h2>
-        <div className="divider !my-0" aria-hidden="true"></div>
+        <div className="grow my-2 border-t border-secondary/30"></div>
         <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16">
           <DownloadBoxComponent
             geneSegment="IGH"
@@ -305,7 +306,7 @@ export default function DownloadPage(): ReactElement {
         <h2 id="tcr-heading" className={H_1}>
           TCR
         </h2>
-        <div className="divider !my-0" aria-hidden="true"></div>
+        <div className="grow my-2 border-t border-secondary/30"></div>
         <div className="flex flex-col lg:flex-row justify-start gap-4 lg:gap-16">
           {/* <DownloadBoxComponent
           geneSegment="TRA"
