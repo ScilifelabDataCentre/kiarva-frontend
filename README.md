@@ -159,7 +159,7 @@ You can fetch changes from upstream at any time:
 
 ```bash
 git fetch upstream
-git pull upstream dev
+git pull upstream main
 ```
 
 > Note: the project requires signed commits for merges. See GitHub documentation on signing commits if you haven't set this up.
@@ -168,7 +168,7 @@ git pull upstream dev
 
 #### Prerequisites
 
-* Node.js 18+ (LTS recommended)
+* Node.js 26+ (LTS recommended)
 * npm (or another compatible package manager)
 
 #### Install dependencies
