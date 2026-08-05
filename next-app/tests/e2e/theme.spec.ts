@@ -38,6 +38,14 @@ function parseOklch(s: string): { L: number; C: number; H: number } {
   return { L, C: parseFloat(cStr), H: parseFloat(hStr) };
 }
 
+// Parse a CSS length ("0.5rem", ".5rem", "16px") into {value, unit}. Chromium
+// 132+ drops leading zeros, so string equality doesn't survive re-serialization.
+function parseLength(s: string): { value: number; unit: string } {
+  const m = s.match(/^(-?\d*\.?\d+)([a-z%]*)$/i);
+  if (!m) throw new Error(`not a parseable length: "${s}"`);
+  return { value: parseFloat(m[1]), unit: m[2] };
+}
+
 test.describe("Design tokens", () => {
   test(":root CSS custom properties resolve to expected values", async ({
     page,
@@ -61,7 +69,10 @@ test.describe("Design tokens", () => {
         expect(a.C, `token ${name} C`).toBeCloseTo(e.C, 4);
         expect(a.H, `token ${name} H`).toBeCloseTo(e.H, 2);
       } else {
-        expect(actual[name], `token ${name}`).toBe(expected);
+        const a = parseLength(actual[name]);
+        const e = parseLength(expected);
+        expect(a.value, `token ${name} value`).toBeCloseTo(e.value, 4);
+        expect(a.unit, `token ${name} unit`).toBe(e.unit);
       }
     }
   });
