@@ -65,11 +65,15 @@
     "css-loader": "^7.0.0",
     "eslint": "^10.0.0",
     "eslint-config-next": "^16.0.0",
-    "postcss": "^8.5.12",
+    "postcss": "^8.5.25",
     "postcss-cli": "^11.0.1",
     "sass": "^1.80.6",
     "sass-loader": "^17.0.0",
     "tailwindcss": "^4.2.4",
     "typescript": "^6.0.0"
+  },
+  "overrides": {
+    "postcss": "$postcss",
+    "sharp": "^0.35.3"
   }
 }
