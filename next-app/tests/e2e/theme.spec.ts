@@ -25,6 +25,19 @@ const expectedTokens = {
   "--radius": "0.5rem",
 } as const;
 
+// Parse an oklch(...) string into {L, C, H} numbers. Handles both the raw
+// authored form ("oklch(0.9838 0.0035 247.86)") and the form Chromium 132+
+// serializes to ("oklch(98.38% .0035 247.86)").
+function parseOklch(s: string): { L: number; C: number; H: number } {
+  const m = s.match(
+    /^oklch\(\s*(\d*\.?\d+)(%?)\s+(\d*\.?\d+)\s+(\d*\.?\d+)\s*\)$/i,
+  );
+  if (!m) throw new Error(`not a parseable oklch: "${s}"`);
+  const [, lStr, pct, cStr, hStr] = m;
+  const L = pct === "%" ? parseFloat(lStr) / 100 : parseFloat(lStr);
+  return { L, C: parseFloat(cStr), H: parseFloat(hStr) };
+}
+
 test.describe("Design tokens", () => {
   test(":root CSS custom properties resolve to expected values", async ({
     page,
@@ -41,7 +54,15 @@ test.describe("Design tokens", () => {
     }, Object.keys(expectedTokens));
 
     for (const [name, expected] of Object.entries(expectedTokens)) {
-      expect(actual[name], `token ${name}`).toBe(expected);
+      if (expected.startsWith("oklch(")) {
+        const a = parseOklch(actual[name]);
+        const e = parseOklch(expected);
+        expect(a.L, `token ${name} L`).toBeCloseTo(e.L, 4);
+        expect(a.C, `token ${name} C`).toBeCloseTo(e.C, 4);
+        expect(a.H, `token ${name} H`).toBeCloseTo(e.H, 2);
+      } else {
+        expect(actual[name], `token ${name}`).toBe(expected);
+      }
     }
   });
 
