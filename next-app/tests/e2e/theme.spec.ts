@@ -87,7 +87,6 @@ test.describe("Design tokens", () => {
     // Chromium normalizes oklch() computed values to "oklab(...)" — read both
     // from the same context so they normalize consistently.
     const { headerBg, primary } = await page.evaluate(() => {
-      const root = document.documentElement;
       const header = document.querySelector("header");
       if (!header) throw new Error("no <header> element found");
 
