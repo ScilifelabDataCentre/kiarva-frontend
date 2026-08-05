@@ -81,7 +81,6 @@ export type GeneType = "IGHV" | "TRGV";
 export type IAlleleDropDownConfig = {
   loci: readonly Locus[];
   geneTypesByLocus: Readonly<Partial<Record<Locus, readonly GeneType[]>>>;
-  geneSelectionEndpoint: string;
 };
 
 export type ISequenceData = {

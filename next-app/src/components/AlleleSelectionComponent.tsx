@@ -4,12 +4,10 @@
 "use client";
 
 import { ReactElement, useEffect, useState } from "react";
-import axios from "axios";
 import DropdownComponent from "@/components/DropdownComponent";
 import { GeneType, IAlleleDropDownConfig, Locus } from "@/interfaces/types";
 import DownloadPlotData from "./DownloadPlotData";
-import { getDbName } from "@/lib/APIcalls";
-import { axiosConfig } from "@/constants";
+import { getDbName, getPlotOptions } from "@/lib/APIcalls";
 
 // Main function to render the PlotPage component
 export default function AlelleSelectionComponent(prop: {
@@ -52,8 +50,6 @@ export default function AlelleSelectionComponent(prop: {
   const [alleleDropDownItemsArray, setAlleleDropDownItemsArray] = useState<
     string[]
   >(["..."]);
-  const geneSelectionEndpoint: string =
-    prop.alleleSelectionConfig.geneSelectionEndpoint;
 
   // Function to update the current pick for dropdowns
   const handleSetCurrentPick = (dropdownName: string, value: string) => {
@@ -76,33 +72,16 @@ export default function AlelleSelectionComponent(prop: {
   useEffect(() => {
     if (!currentPicks.subtypeDropdown) {
       setAlleleDropDownItemsArray(["..."]);
-      const currentSelection = currentPicks.geneDropdown;
-
-      const encodedCurrentSelection = encodeURIComponent(currentSelection);
-
-      axios
-        .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
-        .then((response) => {
-          const responseData = response.data;
-          //  responseData.push("...");
-          setSubtypeDropDownItemsArray(responseData);
-        })
-        .catch((response) => console.log(response.error));
+      getPlotOptions(currentPicks.geneDropdown).then((options) => {
+        setSubtypeDropDownItemsArray(options);
+      });
     } else {
+      setAlleleDropDownItemsArray([]);
       const currentSelection =
         currentPicks.geneDropdown + currentPicks.subtypeDropdown + "*";
-
-      const encodedCurrentSelection = encodeURIComponent(currentSelection);
-
-      setAlleleDropDownItemsArray([]);
-      axios
-        .get(geneSelectionEndpoint + encodedCurrentSelection, axiosConfig)
-        .then((response) => {
-          const responseData = response.data;
-          // responseData.push("...");
-          setAlleleDropDownItemsArray(responseData);
-        })
-        .catch((response) => console.log(response.error));
+      getPlotOptions(currentSelection).then((options) => {
+        setAlleleDropDownItemsArray(options);
+      });
     }
   }, [currentPicks.geneDropdown, currentPicks.subtypeDropdown]);
 

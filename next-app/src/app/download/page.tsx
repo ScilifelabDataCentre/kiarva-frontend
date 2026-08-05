@@ -5,14 +5,12 @@
 
 import { ReactElement, useEffect, useState } from "react";
 import {
-  backendAPI,
   BODY_CLASSES,
   H_1,
   currentVersionFormatted,
-  axiosConfig,
 } from "@/constants";
+import { getGeneFasta, getMetaVersion } from "@/lib/APIcalls";
 import DownloadBoxComponent from "@/components/DownloadBoxComponent";
-import axios from "axios";
 import fileDownload from "js-file-download";
 import JSZip from "jszip";
 import { Button } from "@/components/ui/button";
@@ -27,12 +25,9 @@ export default function DownloadPage(): ReactElement {
   const [isPrepubEnv, setIsPrepubEnv] = useState<boolean>(false);
 
   useEffect(() => {
-    fetch("/meta/version")
-      .then((res) => res.json())
-      .then((data) => {
-        const env = data.currentEnv;
-        setIsPrepubEnv(env === 'prepub');
-      });
+    getMetaVersion().then((data) => {
+      if (data) setIsPrepubEnv(data.currentEnv === 'prepub');
+    });
   }, []);
 
   // State to keep track of the selected type of fasta file
@@ -49,10 +44,6 @@ export default function DownloadPage(): ReactElement {
 
   // all selections combined
   const [selectionArr, setSelectionArr] = useState<string[]>([]);
-
-  // Deep clone axiosConfig, otherwise the original constant gets modified (for the entire app)
-  const axiosConfigDownload = JSON.parse(JSON.stringify(axiosConfig));
-  axiosConfigDownload.headers["Content-Type"] = "attachment"
 
   function getDownloadNamePartsFromGene(gene: string): {
     filePrefix: string;
@@ -76,55 +67,37 @@ export default function DownloadPage(): ReactElement {
   }
 
   async function downloadGeneFasta(gene: string) {
-    const encodedGene = encodeURIComponent(gene);
-    const fastaEndpoint =
-      backendAPI + "fasta/" + fastaTypeSelected + "?file_name=" + encodedGene;
-    
-    console.log(axiosConfig);
-    console.log(axiosConfigDownload)
-    await axios
-      .get(fastaEndpoint, axiosConfigDownload)
-      .then((response) => {
-        const responseData: Blob = response.data;
-        const { filePrefix } = getDownloadNamePartsFromGene(gene);
-        fileDownload(
-          responseData,
-          filePrefix +
-            gene[gene.length - 1] +
-            "_" +
-            fastaTypeSelected +
-            "_v" +
-            currentVersionFormatted +
-            ".fasta"
-        );
-      })
-      .catch((response) => console.log(response.error));
+    const responseData = await getGeneFasta(gene, fastaTypeSelected);
+    if (!responseData) return;
+    const { filePrefix } = getDownloadNamePartsFromGene(gene);
+    fileDownload(
+      responseData,
+      filePrefix +
+        gene[gene.length - 1] +
+        "_" +
+        fastaTypeSelected +
+        "_v" +
+        currentVersionFormatted +
+        ".fasta"
+    );
   }
 
   async function downloadGeneFastaZip(genes: string[]) {
     const zip = new JSZip();
-    let gene: string;
-    for (gene of genes) {
-      const encodedGene = encodeURIComponent(gene);
-      const fastaEndpoint =
-        backendAPI + "fasta/" + fastaTypeSelected + "?file_name=" + encodedGene;
-      await axios
-        .get(fastaEndpoint, axiosConfigDownload)
-        .then((response) => {
-          const responseData: Blob = response.data;
-          const { filePrefix } = getDownloadNamePartsFromGene(gene);
-          zip.file(
-            filePrefix +
-              gene[gene.length - 1] +
-              "_" +
-              fastaTypeSelected +
-              "_v" +
-              currentVersionFormatted +
-              ".fasta",
-            responseData
-          );
-        })
-        .catch((response) => console.log(response.error));
+    for (const gene of genes) {
+      const responseData = await getGeneFasta(gene, fastaTypeSelected);
+      if (!responseData) continue;
+      const { filePrefix } = getDownloadNamePartsFromGene(gene);
+      zip.file(
+        filePrefix +
+          gene[gene.length - 1] +
+          "_" +
+          fastaTypeSelected +
+          "_v" +
+          currentVersionFormatted +
+          ".fasta",
+        responseData
+      );
     }
 
     const zipLoci = Array.from(

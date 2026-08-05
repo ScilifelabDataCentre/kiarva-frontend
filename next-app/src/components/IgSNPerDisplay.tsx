@@ -1,44 +1,30 @@
-import { axiosConfig, backendAPI } from "@/constants";
-import axios from "axios";
 import { ReactElement, useEffect, useState } from "react";
-import {
-  IgSNPerData,
-} from "@/interfaces/types";
+import { getIgSNPerData } from "@/lib/APIcalls";
 
 export default function IgSNPerDisplay(prop: { selectedAllele: string }): ReactElement {
     const [igSNPerScore, setIgSNPerScore] = useState<string>("");
     const [igSNPerSNPs, setIgSNPerSNPs] = useState<string[]>([]);
 
-    async function getGeneIgSNPerData(allele: string) {
-        const encodedAllele = encodeURIComponent(allele);
-
-        const alleleIgSNPerDataEndpoint: string =
-        backendAPI + "data/igsnperdata?allele_name=" + encodedAllele;
-
-        await axios
-        .get(alleleIgSNPerDataEndpoint, axiosConfig)
-        .then((response) => {
-            const responseData: IgSNPerData = response.data;
-            if (responseData.igSNPer_score || responseData.igSNPer_score === 0) {
+    async function loadIgSNPerData(allele: string) {
+        const responseData = await getIgSNPerData(allele);
+        if (!responseData) return;
+        if (responseData.igSNPer_score || responseData.igSNPer_score === 0) {
             const scoreString = responseData.igSNPer_score.toString();
             if (scoreString.length === 1) {
                 setIgSNPerScore(scoreString + ".0");
             } else {
                 setIgSNPerScore(scoreString);
             }
-            } else {
+        } else {
             setIgSNPerScore("Missing");
-            }
-            setIgSNPerSNPs(responseData.igSNPer_SNPs);
-        })
-        .catch((response) => console.log(response.error));
+        }
+        setIgSNPerSNPs(responseData.igSNPer_SNPs);
     }
 
     // Fetch gene frequency data when allele dropdown changes
     useEffect(() => {
         if (prop.selectedAllele) {
-            const selectedAllele = prop.selectedAllele;
-            getGeneIgSNPerData(selectedAllele);
+            loadIgSNPerData(prop.selectedAllele);
         } else {
             setIgSNPerScore("");
             setIgSNPerSNPs([]);
