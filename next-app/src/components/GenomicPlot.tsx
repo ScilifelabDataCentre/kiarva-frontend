@@ -1,13 +1,15 @@
 "use client";
 
 import { ReactElement, useEffect, useState } from "react";
-import { axiosConfig, backendAPI } from "@/constants";
 import FrequencyPlotComponent from "@/components/FrequencyPlotComponent";
 import {
   IGeneFrequencyData,
   IPopulationRegion,
 } from "@/interfaces/types";
-import axios from "axios";
+import {
+  getGenomicPopulationFrequencies,
+  getGenomicSuperpopulationFrequencies,
+} from "@/lib/APIcalls";
 import {
   populationSubsets,
   subPopulations,
@@ -50,30 +52,8 @@ export default function GenomicPlot(prop: { selectedAllele: string }): ReactElem
   >([{ superpopulation: "", population: "" }]);
 
   async function getGeneFreqData(allele: string) {
-    const encodedAllele = encodeURIComponent(allele);
-    const alleleFrequenciesEndpoint: string = backendAPI + "data/frequencies/";
-
-    const superpopulationsEndpoint: string =
-      alleleFrequenciesEndpoint +
-      "superpopulations?allele_name=" +
-      encodedAllele;
-
-    await axios
-      .get(superpopulationsEndpoint, axiosConfig)
-      .then((response) => {
-        setSuperpopFreqAPIData(response.data);
-      })
-      .catch((response) => console.log(response.error));
-
-    const populationsEndpoint: string =
-      alleleFrequenciesEndpoint + "populations?allele_name=" + encodedAllele;
-
-    await axios
-      .get(populationsEndpoint, axiosConfig)
-      .then((response) => {
-        setPopFreqAPIData(response.data);
-      })
-      .catch((response) => console.log(response.error));
+    setSuperpopFreqAPIData(await getGenomicSuperpopulationFrequencies(allele));
+    setPopFreqAPIData(await getGenomicPopulationFrequencies(allele));
   }
 
   // Fetch gene frequency data when allele dropdown changes

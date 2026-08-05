@@ -1,52 +1,22 @@
-import { axiosConfig, backendAPI } from "@/constants";
-import { AlleleListAA } from "@/interfaces/types";
-import axios from "axios";
 import { ReactElement, useEffect, useState } from "react";
+import { getAlleleListAA, getTopLevelAlleleAA } from "@/lib/APIcalls";
 
 export default function IgSNPerDisplay(prop: { selectedAllele: string }): ReactElement {
     const [alleleListAA, setAlleleListAA] = useState<string[]>([]);
     const [topAlleleAA, setTopAlleleAA] = useState<string>("");
 
-    async function getTopLevelAlleleAA(allele: string) {
-        const encodedAllele = encodeURIComponent(allele);
-        const topAlleleAAEndpoint: string =
-        backendAPI + "data/aminoacidalleles?aa_allele_name=" + encodedAllele;
-
-        await axios
-        .get(topAlleleAAEndpoint, axiosConfig)
-        .then((response) => {
-            setTopAlleleAA(response.data.allele_aa);
-        })
-        .catch((response) => console.log(response.error));
-    }
-
-    async function getAlleleListAA(allele: string) {
-        const encodedAllele = encodeURIComponent(allele);
-        const alleleListAADataEndpoint: string =
-        backendAPI + "data/aminoacidlist?aa_allele_name=" + encodedAllele;
-
-        await axios
-        .get(alleleListAADataEndpoint, axiosConfig)
-        .then((response) => {
-            const responseData: AlleleListAA = response.data;
-            if (responseData.aa_allele_list) {
-            setAlleleListAA(responseData.aa_allele_list);
-            }
-        })
-        .catch((response) => console.log(response.error));
-    }
-
     useEffect(() => {
         if (prop.selectedAllele) {
-            const selectedAllele = prop.selectedAllele;
-            getTopLevelAlleleAA(selectedAllele);
+            getTopLevelAlleleAA(prop.selectedAllele).then((allele) =>
+                setTopAlleleAA(allele),
+            );
         }
     }, [prop.selectedAllele]);
 
     // Fetch gene frequency data when allele dropdown changes
     useEffect(() => {
         if (topAlleleAA) {
-            getAlleleListAA(topAlleleAA);
+            getAlleleListAA(topAlleleAA).then((list) => setAlleleListAA(list));
         } else {
             setAlleleListAA([]);
         }

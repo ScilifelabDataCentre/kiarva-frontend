@@ -4,13 +4,16 @@
 "use client";
 
 import { ReactElement, useEffect, useState } from "react";
-import { axiosConfig, backendAPI } from "@/constants";
 import FrequencyPlotComponent from "@/components/FrequencyPlotComponent";
 import {
   IGeneFrequencyData,
   IPopulationRegion,
 } from "@/interfaces/types";
-import axios from "axios";
+import {
+  getAminoAcidPopulationFrequencies,
+  getAminoAcidSuperpopulationFrequencies,
+  getTopLevelAlleleAA,
+} from "@/lib/APIcalls";
 import {
   populationSubsets,
   subPopulations,
@@ -53,52 +56,19 @@ export default function AminoAcidPlot(prop: { selectedAllele: string }): ReactEl
 
   const [topAlleleAA, setTopAlleleAA] = useState<string>("");
 
-  async function getTopLevelAlleleAA(allele: string) {
-    const encodedAllele = encodeURIComponent(allele);
-    const topAlleleAAEndpoint: string =
-      backendAPI + "data/aminoacidalleles?aa_allele_name=" + encodedAllele;
-
-    await axios
-      .get(topAlleleAAEndpoint, axiosConfig)
-      .then((response) => {
-        setTopAlleleAA(response.data.allele_aa);
-      })
-      .catch((response) => console.log(response.error));
-  }
-
   async function getGeneFreqData(allele: string) {
-    const encodedAllele = encodeURIComponent(allele);
-    const alleleFrequenciesEndpoint: string =
-      backendAPI + "data/aminoacidfrequencies/";
-
-    const superpopulationsEndpoint: string =
-      alleleFrequenciesEndpoint +
-      "superpopulations?aa_allele_name=" +
-      encodedAllele;
-
-    await axios
-      .get(superpopulationsEndpoint, axiosConfig)
-      .then((response) => {
-        setSuperpopFreqAPIData(response.data);
-      })
-      .catch((response) => console.log(response.error));
-
-    const populationsEndpoint: string =
-      alleleFrequenciesEndpoint + "populations?aa_allele_name=" + encodedAllele;
-
-    await axios
-      .get(populationsEndpoint, axiosConfig)
-      .then((response) => {
-        setPopFreqAPIData(response.data);
-      })
-      .catch((response) => console.log(response.error));
+    setSuperpopFreqAPIData(
+      await getAminoAcidSuperpopulationFrequencies(allele),
+    );
+    setPopFreqAPIData(await getAminoAcidPopulationFrequencies(allele));
   }
 
   // Fetch gene frequency data when allele dropdown changes
   useEffect(() => {
     if (prop.selectedAllele) {
-      const selectedAllele = prop.selectedAllele;
-      getTopLevelAlleleAA(selectedAllele);
+      getTopLevelAlleleAA(prop.selectedAllele).then((allele) =>
+        setTopAlleleAA(allele),
+      );
     } else {
       setSuperpopFreqAPIData([]);
       setPopFreqAPIData([]);

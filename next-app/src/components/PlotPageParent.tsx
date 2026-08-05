@@ -1,12 +1,12 @@
 "use client";
 
 import { ReactElement, useEffect, useState } from "react";
-import { backendAPI } from "@/constants";
 import {
   GeneType,
   IAlleleDropDownConfig,
   Locus,
 } from "@/interfaces/types";
+import { getMetaVersion } from "@/lib/APIcalls";
 import AlelleSelectionComponent from "./AlleleSelectionComponent";
 import AbbreviationPopupComponent from "@/components/AbbreviationPopupComponent";
 import dynamic from 'next/dynamic'
@@ -19,13 +19,6 @@ import AminoAcidAllelesDisplay from "./AminoAcidAllelesDisplay";
 
 // Main function to render the PlotPage component
 export default function PlotPageParent(prop: { plotType: string }): ReactElement {
-
-//   // config for AlleleSelectionComponent which sets up the allele segment dropdown menu
-//   const alleleDropdownConfig: IAlleleDropDownConfig = {
-//     geneSegmentItemsArray: ["IGH"],
-//     geneDropDownItemsArray: ["IGHV"],
-//     geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
-//   };
 
   // config for AlleleSelectionComponent which sets up the allele segment dropdown menu
   interface IGeneTypesByLocus {
@@ -43,12 +36,9 @@ export default function PlotPageParent(prop: { plotType: string }): ReactElement
   const [isPrepubEnv, setIsPrepubEnv] = useState<boolean>(false);
 
   useEffect(() => {
-    fetch("/meta/version")
-      .then((res) => res.json())
-      .then((data) => {
-        const env = data.currentEnv;
-        setIsPrepubEnv(env === 'prepub');
-      });
+    getMetaVersion().then((data) => {
+      if (data) setIsPrepubEnv(data.currentEnv === 'prepub');
+    });
   }, []);
 
   if (isPrepubEnv) {
@@ -59,7 +49,6 @@ export default function PlotPageParent(prop: { plotType: string }): ReactElement
   const alleleDropdownConfig: IAlleleDropDownConfig = {
     loci: loci,
     geneTypesByLocus: geneTypeByLocus,
-    geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
   };
 
   const [selectedAllele, setSelectedAllele] = useState<string>("");

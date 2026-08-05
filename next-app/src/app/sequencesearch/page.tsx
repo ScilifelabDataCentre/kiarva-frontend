@@ -21,8 +21,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import axios from "axios";
-import { axiosConfig, backendAPI, BODY_CLASSES, H_1 } from "@/constants";
+import { BODY_CLASSES, H_1 } from "@/constants";
+import { searchSequences } from "@/lib/APIcalls";
 import { ISequenceSearchData } from "@/interfaces/types";
 import SequenceSearchComponent from "@/components/SequenceSearchComponent";
 
@@ -33,7 +33,6 @@ const FormSchema = z.object({
 });
 
 export default function SequenceSearchInputForm() {
-  const sequenceSearchEndpoint = backendAPI + "data/sequences?sequence_str=";
   const [sequenceData, setSequenceData] = useState<ISequenceSearchData[]>([]);
   const [searchTermLength, setSearchTermLength] = useState<number>(0);
 
@@ -53,14 +52,9 @@ export default function SequenceSearchInputForm() {
         </pre>
       ),
     });
-    const encodedURI = encodeURI(sequenceSearchEndpoint + data.sequence);
-    await axios
-      .get(encodedURI, axiosConfig)
-      .then((response) => {
-        setSearchTermLength(data.sequence.length);
-        setSequenceData(response.data);
-      })
-      .catch((response) => console.log(response.error));
+    const results = await searchSequences(data.sequence);
+    setSearchTermLength(data.sequence.length);
+    setSequenceData(results);
   }
 
   return (

@@ -1,8 +1,7 @@
 'use client';
 
-import { axiosConfig, backendAPI } from '@/constants';
 import { Button } from "@/components/ui/button";
-import axios from 'axios';
+import { getPlotDataTable } from "@/lib/APIcalls";
 import fileDownload from 'js-file-download';
 import { Download } from 'lucide-react';
 import { ReactElement } from 'react';
@@ -15,24 +14,20 @@ export default function DownloadPlotData(prop: {
     }): ReactElement {
 
     async function handleDownload() {
-        const encodedAlleleName = encodeURIComponent(prop.alleleOrGene);
-        const tableTypeURI = prop.tableType == "genomicFreqPlot" ? "frequencies" : "aminoacidfrequencies";
-        const alleleOrGene = prop.fullGene ? "gene" : "allele";
-        const tableVariableName = prop.tableType == "genomicFreqPlot" ? alleleOrGene + "_name" : "aa_"+alleleOrGene+"_name";
-        const tableEndpoint =
-        backendAPI + "data/" + tableTypeURI + "/table/"+alleleOrGene+"?"+tableVariableName+"=" + encodedAlleleName;
-        const tableFileNameSuffix = prop.tableType == "genomicFreqPlot" ? "genomic" : "aminoacid"; 
-        const tableFileName = prop.alleleOrGene.replace("*", "_").replace("/","_") + "-" + tableFileNameSuffix +"_frequencies.tsv";
-        await axios
-            .get(tableEndpoint, axiosConfig)
-            .then((response) => {
-                const responseData: Blob = response.data;
-                fileDownload(
-                responseData,
-                tableFileName
-                );
-            })
-            .catch((response) => console.log(response.error));
+        const responseData = await getPlotDataTable(
+            prop.alleleOrGene,
+            prop.tableType,
+            prop.fullGene,
+        );
+        if (!responseData) return;
+        const tableFileNameSuffix =
+            prop.tableType == "genomicFreqPlot" ? "genomic" : "aminoacid";
+        const tableFileName =
+            prop.alleleOrGene.replace("*", "_").replace("/", "_") +
+            "-" +
+            tableFileNameSuffix +
+            "_frequencies.tsv";
+        fileDownload(responseData, tableFileName);
     }
 
     return (

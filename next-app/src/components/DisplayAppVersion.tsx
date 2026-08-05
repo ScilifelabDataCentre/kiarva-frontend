@@ -4,6 +4,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { getMetaVersion } from "@/lib/APIcalls";
 
 function toHref(value: string) {
   const v = value.trim();
@@ -17,12 +18,11 @@ export default function FooterVersion() {
   const [backendImage, setBackendImage] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/meta/version")
-      .then((res) => res.json())
-      .then((data) => {
-        setFrontendImage(data.frontendImage);
-        setBackendImage(data.backendImage);
-      });
+    getMetaVersion().then((data) => {
+      if (!data) return;
+      setFrontendImage(data.frontendImage);
+      setBackendImage(data.backendImage);
+    });
   }, []);
 
   return (

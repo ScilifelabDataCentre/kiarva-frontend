@@ -4,7 +4,6 @@
 "use client";
 
 import { ReactElement, useCallback, useEffect, useState } from "react";
-import { axiosConfig, backendAPI } from "@/constants";
 import {
   ISequenceData,
   IAlleleDropDownConfig,
@@ -13,7 +12,7 @@ import {
   Locus,
 } from "@/interfaces/types";
 import AlelleSelectionComponent from "@/components/AlleleSelectionComponent";
-import axios from "axios";
+import { getAlignedSequenceData, getMetaVersion } from "@/lib/APIcalls";
 import MSAViewer from "@/components/MSAViewer";
 
 // Main function to render the PlotPage component
@@ -29,12 +28,9 @@ export default function MSAPlotPageComponent(): ReactElement {
   const [isPrepubEnv, setIsPrepubEnv] = useState<boolean>(false);
 
   useEffect(() => {
-    fetch("/meta/version")
-      .then((res) => res.json())
-      .then((data) => {
-        const env = data.currentEnv;
-        setIsPrepubEnv(env === 'prepub');
-      });
+    getMetaVersion().then((data) => {
+      if (data) setIsPrepubEnv(data.currentEnv === 'prepub');
+    });
   }, []);
 
   const loci: Locus[] = ["IGH"];
@@ -50,7 +46,6 @@ export default function MSAPlotPageComponent(): ReactElement {
   const alleleDropdownConfig: IAlleleDropDownConfig = {
     loci: loci,
     geneTypesByLocus: geneTypeByLocus,
-    geneSelectionEndpoint: backendAPI + "data/plotoptions?current_selection=",
   };
 
   const [selectedGene, setSelectedGene] = useState<string>("");
@@ -63,31 +58,21 @@ export default function MSAPlotPageComponent(): ReactElement {
   ]);
 
   async function AlignedSequenceData(gene: string) {
-    const encodedGene = encodeURIComponent(gene);
-    const alignedSequenceDataEndpoint: string =
-      backendAPI + "data/sequences/alignedsequences?gene_name=" + encodedGene;
-    console.log(axiosConfig);
-    await axios
-      .get(alignedSequenceDataEndpoint, axiosConfig)
-      .then((response) => {
-        const responseData: IMSAData[] = response.data;
-        let item: IMSAData;
-        const tmpSequenceData = [];
-        const tmpAminoAcidSequence = [];
-        for (item of responseData) {
-          tmpSequenceData.push({
-            allele: item.allele,
-            sequence: item.sequence_nt,
-          });
-          tmpAminoAcidSequence.push({
-            allele: item.allele,
-            sequence: item.sequence_aa,
-          });
-        }
-        setSequenceData(tmpSequenceData);
-        setAminoAcidSequence(tmpAminoAcidSequence);
-      })
-      .catch((response) => console.log(response.error));
+    const responseData: IMSAData[] = await getAlignedSequenceData(gene);
+    const tmpSequenceData = [];
+    const tmpAminoAcidSequence = [];
+    for (const item of responseData) {
+      tmpSequenceData.push({
+        allele: item.allele,
+        sequence: item.sequence_nt,
+      });
+      tmpAminoAcidSequence.push({
+        allele: item.allele,
+        sequence: item.sequence_aa,
+      });
+    }
+    setSequenceData(tmpSequenceData);
+    setAminoAcidSequence(tmpAminoAcidSequence);
   }
 
   // Fetch data when allele dropdown changes
