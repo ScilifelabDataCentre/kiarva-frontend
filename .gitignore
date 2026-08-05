@@ -15,3 +15,5 @@ react-app/public/.DS_Store
 react-app/node_modules
 
 .env
+
+CLAUDE.md
