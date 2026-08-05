@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# recorded fixtures (reference only, hand-crafted fixtures live in tests/fixtures/)
+/tests/fixtures/recorded/
