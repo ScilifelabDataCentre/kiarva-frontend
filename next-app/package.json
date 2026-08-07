@@ -3,8 +3,8 @@
   "version": "0.10.5",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint .",
     "test:e2e": "playwright test",
@@ -43,6 +43,7 @@
     "next": "^16.3.0",
     "pa11y-ci": "^4.1.1",
     "plotly.js": "^3.0.0",
+    "plotly.js-basic-dist-min": "^3.7.0",
     "raw-loader": "^4.0.2",
     "react": "^19.1.2",
     "react-dom": "^19.1.2",
