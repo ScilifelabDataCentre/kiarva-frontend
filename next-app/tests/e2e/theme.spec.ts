@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, Page } from "@playwright/test";
 
 // Design tokens defined in src/app/globals.css. Renovate-driven Tailwind or
 // PostCSS bumps have broken these in the past by changing how @theme / @import
@@ -25,18 +25,47 @@ const expectedTokens = {
   "--radius": "0.5rem",
 } as const;
 
-// Parse an oklch(...) string into {L, C, H} numbers. Handles both the raw
-// authored form ("oklch(0.9838 0.0035 247.86)") and the form Chromium 132+
-// serializes to ("oklch(98.38% .0035 247.86)").
-function parseOklch(s: string): { L: number; C: number; H: number } {
-  const m = s.match(
-    /^oklch\(\s*(\d*\.?\d+)(%?)\s+(\d*\.?\d+)\s+(\d*\.?\d+)\s*\)$/i,
-  );
-  if (!m) throw new Error(`not a parseable oklch: "${s}"`);
-  const [, lStr, pct, cStr, hStr] = m;
-  const L = pct === "%" ? parseFloat(lStr) / 100 : parseFloat(lStr);
-  return { L, C: parseFloat(cStr), H: parseFloat(hStr) };
+type Oklab = [L: number, a: number, b: number];
+
+// Colours are compared as colours, not as strings, because the compiled colour
+// space depends on the bundler's CSS minifier rather than on the tokens. The
+// webpack pipeline emitted the authored oklch(); Turbopack's lightningcss emits
+// a hex fallback plus lab(). Those resolve to the same rendered colour, so
+// string comparison would test the minifier instead of globals.css.
+//
+// Both sides are converted through the browser's relative colour syntax, so any
+// input colour space normalises the same way. oklab rather than oklch because
+// hue is numerically unstable at the near-zero chroma several of these tokens
+// use — --background's hue moves 0.29° from serialization rounding alone, while
+// its oklab coordinates move by 2e-5.
+async function resolveOklab(
+  page: Page,
+  colors: string[],
+): Promise<(Oklab | null)[]> {
+  return page.evaluate((cssColors) => {
+    const probe = document.createElement("div");
+    document.body.appendChild(probe);
+    const out = cssColors.map((color) => {
+      // Reset first: an invalid colour leaves the previous value in place,
+      // which would silently compare the wrong token.
+      probe.style.color = "";
+      probe.style.color = `oklab(from ${color} l a b)`;
+      const m = getComputedStyle(probe).color.match(
+        /^oklab\(\s*(-?[\d.e-]+)\s+(-?[\d.e-]+)\s+(-?[\d.e-]+)/i,
+      );
+      return m
+        ? ([parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3])] as Oklab)
+        : null;
+    });
+    probe.remove();
+    return out;
+  }, colors);
 }
+
+// Serialization rounding between colour spaces moves oklab coordinates by up to
+// ~1.5e-4. A token actually changing value moves them by 1e-2 or more, so this
+// separates the two comfortably.
+const OKLAB_TOLERANCE = 1e-3;
 
 // Parse a CSS length ("0.5rem", ".5rem", "16px") into {value, unit}. Chromium
 // 132+ drops leading zeros, so string equality doesn't survive re-serialization.
@@ -61,19 +90,45 @@ test.describe("Design tokens", () => {
       return out;
     }, Object.keys(expectedTokens));
 
+    const colorNames = Object.keys(expectedTokens).filter((n) =>
+      expectedTokens[n as keyof typeof expectedTokens].startsWith("oklch("),
+    );
+
+    // Resolve actual and expected in a single page call so both normalise
+    // through the same browser instance.
+    const resolved = await resolveOklab(page, [
+      ...colorNames.map((n) => actual[n]),
+      ...colorNames.map(
+        (n) => expectedTokens[n as keyof typeof expectedTokens],
+      ),
+    ]);
+    const actualLab = resolved.slice(0, colorNames.length);
+    const expectedLab = resolved.slice(colorNames.length);
+
+    colorNames.forEach((name, i) => {
+      const a = actualLab[i];
+      const e = expectedLab[i];
+      expect(e, `expected token ${name} is not a valid colour`).not.toBeNull();
+      expect(
+        a,
+        `token ${name} did not resolve to a colour (got "${actual[name]}")`,
+      ).not.toBeNull();
+
+      const labels = ["L", "a", "b"] as const;
+      a!.forEach((v, j) => {
+        expect(
+          Math.abs(v - e![j]),
+          `token ${name} ${labels[j]}: expected ${e![j]}, got ${v}`,
+        ).toBeLessThan(OKLAB_TOLERANCE);
+      });
+    });
+
     for (const [name, expected] of Object.entries(expectedTokens)) {
-      if (expected.startsWith("oklch(")) {
-        const a = parseOklch(actual[name]);
-        const e = parseOklch(expected);
-        expect(a.L, `token ${name} L`).toBeCloseTo(e.L, 4);
-        expect(a.C, `token ${name} C`).toBeCloseTo(e.C, 4);
-        expect(a.H, `token ${name} H`).toBeCloseTo(e.H, 2);
-      } else {
-        const a = parseLength(actual[name]);
-        const e = parseLength(expected);
-        expect(a.value, `token ${name} value`).toBeCloseTo(e.value, 4);
-        expect(a.unit, `token ${name} unit`).toBe(e.unit);
-      }
+      if (expected.startsWith("oklch(")) continue;
+      const a = parseLength(actual[name]);
+      const e = parseLength(expected);
+      expect(a.value, `token ${name} value`).toBeCloseTo(e.value, 4);
+      expect(a.unit, `token ${name} unit`).toBe(e.unit);
     }
   });
 

@@ -6,7 +6,19 @@
 // set up plotly with TypeScript:
 // https://stackoverflow.com/a/70807520 +
 // https://community.plotly.com/t/how-to-initiate-and-build-a-plotly-js-project-using-vite/65701/4
-import Plotly, { Datum, Layout } from "plotly.js";
+//
+// The runtime bundle is plotly.js-basic-dist-min, not plotly.js. The full
+// plotly.js package is a source distribution that reaches a dynamic require()
+// through glslify (via the WebGL scattergl trace), which Turbopack cannot
+// resolve. This component only ever emits `type: "bar"` traces, which the
+// prebuilt basic bundle registers. See next.config.mjs.
+//
+// plotly.js stays in dependencies because react-plotly.js declares it as a
+// peer, and its types are still the accurate ones — but nothing imports it at
+// runtime, so it no longer reaches the bundle. See
+// src/types/plotly-basic-dist-min.d.ts.
+import type { Data, Datum, Layout } from "plotly.js";
+import Plotly from "plotly.js-basic-dist-min";
 import createPlotlyComponent from "react-plotly.js/factory";
 import {
   IGeneFrequencyData,
@@ -30,7 +42,7 @@ export default function FrequencyPlotComponent(prop: {
     superpopulationsColor: ISuperpopulationColors,
     plotPosition: number,
     superpopulationRegions: IPopulationRegion[]
-  ): Plotly.Data[] {
+  ): Data[] {
     const regions: string[] = [];
     const frequencies: number[] = [];
     const counts: number[] = [];
@@ -58,7 +70,7 @@ export default function FrequencyPlotComponent(prop: {
       }
     }
 
-    const traces: Plotly.Data[] = [];
+    const traces: Data[] = [];
 
     const showLegend = plotPosition === 1;
 
@@ -81,14 +93,14 @@ export default function FrequencyPlotComponent(prop: {
     return traces;
   }
 
-  const superpopulationTraces: Plotly.Data[] = generateTraces(
+  const superpopulationTraces: Data[] = generateTraces(
     prop.superpopulationAPIData,
     prop.superpopulationColors,
     1,
     prop.superpopulationRegions
   );
 
-  const populationTraces: Plotly.Data[] = generateTraces(
+  const populationTraces: Data[] = generateTraces(
     prop.populationAPIData,
     prop.superpopulationColors,
     2,
