@@ -1,0 +1,32 @@
+[
+  {
+    "population": "AFR",
+    "n": 1200,
+    "frequency": 0.9
+  },
+  {
+    "population": "AMR",
+    "n": 1201,
+    "frequency": 0.87
+  },
+  {
+    "population": "EAS",
+    "n": 1202,
+    "frequency": 0.84
+  },
+  {
+    "population": "EUR",
+    "n": 1203,
+    "frequency": 0.81
+  },
+  {
+    "population": "SAS",
+    "n": 1204,
+    "frequency": 0.78
+  },
+  {
+    "population": "ALL",
+    "n": 2005,
+    "frequency": 0.75
+  }
+]
