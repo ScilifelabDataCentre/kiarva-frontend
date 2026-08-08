@@ -6,10 +6,9 @@ import React from "react";
 import { useState } from "react";
 import {
   Dialog,
-  DialogBackdrop,
-  DialogPanel,
+  DialogContent,
   DialogTitle,
-} from "@headlessui/react";
+} from "@/components/ui/dialog";
 import { AbbreviationPopupComponentProps } from "@/interfaces/types";
 
 const AbbreviationPopupComponent: React.FC<AbbreviationPopupComponentProps> = ({
@@ -96,99 +95,89 @@ const AbbreviationPopupComponent: React.FC<AbbreviationPopupComponentProps> = ({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} className="relative z-10">
-      <DialogBackdrop
-        transition
-        className="fixed inset-0 bg-secondary bg-opacity-75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-leave:duration-200 data-enter:ease-out data-leave:ease-in"
-      />
+    <Dialog
+      open={open}
+      onOpenChange={(nextOpen) => {
+        if (!nextOpen) handleClose();
+      }}
+    >
+      {/*
+        The populations list is 25 entries, so the dialog has to scroll rather
+        than overflow off a short viewport. DialogContent is centred and has no
+        max height of its own.
 
-      <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <DialogPanel
-            transition
-            className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-leave:duration-200 data-enter:ease-out data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-          >
-            <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-              <div className="sm:flex sm:items-start">
-                <div className="mx-auto flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary sm:mx-0 sm:h-10 sm:w-10">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="white"
-                    className="size-6"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z"
-                    />
-                  </svg>
-                </div>
-                <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                  <DialogTitle className="text-xl font-semibold leading-6 text-foreground">
-                    Abbreviations
-                  </DialogTitle>
-                  <div className="mt-6">
-                    <section aria-labelledby="superpopulations-heading">
-                      <h3
-                        id="superpopulations-heading"
-                        className="font-semibold"
-                      >
-                        Superpopulations
-                      </h3>
-                      <ul className="list-disc list-inside space-y-1 mb-4 mt-2">
-                        {Object.keys(superPopulations).map((key) => (
-                          <li key={key} className="flex items-center">
-                            <span
-                              className="inline-block w-3 h-3 rounded-full mr-2"
-                              style={{
-                                backgroundColor: superPopulationColorsDict[key],
-                              }}
-                              aria-hidden="true"
-                            ></span>
-                            {key} - {superPopulations[key]}
-                          </li>
-                        ))}
-                      </ul>
-                    </section>
-                    <section aria-labelledby="populations-heading">
-                      <h3 id="populations-heading" className="font-semibold">
-                        Populations
-                      </h3>
-                      <ul className="list-disc list-inside space-y-1 mt-2">
-                        {Object.keys(populations).map((key) => (
-                          <li key={key} className="flex items-center">
-                            <span
-                              className="inline-block w-3 h-3 rounded-full mr-2"
-                              style={{
-                                backgroundColor: populationColorsDict[key],
-                              }}
-                              aria-hidden="true"
-                            ></span>
-                            {key} - {populations[key]}
-                          </li>
-                        ))}
-                      </ul>
-                    </section>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button
-              type="button"
-              data-autofocus
-              onClick={handleClose}
-              className="absolute right-2 top-2"
-              aria-label="Close abbreviations dialog"
+        aria-describedby={undefined} because there is no DialogDescription here;
+        without it Radix logs a missing-description warning.
+      */}
+      <DialogContent
+        className="max-h-[85vh] overflow-y-auto bg-white text-left"
+        aria-describedby={undefined}
+      >
+        <div className="sm:flex sm:items-start">
+          <div className="mx-auto flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary sm:mx-0 sm:h-10 sm:w-10">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="white"
+              className="size-6"
+              aria-hidden="true"
             >
-              <span aria-hidden="true">✕</span>
-            </button>
-          </DialogPanel>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z"
+              />
+            </svg>
+          </div>
+          <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+            <DialogTitle className="text-xl font-semibold leading-6 text-foreground">
+              Abbreviations
+            </DialogTitle>
+            <div className="mt-6">
+              <section aria-labelledby="superpopulations-heading">
+                <h3 id="superpopulations-heading" className="font-semibold">
+                  Superpopulations
+                </h3>
+                <ul className="list-disc list-inside space-y-1 mb-4 mt-2">
+                  {Object.keys(superPopulations).map((key) => (
+                    <li key={key} className="flex items-center">
+                      <span
+                        className="inline-block w-3 h-3 rounded-full mr-2"
+                        style={{
+                          backgroundColor: superPopulationColorsDict[key],
+                        }}
+                        aria-hidden="true"
+                      ></span>
+                      {key} - {superPopulations[key]}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+              <section aria-labelledby="populations-heading">
+                <h3 id="populations-heading" className="font-semibold">
+                  Populations
+                </h3>
+                <ul className="list-disc list-inside space-y-1 mt-2">
+                  {Object.keys(populations).map((key) => (
+                    <li key={key} className="flex items-center">
+                      <span
+                        className="inline-block w-3 h-3 rounded-full mr-2"
+                        style={{
+                          backgroundColor: populationColorsDict[key],
+                        }}
+                        aria-hidden="true"
+                      ></span>
+                      {key} - {populations[key]}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </div>
+          </div>
         </div>
-      </div>
+      </DialogContent>
     </Dialog>
   );
 };

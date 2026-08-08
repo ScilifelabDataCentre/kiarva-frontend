@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { toast } from "@/components/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import {
@@ -44,14 +43,6 @@ export default function SequenceSearchInputForm() {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following sequence:",
-      description: (
-        <pre className="mt-2 w-85 rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
     const results = await searchSequences(data.sequence);
     setSearchTermLength(data.sequence.length);
     setSequenceData(results);
