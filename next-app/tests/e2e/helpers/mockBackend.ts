@@ -16,9 +16,13 @@ type BackendOverrides = {
 };
 
 /**
- * Wires all APIcalls URL patterns to hand-crafted fixtures via page.route().
+ * Wires all APIcalls URL patterns to the fixtures in tests/fixtures via page.route().
  * The frontend hits http://localhost:5000/* in dev (via window.location.origin
  * detection in constants.ts) and /meta/version on the app origin.
+ *
+ * The fixtures are what a backend seeded with kiarva-backend/tests/mock_data/ returns
+ * for the same requests, down to the row order; scripts/record-fixtures.sh re-records
+ * them and documents the few values that are picked by hand instead.
  */
 export async function mockBackend(page: Page, overrides: BackendOverrides = {}) {
   const jsonRoute =

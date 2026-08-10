@@ -3,13 +3,18 @@
 # Records backend responses into tests/fixtures/recorded/ for reference.
 #
 # Precondition: local backend running at $BACKEND_URL (default http://localhost:5000)
-# seeded with the mock TSV from kiarva-backend/tests/generate_mock_data.py.
+# seeded with the mock data from kiarva-backend/tests/mock_data/.
 #
-# NOTE: These recordings use the mock TSV's TEST-named genes (TEST1-8, SEQTEST1-2,
-# ALIGNMENTTEST1-2, ...). The frontend queries with IGHV-prefixed names, so the
-# actual E2E fixtures under tests/fixtures/ are hand-crafted with the same shapes
-# but IGHV names. Use the recorded output here as ground truth for shape when
-# updating those fixtures.
+# That mock data uses real gene and allele names, so what comes back here is directly
+# comparable to the fixtures in tests/fixtures/ - the recorded files are the ground
+# truth for their shape, their names and the order of their rows. Two deliberate
+# differences remain:
+#
+#   * The frequency fixtures keep hand-picked n and frequency values. The mock dataset
+#     has one case per population, so the real numbers are mostly 1.0 and would make
+#     the plot rendering assertions much weaker.
+#   * Which allele the sequence search hits is a property of the mock data, so check
+#     sequence-search-match.json against the recording after changing it.
 
 set -euo pipefail
 
@@ -32,24 +37,26 @@ fetch() {
 echo "Recording fixtures from $BACKEND_URL into $OUT_DIR"
 
 # Gene/allele options
-fetch "plotoptions-test1-8.json"          "/data/plotoptions?current_selection=TEST1-8%2A"
-fetch "plotoptions-test1-69-1-69d.json"   "/data/plotoptions?current_selection=TEST1-69%2F1-69D%2A"
-fetch "dbname-test1-8-01.json"            "/data/db_name?selection=TEST1-8,01"
+fetch "plotoptions-ighv.json"       "/data/plotoptions?current_selection=IGHV"
+fetch "plotoptions-ighv1-8.json"    "/data/plotoptions?current_selection=IGHV1-8%2A"
+fetch "dbname-ighv1-8-01.json"      "/data/db_name?selection=IGHV1-8,01"
 
 # Frequency data
-fetch "superpop-frequencies-test1-8-01.json"    "/data/frequencies/superpopulations?allele_name=TEST1-8%2A01"
-fetch "pop-frequencies-test1-8-01.json"         "/data/frequencies/populations?allele_name=TEST1-8%2A01"
-fetch "aa-superpop-frequencies-test1-8-01.json" "/data/aminoacidfrequencies/superpopulations?aa_allele_name=TEST1-8%2A01"
-fetch "aa-pop-frequencies-test1-8-01.json"      "/data/aminoacidfrequencies/populations?aa_allele_name=TEST1-8%2A01"
+fetch "superpop-frequencies-ighv1-8-01.json"    "/data/frequencies/superpopulations?allele_name=IGHV1-8%2A01"
+fetch "pop-frequencies-ighv1-8-01.json"         "/data/frequencies/populations?allele_name=IGHV1-8%2A01"
+fetch "aa-superpop-frequencies-ighv1-8-01.json" "/data/aminoacidfrequencies/superpopulations?aa_allele_name=IGHV1-8%2A01"
+fetch "aa-pop-frequencies-ighv1-8-01.json"      "/data/aminoacidfrequencies/populations?aa_allele_name=IGHV1-8%2A01"
+fetch "plot-table.tsv"                          "/data/frequencies/table/allele?allele_name=IGHV1-8%2A01"
 
 # Allele metadata
-fetch "igsnper-test1-8-01.json"     "/data/igsnperdata?allele_name=TEST1-8%2A01"
-fetch "aa-alleles-test1-8-01.json"  "/data/aminoacidalleles?aa_allele_name=TEST1-8%2A01"
-fetch "aa-list-test1-8-01.json"     "/data/aminoacidlist?aa_allele_name=TEST1-8%2A01"
+fetch "igsnper-ighv1-8-01.json"     "/data/igsnperdata?allele_name=IGHV1-8%2A01"
+fetch "aa-alleles-ighv1-8-01.json"  "/data/aminoacidalleles?aa_allele_name=IGHV1-8%2A01"
+fetch "aa-list-ighv1-8-01.json"     "/data/aminoacidlist?aa_allele_name=IGHV1-8%2A01"
 
 # Sequences
-fetch "aligned-sequences-alignmenttest1-2.json" "/data/sequences/alignedsequences?gene_name=ALIGNMENTTEST1-2"
-fetch "sequence-search-match.json"              "/data/sequences?sequence_str=ESEARCHTES"
-fetch "sequence-search-empty.json"              "/data/sequences?sequence_str=NOMATCHFORTHIS"
+fetch "aligned-sequences-ighv1-8.json" "/data/sequences/alignedsequences?gene_name=IGHV1-8"
+fetch "sequence-search-match.json"     "/data/sequences?sequence_str=ESEARCHTES"
+fetch "sequence-search-empty.json"     "/data/sequences?sequence_str=NOMATCHFORTHIS"
+fetch "fasta.txt"                      "/fasta/genomic?file_name=IGHV"
 
 echo "Done. Recorded fixtures live in $OUT_DIR (gitignored)."
