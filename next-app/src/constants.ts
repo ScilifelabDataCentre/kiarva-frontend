@@ -1,4 +1,4 @@
-import { IAxiosConfig, IYouTubeVideo } from "./interfaces/types";
+import { IYouTubeVideo } from "./interfaces/types";
 
 // reused tailwind classes
 export const H_1: string =
@@ -28,11 +28,9 @@ if (typeof window !== "undefined") {
 export const backendAPI = backendAPI_tmp;
 
 
-// Common settings for Axios API calls
-export const axiosConfig: IAxiosConfig = {
-  headers: {
-    "X-api-key": "kiarvafrontend"
-  }
+// Headers sent with every backend API call
+export const API_HEADERS: Readonly<Record<string, string>> = {
+  "X-api-key": "kiarvafrontend"
 }
 
 // Youtube video data, used for showing embedded videos on index page

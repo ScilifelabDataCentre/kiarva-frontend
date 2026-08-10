@@ -17,6 +17,34 @@ import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
 import AminoAcidAllelesDisplay from "./AminoAcidAllelesDisplay";
 
+type PlotProps = {
+  selectedAllele: string;
+};
+
+// The plot components are loaded lazily and client-side only, because
+// plotly.js touches the DOM at module scope.
+//
+// The import specifiers must be static string literals. This previously built
+// the path at runtime, as `import('@/components/' + plotName)`. Webpack
+// tolerated that by compiling the whole directory into a lazy context module,
+// but Turbopack does not resolve computed specifiers the same way, and the
+// translated tab silently rendered GenomicPlot instead of AminoAcidPlot — so
+// both tabs fetched and plotted genomic frequencies.
+//
+// These are also declared at module scope rather than inside the component.
+// Calling dynamic() during render produces a new component type on every
+// render, which remounts the plot and refetches its data.
+const PLOT_COMPONENTS: Record<string, React.ComponentType<PlotProps>> = {
+  genomicFreqPlot: dynamic<PlotProps>(
+    () => import("@/components/GenomicPlot"),
+    { ssr: false, loading: () => <Loading /> },
+  ),
+  translatedFreqPlot: dynamic<PlotProps>(
+    () => import("@/components/AminoAcidPlot"),
+    { ssr: false, loading: () => <Loading /> },
+  ),
+};
+
 // Main function to render the PlotPage component
 export default function PlotPageParent(prop: { plotType: string }): ReactElement {
 
@@ -117,22 +145,8 @@ export default function PlotPageParent(prop: { plotType: string }): ReactElement
   }
 
   function displayElement(plotType: string) {
-    let plotName = "";
-    if (plotType == "genomicFreqPlot") {
-      plotName = "GenomicPlot";
-    }
-    else if (plotType == "translatedFreqPlot") {
-      plotName = "AminoAcidPlot";
-    }
-
-    type PlotProps = {
-      selectedAllele: string;
-    };
-
-    const PlotPageComponent = dynamic<PlotProps>(() => import('@/components/' + plotName), {
-      ssr: false,
-      loading: () => <Loading />,
-    })
+    const PlotPageComponent = PLOT_COMPONENTS[plotType];
+    if (!PlotPageComponent) return null;
 
     return (
       <>

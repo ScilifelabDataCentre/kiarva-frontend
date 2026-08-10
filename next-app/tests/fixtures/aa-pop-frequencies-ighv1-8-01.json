@@ -1,0 +1,132 @@
+[
+  {
+    "population": "ACB",
+    "n": 2200,
+    "frequency": 0.9
+  },
+  {
+    "population": "ASW",
+    "n": 2201,
+    "frequency": 0.87
+  },
+  {
+    "population": "PJL",
+    "n": 2202,
+    "frequency": 0.84
+  },
+  {
+    "population": "STU",
+    "n": 2203,
+    "frequency": 0.81
+  },
+  {
+    "population": "ITU",
+    "n": 2204,
+    "frequency": 0.78
+  },
+  {
+    "population": "BEB",
+    "n": 2205,
+    "frequency": 0.75
+  },
+  {
+    "population": "GIH",
+    "n": 2206,
+    "frequency": 0.72
+  },
+  {
+    "population": "CHS",
+    "n": 2207,
+    "frequency": 0.69
+  },
+  {
+    "population": "CDX",
+    "n": 2208,
+    "frequency": 0.66
+  },
+  {
+    "population": "KHV",
+    "n": 2209,
+    "frequency": 0.63
+  },
+  {
+    "population": "CHB",
+    "n": 2210,
+    "frequency": 0.6
+  },
+  {
+    "population": "JPT",
+    "n": 2211,
+    "frequency": 0.57
+  },
+  {
+    "population": "CLM",
+    "n": 2212,
+    "frequency": 0.54
+  },
+  {
+    "population": "GWD",
+    "n": 2213,
+    "frequency": 0.51
+  },
+  {
+    "population": "ESN",
+    "n": 2214,
+    "frequency": 0.48
+  },
+  {
+    "population": "MSL",
+    "n": 2215,
+    "frequency": 0.45
+  },
+  {
+    "population": "YRI",
+    "n": 2216,
+    "frequency": 0.42
+  },
+  {
+    "population": "FIN",
+    "n": 2217,
+    "frequency": 0.39
+  },
+  {
+    "population": "GBR",
+    "n": 2218,
+    "frequency": 0.36
+  },
+  {
+    "population": "IBS",
+    "n": 2219,
+    "frequency": 0.33
+  },
+  {
+    "population": "LWK",
+    "n": 2220,
+    "frequency": 0.3
+  },
+  {
+    "population": "TSI",
+    "n": 2221,
+    "frequency": 0.27
+  },
+  {
+    "population": "MXL",
+    "n": 2222,
+    "frequency": 0.24
+  },
+  {
+    "population": "PEL",
+    "n": 2223,
+    "frequency": 0.21
+  },
+  {
+    "population": "PUR",
+    "n": 2224,
+    "frequency": 0.18
+  },
+  {
+    "population": "ALL",
+    "n": 7025,
+    "frequency": 0.15
+  }
+]

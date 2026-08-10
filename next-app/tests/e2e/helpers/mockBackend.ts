@@ -64,13 +64,18 @@ export async function mockBackend(page: Page, overrides: BackendOverrides = {}) 
     /\/data\/frequencies\/populations\?/,
     jsonRoute("pop-frequencies-ighv1-8-01.json"),
   );
+  // Deliberately different values from the genomic fixtures above. They used to
+  // be the same, which meant a bug that served genomic data on the translated
+  // tab was invisible to every test — exactly what happened when a computed
+  // dynamic import made both tabs render GenomicPlot under Turbopack. The row
+  // counts still match, since both endpoints cover the same populations.
   await page.route(
     /\/data\/aminoacidfrequencies\/superpopulations\?/,
-    jsonRoute("superpop-frequencies-ighv1-8-01.json"),
+    jsonRoute("aa-superpop-frequencies-ighv1-8-01.json"),
   );
   await page.route(
     /\/data\/aminoacidfrequencies\/populations\?/,
-    jsonRoute("pop-frequencies-ighv1-8-01.json"),
+    jsonRoute("aa-pop-frequencies-ighv1-8-01.json"),
   );
 
   // ---------- allele metadata ----------
