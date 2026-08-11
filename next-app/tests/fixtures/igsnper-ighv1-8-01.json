@@ -1,4 +1,4 @@
 {
-  "igSNPer_score": 3.5,
-  "igSNPer_SNPs": ["rs12345678", "rs87654321", "rs11223344"]
+  "igSNPer_score": 2.0,
+  "igSNPer_SNPs": ["rs12345678(A:87,106539163)", "rs87654321(G:204,106539280)"]
 }

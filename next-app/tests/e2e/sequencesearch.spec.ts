@@ -9,7 +9,7 @@ test.describe("Sequence search", () => {
     await page.getByRole("textbox", { name: "Sequence" }).fill("ESEARCHTES");
     await page.getByRole("button", { name: "Search" }).click();
 
-    await expect(page.getByText("IGHV1-8*01")).toBeVisible();
+    await expect(page.getByText("IGHV3-23*01")).toBeVisible();
     await expect(page.getByText(/THISISASEQUENCESEARCHTEST123/)).toBeVisible();
   });
 

@@ -55,7 +55,7 @@ test.describe("Backend error handling", () => {
     await expect(page.getByText("Plot for IGHV1-8*01")).toBeVisible();
 
     // Data that did succeed is unaffected.
-    await expect(page.getByText("IgSNPer SCORE: 3.5")).toBeVisible();
+    await expect(page.getByText("IgSNPer SCORE: 2.0")).toBeVisible();
 
     // This is the assertion that actually pins the response.ok check. The
     // fallback is an empty array, so Plotly still mounts and simply draws no
