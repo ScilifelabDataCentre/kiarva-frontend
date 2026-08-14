@@ -1,8 +1,8 @@
 [
   { "population": "AFR", "n": 200, "frequency": 0.42 },
-  { "population": "AMR", "n": 200, "frequency": 0.18 },
-  { "population": "EAS", "n": 200, "frequency": 0.31 },
   { "population": "EUR", "n": 200, "frequency": 0.55 },
+  { "population": "EAS", "n": 200, "frequency": 0.31 },
   { "population": "SAS", "n": 200, "frequency": 0.27 },
+  { "population": "AMR", "n": 200, "frequency": 0.18 },
   { "population": "ALL", "n": 1000, "frequency": 0.35 }
 ]

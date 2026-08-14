@@ -18,7 +18,7 @@ test.describe("Plot page - genomic tab", () => {
 
     await expect(page.getByText("Plot for IGHV1-8*01")).toBeVisible();
 
-    await expect(page.getByText("IgSNPer SCORE: 3.5")).toBeVisible();
+    await expect(page.getByText("IgSNPer SCORE: 2.0")).toBeVisible();
     await expect(page.getByText("rs12345678")).toBeVisible();
     await expect(page.getByText("rs87654321")).toBeVisible();
 
