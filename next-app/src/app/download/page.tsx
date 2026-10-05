@@ -224,7 +224,7 @@ export default function DownloadPage(): ReactElement {
                 htmlFor="translated"
                 onClick={() => setFastaTypeSelected("translated")}
                 >
-                  Translated V gene sequences
+                  Translated sequences
               </Label>
             </div>
           </RadioGroup>

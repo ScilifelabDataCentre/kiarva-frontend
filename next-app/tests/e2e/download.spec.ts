@@ -40,7 +40,7 @@ test.describe("Download page", () => {
       page.getByRole("checkbox", { name: "Select IGHJ" }),
     ).toBeEnabled();
 
-    await page.getByText("Translated V gene sequences").click();
+    await page.getByText("Translated sequences").click();
 
     await expect(
       page.getByRole("checkbox", { name: "Select IGHJ" }),
@@ -57,7 +57,7 @@ test.describe("Download page", () => {
     await page.getByRole("checkbox", { name: "Select IGHV" }).check();
     await expect(page.getByRole("button", { name: "Download" })).toBeEnabled();
 
-    await page.getByText("Translated V gene sequences").click();
+    await page.getByText("Translated sequences").click();
 
     await expect(page.getByRole("button", { name: "Download" })).toBeDisabled();
   });
