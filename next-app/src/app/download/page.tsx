@@ -187,7 +187,10 @@ export default function DownloadPage(): ReactElement {
 
         <fieldset className="w-full my-0!">
           <legend className="sr-only">Select FASTA file type</legend>
-          <RadioGroup defaultValue="genomic">
+          <RadioGroup
+            value={fastaTypeSelected}
+            onValueChange={setFastaTypeSelected}
+          >
             <div className="flex items-center gap-3">
               <RadioGroupItem
                 value="genomic" 
@@ -196,7 +199,6 @@ export default function DownloadPage(): ReactElement {
               <Label 
                 className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-base"
                 htmlFor="genomic"
-                onClick={() => setFastaTypeSelected("genomic")}
                 >
                   Genomic coding sequence
               </Label>
@@ -209,7 +211,6 @@ export default function DownloadPage(): ReactElement {
               <Label 
                 className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-base"
                 htmlFor="genomic_fl"
-                onClick={() => setFastaTypeSelected("genomic_fl")}
                 >
                   Genomic coding sequence with flanking regions
               </Label>
@@ -222,7 +223,6 @@ export default function DownloadPage(): ReactElement {
               <Label 
                 className="flex rounded-md my-3 hover:bg-neutral cursor-pointer text-base"
                 htmlFor="translated"
-                onClick={() => setFastaTypeSelected("translated")}
                 >
                   Translated sequences
               </Label>
