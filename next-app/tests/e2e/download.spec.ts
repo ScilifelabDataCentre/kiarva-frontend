@@ -85,15 +85,25 @@ test.describe("Download page", () => {
   test("selecting the FASTA type with the keyboard disables incompatible gene checkboxes", async ({
     page,
   }) => {
+    // A keypress sent before hydration is dropped.
+    await page.waitForLoadState("networkidle");
+
+    // Radix moves roving focus in a setTimeout after keydown, and a radio only
+    // selects itself on focus while an arrow key is still held. keyboard.press()
+    // sends keyup immediately, so it usually lands first and the radio is
+    // focused but not selected. Hold the key the way a real keypress does.
+    const arrowDownTo = async (name: string) => {
+      await page.keyboard.down("ArrowDown");
+      await expect(page.getByRole("radio", { name, exact: true })).toBeChecked();
+      await page.keyboard.up("ArrowDown");
+    };
+
     await page
       .getByRole("radio", { name: "Select genomic sequences", exact: true })
       .focus();
-    await page.keyboard.press("ArrowDown");
-    await page.keyboard.press("ArrowDown");
+    await arrowDownTo("Select genomic sequences with flanking regions");
+    await arrowDownTo("Select translated sequences");
 
-    await expect(
-      page.getByRole("radio", { name: "Select translated sequences" }),
-    ).toBeChecked();
     await expect(
       page.getByRole("checkbox", { name: "Select IGHJ" }),
     ).toBeDisabled();
